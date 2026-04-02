@@ -1,0 +1,431 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);background:var(--color-background-tertiary)}
+.app{display:flex;min-height:100vh}
+.sidebar{width:200px;background:var(--color-background-primary);border-right:0.5px solid var(--color-border-tertiary);padding:1rem 0;flex-shrink:0}
+.logo{padding:0 1rem 1rem;border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:0.75rem}
+.logo-text{font-size:13px;font-weight:500;color:var(--color-text-primary)}
+.logo-sub{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+.nav-section{padding:0 0.75rem;margin-bottom:0.5rem}
+.nav-label{font-size:10px;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.06em;padding:0 0.25rem;margin-bottom:4px}
+.nav-item{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:var(--border-radius-md);cursor:pointer;font-size:12.5px;color:var(--color-text-secondary);margin-bottom:1px}
+.nav-item:hover{background:var(--color-background-secondary)}
+.nav-item.active{background:var(--color-background-info);color:var(--color-text-info)}
+.nav-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.topbar{background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary);padding:0 1.5rem;height:52px;display:flex;align-items:center;justify-content:space-between}
+.topbar-title{font-size:15px;font-weight:500;color:var(--color-text-primary)}
+.topbar-right{display:flex;align-items:center;gap:10px}
+.badge-live{background:#EAF3DE;color:#3B6D11;font-size:11px;padding:3px 10px;border-radius:999px;font-weight:500}
+.badge-alert{background:#FCEBEB;color:#A32D2D;font-size:11px;padding:3px 10px;border-radius:999px;font-weight:500}
+.avatar{width:28px;height:28px;border-radius:50%;background:#E6F1FB;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:#0C447C}
+.content{padding:1.25rem 1.5rem;overflow-y:auto;flex:1}
+.metrics-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:1.25rem}
+.metric{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px 14px}
+.metric-label{font-size:11px;color:var(--color-text-secondary);margin-bottom:6px}
+.metric-value{font-size:22px;font-weight:500;color:var(--color-text-primary);line-height:1}
+.metric-delta{font-size:11px;margin-top:4px}
+.delta-up{color:#3B6D11}
+.delta-dn{color:#A32D2D}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:1rem}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.card-title{font-size:13px;font-weight:500;color:var(--color-text-primary)}
+.card-action{font-size:11px;color:var(--color-text-info);cursor:pointer}
+.sec-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.sec-item:last-child{border-bottom:none;padding-bottom:0}
+.status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dot-green{background:#639922}
+.dot-amber{background:#BA7517}
+.dot-red{background:#E24B4A}
+.sec-name{font-size:12.5px;color:var(--color-text-primary);flex:1}
+.sec-badge{font-size:10px;padding:2px 8px;border-radius:999px}
+.sb-ok{background:#EAF3DE;color:#3B6D11}
+.sb-warn{background:#FAEEDA;color:#854F0B}
+.sb-fail{background:#FCEBEB;color:#A32D2D}
+.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.bar-label{font-size:11px;color:var(--color-text-secondary);width:90px;flex-shrink:0;text-align:right}
+.bar-track{flex:1;height:6px;background:var(--color-background-secondary);border-radius:999px;overflow:hidden}
+.bar-fill{height:100%;border-radius:999px}
+.bar-val{font-size:11px;color:var(--color-text-secondary);width:32px;text-align:right}
+.cost-item{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.cost-item:last-child{border-bottom:none;padding-bottom:0}
+.cost-name{font-size:12.5px;color:var(--color-text-primary)}
+.cost-sub{font-size:11px;color:var(--color-text-secondary)}
+.cost-amt{font-size:13px;font-weight:500;color:var(--color-text-primary)}
+.cost-save{font-size:11px;color:#3B6D11}
+.mini-bar{height:4px;border-radius:999px;margin-top:4px}
+.event-row{display:flex;gap:10px;padding:7px 0;border-bottom:0.5px solid var(--color-border-tertiary);align-items:flex-start}
+.event-row:last-child{border-bottom:none}
+.event-time{font-size:10px;color:var(--color-text-tertiary);min-width:44px;margin-top:2px}
+.event-text{font-size:12px;color:var(--color-text-primary);line-height:1.4}
+.event-cat{font-size:10px;padding:1px 6px;border-radius:999px;margin-top:2px;display:inline-block}
+.ec-sec{background:#E6F1FB;color:#0C447C}
+.ec-cost{background:#EAF3DE;color:#3B6D11}
+.ec-warn{background:#FAEEDA;color:#854F0B}
+.policy-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.policy-row:last-child{border-bottom:none}
+.policy-name{font-size:12px;color:var(--color-text-primary)}
+.toggle{width:32px;height:18px;border-radius:999px;display:flex;align-items:center;padding:2px;cursor:pointer;flex-shrink:0}
+.toggle-on{background:#639922;justify-content:flex-end}
+.toggle-off{background:var(--color-background-secondary);border:0.5px solid var(--color-border-secondary);justify-content:flex-start}
+.toggle-thumb{width:14px;height:14px;border-radius:50%;background:white}
+.chart-area{height:80px;display:flex;align-items:flex-end;gap:4px;padding-top:8px}
+.chart-bar{flex:1;border-radius:3px 3px 0 0;min-height:4px}
+.chart-labels{display:flex;gap:4px;margin-top:4px}
+.chart-lbl{flex:1;font-size:9px;color:var(--color-text-tertiary);text-align:center}
+.section-label{font-size:11px;font-weight:500;color:var(--color-text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em}
+</style>
+
+<div class="app">
+  <div class="sidebar">
+    <div class="logo">
+      <div class="logo-text">SecureOps</div>
+      <div class="logo-sub">Post-Migration Dashboard</div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">Overview</div>
+      <div class="nav-item active"><div class="nav-dot" style="background:#378ADD"></div>Dashboard</div>
+      <div class="nav-item"><div class="nav-dot" style="background:#639922"></div>Cost centre</div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">Security</div>
+      <div class="nav-item"><div class="nav-dot" style="background:#E24B4A"></div>Threats</div>
+      <div class="nav-item"><div class="nav-dot" style="background:#BA7517"></div>Compliance</div>
+      <div class="nav-item"><div class="nav-dot" style="background:#534AB7"></div>Access control</div>
+      <div class="nav-item"><div class="nav-dot" style="background:#1D9E75"></div>Audit log</div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">Infrastructure</div>
+      <div class="nav-item"><div class="nav-dot" style="background:#888780"></div>API gateway</div>
+      <div class="nav-item"><div class="nav-dot" style="background:#888780"></div>Environments</div>
+      <div class="nav-item"><div class="nav-dot" style="background:#888780"></div>Settings</div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title">Post-migration overview</div>
+      <div class="topbar-right">
+        <div class="badge-live">Live monitoring</div>
+        <div class="badge-alert">2 alerts</div>
+        <div class="avatar">AD</div>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <div class="metrics-row">
+        <div class="metric">
+          <div class="metric-label">Security score</div>
+          <div class="metric-value">87<span style="font-size:14px;color:var(--color-text-secondary)">/100</span></div>
+          <div class="metric-delta delta-up">+12 vs Oracle Forms</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Threats blocked</div>
+          <div class="metric-value">1,284</div>
+          <div class="metric-delta delta-up">Last 30 days</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Monthly infra cost</div>
+          <div class="metric-value">$4,210</div>
+          <div class="metric-delta delta-up">-38% vs legacy</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Potential savings</div>
+          <div class="metric-value">$1,640</div>
+          <div class="metric-delta delta-dn">3 actions pending</div>
+        </div>
+      </div>
+
+      <div class="two-col">
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Security control status</div>
+            <div class="card-action">View all</div>
+          </div>
+          <div class="sec-item">
+            <div class="status-dot dot-green"></div>
+            <div class="sec-name">OAuth 2.0 / SSO</div>
+            <div class="sec-badge sb-ok">Active</div>
+          </div>
+          <div class="sec-item">
+            <div class="status-dot dot-green"></div>
+            <div class="sec-name">MFA enforcement</div>
+            <div class="sec-badge sb-ok">Active</div>
+          </div>
+          <div class="sec-item">
+            <div class="status-dot dot-green"></div>
+            <div class="sec-name">TLS 1.3 in transit</div>
+            <div class="sec-badge sb-ok">Active</div>
+          </div>
+          <div class="sec-item">
+            <div class="status-dot dot-green"></div>
+            <div class="sec-name">WAF rules</div>
+            <div class="sec-badge sb-ok">Active</div>
+          </div>
+          <div class="sec-item">
+            <div class="status-dot dot-amber"></div>
+            <div class="sec-name">CSRF token rotation</div>
+            <div class="sec-badge sb-warn">Review</div>
+          </div>
+          <div class="sec-item">
+            <div class="status-dot dot-red"></div>
+            <div class="sec-name">Dependency patching</div>
+            <div class="sec-badge sb-fail">Outdated</div>
+          </div>
+          <div class="sec-item">
+            <div class="status-dot dot-green"></div>
+            <div class="sec-name">DB encryption (TDE)</div>
+            <div class="sec-badge sb-ok">Active</div>
+          </div>
+          <div class="sec-item">
+            <div class="status-dot dot-green"></div>
+            <div class="sec-name">RBAC roles synced</div>
+            <div class="sec-badge sb-ok">Active</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Cost optimisation actions</div>
+            <div class="card-action">Run analysis ↗</div>
+          </div>
+          <div class="cost-item">
+            <div>
+              <div class="cost-name">Right-size API instances</div>
+              <div class="cost-sub">3 over-provisioned nodes</div>
+              <div class="mini-bar" style="width:70%;background:#9FE1CB"></div>
+            </div>
+            <div style="text-align:right">
+              <div class="cost-amt">$580/mo</div>
+              <div class="cost-save">Save $390</div>
+            </div>
+          </div>
+          <div class="cost-item">
+            <div>
+              <div class="cost-name">Remove unused IAM roles</div>
+              <div class="cost-sub">14 stale roles detected</div>
+              <div class="mini-bar" style="width:50%;background:#9FE1CB"></div>
+            </div>
+            <div style="text-align:right">
+              <div class="cost-amt">Security + cost</div>
+              <div class="cost-save">Save $120/mo</div>
+            </div>
+          </div>
+          <div class="cost-item">
+            <div>
+              <div class="cost-name">Enable log compression</div>
+              <div class="cost-sub">SIEM ingest volume high</div>
+              <div class="mini-bar" style="width:85%;background:#FAC775"></div>
+            </div>
+            <div style="text-align:right">
+              <div class="cost-amt">$940/mo</div>
+              <div class="cost-save">Save $430/mo</div>
+            </div>
+          </div>
+          <div class="cost-item">
+            <div>
+              <div class="cost-name">WAF rule deduplication</div>
+              <div class="cost-sub">38 redundant rules</div>
+              <div class="mini-bar" style="width:40%;background:#9FE1CB"></div>
+            </div>
+            <div style="text-align:right">
+              <div class="cost-amt">$210/mo</div>
+              <div class="cost-save">Save $90/mo</div>
+            </div>
+          </div>
+          <div class="cost-item">
+            <div>
+              <div class="cost-name">CDN cache for static assets</div>
+              <div class="cost-sub">React bundles uncached</div>
+              <div class="mini-bar" style="width:60%;background:#9FE1CB"></div>
+            </div>
+            <div style="text-align:right">
+              <div class="cost-amt">$320/mo</div>
+              <div class="cost-save">Save $610/mo</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="three-col">
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Threat volume — 7 days</div>
+          </div>
+          <div class="chart-area" id="threatChart"></div>
+          <div class="chart-labels" id="threatLabels"></div>
+          <div style="display:flex;gap:12px;margin-top:10px">
+            <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--color-text-secondary)"><div style="width:8px;height:8px;border-radius:2px;background:#E24B4A"></div>Blocked</div>
+            <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--color-text-secondary)"><div style="width:8px;height:8px;border-radius:2px;background:#B5D4F4"></div>Flagged</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Security policies</div>
+          </div>
+          <div class="policy-row">
+            <div class="policy-name">Force HTTPS redirect</div>
+            <div class="toggle toggle-on"><div class="toggle-thumb"></div></div>
+          </div>
+          <div class="policy-row">
+            <div class="policy-name">Auto-rotate JWT secrets</div>
+            <div class="toggle toggle-on"><div class="toggle-thumb"></div></div>
+          </div>
+          <div class="policy-row">
+            <div class="policy-name">Block legacy TLS 1.0/1.1</div>
+            <div class="toggle toggle-on"><div class="toggle-thumb"></div></div>
+          </div>
+          <div class="policy-row">
+            <div class="policy-name">PII masking in logs</div>
+            <div class="toggle toggle-on"><div class="toggle-thumb"></div></div>
+          </div>
+          <div class="policy-row">
+            <div class="policy-name">Auto-disable idle accounts</div>
+            <div class="toggle toggle-off"><div class="toggle-thumb"></div></div>
+          </div>
+          <div class="policy-row">
+            <div class="policy-name">Geo-block high-risk regions</div>
+            <div class="toggle toggle-off"><div class="toggle-thumb"></div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Cost by category</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Compute</div>
+            <div class="bar-track"><div class="bar-fill" style="width:72%;background:#378ADD"></div></div>
+            <div class="bar-val">$1,540</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">SIEM / logs</div>
+            <div class="bar-track"><div class="bar-fill" style="width:44%;background:#378ADD"></div></div>
+            <div class="bar-val">$940</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">WAF / CDN</div>
+            <div class="bar-track"><div class="bar-fill" style="width:25%;background:#378ADD"></div></div>
+            <div class="bar-val">$530</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">DB / storage</div>
+            <div class="bar-track"><div class="bar-fill" style="width:34%;background:#378ADD"></div></div>
+            <div class="bar-val">$720</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">IdP / auth</div>
+            <div class="bar-track"><div class="bar-fill" style="width:14%;background:#378ADD"></div></div>
+            <div class="bar-val">$290</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Scanning / CI</div>
+            <div class="bar-track"><div class="bar-fill" style="width:9%;background:#B5D4F4"></div></div>
+            <div class="bar-val">$190</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="two-col">
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Recent security events</div>
+            <div class="card-action">Full log ↗</div>
+          </div>
+          <div class="event-row">
+            <div class="event-time">09:14</div>
+            <div><div class="event-text">SQL injection attempt blocked by WAF on /api/reports</div><span class="event-cat ec-sec">Security</span></div>
+          </div>
+          <div class="event-row">
+            <div class="event-time">08:52</div>
+            <div><div class="event-text">IAM role cleanup completed — 14 stale roles removed</div><span class="event-cat ec-cost">Cost + Sec</span></div>
+          </div>
+          <div class="event-row">
+            <div class="event-time">08:30</div>
+            <div><div class="event-text">npm audit: 2 high-severity CVEs in react-scripts</div><span class="event-cat ec-warn">Warning</span></div>
+          </div>
+          <div class="event-row">
+            <div class="event-time">07:45</div>
+            <div><div class="event-text">JWT secret auto-rotated successfully — all sessions refreshed</div><span class="event-cat ec-sec">Security</span></div>
+          </div>
+          <div class="event-row">
+            <div class="event-time">07:10</div>
+            <div><div class="event-text">SIEM alert: 340 failed logins from IP range 45.x.x.x</div><span class="event-cat ec-warn">Warning</span></div>
+          </div>
+          <div class="event-row">
+            <div class="event-time">06:00</div>
+            <div><div class="event-text">CDN cache rules applied — static assets now cached globally</div><span class="event-cat ec-cost">Cost</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Compliance posture</div>
+            <div class="card-action">Download report ↗</div>
+          </div>
+          <div class="bar-row" style="margin-bottom:12px">
+            <div class="bar-label">OWASP Top 10</div>
+            <div class="bar-track"><div class="bar-fill" style="width:90%;background:#639922"></div></div>
+            <div class="bar-val">9/10</div>
+          </div>
+          <div class="bar-row" style="margin-bottom:12px">
+            <div class="bar-label">ISO 27001</div>
+            <div class="bar-track"><div class="bar-fill" style="width:76%;background:#639922"></div></div>
+            <div class="bar-val">76%</div>
+          </div>
+          <div class="bar-row" style="margin-bottom:12px">
+            <div class="bar-label">GDPR</div>
+            <div class="bar-track"><div class="bar-fill" style="width:84%;background:#639922"></div></div>
+            <div class="bar-val">84%</div>
+          </div>
+          <div class="bar-row" style="margin-bottom:12px">
+            <div class="bar-label">PCI-DSS</div>
+            <div class="bar-track"><div class="bar-fill" style="width:60%;background:#BA7517"></div></div>
+            <div class="bar-val">60%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">SOC 2</div>
+            <div class="bar-track"><div class="bar-fill" style="width:50%;background:#BA7517"></div></div>
+            <div class="bar-val">50%</div>
+          </div>
+          <div style="margin-top:12px;padding-top:10px;border-top:0.5px solid var(--color-border-tertiary);display:flex;justify-content:flex-end">
+            <button onclick="sendPrompt('What steps do I need to complete to reach 100% PCI-DSS compliance?')" style="font-size:12px;padding:6px 14px">Improve PCI-DSS compliance ↗</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+const blocked = [210,180,310,260,195,88,41];
+const flagged = [45,38,62,50,40,20,12];
+const maxVal = Math.max(...blocked);
+const chartEl = document.getElementById('threatChart');
+const labelsEl = document.getElementById('threatLabels');
+days.forEach((d,i) => {
+  const col = document.createElement('div');
+  col.style.cssText = 'flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;justify-content:flex-end;height:100%';
+  const bH = Math.round(blocked[i]/maxVal*72);
+  const fH = Math.round(flagged[i]/maxVal*72);
+  col.innerHTML = `<div style="width:100%;height:${fH}px;background:#B5D4F4;border-radius:2px 2px 0 0"></div><div style="width:100%;height:${bH}px;background:#E24B4A;border-radius:2px 2px 0 0"></div>`;
+  chartEl.appendChild(col);
+  const lbl = document.createElement('div');
+  lbl.className = 'chart-lbl';
+  lbl.textContent = d;
+  labelsEl.appendChild(lbl);
+});
+</script>
