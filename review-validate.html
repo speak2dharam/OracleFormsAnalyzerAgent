@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step 8: Review & Validate - CloudAtlas</title>
+    <link href="assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <aside class="sidebar">
+        <!-- New sidebar structure -->
+        <div class="sidebar-header">
+            <i class="fa-solid fa-cloud logo-icon"></i>
+            <span class="logo-text">CloudAtlas</span>
+        </div>
+        <div class="sidebar-menu">
+            <div class="menu-label">Overview</div>
+            <a href="index.html" class="menu-item"><i class="fa-solid fa-border-all"></i><span class="menu-text">Assessment Dashboard</span></a>
+            <a href="smb-guided-mode.html" class="menu-item bg-primary-soft text-primary"><i class="fa-solid fa-wand-magic-sparkles"></i><span class="menu-text fw-bold">SMB Guided Mode</span></a>
+            <div class="menu-label">Evaluation Pipeline</div>
+            <a href="project-intake.html" class="menu-item"><i class="fa-solid fa-file-arrow-up"></i><span class="menu-text">1. Project Intake</span></a>
+            <a href="parser-engine.html" class="menu-item"><i class="fa-solid fa-gears"></i><span class="menu-text">2. Parser Engine</span></a>
+            <a href="ai-logic.html" class="menu-item"><i class="fa-solid fa-brain"></i><span class="menu-text">3. AI Logic Analyzer</span></a>
+            <a href="dependency-map.html" class="menu-item"><i class="fa-solid fa-diagram-project"></i><span class="menu-text">4. Dependency Map</span></a>
+            <a href="azure-assessment.html" class="menu-item"><i class="fa-solid fa-server"></i><span class="menu-text">5. Azure Assessment</span></a>
+            <div class="menu-label">Planning & Targeting</div>
+            <a href="security-finops.html" class="menu-item"><i class="fa-solid fa-shield-halved"></i><span class="menu-text">6. Security + FinOps</span></a>
+            <a href="conversion-studio.html" class="menu-item"><i class="fa-solid fa-code"></i><span class="menu-text">7. Conversion Studio</span></a>
+            <a href="review-validate.html" class="menu-item active"><i class="fa-solid fa-user-check"></i><span class="menu-text">8. Review & Validate</span></a>
+            <a href="tech-decision.html" class="menu-item"><i class="fa-solid fa-layer-group"></i><span class="menu-text">9. Technology Decision</span></a>
+            <div class="menu-label mt-4">Internal Tools</div>
+            <a href="pitch-mode.html" class="menu-item"><i class="fa-solid fa-person-chalkboard"></i><span class="menu-text">Pitch Mode Script</span></a>
+        </div>
+    </aside>
+
+    <main class="main-wrapper">
+        <header class="topbar">
+            <!-- Topbar content -->
+            <div class="d-flex align-items-center">
+                <button class="sidebar-toggle" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+                <div class="ms-3 text-muted d-none d-md-block"><span>Planning & Targeting > <strong class="text-dark">8. Review & Validate</strong></span></div>
+            </div>
+            <div class="dropdown">
+                <div class="profile-dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=eff6ff&color=2563eb" alt="Profile">
+                    <div class="user-info d-none d-sm-flex"><span class="name">Admin User</span><span class="role">System Analyst</span></div>
+                </div>
+            </div>
+        </header>
+
+        <div class="page-content fade-in">
+            <div class="page-header d-flex justify-content-between align-items-end">
+                <div>
+                    <h1 class="page-title">Step 8: Quality Review & Validation</h1>
+                    <p class="page-subtitle">Human-in-the-loop review gate prior to CI/CD repository commits. Validates functional equivalency mapping.</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="modern-card">
+                        <div class="card-header-modern">
+                            <h2 class="card-title-modern">Generated Component Quality checks</h2>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table class="table align-middle border-bottom">
+                                <thead class="table-light text-uppercase small text-muted">
+                                    <tr>
+                                        <th>Component Identifier</th>
+                                        <th>Code Standard Score</th>
+                                        <th>Test Pass Rate</th>
+                                        <th>Action Required</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="fw-bold">EmployeeList.tsx</td>
+                                        <td><span class="badge bg-success">A (98%)</span></td>
+                                        <td><div class="progress" style="height: 6px;"><div class="progress-bar bg-success" style="width: 100%;"></div></div></td>
+                                        <td><span class="text-muted"><i class="fa-solid fa-check text-success me-1"></i> Auto-Approved</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">PayrollEngine_Service.cs</td>
+                                        <td><span class="badge bg-warning text-dark">B (84%)</span></td>
+                                        <td><div class="progress" style="height: 6px;"><div class="progress-bar bg-warning" style="width: 80%;"></div></div></td>
+                                        <td><button class="btn btn-sm btn-outline-danger">Manual Review Node</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="modern-card">
+                        <div class="card-header-modern"><h2 class="card-title-modern">Commit Action</h2></div>
+                        <p class="small text-muted">Awaiting Engineering approval to merge functional code into Target Application Repo.</p>
+                        <div class="alert alert-warning small py-2"><i class="fa-solid fa-triangle-exclamation me-1"></i> 1 Item requires Review.</div>
+                        <button class="btn btn-success w-100 fw-bold shadow disabled">Approve & Push to Repo</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-12 text-end">
+                    <a href="tech-decision.html" class="btn btn-dark">Next: Tech Strategy Recap <i class="fa-solid fa-arrow-right ms-2"></i></a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="assets/libs/jquery/jquery.min.js"></script>
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

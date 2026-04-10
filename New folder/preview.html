@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CloudAtlas Oracle Modernization Hub - Updated Clickthrough</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <style>
+    :root {
+      --bg: #f3f7fc;
+      --sidebar: #254b8f;
+      --sidebar-dark: #1f3e77;
+      --panel: #ffffff;
+      --panel-soft: #f7faff;
+      --line: #dbe5f1;
+      --text: #22324d;
+      --muted: #61718d;
+      --accent: #2f7ef7;
+      --accent-2: #18b4ff;
+      --good: #57a044;
+      --warn: #c98b28;
+      --bad: #df5b5b;
+      --purple: #6f5bd6;
+      --teal: #23a5a1;
+      --orange: #f07a1a;
+      --shadow: 0 18px 50px rgba(31, 61, 122, .08);
+      --radius: 20px;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: "Roboto", sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #f7faff 0%, #f2f6fc 100%);
+    }
+    p { font-size: 14px; }
+    .app { display: grid; grid-template-columns: 290px 1fr; min-height: 100vh; }
+    .sidebar {
+      background: linear-gradient(180deg, var(--sidebar), var(--sidebar-dark));
+      color: #eef4ff;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 18px 14px 24px;
+      box-shadow: 14px 0 40px rgba(9,20,40,.10);
+      scrollbar-width: thin;
+    }
+    .sidebar::-webkit-scrollbar { width: 10px; }
+    .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,.18); border-radius: 999px; }
+    .brand {
+      display: flex; align-items: center; gap: 12px; padding: 8px 8px 16px;
+      border-bottom: 1px solid rgba(255,255,255,.10); margin-bottom: 16px;
+    }
+    .brand-mark {
+      width: 42px; height: 42px; border-radius: 14px; background: linear-gradient(135deg, #4fd0ff, #2f7ef7);
+      box-shadow: 0 10px 24px rgba(10, 32, 97, .25); position: relative; overflow: hidden;
+    }
+    .brand-mark::before, .brand-mark::after { content: ""; position: absolute; border-radius: 999px; background: rgba(255,255,255,.22); }
+    .brand-mark::before { width: 74px; height: 16px; top: 4px; left: -16px; transform: rotate(35deg); }
+    .brand-mark::after { width: 74px; height: 16px; bottom: 6px; right: -20px; transform: rotate(35deg); }
+    .brand h1 { margin: 0; font-size: 20px; line-height: 1.2; font-weight: 800; }
+    .brand small { color: rgba(238,244,255,.72); display: block; margin-top: 3px; font-size: 12px; }
+    .nav-title { font-size: 11px; letter-spacing: 1.3px; text-transform: uppercase; color: rgba(238,244,255,.56); margin: 18px 10px 8px; }
+    .step-nav { display: grid; gap: 8px; }
+    .step-item {
+      display: flex; gap: 12px; align-items: center; padding: 12px; border-radius: 16px; cursor: pointer;
+      border: 1px solid transparent; transition: .22s ease;
+    }
+    .step-item:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.09); transform: translateY(-1px); }
+    .step-item.active { background: linear-gradient(135deg, rgba(53,109,255,.28), rgba(61,183,255,.12)); border-color: rgba(255,255,255,.14); }
+    .step-index {
+      width: 34px; height: 34px; border-radius: 11px; display: grid; place-items: center; background: rgba(255,255,255,.08);
+      color: #fff; font-weight: 800; flex: 0 0 34px;
+    }
+    .step-copy strong { display: block; color: white; font-size: 13px; margin-bottom: 2px; }
+    .step-copy span { display: block; color: rgba(238,244,255,.68); font-size: 11px; line-height: 1.35; }
+    .stack-note {
+      margin-top: 18px; border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.04);
+      border-radius: 18px; padding: 14px; font-size: 12px; line-height: 1.6; color: rgba(238,244,255,.76);
+    }
+    .stack-note strong { color: white; }
+    .main { padding: 16px 20px 28px; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+    .topbar h2 { margin: 0; font-size: 18px; }
+    .topbar p { margin: 4px 0 0; color: var(--muted); }
+    .top-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn {
+      border: 0; border-radius: 14px; padding: 11px 16px; font-weight: 700; cursor: pointer; transition: .24s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { color: white; background: linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow: 0 10px 22px rgba(53,109,255,.18); }
+    .btn-secondary { background: white; color: var(--text); border: 1px solid var(--line); }
+    .btn-soft { background: #edf5ff; color: var(--accent); border: 1px solid #dce9ff; }
+    .hero {
+      background: linear-gradient(140deg, #ffffff 0%, #f9fbff 100%); border: 1px solid var(--line); border-radius: 26px;
+      padding: 24px; box-shadow: var(--shadow); margin-bottom: 14px;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 18px; align-items: center; }
+    .hero h3 { margin: 0 0 10px; font-size: 17px; line-height: 1.25; }
+    .hero p { margin: 0; color: var(--muted); line-height: 1.7; }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; background: #f3f8ff; border: 1px solid #dbe7ff; color: #5673a5; font-size: 12px; font-weight: 700; }
+    .hero-side { display: grid; gap: 12px; }
+    .hero-widget { background: linear-gradient(180deg, #f8fbff, #f3f8ff); border: 1px solid var(--line); border-radius: 18px; padding: 14px; }
+    .hero-widget strong { display: block; margin-bottom: 6px; font-size: 13px; }
+    .hero-widget span { display: block; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .top-metrics { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; margin-bottom: 16px; }
+    .metric-card { background: white; border: 1px solid var(--line); border-radius: 20px; padding: 18px; box-shadow: var(--shadow); }
+    .metric-card .label { color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+    .metric-card .value { font-size: 24px; font-weight: 800; margin-bottom: 4px; }
+    .metric-card .delta { font-size: 12px; color: var(--good); font-weight: 700; }
+    .screen { display: none; animation: fade .35s ease; }
+    .screen.active { display: block; }
+    @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .workspace { display: grid; grid-template-columns: 1.15fr .85fr; gap: 16px; }
+    .card { background: white; border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); }
+    .card h3, .card h4 { margin-top: 0; }
+    .muted { color: var(--muted); }
+    .small { font-size: 13px; }
+    .list, .timeline, .summary-list, .mapping-list, .source-grid, .insight-grid, .mode-grid { display: grid; gap: 12px; }
+    .row-box, .timeline-step, .mapping-row, .source-card, .insight-card, .validate-card, .mode-card {
+      background: var(--panel-soft); border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px;
+    }
+    .timeline-step { position: relative; padding-left: 56px; }
+    .timeline-step::before {
+      content: attr(data-step); position: absolute; left: 14px; top: 14px; width: 28px; height: 28px; border-radius: 10px;
+      background: #e8f0ff; color: var(--accent); display: grid; place-items: center; font-weight: 800;
+    }
+    .dropzone {
+      min-height: 210px; display: grid; place-items: center; text-align: center; padding: 24px; border-radius: 22px;
+      border: 2px dashed #bfd4ff; background: linear-gradient(180deg, #f8fbff, #f4f9ff); transition: .24s ease;
+    }
+    .dropzone.ready { border-style: solid; border-color: #9fd7bd; background: linear-gradient(180deg, #f2fbf5, #f8fffb); }
+    .progress-wrap { margin-top: 16px; }
+    .progress { height: 12px; border-radius: 999px; background: #edf2fa; overflow: hidden; border: 1px solid var(--line); }
+    .bar { height: 100%; width: 0; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); transition: width .45s ease; }
+    .codebox {
+      background: #f6f9ff; border: 1px solid #dce6f3; border-radius: 18px; padding: 18px; color: #284064;
+      font-family: Consolas, Monaco, monospace; font-size: 13px; line-height: 1.6; white-space: pre-wrap; overflow: auto;
+    }
+    .table-wrap { overflow: auto; border: 1px solid var(--line); border-radius: 18px; background: white; }
+    table { width: 100%; min-width: 760px; border-collapse: collapse; }
+    th, td { text-align: left; padding: 13px 14px; border-bottom: 1px solid #edf2f8; font-size: 14px; vertical-align: top; }
+    th { background: #f8fbff; color: #57708f; font-weight: 700; }
+    .badge { display: inline-flex; align-items: center; gap: 7px; border-radius: 999px; padding: 7px 11px; font-size: 12px; font-weight: 700; }
+    .badge.good { background: rgba(108,166,36,.13); color: var(--good); }
+    .badge.warn { background: rgba(201,139,40,.14); color: var(--warn); }
+    .badge.bad { background: rgba(223,91,91,.14); color: var(--bad); }
+    .badge.info { background: rgba(47,126,247,.12); color: var(--accent); }
+    .badge.purple { background: rgba(111,91,214,.12); color: var(--purple); }
+    .dual-grid, .assessment-grid, .detail-grid, .decision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .source-grid { grid-template-columns: 1fr 1fr; }
+    .source-card.disabled { opacity: .65; }
+    .source-card strong { display: block; margin-bottom: 6px; }
+    .mode-grid { grid-template-columns: 1fr 1fr; }
+    .mode-card { cursor:pointer; transition:.2s ease; }
+    .mode-card:hover { transform: translateY(-1px); border-color:#b7d0ff; }
+    .mode-card.active-mode { border-color: #a9c7ff; background: linear-gradient(180deg, #f8fbff, #eef5ff); box-shadow: 0 10px 24px rgba(47,126,247,.08); }
+    .mode-card .mode-badge { margin-top:10px; }
+    .pill-toggle { display:inline-flex; gap:8px; padding:5px; border-radius:999px; background:#eef5ff; border:1px solid #d9e7ff; }
+    .pill-toggle button { border:0; background:transparent; padding:8px 12px; border-radius:999px; font-weight:700; color:#5b76a7; cursor:pointer; }
+    .pill-toggle button.active { background:linear-gradient(135deg, var(--accent), var(--accent-2)); color:white; }
+    .scroll-note { font-size:12px; color:var(--muted); margin-top:8px; }
+    .tco-grid { display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-top:16px; }
+    .tco-highlight { background:linear-gradient(135deg,#f3fbf4,#fbfffc); border:1px solid #d8eed9; border-radius:18px; padding:16px; }
+    .tco-highlight strong { display:block; margin-bottom:6px; }
+    .good-text { color: var(--good); font-weight:700; }
+    .warn-text { color: var(--warn); font-weight:700; }
+    .risk-text { color: var(--bad); font-weight:700; }
+    .insight-grid { grid-template-columns: 1fr 1fr; }
+    .insight-card.high { border-left: 5px solid var(--bad); }
+    .insight-card.medium { border-left: 5px solid var(--warn); }
+    .insight-card.low { border-left: 5px solid var(--good); }
+    .flow-footer { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 22px; flex-wrap: wrap; }
+    .steps-dots { display: flex; gap: 8px; align-items: center; }
+    .steps-dots .dot-step { width: 10px; height: 10px; border-radius: 999px; background: #d8e3f0; transition: .25s ease; }
+    .steps-dots .dot-step.active { width: 28px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+    .preview-shell { border-radius: 24px; background: linear-gradient(180deg, #f8fbff, #eef5ff); border: 1px solid var(--line); padding: 18px; min-height: 420px; }
+    .preview-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+    .preview-card { background: white; border: 1px solid #dde7f3; border-radius: 18px; padding: 18px; box-shadow: 0 10px 24px rgba(31,61,122,.05); }
+    .preview-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+    .preview-card label { display: block; font-size: 13px; color: #627799; margin-bottom: 6px; }
+    .preview-card input, .preview-card select { width: 100%; border: 1px solid #d9e2f0; border-radius: 12px; padding: 11px 12px; }
+    .preview-toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+    .mini-btn { border: 0; border-radius: 12px; padding: 10px 14px; font-weight: 700; color: white; background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
+    .accordion { display: grid; gap: 12px; }
+    .acc-item { border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: #fbfdff; }
+    .acc-head { padding: 16px 18px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 700; }
+    .acc-body { display: none; padding: 0 18px 18px; color: var(--muted); line-height: 1.7; font-size: 14px; }
+    .kpi-strip { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; margin-bottom: 14px; }
+    .kpi-box { background: #f8fbff; border: 1px solid var(--line); border-radius: 16px; padding: 14px; }
+    .kpi-box .num { font-size: 22px; font-weight: 800; margin-top: 6px; }
+    .subtle { background: #fbfdff; border: 1px dashed var(--line); border-radius: 16px; padding: 14px; }
+    .hidden-internal { font-size: 12px; color: rgba(238,244,255,.8); margin-top: 8px; }
+    @media (max-width: 1200px) {
+      .app { grid-template-columns: 1fr; }
+      .sidebar { position: relative; height: auto; overflow: visible; }
+      .hero-grid, .top-metrics, .workspace, .dual-grid, .assessment-grid, .detail-grid, .decision-grid, .source-grid, .insight-grid, .mode-grid, .preview-grid, .kpi-strip { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark"></div>
+        <div>
+          <h1>CloudAtlas</h1>
+          <small>Oracle Modernization Hub</small>
+        </div>
+      </div>
+
+      <div class="nav-title">Platform flow</div>
+      <div class="step-nav">
+        <div class="step-item active" data-target="screen-1"><div class="step-index">1</div><div class="step-copy"><strong>Discovery</strong><span>Run discovery and export assessment package</span></div></div>
+        <div class="step-item" data-target="screen-2"><div class="step-index">2</div><div class="step-copy"><strong>Assessment Intake</strong><span>Upload discovery output for inventory parsing</span></div></div>
+        <div class="step-item" data-target="screen-3"><div class="step-index">3</div><div class="step-copy"><strong>Analyzer</strong><span>AI insights + key observations</span></div></div>
+        <div class="step-item" data-target="screen-4"><div class="step-index">4</div><div class="step-copy"><strong>Dependency Map</strong><span>Tables, packages, integrations</span></div></div>
+        <div class="step-item" data-target="screen-5"><div class="step-index">5</div><div class="step-copy"><strong>Assessment</strong><span>Retain vs Modernize + cost</span></div></div>
+        <div class="step-item" data-target="screen-6"><div class="step-index">6</div><div class="step-copy"><strong>Deep Dive</strong><span>Schema intelligence from report</span></div></div>
+        <div class="step-item" data-target="screen-7"><div class="step-index">7</div><div class="step-copy"><strong>Security & FinOps</strong><span>Recurring post-migration value</span></div></div>
+        <div class="step-item" data-target="screen-8"><div class="step-index">8</div><div class="step-copy"><strong>Conversion Studio</strong><span>React default, Angular optional</span></div></div>
+        <div class="step-item" data-target="screen-9"><div class="step-index">9</div><div class="step-copy"><strong>Review & Validate</strong><span>Human-in-loop quality gate</span></div></div>
+        <div class="step-item" data-target="screen-10"><div class="step-index">10</div><div class="step-copy"><strong>Internal Pitch</strong><span>Sales-only companion view</span></div></div>
+      </div>
+
+      <div class="stack-note">
+        <strong>Default target stack</strong><br>
+        Frontend: React + TypeScript<br>
+        Backend: .NET Web API<br>
+        Database: PostgreSQL on Azure<br><br>
+        <strong>Optional output targets</strong><br>
+        Angular for enterprise fit, Python for parser/orchestration, Java only if customer ecosystem requires it.
+        <div class="hidden-internal">Internal-only: Pitch Mode is intentionally separated from customer flow.</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <h2>CloudAtlas Oracle Modernization Hub</h2>
+          <p>Updated clickthrough aligned to assessment reports, key observations, dual-path modernization strategy, and validation-first delivery.</p>
+        </div>
+        <div class="top-actions">
+          <button class="btn btn-primary" id="startDemo">Start Demo</button>
+          <button class="btn btn-soft" id="autoWalk">Auto Walkthrough</button>
+          <button class="btn btn-secondary" id="resetDemo">Reset</button>
+        </div>
+      </div>
+
+      <section class="hero">
+        <div class="hero-grid">
+          <div>
+            <h3>From Oracle discovery to migration decision, conversion, and validation in one product story</h3>
+            <p>This version incorporates the email feedback: guided mode for SMB, discovery source placeholders, dual-path retain versus modernize recommendations, schema drill-down, Review & Validate gate, and a separate internal pitch view. It also brings DEMODB assessment insights into the UI and now includes Total Cost of Ownership comparison for modernize vs retain decisions.</p>
+            <div class="chip-row">
+              <span class="chip">Guided mode</span>
+              <span class="chip">Discovery connectors</span>
+              <span class="chip">Retain vs modernize</span>
+              <span class="chip">Key observations</span>
+              <span class="chip">5-year TCO comparison</span>
+            </div>
+          </div>
+          <div class="hero-side">
+            <div class="hero-widget"><strong>Stream A</strong><span>Forms workbench, parser, analyzer, dependency map, conversion and validation flow.</span></div>
+            <div class="hero-widget"><strong>Stream B</strong><span>Assessment, routing, security, FinOps, retain-path, and shared platform readiness.</span></div>
+            <div class="hero-widget"><strong>Stream C</strong><span>Discovery integrations shown as intake connectors, ready for future implementation.</span></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="top-metrics">
+        <div class="metric-card"><div class="label">Schemas in view</div><div class="value">8</div><div class="delta">DEMODB highlighted from discovery-led assessment</div></div>
+        <div class="metric-card"><div class="label">Current projected cost</div><div class="value">$255.79</div><div class="delta">Per assessment sample</div></div>
+        <div class="metric-card"><div class="label">Best 5-year TCO</div><div class="value">$655K</div><div class="delta">Modernize saves $165K vs on-prem</div></div>
+        <div class="metric-card"><div class="label">Default UI target</div><div class="value">React</div><div class="delta">Angular remains optional</div></div>
+        <div class="metric-card"><div class="label">Validation gate</div><div class="value">Required</div><div class="delta">Before CI/CD handoff</div></div>
+      </div>
+
+      <section id="screen-1" class="screen active">
+        <div class="workspace">
+          <div class="card">
+            <h3>1. Discovery Tool Output</h3>
+            <p class="muted">The workflow now starts with the discovery tool. Discovery exports a structured package, and that package is uploaded into assessment to identify Oracle databases, forms, applications, reports, menus, libraries, and supporting dependencies.</p>
+            <div style="display:flex; justify-content:space-between; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:12px;">
+              <div class="pill-toggle" id="modeToggle">
+                <button class="active" data-mode="enterprise">Enterprise Mode</button>
+                <button data-mode="guided">Guided Mode (SMB/SMC)</button>
+              </div>
+              <div class="scroll-note">Guided Mode is now clickable in the demo.</div>
+            </div>
+            <div class="mode-grid" style="margin-bottom:16px;">
+              <div class="mode-card active-mode" data-mode-card="enterprise">
+                <strong>Enterprise Mode</strong>
+                <div class="muted small">Full-control experience with separate discovery, assessment, pathing, conversion, and validation.</div>
+                <span class="badge info mode-badge">Best for enterprise programs</span>
+              </div>
+              <div class="mode-card" data-mode-card="guided">
+                <strong>Guided Mode (SMB/SMC)</strong>
+                <div class="muted small">Auto-select defaults, collapse discovery to summary, recommend React + .NET + Azure PostgreSQL, and skip manual wave planning.</div>
+                <span class="badge good mode-badge">Clickable quick path</span>
+              </div>
+            </div>
+            <div class="row-box" id="modeSummary" style="margin-bottom:16px;"><strong>Enterprise Mode selected</strong><div class="muted small">Use the full workflow when you want separate discovery review, detailed assessment, manual retain-vs-modernize decisions, wave planning, conversion, and validation gates.</div></div>
+            <div class="dropzone" id="dropzone">
+              <div>
+                <div style="font-size:46px; margin-bottom:10px;">☁</div>
+                <h4 style="margin:0 0 8px;">Run discovery and export assessment package</h4>
+                <p class="muted">Discovery scans Oracle estates, identifies databases, forms, apps, reports, menus, libraries, and metadata, then exports an assessment-ready package.</p>
+                <button class="btn btn-primary" id="simulateUpload">Run discovery on demo estate</button>
+              </div>
+            </div>
+            <div class="progress-wrap">
+              <div class="small muted" style="margin-bottom:8px;">Intake progress</div>
+              <div class="progress"><div class="bar" id="uploadBar"></div></div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Discovery Sources</h3>
+            <div class="source-grid">
+              <div class="source-card disabled"><strong>Azure Migrate</strong><div class="muted small">Connector placeholder for infra and dependency discovery.</div><span class="badge info">Planned</span></div>
+              <div class="source-card disabled"><strong>Lansweeper</strong><div class="muted small">Connector placeholder for estate inventory and device context.</div><span class="badge info">Planned</span></div>
+              <div class="source-card disabled"><strong>ServiceNow</strong><div class="muted small">Connector placeholder for CMDB and application relationships.</div><span class="badge info">Planned</span></div>
+              <div class="source-card disabled"><strong>Flexera</strong><div class="muted small">Connector placeholder for licensing and usage signals.</div><span class="badge info">Planned</span></div>
+            </div>
+            <div class="list" id="uploadSummary" style="margin-top:16px;">
+              <div class="row-box"><strong>Status</strong><div class="muted small">Waiting to run discovery scan</div></div>
+              <div class="row-box"><strong>Discovery outputs</strong><div class="muted small">Application inventory, Oracle Forms modules, reports, menus, libraries, schema metadata, and assessment-ready export package</div></div>
+              <div class="row-box"><strong>Why this matters</strong><div class="muted small">Discovery gives a structured inventory first, so downstream assessment can identify Oracle Forms DBs, forms, apps, reports, and dependencies more accurately.</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="flow-footer"><div class="steps-dots"></div><button class="btn btn-primary next-btn" data-next="screen-2">Next: Assessment Intake</button></div>
+      </section>
+
+      <section id="screen-2" class="screen">
+        <div class="workspace">
+          <div class="card">
+            <h3>2. Assessment Intake + Inventory Parser</h3>
+            <p class="muted">Assessment takes the exported discovery package, parses its inventory, and normalizes the output into canonical JSON. This keeps analysis structured and makes Forms, DBs, apps, and reports visible before deeper AI processing.</p>
+            <div class="timeline">
+              <div class="timeline-step" data-step="A"><strong>Upload discovery package</strong><div class="muted small">Use the file exported by the discovery tool. It contains inventory for Oracle databases, forms, applications, reports, menus, libraries, and schema metadata.</div></div>
+              <div class="timeline-step" data-step="B"><strong>Normalize form structure</strong><div class="muted small">Windows, canvases, blocks, items, LOVs, triggers, program units, libraries.</div></div>
+              <div class="timeline-step" data-step="C"><strong>Build canonical model</strong><div class="muted small">One target-neutral JSON model that feeds AI, reporting, and code generation.</div></div>
+            </div>
+            <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+              <button class="btn btn-primary" id="runParse">Parse Discovery Output</button>
+              <button class="btn btn-secondary">View mapping schema</button>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Canonical JSON</h3>
+            <div class="codebox" id="jsonPreview">{
+  "discoveryPackage": "Oracle_Modernization_Discovery.zip",
+  "status": "waiting for assessment intake"
+}</div>
+          </div>
+        </div>
+        <div class="flow-footer"><div class="steps-dots"></div><div style="display:flex; gap:10px;"><button class="btn btn-secondary prev-btn" data-prev="screen-1">Back</button><button class="btn btn-primary next-btn" data-next="screen-3">Next: Analyzer</button></div></div>
+      </section>
+
+      <section id="screen-3" class="screen">
+        <div class="workspace">
+          <div class="card">
+            <h3>3. AI Logic Analyzer + Key Observations</h3>
+            <p class="muted">This screen turns technical extraction into migration insight. It includes the “Key Observations” layer from the discovery report rather than just raw counts.</p>
+            <div class="list" id="analysisCards">
+              <div class="row-box"><strong>Trigger inventory</strong><div class="muted small">Run analysis to populate details.</div></div>
+              <div class="row-box"><strong>Built-ins</strong><div class="muted small">GO_BLOCK, EXECUTE_QUERY, SET_ITEM_PROPERTY, MESSAGE</div></div>
+              <div class="row-box"><strong>Business summary</strong><div class="muted small">AI converts form logic into plain English for architects and decision makers.</div></div>
+            </div>
+            <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+              <button class="btn btn-primary" id="runAnalysis">Run Analysis</button>
+              <button class="btn btn-secondary">Risk flags</button>
+            </div>
+          </div>
+          <div class="card">
+            <h3>AI Insight Panel</h3>
+            <div class="insight-grid" id="insightGrid">
+              <div class="insight-card high"><strong>PL/SQL-heavy forms triggers</strong><div class="muted small">Likely manual refactoring into services and client-side validations.</div></div>
+              <div class="insight-card high"><strong>Tight UI ↔ DB coupling</strong><div class="muted small">Requires service layer decoupling before clean modernization.</div></div>
+              <div class="insight-card medium"><strong>High trigger count impacts performance</strong><div class="muted small">Watch for migration behavior changes and optimize trigger patterns.</div></div>
+              <div class="insight-card medium"><strong>Limited documentation</strong><div class="muted small">Reverse engineering and AI explanation become mandatory.</div></div>
+            </div>
+            <div class="codebox" id="analysisNotes" style="margin-top:14px;">Analysis not started yet.</div>
+          </div>
+        </div>
+        <div class="flow-footer"><div class="steps-dots"></div><div style="display:flex; gap:10px;"><button class="btn btn-secondary prev-btn" data-prev="screen-2">Back</button><button class="btn btn-primary next-btn" data-next="screen-4">Next: Dependency Map</button></div></div>
+      </section>
+
+      <section id="screen-4" class="screen">
+        <div class="workspace">
+          <div class="card">
+            <h3>4. Dependency Map</h3>
+            <p class="muted">This stage maps forms to tables, procedures, packages, and external integrations. It drives wave planning and helps explain where the coupling lives.</p>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Form</th><th>Tables</th><th>Packages / Procedures</th><th>Integration / Note</th></tr>
+                </thead>
+                <tbody id="dependencyRows">
+                  <tr><td>CUSTOMER_MASTER</td><td>Waiting...</td><td>Waiting...</td><td>Pending mapping</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="margin-top:16px;"><button class="btn btn-primary" id="loadDependencies">Map Dependencies</button></div>
+          </div>
+          <div class="card">
+            <h3>Migration scoring direction</h3>
+            <div class="mapping-list">
+              <div class="mapping-row"><strong>Low</strong><div class="muted small">Simple CRUD, low trigger count, minimal package and DB coupling.</div></div>
+              <div class="mapping-row"><strong>Medium</strong><div class="muted small">Multiple blocks, LOV usage, medium package dependency, some business rules in triggers.</div></div>
+              <div class="mapping-row"><strong>High</strong><div class="muted small">Deep trigger chains, package body logic, shared libraries, tightly coupled SQL behavior.</div></div>
+            </div>
+            <div class="subtle" style="margin-top:14px;"><strong>Integration context</strong><div class="muted small">Email notifications, CSV/Excel file handling, payment APIs, and DB scheduler jobs should be surfaced as migration dependencies.</div></div>
+          </div>
+        </div>
+        <div class="flow-footer"><div class="steps-dots"></div><div style="display:flex; gap:10px;"><button class="btn btn-secondary prev-btn" data-prev="screen-3">Back</button><button class="btn btn-primary next-btn" data-next="screen-5">Next: Assessment</button></div></div>
+      </section>
+
+      <section id="screen-5" class="screen">
+        <div class="card">
+          <h3>5. Assessment + Decision Layer</h3>
+          <p class="muted">This stage brings the CloudAtlas-style assessment dashboard into the flow, but adds what was missing: recommended path, real TCO comparison, and the ability to distinguish Oracle Retain from Modernize.</p>
+          <div class="kpi-strip">
+            <div class="kpi-box"><div>Total schema</div><div class="num">10</div><div class="muted small">Current sample estate</div></div>
+            <div class="kpi-box"><div>Azure readiness</div><div class="num">81%</div><div class="muted small">Across highlighted schemas</div></div>
+            <div class="kpi-box"><div>Total effort</div><div class="num">120h</div><div class="muted small">Sample dashboard value</div></div>
+            <div class="kpi-box"><div>Best 5-year TCO</div><div class="num">$655K</div><div class="muted small">Modernize path is lowest-cost option</div></div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Schema</th><th>Project</th><th>Readiness</th><th>Total Effort</th><th>Assessment Cost</th><th>Recommended Path</th><th>Reason</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>AB_BOUNDARIES</td><td>Final-Oracle</td><td>100%</td><td>3h</td><td>$255.79</td><td><span class="badge good">Modernize</span></td><td>High readiness and low effort make this an early conversion candidate.</td></tr>
+                <tr><td>demoreport</td><td>DemoDb</td><td>68%</td><td>24h</td><td>$255.79</td><td><span class="badge purple">Retain</span></td><td>Use VM-based retain path first while modernization planning matures.</td></tr>
+                <tr><td>DEMODB</td><td>SINGLEDBTEST</td><td>50%</td><td>37h</td><td>$255.79</td><td><span class="badge warn">Modernize with review</span></td><td>Moderate readiness with heavy procedure/package work calls for staged modernization.</td></tr>
+                
+              </tbody>
+            </table>
+          </div>
+          <div class="decision-grid" style="margin-top:16px;">
+            <div class="card" style="padding:18px; box-shadow:none;">
+              <h4 style="margin-top:0;">Recommended routing logic</h4>
+              <div class="list">
+                <div class="row-box"><strong>Retain</strong><div class="muted small">Choose when readiness is low, business risk is high, or the workload needs a fast VM-based landing zone.</div></div>
+                <div class="row-box"><strong>Modernize</strong><div class="muted small">Choose when readiness and object complexity support managed transformation to .NET + React + PostgreSQL.</div></div>
+                <div class="row-box"><strong>TCO-informed routing</strong><div class="muted small">5-year TCO favors phased modernization at $655K versus $726K for Oracle on Azure retain and $820K for current on-prem.</div></div>
+              </div>
+            </div>
+            <div class="card" style="padding:18px; box-shadow:none;">
+              <h4 style="margin-top:0;">Quick wins</h4>
+              <div class="summary-list">
+                <div class="row-box"><strong>AB_BOUNDARIES</strong><div class="muted small">100% readiness and 3h effort.</div></div>
+                <div class="row-box"><strong>demoreport</strong><div class="muted small">Retain-path candidate with 68% readiness and 24h effort.</div></div>
+                <div class="row-box"><strong>DEMODB</strong><div class="muted small">Use as showcase for drill-down and review gate.</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="tco-grid">
+            <div class="card" style="padding:18px; box-shadow:none;">
+              <h4 style="margin-top:0;">5-year TCO comparison</h4>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Option</th><th>5-Year Cost</th><th>Savings vs Current</th><th>Position</th></tr></thead>
+                  <tbody>
+                    <tr><td>Current Oracle On-Prem</td><td>$820,000</td><td>-</td><td><span class="badge bad">Highest cost</span></td></tr>
+                    <tr><td>Modernize: React + .NET + PostgreSQL on Azure</td><td>$655,000</td><td>$165,000</td><td><span class="badge good">Recommended</span></td></tr>
+                    <tr><td>Retain: Oracle on Azure</td><td>$726,000</td><td>$94,000</td><td><span class="badge warn">Interim path</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card" style="padding:18px; box-shadow:none;">
+              <h4 style="margin-top:0;">TCO drivers</h4>
+              <div class="summary-list">
+                <div class="row-box"><strong>Current on-prem</strong><div class="muted small">Oracle licenses $360K, support $70K, infrastructure $150K, maintenance team $240K over 5 years.</div></div>
+                <div class="row-box"><strong>Modernize path</strong><div class="muted small">One-time migration $265K plus 5-year run cost $390K gives the lowest total cost.</div></div>
+                <div class="row-box"><strong>Retain path</strong><div class="muted small">One-time move $96K is faster upfront, but Oracle licensing keeps long-term cost higher.</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="tco-grid">
+            <div class="tco-highlight">
+              <strong>Recommendation</strong>
+              <div class="muted small">Phased modernization to React + .NET + PostgreSQL on Azure gives the best 5-year TCO and the strongest strategic position.</div>
+              <div class="good-text" style="margin-top:8px;">Estimated 5-year savings: $165,000</div>
+            </div>
+            <div class="tco-highlight">
+              <strong>Retain path usage</strong>
+              <div class="muted small">Oracle on Azure can still be used as a fast interim landing zone for selected workloads, but should not be the default end-state when long-term TCO matters.</div>
+              <div class="warn-text" style="margin-top:8px;">Retain saves only $94,000 vs current state</div>
+            </div>
+          </div>
+        </div>
+        <div class="flow-footer"><div class="steps-dots"></div><div style="display:flex; gap:10px;"><button class="btn btn-secondary prev-btn" data-prev="screen-4">Back</button><button class="btn btn-primary next-btn" data-next="screen-6">Next: Schema Deep Dive</button></div></div>
+      </section>
+
+      <section id="screen-6" class="screen">
+        <div class="workspace">
+          <div class="card">
+            <h3>6. Schema Deep Dive (DEMODB)</h3>
+            <p class="muted">This is the missing drill-down layer. Instead of leaving the intelligence buried in PDFs, the UI surfaces object-level effort and compatibility details.</p>
+            <div class="tabs" style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px;">
+              <div class="chip">Active schema: DEMODB</div>
+              <div class="chip">Discovery-led assessment package</div>
+              <div class="chip">Assessment source: Oracle → PostgreSQL</div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Category</th><th>Actual Objects</th><th>Impacted</th><th>Estimated Effort</th><th>Migration Note</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Functions</td><td>6</td><td>4</td><td>60 min</td><td>Standard PL/pgSQL translation patterns available.</td></tr>
+                  <tr><td>Procedures</td><td>22</td><td>18</td><td>447 min</td><td>Several procedures need rewrite and validation.</td></tr>
+                  <tr><td>Materialized Views</td><td>3</td><td>1</td><td>20 min</td><td>Refresh behavior must be adjusted.</td></tr>
+                  <tr><td>Package Body Procedures</td><td>6</td><td>6</td><td>1540 min</td><td>Primary complexity driver in DEMODB.</td></tr>
+                  <tr><td>Views</td><td>13</td><td>8</td><td>116 min</td><td>Compatibility differences require review.</td></tr>
+                  <tr><td>Triggers</td><td>3</td><td>3</td><td>50 min</td><td>Trigger code must move to dedicated PostgreSQL functions.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="detail-grid" style="margin-top:16px;">
+              <div class="row-box"><strong>High-effort hotspot</strong><div class="muted small">PKG_AIREX001.GET_JOB_ORDER_LIST is the standout high-effort procedure and should be explicitly flagged in review planning.</div></div>
+              <div class="row-box"><strong>Primary hotspot</strong><div class="muted small">Package body procedures dominate DEMODB effort and should drive manual review and validation planning.</div></div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Compatibility + Recommendations</h3>
+            <div class="summary-list">
+              <div class="row-box"><strong>View compatibility</strong><div class="muted small">FORCE, VISIBLE/INVISIBLE, and WITH READ ONLY are not directly compatible; CHECK OPTION is supported.</div></div>
+              <div class="row-box"><strong>Trigger rewrite</strong><div class="muted small">Oracle trigger body must move into a separate PostgreSQL trigger function.</div></div>
+              <div class="row-box"><strong>Package conversion</strong><div class="muted small">Package body procedures are a major complexity zone and justify manual review.</div></div>
+              <div class="row-box"><strong>Schema note</strong><div class="muted small">Use DEMODB as the primary proof point for effort, compatibility, and review gating in the click-through.</div></div>
+            </div>
+            <div class="codebox" style="margin-top:14px;">Top observations for customer conversation:
+- Heavy package-body effort is the main reason DEMODB should not skip review.
+- Drill-down intelligence should be visual, not PDF-only.
+- TCO now favors phased modernization: $655K vs $726K retain path over 5 years.</div>
+          </div>
+        </div>
+        <div class="flow-footer"><div class="steps-dots"></div><div style="display:flex; gap:10px;"><button class="btn btn-secondary prev-btn" data-prev="screen-5">Back</button><button class="btn btn-primary next-btn" data-next="screen-7">Next: Security & FinOps</button></div></div>
+      </section>
+
+      <section id="screen-7" class="screen">
+        <div class="card">
+          <h3>7. Post-migration Security + FinOps Dashboard</h3>
+          <p class="muted">This remains a strong differentiator. It shows the story does not end at migration and supports recurring value after the cutover.</p>
+          <div class="top-metrics" style="grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top:16px;">
+            <div class="metric-card"><div class="label">Security score</div><div class="value">87/100</div><div class="delta">+12 vs legacy</div></div>
+            <div class="metric-card"><div class="label">Threats blocked</div><div class="value">1,284</div><div class="delta">Last 30 days</div></div>
+            <div class="metric-card"><div class="label">Monthly infra cost</div><div class="value">$4,210</div><div class="delta">-38% vs legacy</div></div>
+            <div class="metric-card"><div class="label">Potential savings</div><div class="value">$1,640</div><div class="delta">3 actions pending</div></div>
+          </div>
+          <div class="dual-grid" style="margin-top:16px;">
+            <div class="card" style="padding:18px; box-shadow:none;">
+              <h4 style="margin-top:0;">Security control status</h4>
+              <div class="summary-list">
+                <div class="row-box"><strong>OAuth / SSO, MFA, TLS, WAF, TDE, RBAC</strong><div class="muted small">Position these as active security controls in the modern platform.</div></div>
+                <div class="row-box"><strong>CSRF rotation review</strong><div class="muted small">Flagged as needing follow-up.</div></div>
+                <div class="row-box"><strong>Dependency patching</strong><div class="muted small">Outdated dependencies remain a post-migration operational concern.</div></div>
+              </div>
+            </div>
+            <div class="card" style="padding:18px; box-shadow:none;">
+              <h4 style="margin-top:0;">FinOps actions</h4>
+              <div class="summary-list">
+                <div class="row-box"><strong>Right-size compute</strong><div class="muted small">3 over-provisioned nodes detected.</div></div>
+                <div class="row-box"><strong>Remove stale IAM roles</strong><div class="muted small">Security and cost win together.</div></div>
+                <div class="row-box"><strong>Enable log compression + CDN caching</strong><div class="muted small">Reduce recurring operational spend.</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flow-footer"><div class="steps-dots"></div><div style="display:flex; gap:10px;"><button class="btn btn-secondary prev-btn" data-prev="screen-6">Back</button><button class="btn btn-primary next-btn" data-next="screen-8">Next: Conversion Studio</button></div></div>
+      </section>
+
+      <section id="screen-8" class="screen">
+        <div class="workspace">
+          <div class="card">
+            <h3>8. Conversion Studio</h3>
+            <p class="muted">Updated per architecture feedback: React + TypeScript is now the default customer-facing target, while Angular remains an optional output path if enterprise context justifies it.</p>
+            <div class="accordion">
+              <div class="acc-item">
+                <div class="acc-head">Default modernization mapping <span>+</span></div>
+                <div class="acc-body">
+                  Oracle Window → React page / modal<br>
+                  Oracle Canvas → React section / tab<br>
+                  Oracle Data Block → React form state + data grid<br>
+                  Oracle Item → controlled input component<br>
+                  LOV → dropdown / autocomplete service<br>
+                  Trigger logic → React handlers + .NET APIs<br>
+                  Package calls → application services / controllers
+                </div>
+              </div>
+              <div class="acc-item">
+                <div class="acc-head">Generated assets <span>+</span></div>
+                <div class="acc-body">
+                  CustomerMaster.tsx<br>
+                  customer-master.api.ts<br>
+                  customer-master.types.ts<br>
+                  CustomerController.cs<br>
+                  CustomerService.cs<br>
+                  Validation harness + migration notes
+                </div>
+              </div>
+              <div class="acc-item">
+                <div class="acc-head">Optional outputs <span>+</span></div>
+                <div class="acc-body">
+                  Angular stays available for enterprise customers that prefer its form patterns and DI model. Python remains useful for parser/orchestration. Java stays optional for special ecosystems.
+                </div>
+              </div>
+            </div>
+            <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+              <button class="btn btn-primary" id="generateUi">Generate UI Preview</button>
+              <button class="btn btn-secondary" id="toggleCode">Show Generated Code</button>
+            </div>
+            <div class="codebox" id="generatedCode" style="display:none; margin-top:16px;"></div>
+          </div>
+          <div class="card">
+            <h3>React Preview</h3>
+            <div class="preview-shell" id="uiPreview"><div class="muted">Click “Generate UI Preview” to render the modern page.</div></div>
+          </div>
+        </div>
+        <div class="flow-footer"><div class="steps-dots"></div><div style="display:flex; gap:10px;"><button class="btn btn-secondary prev-btn" data-prev="screen-7">Back</button><button class="btn btn-primary next-btn" data-next="screen-9">Next: Review & Validate</button></div></div>
+      </section>
+
+      <section id="screen-9" class="screen">
+        <div class="workspace">
+          <div class="card">
+            <h3>9. Review & Validate</h3>
+            <p class="muted">This step is added to address the missing validation and human-review gate. Generated output should not go directly to deployment without quality review.</p>
+            <div class="kpi-strip">
+              <div class="kpi-box"><div>Code quality</div><div class="num">84/100</div><div class="muted small">Static quality gate</div></div>
+              <div class="kpi-box"><div>Functional coverage</div><div class="num">76%</div><div class="muted small">Target vs extracted logic</div></div>
+              <div class="kpi-box"><div>Flagged items</div><div class="num">7</div><div class="muted small">Need manual review</div></div>
+              <div class="kpi-box"><div>Deployment status</div><div class="num">Held</div><div class="muted small">Awaiting approval</div></div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Area</th><th>Status</th><th>Finding</th><th>Owner</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Procedure translation</td><td><span class="badge warn">Review</span></td><td>High-effort package procedure requires functional verification.</td><td>Migration engineer</td></tr>
+                  <tr><td>Trigger behavior</td><td><span class="badge warn">Review</span></td><td>Oracle trigger chain mapped to service + DB trigger function, needs parity testing.</td><td>QA + architect</td></tr>
+                  <tr><td>View compatibility</td><td><span class="badge good">Pass</span></td><td>CHECK OPTION mapping validated; unsupported properties documented.</td><td>DB engineer</td></tr>
+                  <tr><td>UI workflow parity</td><td><span class="badge bad">Action</span></td><td>Two navigation behaviors need manual React UX adjustment.</td><td>Frontend lead</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Human-in-the-loop gate</h3>
+            <div class="summary-list">
+              <div class="validate-card"><strong>Approve</strong><div class="muted small">Allow CI/CD packaging only after technical sign-off and business review.</div><span class="badge good">Enabled</span></div>
+              <div class="validate-card"><strong>Reject and rework</strong><div class="muted small">Route flagged logic back to Conversion Studio with reviewer notes.</div><span class="badge warn">Enabled</span></div>
+              <div class="validate-card"><strong>Wave planning impact</strong><div class="muted small">Use validation findings to move high-risk forms into later modernization waves.</div><span class="badge info">Tracked</span></div>
+              <div class="validate-card"><strong>TCO note</strong><div class="muted small">Manual review cost should be judged against 5-year operating savings. Even with review gates, phased modernization still has the best TCO.</div><span class="badge good">$165K better</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="flow-footer"><div class="steps-dots"></div><div style="display:flex; gap:10px;"><button class="btn btn-secondary prev-btn" data-prev="screen-8">Back</button><button class="btn btn-primary next-btn" data-next="screen-10">Next: Internal Pitch</button></div></div>
+      </section>
+
+      <section id="screen-10" class="screen">
+        <div class="workspace">
+          <div class="card">
+            <h3>10. Internal Pitch Mode</h3>
+            <p class="muted">This view is now explicitly marked as internal-only and sits outside the core customer product flow.</p>
+            <div class="timeline">
+              <div class="timeline-step" data-step="1"><strong>Lead with discovery and decision</strong><div class="muted small">We discover the Oracle estate, assess readiness, and decide retain versus modernize.</div></div>
+              <div class="timeline-step" data-step="2"><strong>Show intelligence, not just counts</strong><div class="muted small">Key observations, schema drill-down, complexity hotspots, and path recommendations make the value clear.</div></div>
+              <div class="timeline-step" data-step="3"><strong>Show conversion with guardrails</strong><div class="muted small">Conversion Studio is followed by Review & Validate, not straight deployment.</div></div>
+              <div class="timeline-step" data-step="4"><strong>Close with recurring value</strong><div class="muted small">Security, FinOps, and future TCO comparison turn a migration project into a platform story.</div></div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Meeting-ready internal script</h3>
+            <div class="codebox">This updated clickthrough positions the solution as an Oracle modernization platform, not just a parser or report viewer.
+
+We start with upload plus future discovery-source connectors. Then we normalize forms into canonical JSON, apply AI analysis, surface key observations, map dependencies, and run assessment with a retain-versus-modernize decision.
+
+The DEMODB reports are no longer buried in PDF output. Their object-level effort, compatibility issues, and hotspots now show up in a schema drill-down screen. Conversion now defaults to React + .NET + PostgreSQL, with Angular still available when needed. Most importantly, generated output goes through Review & Validate before deployment.
+
+TCO is now part of the story: phased modernization is the lowest 5-year cost option, while Oracle on Azure remains a faster but more expensive retain path.</div>
+          </div>
+        </div>
+        <div class="flow-footer"><div class="steps-dots"></div><div style="display:flex; gap:10px;"><button class="btn btn-secondary prev-btn" data-prev="screen-9">Back</button><button class="btn btn-primary" id="restartEnd">Restart Demo</button></div></div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    $(function () {
+      const screens = $('.screen');
+      const steps = $('.step-item');
+      const order = ['screen-1','screen-2','screen-3','screen-4','screen-5','screen-6','screen-7','screen-8','screen-9','screen-10'];
+      let autoTimer = null;
+      let autoIndex = 0;
+      let activeMode = 'enterprise';
+      let autoMode = false;
+
+      function renderDots(current) {
+        $('.steps-dots').each(function () {
+          const wrapper = $(this);
+          wrapper.empty();
+          order.forEach((id, index) => wrapper.append('<span class="dot-step ' + ((index + 1) <= current ? 'active' : '') + '"></span>'));
+        });
+      }
+
+      function showScreen(id) {
+        screens.removeClass('active');
+        $('#' + id).addClass('active');
+        steps.removeClass('active');
+        $('.step-item[data-target="' + id + '"]').addClass('active');
+        renderDots(order.indexOf(id) + 1);
+        if (!autoMode) { /* keep the current viewport stable */ }
+      }
+
+      function setMode(mode) {
+        activeMode = mode;
+        $('#modeToggle button').removeClass('active');
+        $('#modeToggle button[data-mode="' + mode + '"]').addClass('active');
+        $('.mode-card').removeClass('active-mode');
+        $('.mode-card[data-mode-card="' + mode + '"]').addClass('active-mode');
+        if (mode === 'guided') {
+          $('#modeSummary').html('<strong>Guided Mode selected</strong><div class="muted small">This is the simplified SMB/SMC journey. It auto-selects the target stack, compresses discovery into a summary, recommends modernization by default, and skips manual wave planning. Yes, it is clickable in the demo now.</div>');
+          $('#simulateUpload').text('Run guided discovery');
+        } else {
+          $('#modeSummary').html('<strong>Enterprise Mode selected</strong><div class="muted small">Use the full workflow when you want separate discovery review, detailed assessment, manual retain-vs-modernize decisions, wave planning, conversion, and validation gates.</div>');
+          $('#simulateUpload').text('Run discovery on demo estate');
+        }
+      }
+
+      function resetDemoState() {
+        clearInterval(autoTimer);
+        autoTimer = null;
+        autoIndex = 0;
+        autoMode = false;
+        $('#dropzone').removeClass('ready');
+        $('#uploadBar').css('width', '0%');
+        $('#uploadSummary').html(`
+          <div class="row-box"><strong>Status</strong><div class="muted small">Waiting to run discovery scan</div></div>
+          <div class="row-box"><strong>Discovery outputs</strong><div class="muted small">Application inventory, Oracle Forms modules, reports, menus, libraries, schema metadata, and assessment-ready export package</div></div>
+          <div class="row-box"><strong>Why this matters</strong><div class="muted small">Discovery gives a structured inventory first, so downstream assessment can identify Oracle Forms DBs, forms, apps, reports, and dependencies more accurately.</div></div>
+        `);
+        $('#jsonPreview').text('{' + '\n  "formName": "CUSTOMER_MASTER",\n  "status": "waiting for parser"\n}');
+        $('#analysisCards').html(`
+          <div class="row-box"><strong>Trigger inventory</strong><div class="muted small">Run analysis to populate details.</div></div>
+          <div class="row-box"><strong>Built-ins</strong><div class="muted small">GO_BLOCK, EXECUTE_QUERY, SET_ITEM_PROPERTY, MESSAGE</div></div>
+          <div class="row-box"><strong>Business summary</strong><div class="muted small">AI converts form logic into plain English for architects and decision makers.</div></div>
+        `);
+        $('#analysisNotes').text('Analysis not started yet.');
+        $('#dependencyRows').html('<tr><td>CUSTOMER_MASTER</td><td>Waiting...</td><td>Waiting...</td><td>Pending mapping</td></tr>');
+        $('#uiPreview').html('<div class="muted">Click “Generate UI Preview” to render the modern page.</div>');
+        $('#generatedCode').hide().text('');
+        setMode('enterprise');
+        showScreen('screen-1');
+      }
+
+      function simulateUpload() {
+        $('#dropzone').addClass('ready');
+        $('#uploadBar').css('width', '100%');
+        $('#uploadSummary').html(`
+          <div class="row-box"><strong>Status</strong><div class="muted small">Discovery scan complete — Oracle_Modernization_Discovery.zip</div></div>
+          <div class="row-box"><strong>Artifacts detected</strong><div class="muted small">Discovery identified 12 .fmb files, 2 libraries, 1 menu module, 5 reports, application metadata, and DEMODB assessment output</div></div>
+          <div class="row-box"><strong>Selected primary schema</strong><div class="muted small">DEMODB</div></div>
+          <div class="row-box"><strong>Next action</strong><div class="muted small">Upload the generated discovery output into assessment to normalize inventory and identify Oracle Forms databases, forms, apps, reports, and dependencies.</div></div>
+        `);
+      }
+
+      function runParse() {
+        $('#jsonPreview').text(`{
+  "formName": "CUSTOMER_MASTER",
+  "module": "CRM",
+  "windows": ["MAIN_WINDOW"],
+  "canvases": ["HEADER_CANVAS", "DETAIL_CANVAS"],
+  "blocks": [
+    {"name": "CUSTOMER", "baseTable": "CUSTOMERS", "items": ["CUSTOMER_ID","NAME","EMAIL","COUNTRY_ID","STATUS"]}
+  ],
+  "triggers": [
+    {"name": "WHEN-VALIDATE-ITEM", "owner": "CUSTOMER.EMAIL"},
+    {"name": "WHEN-BUTTON-PRESSED", "owner": "BTN_SAVE"},
+    {"name": "PRE-QUERY", "owner": "CUSTOMER"}
+  ],
+  "attachedReports": ["DEMODB"],
+  "status": "parsed"
+}`);
+      }
+
+      function runAnalysis() {
+        $('#analysisCards').html(`
+          <div class="row-box"><strong>Trigger inventory</strong><div class="muted small">18 form triggers identified; several align with heavy PL/SQL usage patterns.</div></div>
+          <div class="row-box"><strong>Built-ins</strong><div class="muted small">GO_BLOCK, SET_ITEM_PROPERTY, EXECUTE_QUERY, MESSAGE, CLEAR_BLOCK</div></div>
+          <div class="row-box"><strong>Business summary</strong><div class="muted small">The flow manages customer data with lookup-driven behavior, validations, and DB-coupled save/query logic.</div></div>
+          <div class="row-box"><strong>Migration signal</strong><div class="muted small">Strong candidate for service-layer extraction and staged UI modernization.</div></div>
+        `);
+        $('#analysisNotes').text(`AI Summary:\n\nKey observations derived from the discovery layer:\n- Heavy use of PL/SQL in Forms triggers\n- Tight coupling between UI and database\n- High number of database triggers impacting performance\n- Limited documentation available\n\nRecommended action:\n1. Move rules into .NET services and modern UI validation.\n2. Use dependency map to isolate DB-coupled hotspots.\n3. Route high-risk objects through Review & Validate.`);
+      }
+
+      function loadDependencies() {
+        $('#dependencyRows').html(`
+          <tr><td>CUSTOMER_MASTER</td><td>CUSTOMERS, COUNTRIES, CUSTOMER_STATUS</td><td>PKG_CUSTOMER_SAVE, PKG_CUSTOMER_QUERY</td><td><span class="badge warn">Shared DB logic</span></td></tr>
+          <tr><td>ADDRESS_DETAIL</td><td>CUSTOMER_ADDRESSES, COUNTRIES, STATES</td><td>PKG_ADDRESS_MAINT</td><td><span class="badge info">Lookup dependent</span></td></tr>
+          <tr><td>ORDER_SEARCH</td><td>ORDERS, ORDER_STATUS, CUSTOMERS</td><td>PKG_ORDER_QUERY</td><td><span class="badge bad">Trigger-heavy search flow</span></td></tr>
+          <tr><td>PAYMENT_BATCH</td><td>PAYMENTS, BATCH_AUDIT</td><td>PKG_PAYMENT_SYNC</td><td><span class="badge purple">API + scheduler dependency</span></td></tr>
+        `);
+      }
+
+      function generateUi() {
+        $('#uiPreview').html(`
+          <div class="preview-top">
+            <div>
+              <div style="font-size:24px; font-weight:800; color:#22324d;">Customer Master</div>
+              <div style="color:#6880a4; margin-top:4px;">React + TypeScript preview backed by .NET Web API</div>
+            </div>
+            <div class="chip">Default stack: React + .NET</div>
+          </div>
+          <div class="preview-card">
+            <div class="preview-grid">
+              <div><label>Customer ID</label><input value="C-10021" /></div>
+              <div><label>Status</label><select><option>Active</option><option>Inactive</option></select></div>
+              <div><label>Name</label><input value="Rohan Malhotra" /></div>
+              <div><label>Email</label><input value="rohan@example.com" /></div>
+              <div><label>Country (LOV_COUNTRY)</label><select><option>India</option><option>UAE</option><option>Zambia</option></select></div>
+              <div><label>Search by Status</label><select><option>All</option><option>Active</option><option>Inactive</option></select></div>
+            </div>
+            <div class="preview-toolbar">
+              <button class="mini-btn">Save</button>
+              <button class="mini-btn">Query</button>
+              <button class="mini-btn">Clear</button>
+            </div>
+          </div>
+        `);
+        $('#generatedCode').text(`// React component target\nconst [form, setForm] = useState({\n  customerId: 'C-10021',\n  status: 'Active',\n  name: 'Rohan Malhotra',\n  email: 'rohan@example.com',\n  countryId: 'India'\n});\n\n// .NET API target\nPOST /api/customers/save\nGET /api/customers/query?status=Active\n\n// Optional output targets\n// Angular: enterprise-aligned alternative UI output\n// Python: parser, XML extraction, report generation\n// Java: customer-specific integration cases only`);
+      }
+
+      steps.on('click', function () { showScreen($(this).data('target')); });
+      $('#modeToggle').on('click', 'button', function () { setMode($(this).data('mode')); });
+      $('.mode-card').on('click', function () { setMode($(this).data('mode-card')); });
+      $('.next-btn').on('click', function () { showScreen($(this).data('next')); });
+      $('.prev-btn').on('click', function () { showScreen($(this).data('prev')); });
+      $('#startDemo').on('click', function () { showScreen('screen-1'); });
+      $('#simulateUpload').on('click', simulateUpload);
+      $('#runParse').on('click', runParse);
+      $('#runAnalysis').on('click', runAnalysis);
+      $('#loadDependencies').on('click', loadDependencies);
+      $('#generateUi').on('click', generateUi);
+      $('#toggleCode').on('click', function () { $('#generatedCode').slideToggle(180); });
+      $('#restartEnd, #resetDemo').on('click', resetDemoState);
+      $('.acc-head').on('click', function () {
+        const body = $(this).next('.acc-body');
+        $('.acc-body').not(body).slideUp(180);
+        body.slideToggle(180);
+      });
+
+      $('#autoWalk').on('click', function () {
+        clearInterval(autoTimer);
+        resetDemoState();
+        autoMode = true;
+        const actions = [
+          () => showScreen('screen-1'),
+          () => simulateUpload(),
+          () => showScreen('screen-2'),
+          () => runParse(),
+          () => showScreen('screen-3'),
+          () => runAnalysis(),
+          () => showScreen('screen-4'),
+          () => loadDependencies(),
+          () => showScreen('screen-5'),
+          () => showScreen('screen-6'),
+          () => showScreen('screen-7'),
+          () => showScreen('screen-8'),
+          () => generateUi(),
+          () => showScreen('screen-9'),
+          () => showScreen('screen-10')
+        ];
+        autoIndex = 0;
+        autoTimer = setInterval(function () {
+          if (autoIndex >= actions.length) { clearInterval(autoTimer); autoMode = false; return; }
+          actions[autoIndex++]();
+        }, 1500);
+      });
+
+      renderDots(1);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step 3: AI Logic Analyzer - CloudAtlas</title>
+    <link href="assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <i class="fa-solid fa-cloud logo-icon"></i>
+            <span class="logo-text">CloudAtlas</span>
+        </div>
+        <div class="sidebar-menu">
+            <div class="menu-label">Overview</div>
+            <a href="index.html" class="menu-item"><i class="fa-solid fa-border-all"></i><span class="menu-text">Assessment Dashboard</span></a>
+            <a href="smb-guided-mode.html" class="menu-item bg-primary-soft text-primary"><i class="fa-solid fa-wand-magic-sparkles"></i><span class="menu-text fw-bold">SMB Guided Mode</span></a>
+            <div class="menu-label">Evaluation Pipeline</div>
+            <a href="project-intake.html" class="menu-item"><i class="fa-solid fa-file-arrow-up"></i><span class="menu-text">1. Project Intake</span></a>
+            <a href="parser-engine.html" class="menu-item"><i class="fa-solid fa-gears"></i><span class="menu-text">2. Parser Engine</span></a>
+            <a href="ai-logic.html" class="menu-item active"><i class="fa-solid fa-brain"></i><span class="menu-text">3. AI Logic Analyzer</span></a>
+            <a href="dependency-map.html" class="menu-item"><i class="fa-solid fa-diagram-project"></i><span class="menu-text">4. Dependency Map</span></a>
+            <a href="azure-assessment.html" class="menu-item"><i class="fa-solid fa-server"></i><span class="menu-text">5. Azure Assessment</span></a>
+            <div class="menu-label">Planning & Targeting</div>
+            <a href="security-finops.html" class="menu-item"><i class="fa-solid fa-shield-halved"></i><span class="menu-text">6. Security + FinOps</span></a>
+            <a href="conversion-studio.html" class="menu-item"><i class="fa-solid fa-code"></i><span class="menu-text">7. Conversion Studio</span></a>
+            <a href="review-validate.html" class="menu-item"><i class="fa-solid fa-user-check"></i><span class="menu-text">8. Review & Validate</span></a>
+            <a href="tech-decision.html" class="menu-item"><i class="fa-solid fa-layer-group"></i><span class="menu-text">9. Technology Decision</span></a>
+            <div class="menu-label mt-4">Internal Tools</div>
+            <a href="pitch-mode.html" class="menu-item"><i class="fa-solid fa-person-chalkboard"></i><span class="menu-text">Pitch Mode Script</span></a>
+        </div>
+    </aside>
+
+    <main class="main-wrapper">
+        <header class="topbar">
+            <!-- Topbar content -->
+            <div class="d-flex align-items-center">
+                <button class="sidebar-toggle" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+                <div class="ms-3 text-muted d-none d-md-block"><span>Evaluation Pipeline > <strong class="text-dark">3. AI Logic Analyzer</strong></span></div>
+            </div>
+            <div class="dropdown">
+                <div class="profile-dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=eff6ff&color=2563eb" alt="Profile">
+                    <div class="user-info d-none d-sm-flex"><span class="name">Admin User</span><span class="role">System Analyst</span></div>
+                </div>
+            </div>
+        </header>
+
+        <div class="page-content fade-in">
+            <div class="page-header">
+                <h1 class="page-title">Step 3: AI Logic Analyzer</h1>
+                <p class="page-subtitle">Explaining triggers, identifying built-ins, and summarizing business rules automatically.</p>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="modern-card">
+                        <div class="card-header-modern"><h2 class="card-title-modern">AI Summary Stats</h2></div>
+                        <ul class="list-group list-group-flush mb-4">
+                            <li class="list-group-item d-flex justify-content-between px-0"><span class="text-muted">Total Triggers:</span><span class="fw-bold">142</span></li>
+                            <li class="list-group-item d-flex justify-content-between px-0"><span class="text-muted">Forms Built-Ins:</span><span class="fw-bold text-danger">45 (rewrite required)</span></li>
+                            <li class="list-group-item d-flex justify-content-between px-0"><span class="text-muted">Complexity:</span><span class="fw-bold text-warning">Medium (6.5/10)</span></li>
+                        </ul>
+                        <div class="alert alert-primary bg-primary-soft border-0">
+                            <strong><i class="fa-solid fa-lightbulb me-2"></i> Architecture Recommendation:</strong>
+                            <p class="mb-0 mt-2 small">Translating PRE-INSERT validation triggers into deeply-coupled React logic is an anti-pattern. Instead, convert these robust loops into `.NET Web API` request validations targeting the unified Entity Framework schema.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="modern-card">
+                        <div class="card-header-modern">
+                            <h2 class="card-title-modern">Extracted Business Logic</h2>
+                            <select class="form-select w-auto form-select-sm"><option>HR_MODULE_V4 - EMP_DETAILS</option></select>
+                        </div>
+                        <div class="accordion" id="accordionTriggers">
+                          <div class="accordion-item border-0 mb-2 shadow-sm rounded">
+                            <h2 class="accordion-header" id="headingOne">
+                              <button class="accordion-button rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                <i class="fa-solid fa-code-commit text-primary me-2"></i> PRE-INSERT (Validation Logic)
+                              </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show">
+                              <div class="accordion-body bg-light rounded-bottom">
+                                <p class="small text-muted mb-2">Original PL/SQL snippet:</p>
+                                <pre class="p-2 bg-dark text-light rounded small"><code>IF :EMP.SALARY > 15000 AND :EMP.JOB_ID != 'MGR' THEN
+    MESSAGE('Salary exceeds permissible limit.');
+    RAISE FORM_TRIGGER_FAILURE;
+END IF;</code></pre>
+                                <p class="small fw-bold text-primary mb-1 mt-3">Target Conversion Spec (React + .NET):</p>
+                                <p class="small text-muted">This specific constraint will be parsed into an asynchronous `.NET FluentValidation` on the <code>CreateEmployeeRequest</code> DTO, firing an error state managed dynamically inside the React Hook Form.</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="mt-4 text-end">
+                            <a href="dependency-map.html" class="btn btn-primary">Next: Dependency Map <i class="fa-solid fa-arrow-right ms-2"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="assets/libs/jquery/jquery.min.js"></script>
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

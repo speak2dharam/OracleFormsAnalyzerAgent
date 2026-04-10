@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step 5: Assessment & TCO Report - CloudAtlas</title>
+    <link href="assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <style>
+        .data-list li { padding: 0.5rem 0; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between;}
+        .data-list li:last-child { border-bottom: none; }
+        .section-divider { border-bottom: 3px solid var(--primary-color); margin: 3rem 0; padding-bottom: 0.5rem;}
+    </style>
+</head>
+<body>
+    <aside class="sidebar position-fixed">
+        <div class="sidebar-header">
+            <i class="fa-solid fa-cloud logo-icon"></i>
+            <span class="logo-text">CloudAtlas</span>
+        </div>
+        <div class="sidebar-menu">
+            <div class="menu-label">Overview</div>
+            <a href="index.html" class="menu-item"><i class="fa-solid fa-border-all"></i><span class="menu-text">Assessment Dashboard</span></a>
+            <div class="menu-label">Evaluation Pipeline</div>
+            <a href="project-intake.html" class="menu-item"><i class="fa-solid fa-file-arrow-up"></i><span class="menu-text">1. Project Intake</span></a>
+            <a href="parser-engine.html" class="menu-item"><i class="fa-solid fa-gears"></i><span class="menu-text">2. Parser Engine</span></a>
+            <a href="ai-logic.html" class="menu-item"><i class="fa-solid fa-brain"></i><span class="menu-text">3. AI Logic Analyzer</span></a>
+            <a href="dependency-map.html" class="menu-item"><i class="fa-solid fa-diagram-project"></i><span class="menu-text">4. Dependency Map</span></a>
+            <a href="azure-assessment.html" class="menu-item active"><i class="fa-solid fa-server"></i><span class="menu-text">5. Azure Assessment</span></a>
+            <div class="menu-label">Planning & Targeting</div>
+            <a href="security-finops.html" class="menu-item"><i class="fa-solid fa-shield-halved"></i><span class="menu-text">6. Security + FinOps</span></a>
+            <a href="conversion-studio.html" class="menu-item"><i class="fa-solid fa-code"></i><span class="menu-text">7. Conversion Studio</span></a>
+            <a href="review-validate.html" class="menu-item"><i class="fa-solid fa-user-check"></i><span class="menu-text">8. Review & Validate</span></a>
+            <a href="tech-decision.html" class="menu-item"><i class="fa-solid fa-layer-group"></i><span class="menu-text">9. Technology Decision</span></a>
+        </div>
+    </aside>
+
+    <main class="main-wrapper">
+        <header class="topbar sticky-top bg-white border-bottom shadow-sm">
+            <div class="d-flex align-items-center">
+                <button class="sidebar-toggle" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+                <div class="ms-3 text-muted d-none d-md-block"><span>Evaluation Pipeline > <strong class="text-dark">5. Discovery & Assessment Matrix</strong></span></div>
+            </div>
+            <div class="dropdown">
+                <div class="profile-dropdown-toggle">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=eff6ff&color=2563eb" alt="Profile">
+                    <div class="user-info d-none d-sm-flex"><span class="name">Admin User</span><span class="role">System Analyst</span></div>
+                </div>
+            </div>
+        </header>
+
+        <div class="page-content fade-in">
+            <div class="page-header d-flex justify-content-between align-items-end mb-4">
+                <div>
+                    <h1 class="page-title text-primary"><i class="fa-solid fa-file-invoice-dollar me-2"></i>Comprehensive Master Report</h1>
+                    <p class="page-subtitle fs-6">Single-page scroll view for Oracle Forms DB Discovery & Full 3-Year TCO Cost Breakdowns.</p>
+                </div>
+                <div class="d-flex gap-2">
+                    <a href="planning/DEMODB.pdf" target="_blank" class="btn btn-outline-info shadow-sm fw-bold"><i class="fa-solid fa-file-pdf me-2"></i>View DEMODB Diagram</a>
+                </div>
+            </div>
+
+            <!-- SECTION A: TCO -->
+            <h3 class="fw-bold text-dark section-divider"><i class="fa-solid fa-chart-pie text-primary me-2"></i>SECTION A: Excel 3-Year TCO Summary</h3>
+            <p class="text-muted">Data parsed dynamically from the Excel worksheets (Year 1, Year 2, and Year 3).</p>
+            
+            <div class="row mb-4">
+                <div class="col-md-4 mb-3">
+                    <div class="modern-card text-center bg-light h-100 shadow-sm">
+                        <span class="badge bg-secondary mb-2">BASELINE</span>
+                        <h5 class="fw-bold text-muted">On-Prem Oracle RAC + Forms</h5>
+                        <h2 class="fw-bold text-dark">$5,081,000</h2>
+                        <p class="small text-muted mb-0">High hardware and Oracle license burden ($700K DB License/Yr).</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="modern-card text-center border border-success border-2 h-100 position-relative shadow-sm">
+                        <span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-success px-3 py-2 shadow">★ RECOMMENDED ★</span>
+                        <h5 class="fw-bold text-success mt-4">ODB@Azure Exascale</h5>
+                        <h2 class="fw-bold text-success">$3,183,864</h2>
+                        <p class="small text-muted mb-0">Re-use licenses via BYOL. Excellent speed to value.</p>
+                        <div class="bg-success-soft py-2 px-2 mt-auto rounded"><span class="fw-bold text-success">Save $1,897,136 (37.3%)</span></div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="modern-card text-center border border-primary h-100 d-flex flex-column shadow-sm">
+                        <span class="badge bg-primary mb-2 mx-auto">FULL MODERNIZE</span>
+                        <h5 class="fw-bold text-primary">Azure PG + Modern React</h5>
+                        <h2 class="fw-bold text-primary">$1,808,104</h2>
+                        <p class="small text-muted mb-0">Eliminates ALL Oracle licenses. High Yr 1 cost but massive YoY savings.</p>
+                        <div class="bg-primary-soft py-2 px-2 mt-auto rounded"><span class="fw-bold text-primary">Save $3,272,896 (64.4%)</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SHEET 1, 2, 3 RAW DATA INJECTION -->
+            <h4 class="fw-bold text-dark mt-5 mb-3"><i class="fa-solid fa-table border d-inline-block p-1 rounded bg-light me-2"></i>Worksheet Breakdown: Year 1 vs Year 2 vs Year 3</h4>
+            <div class="modern-card mb-5 shadow-sm">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm small align-middle text-center">
+                        <thead class="table-light text-muted">
+                            <tr>
+                                <th class="text-start">Cost Element</th>
+                                <th colspan="3" class="text-center border-start border-end">YEAR 1 ($)</th>
+                                <th colspan="3" class="text-center border-end">YEAR 2 ($)</th>
+                                <th colspan="3" class="text-center">YEAR 3 ($)</th>
+                            </tr>
+                            <tr style="font-size: 0.75rem;">
+                                <th class="text-start">Category</th>
+                                <th class="border-start bg-light text-secondary">On-Prem</th>
+                                <th class="bg-success-soft text-success">Exascale</th>
+                                <th class="border-end bg-primary-soft text-primary">Az PG</th>
+                                <th class="bg-light text-secondary">On-Prem</th>
+                                <th class="bg-success-soft text-success">Exascale</th>
+                                <th class="border-end bg-primary-soft text-primary">Az PG</th>
+                                <th class="bg-light text-secondary">On-Prem</th>
+                                <th class="bg-success-soft text-success">Exascale</th>
+                                <th class="bg-primary-soft text-primary">Az PG</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-start fw-bold">DB Compute / Infra</td>
+                                <td class="border-start">$300,000</td><td>$173,908</td><td class="border-end fw-bold">$81,600</td>
+                                <td>$300,000</td><td>$93,908</td><td class="border-end fw-bold">$81,600</td>
+                                <td>$300,000</td><td>$93,908</td><td class="fw-bold">$81,600</td>
+                            </tr>
+                            <tr>
+                                <td class="text-start fw-bold">Oracle DB + WLS Licenses</td>
+                                <td class="border-start">$876,000</td><td>$876,000</td><td class="border-end fw-bold text-primary">$0</td>
+                                <td>$919,800</td><td>$919,800</td><td class="border-end fw-bold text-primary">$0</td>
+                                <td>$965,790</td><td>$965,790</td><td class="fw-bold text-primary">$0</td>
+                            </tr>
+                            <tr>
+                                <td class="text-start fw-bold">Forms / App Compute</td>
+                                <td class="border-start">$60,000</td><td>$6,312</td><td class="border-end">$7,368</td>
+                                <td>$60,000</td><td>$6,312</td><td class="border-end">$7,368</td>
+                                <td>$60,000</td><td>$6,312</td><td>$7,368</td>
+                            </tr>
+                            <tr>
+                                <td class="text-start fw-bold text-reset">Labor & Admin</td>
+                                <td class="border-start">$400,000</td><td>$300,000</td><td class="border-end">$200,000</td>
+                                <td>$400,000</td><td>$300,000</td><td class="border-end">$200,000</td>
+                                <td>$400,000</td><td>$300,000</td><td>$200,000</td>
+                            </tr>
+                            <tr class="table-warning">
+                                <td class="text-start fw-bold">Migration Costs (One-Time)</td>
+                                <td class="border-start">$0</td><td>$180,000</td><td class="border-end text-danger">$630,000</td>
+                                <td>$0</td><td>$0</td><td class="border-end">$0</td>
+                                <td>$0</td><td>$0</td><td>$0</td>
+                            </tr>
+                            <tr class="table-dark text-light border-top border-2">
+                                <td class="text-start fw-bold">TOTAL COST</td>
+                                <td class="border-start">$1.9M</td><td>$1.4M</td><td class="border-end">$986K</td>
+                                <td>$1.96M</td><td>$1.28M</td><td class="border-end">$356K</td>
+                                <td>$2.0M</td><td>$1.33M</td><td>$356K</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SECTION B: DISCOVERY -->
+            <h3 class="fw-bold text-dark section-divider"><i class="fa-solid fa-microscope text-primary me-2"></i>SECTION B: Oracle Discovery Report</h3>
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <div class="modern-card shadow-sm h-100 bg-white">
+                        <h6 class="fw-bold border-bottom pb-2 mb-3">1. Tech Overview</h6>
+                        <ul class="list-unstyled data-list small">
+                            <li><span class="text-muted">Oracle Forms</span><span class="fw-bold">11g</span></li>
+                            <li><span class="text-muted">Database</span><span class="fw-bold">12c</span></li>
+                            <li><span class="text-muted">WebLogic</span><span class="fw-bold">12c</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="modern-card shadow-sm h-100 bg-white">
+                        <h6 class="fw-bold border-bottom pb-2 mb-3">2. Inventory</h6>
+                        <ul class="list-unstyled data-list small">
+                            <li><span class="text-muted">Forms (.fmb)</span><span class="fw-bold">50</span></li>
+                            <li><span class="text-muted">Reports (.rdf)</span><span class="fw-bold">50</span></li>
+                            <li><span class="text-muted">Menus (.mmb)</span><span class="fw-bold">8</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="modern-card shadow-sm h-100 bg-white border-danger border-2">
+                        <h6 class="fw-bold border-bottom pb-2 mb-3">3. Database Sizing</h6>
+                        <ul class="list-unstyled data-list small">
+                            <li><span class="text-muted">Total DB Size</span><span class="fw-bold text-danger">1.5 TB</span></li>
+                            <li><span class="text-muted">Largest Table</span><span class="fw-bold">Transactions</span></li>
+                            <li><span class="text-muted">Annual Growth</span><span class="fw-bold">15%</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="modern-card shadow-sm h-100 bg-white border-warning border-2">
+                        <h6 class="fw-bold border-bottom pb-2 mb-3">4. PL/SQL Objects</h6>
+                        <ul class="list-unstyled data-list small">
+                            <li><span class="text-muted">Procedures</span><span class="fw-bold">120</span></li>
+                            <li><span class="text-muted">Packages</span><span class="fw-bold text-danger">45</span></li>
+                            <li><span class="text-muted">Triggers</span><span class="fw-bold text-danger">150</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-12 text-end">
+                    <a href="security-finops.html" class="btn btn-dark shadow px-4 py-2">Next: Security & FinOps <i class="fa-solid fa-arrow-right ms-2"></i></a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="assets/libs/jquery/jquery.min.js"></script>
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

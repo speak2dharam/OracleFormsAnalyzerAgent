@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internal: Pitch Mode - CloudAtlas</title>
+    <link href="assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <aside class="sidebar">
+        <!-- New sidebar structure -->
+        <div class="sidebar-header">
+            <i class="fa-solid fa-cloud logo-icon"></i>
+            <span class="logo-text">CloudAtlas</span>
+        </div>
+        <div class="sidebar-menu">
+            <div class="menu-label">Overview</div>
+            <a href="index.html" class="menu-item"><i class="fa-solid fa-border-all"></i><span class="menu-text">Assessment Dashboard</span></a>
+            <a href="smb-guided-mode.html" class="menu-item bg-primary-soft text-primary"><i class="fa-solid fa-wand-magic-sparkles"></i><span class="menu-text fw-bold">SMB Guided Mode</span></a>
+            <div class="menu-label">Evaluation Pipeline</div>
+            <a href="project-intake.html" class="menu-item"><i class="fa-solid fa-file-arrow-up"></i><span class="menu-text">1. Project Intake</span></a>
+            <a href="parser-engine.html" class="menu-item"><i class="fa-solid fa-gears"></i><span class="menu-text">2. Parser Engine</span></a>
+            <a href="ai-logic.html" class="menu-item"><i class="fa-solid fa-brain"></i><span class="menu-text">3. AI Logic Analyzer</span></a>
+            <a href="dependency-map.html" class="menu-item"><i class="fa-solid fa-diagram-project"></i><span class="menu-text">4. Dependency Map</span></a>
+            <a href="azure-assessment.html" class="menu-item"><i class="fa-solid fa-server"></i><span class="menu-text">5. Azure Assessment</span></a>
+            <div class="menu-label">Planning & Targeting</div>
+            <a href="security-finops.html" class="menu-item"><i class="fa-solid fa-shield-halved"></i><span class="menu-text">6. Security + FinOps</span></a>
+            <a href="conversion-studio.html" class="menu-item"><i class="fa-solid fa-code"></i><span class="menu-text">7. Conversion Studio</span></a>
+            <a href="review-validate.html" class="menu-item"><i class="fa-solid fa-user-check"></i><span class="menu-text">8. Review & Validate</span></a>
+            <a href="tech-decision.html" class="menu-item"><i class="fa-solid fa-layer-group"></i><span class="menu-text">9. Technology Decision</span></a>
+            <div class="menu-label mt-4">Internal Tools</div>
+            <a href="pitch-mode.html" class="menu-item active"><i class="fa-solid fa-person-chalkboard"></i><span class="menu-text">Pitch Mode Script</span></a>
+        </div>
+    </aside>
+
+    <main class="main-wrapper">
+        <header class="topbar">
+            <!-- Topbar content -->
+            <div class="d-flex align-items-center">
+                <button class="sidebar-toggle" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+                <div class="ms-3 text-muted d-none d-md-block"><span>Internal Tools > <strong class="text-dark">Pitch Mode Script</strong></span></div>
+            </div>
+            <div class="dropdown">
+                <div class="profile-dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=eff6ff&color=2563eb" alt="Profile">
+                    <div class="user-info d-none d-sm-flex"><span class="name">Admin User</span><span class="role">System Analyst</span></div>
+                </div>
+            </div>
+        </header>
+
+        <div class="page-content fade-in">
+            <div class="alert alert-warning small py-2 mb-4 d-inline-block"><i class="fa-solid fa-lock me-2"></i> Employee Access Only. Not visible to Client Tenants.</div>
+            
+            <div class="page-header text-center py-2">
+                <h1 class="page-title display-5 fw-bold text-primary">Meeting-Ready Script</h1>
+                <p class="page-subtitle fs-5 mx-auto" style="max-width: 600px;">Presenting the value of your end-to-end modernization strategy in one concise narrative.</p>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="modern-card shadow p-5 border-0 bg-light">
+                        <div class="text-center mb-4">
+                            <i class="fa-solid fa-quote-left fs-1 text-muted opacity-25"></i>
+                        </div>
+                        
+                        <div class="fs-5 text-dark" style="line-height: 1.8;">
+                            <p><strong>"CloudAtlas Oracle Modernization Hub</strong> doesn't just scan files—it provides an assessment-first roadmap to escape legacy vendor lock-in seamlessly.</p>
+                            
+                            <p>We start by feeding legacy code into our <strong>Parser Engine</strong>. Our <strong>Discovery APIs</strong> map infrastructural footprints identically via ServiceNow and Lansweeper. The <strong>AI Logic Analyzer</strong> reads through thousands of PL/SQL triggers, preparing optimal replacements."</p>
+                            
+                            <p>Once we have the <strong>Dependency Map</strong>, we orchestrate a tailored <strong>Azure Assessment</strong>. We determine whether workloads should be Refactored via our .NET & React Studio Engine, or Shifted directly to Azure Infrastructure VMs."</p>
+                            
+                            <p>All modernized code sits behind our proprietary <strong>Review & Testing Gate</strong>. Finally, we don't drop clients at Launch Day; our integrated <strong>Post-Migration Security & FinOps Dashboard</strong> ensures active cost monitoring from Day 1 natively hosted on Azure."</p>
+                        </div>
+
+                        <div class="text-center mt-5">
+                            <button class="btn btn-outline-primary px-4 py-2 me-2"><i class="fa-solid fa-copy me-2"></i>Copy Script</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="assets/libs/jquery/jquery.min.js"></script>
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

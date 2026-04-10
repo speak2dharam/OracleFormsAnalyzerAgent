@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step 2: Parser Engine - CloudAtlas</title>
+    <link href="assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <aside class="sidebar">
+        <!-- New sidebar structure -->
+        <div class="sidebar-header">
+            <i class="fa-solid fa-cloud logo-icon"></i>
+            <span class="logo-text">CloudAtlas</span>
+        </div>
+        <div class="sidebar-menu">
+            <div class="menu-label">Overview</div>
+            <a href="index.html" class="menu-item"><i class="fa-solid fa-border-all"></i><span class="menu-text">Assessment Dashboard</span></a>
+            <a href="smb-guided-mode.html" class="menu-item bg-primary-soft text-primary"><i class="fa-solid fa-wand-magic-sparkles"></i><span class="menu-text fw-bold">SMB Guided Mode</span></a>
+            <div class="menu-label">Evaluation Pipeline</div>
+            <a href="project-intake.html" class="menu-item"><i class="fa-solid fa-file-arrow-up"></i><span class="menu-text">1. Project Intake</span></a>
+            <a href="parser-engine.html" class="menu-item active"><i class="fa-solid fa-gears"></i><span class="menu-text">2. Parser Engine</span></a>
+            <a href="ai-logic.html" class="menu-item"><i class="fa-solid fa-brain"></i><span class="menu-text">3. AI Logic Analyzer</span></a>
+            <a href="dependency-map.html" class="menu-item"><i class="fa-solid fa-diagram-project"></i><span class="menu-text">4. Dependency Map</span></a>
+            <a href="azure-assessment.html" class="menu-item"><i class="fa-solid fa-server"></i><span class="menu-text">5. Azure Assessment</span></a>
+            <div class="menu-label">Planning & Targeting</div>
+            <a href="security-finops.html" class="menu-item"><i class="fa-solid fa-shield-halved"></i><span class="menu-text">6. Security + FinOps</span></a>
+            <a href="conversion-studio.html" class="menu-item"><i class="fa-solid fa-code"></i><span class="menu-text">7. Conversion Studio</span></a>
+            <a href="review-validate.html" class="menu-item"><i class="fa-solid fa-user-check"></i><span class="menu-text">8. Review & Validate</span></a>
+            <a href="tech-decision.html" class="menu-item"><i class="fa-solid fa-layer-group"></i><span class="menu-text">9. Technology Decision</span></a>
+            <div class="menu-label mt-4">Internal Tools</div>
+            <a href="pitch-mode.html" class="menu-item"><i class="fa-solid fa-person-chalkboard"></i><span class="menu-text">Pitch Mode Script</span></a>
+        </div>
+    </aside>
+    <main class="main-wrapper">
+        <header class="topbar">
+            <!-- Topbar content -->
+            <div class="d-flex align-items-center">
+                <button class="sidebar-toggle" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+                <div class="ms-3 text-muted d-none d-md-block"><span>Evaluation Pipeline > <strong class="text-dark">2. Parser Engine</strong></span></div>
+            </div>
+            <div class="dropdown">
+                <div class="profile-dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=eff6ff&color=2563eb" alt="Profile">
+                    <div class="user-info d-none d-sm-flex"><span class="name">Admin User</span><span class="role">System Analyst</span></div>
+                </div>
+            </div>
+        </header>
+
+        <div class="page-content fade-in">
+            <!-- Simplified Pipeline step, leaving out the visual graphic to save space for compact UI -->
+            <div class="page-header">
+                <h1 class="page-title">Step 2: Parser Engine</h1>
+                <p class="page-subtitle">Converting unstructured forms into canonical JSON for AI modeling.</p>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="modern-card">
+                        <div class="card-header-modern">
+                            <h2 class="card-title-modern">Extraction Live Logs</h2>
+                            <span class="badge bg-success">Status: Parsing Complete</span>
+                        </div>
+                        <div class="bg-dark text-light p-3 rounded" style="font-family: monospace; height: 300px; overflow-y: auto;">
+                            <!-- Log Code from earlier -->
+                            <div class="text-secondary">[10:02:44] Starting extraction process for HR_MODULE_V4...</div>
+                            <div class="text-secondary">[10:02:45] Converting proprietary blocks to standard JSON elements...</div>
+                            <div class="text-success">[10:02:46] Form block triggers mapping successful.</div>
+                            <div class="text-warning">[10:02:48] Extracted 83 procedures. 14 flagged for complex logic.</div>
+                            <div class="text-success fw-bold">[10:02:51] Parser Engine Completed. Output saved to robust canonical store.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="modern-card">
+                        <div class="card-header-modern"><h2 class="card-title-modern">Canonical Output</h2></div>
+                        <pre class="bg-light p-3 rounded border" style="font-size: 0.85rem; height: 260px; overflow-y: auto;"><code>{
+  "form_id": "HR_MODULE_V4",
+  "metadata": { "module_type": "FORM", "total_blocks": 12 },
+  "blocks": [
+    {
+      "name": "EMP_DETAILS",
+      "type": "DATABASE",
+      "base_table": "EMPLOYEES",
+      "triggers": [
+        {"name": "PRE-QUERY", "type": "PLSQL"}
+      ]
+    }
+  ]
+}</code></pre>
+                        <div class="text-end">
+                            <a href="ai-logic.html" class="btn btn-primary mt-3">Next: AI Logic Analyzer <i class="fa-solid fa-arrow-right ms-2"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="assets/libs/jquery/jquery.min.js"></script>
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

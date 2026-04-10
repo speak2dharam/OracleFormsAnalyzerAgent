@@ -1,0 +1,431 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --secondary-color: #f8fafc;
+  --accent-color: #8b5cf6;
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --danger-color: #ef4444;
+  --text-dark: #0f172a;
+  --text-muted: #64748b;
+  --sidebar-bg: #ffffff;
+  --sidebar-width: 240px;
+  --sidebar-collapsed-width: 60px;
+  --topbar-height: 55px;
+  --bg-color: #f1f5f9;
+  --card-bg: #ffffff;
+  --border-color: #e2e8f0;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+  width: var(--sidebar-width);
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--sidebar-bg);
+  border-right: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar.collapsed {
+  width: var(--sidebar-collapsed-width);
+}
+
+.sidebar-header {
+  height: var(--topbar-height);
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.sidebar-header .logo-icon {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  min-width: 30px;
+}
+
+.sidebar-header .logo-text {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-left: 0.75rem;
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sidebar.collapsed .logo-text {
+  opacity: 0;
+  display: none;
+}
+
+.sidebar-menu {
+  padding: 1rem 0;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.menu-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.5rem 1.5rem;
+  margin-top: 1rem;
+}
+
+.sidebar.collapsed .menu-label {
+  display: none;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1.25rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  border-right: 3px solid transparent;
+  font-size: 0.85rem;
+}
+
+.menu-item:hover, .menu-item.active {
+  background-color: #eff6ff;
+  color: var(--primary-color);
+  border-right-color: var(--primary-color);
+}
+
+.menu-item i {
+  font-size: 1rem;
+  min-width: 30px;
+  text-align: center;
+}
+
+.menu-item .menu-text {
+  margin-left: 0.5rem;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar.collapsed .menu-text {
+  opacity: 0;
+  display: none;
+}
+
+/* Main Content */
+.main-wrapper {
+  margin-left: var(--sidebar-width);
+  transition: all 0.3s ease;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar.collapsed ~ .main-wrapper {
+  margin-left: var(--sidebar-collapsed-width);
+}
+
+/* Topbar */
+.topbar {
+  height: var(--topbar-height);
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.sidebar-toggle {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: var(--text-dark);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.sidebar-toggle:hover {
+  background-color: var(--bg-color);
+}
+
+/* User Profile Dropdown */
+.profile-dropdown-toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.profile-dropdown-toggle:hover {
+  background-color: var(--bg-color);
+}
+
+.profile-dropdown-toggle img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 0.75rem;
+  border: 2px solid var(--primary-color);
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.user-info .name {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.user-info .role {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.dropdown-menu-profile {
+  min-width: 200px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-lg);
+  margin-top: 0.5rem;
+}
+
+/* Page Content */
+.page-content {
+  padding: 1.5rem;
+  flex-grow: 1;
+}
+
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.page-title {
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--text-dark);
+  margin-bottom: 0.25rem;
+}
+
+.page-subtitle {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* Premium Cards */
+.modern-card {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+}
+
+.modern-card:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.card-icon-wrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.bg-primary-soft { background-color: #eff6ff; color: var(--primary-color); }
+.bg-success-soft { background-color: #ecfdf5; color: var(--success-color); }
+.bg-warning-soft { background-color: #fffbeb; color: var(--warning-color); }
+.bg-accent-soft { background-color: #f5f3ff; color: var(--accent-color); }
+
+/* Animations */
+.fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Timeline / Pipeline step tracker */
+.pipeline-steps {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
+.pipeline-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  flex: 1;
+  text-align: center;
+  min-width: 80px;
+}
+
+.step-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--bg-color);
+  border: 2px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: var(--text-muted);
+  z-index: 2;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s;
+}
+
+.pipeline-step.active .step-icon {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+  box-shadow: 0 0 0 4px #eff6ff;
+}
+
+.pipeline-step.completed .step-icon {
+  background-color: var(--success-color);
+  border-color: var(--success-color);
+  color: white;
+}
+
+.step-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.pipeline-step.active .step-label {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* Progress bar connecting steps */
+.pipeline-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background-color: var(--border-color);
+  z-index: 1;
+}
+
+.pipeline-step.completed:not(:last-child)::after {
+  background-color: var(--success-color);
+}
+
+/* File Upload Area */
+.upload-area {
+  border: 2px dashed var(--border-color);
+  border-radius: 8px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  background-color: var(--bg-color);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.upload-area:hover {
+  border-color: var(--primary-color);
+  background-color: #eff6ff;
+}
+
+.upload-icon {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 0.75rem;
+}
+
+/* Connector Cards for Discovery Tools */
+.connector-card {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  background: var(--card-bg);
+  opacity: 0.7;
+  filter: grayscale(100%);
+  transition: all 0.3s ease;
+}
+.connector-card:hover {
+  opacity: 1;
+  filter: grayscale(0%);
+  border-color: var(--primary-color);
+  cursor: not-allowed;
+}
+.connector-logo {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  background-color: var(--bg-color);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  margin-right: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+  .sidebar.show {
+    transform: translateX(0);
+  }
+  .main-wrapper {
+    margin-left: 0 !important;
+  }
+}

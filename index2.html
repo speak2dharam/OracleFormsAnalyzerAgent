@@ -3,59 +3,72 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Oracle Modernization Hub - Enterprise Demo</title>
+  <title>CloudAtlas Oracle Modernization Hub - Assessment Report Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <style>
     :root {
       --bg: #f3f7fc;
-      --sidebar: #10233f;
-      --sidebar-2: #0d1d35;
+      --sidebar: #2f4d93;
+      --sidebar-dark: #274382;
       --panel: #ffffff;
       --panel-soft: #f7faff;
       --line: #dbe5f1;
-      --text: #1f2f49;
-      --muted: #73839b;
-      --accent: #356dff;
-      --accent-2: #3db7ff;
-      --accent-soft: rgba(53,109,255,.10);
-      --good: #1fa86f;
-      --warn: #e79a20;
-      --bad: #df5967;
-      --teal: #17a6b6;
-      --shadow: 0 18px 50px rgba(26, 57, 110, .09);
-      --radius: 22px;
+      --text: #22324d;
+      --muted: #5d5d5d;
+      --accent: #2f7ef7;
+      --accent-2: #18b4ff;
+      --good: #6ca624;
+      --warn: #c98b28;
+      --bad: #df5b5b;
+      --purple: #6f5bd6;
+      --teal: #23a5a1;
+      --orange: #f07a1a;
+      --shadow: 0 18px 50px rgba(31, 61, 122, .08);
+      --radius: 20px;
     }
 
     * { box-sizing: border-box; }
     html, body { height: 100%; }
     body {
       margin: 0;
-      font-family: Inter, Arial, Helvetica, sans-serif;
+      /* font-family: Inter, Arial, Helvetica, sans-serif; */
+      font-family: "Roboto", sans-serif;
       color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(61,183,255,.08), transparent 22%),
-        radial-gradient(circle at bottom right, rgba(53,109,255,.08), transparent 28%),
-        linear-gradient(180deg, #f7faff 0%, #f2f6fc 100%);
+      background: linear-gradient(180deg, #f7faff 0%, #f2f6fc 100%);
     }
-
+    p{
+      font-size: 14px;
+    }
     .app {
       display: grid;
-      grid-template-columns: 286px 1fr;
+      grid-template-columns: 280px 1fr;
       min-height: 100vh;
     }
 
     .sidebar {
-      background: linear-gradient(180deg, var(--sidebar), var(--sidebar-2));
-      color: #eaf2ff;
-      padding: 22px 16px;
+      background: linear-gradient(180deg, var(--sidebar), var(--sidebar-dark));
+      color: #eef4ff;
+      height: 100vh;
       position: sticky;
       top: 0;
-      height: 100vh;
       overflow-y: auto;
       overflow-x: hidden;
-      box-shadow: 14px 0 40px rgba(9,20,40,.12);
+      padding: 18px 14px 24px;
+      box-shadow: 14px 0 40px rgba(9,20,40,.10);
       scrollbar-width: thin;
       scrollbar-color: rgba(255,255,255,.22) transparent;
+    }
+
+    .sidebar::-webkit-scrollbar { width: 10px; }
+    .sidebar::-webkit-scrollbar-track { background: transparent; }
+    .sidebar::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,.18);
+      border-radius: 999px;
+      border: 2px solid transparent;
+      background-clip: padding-box;
     }
 
     .brand {
@@ -63,16 +76,16 @@
       align-items: center;
       gap: 12px;
       padding: 8px 8px 16px;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-      margin-bottom: 18px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      margin-bottom: 16px;
     }
 
     .brand-mark {
-      width: 46px;
-      height: 46px;
-      border-radius: 15px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      box-shadow: 0 10px 24px rgba(53,109,255,.28);
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #4fd0ff, #2f7ef7);
+      box-shadow: 0 10px 24px rgba(10, 32, 97, .25);
       position: relative;
       overflow: hidden;
     }
@@ -82,18 +95,18 @@
       content: "";
       position: absolute;
       border-radius: 999px;
-      background: rgba(255,255,255,.18);
+      background: rgba(255,255,255,.22);
     }
     .brand-mark::before {
-      width: 78px;
-      height: 18px;
-      top: 2px;
+      width: 74px;
+      height: 16px;
+      top: 4px;
       left: -16px;
       transform: rotate(35deg);
     }
     .brand-mark::after {
-      width: 78px;
-      height: 18px;
+      width: 74px;
+      height: 16px;
       bottom: 6px;
       right: -20px;
       transform: rotate(35deg);
@@ -101,44 +114,24 @@
 
     .brand h1 {
       margin: 0;
-      font-size: 18px;
+      font-size: 20px;
       line-height: 1.2;
+      font-weight: 800;
     }
 
-    .brand small { color: rgba(234,242,255,.65); }
-
-    .workspace-switcher {
-      display: grid;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-
-    .switch-card {
-      border: 1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.04);
-      border-radius: 18px;
-      padding: 14px;
-    }
-
-    .switch-card strong {
+    .brand small {
+      color: rgba(238,244,255,.72);
       display: block;
-      font-size: 13px;
-      margin-bottom: 4px;
-    }
-
-    .switch-card span {
-      display: block;
+      margin-top: 3px;
       font-size: 12px;
-      color: rgba(234,242,255,.65);
-      line-height: 1.45;
     }
 
     .nav-title {
       font-size: 11px;
       letter-spacing: 1.3px;
       text-transform: uppercase;
-      color: rgba(234,242,255,.52);
-      margin: 16px 8px 10px;
+      color: rgba(238,244,255,.56);
+      margin: 18px 10px 8px;
     }
 
     .step-nav {
@@ -150,7 +143,7 @@
       display: flex;
       gap: 12px;
       align-items: center;
-      padding: 12px 12px;
+      padding: 12px;
       border-radius: 16px;
       cursor: pointer;
       border: 1px solid transparent;
@@ -159,13 +152,13 @@
 
     .step-item:hover {
       background: rgba(255,255,255,.06);
-      border-color: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.09);
       transform: translateY(-1px);
     }
 
     .step-item.active {
       background: linear-gradient(135deg, rgba(53,109,255,.28), rgba(61,183,255,.12));
-      border-color: rgba(255,255,255,.12);
+      border-color: rgba(255,255,255,.14);
     }
 
     .step-index {
@@ -182,45 +175,47 @@
 
     .step-copy strong {
       display: block;
+      color: white;
       font-size: 13px;
-      color: #fff;
       margin-bottom: 2px;
     }
 
     .step-copy span {
       display: block;
+      color: rgba(238,244,255,.68);
       font-size: 11px;
-      color: rgba(234,242,255,.66);
-      line-height: 1.4;
+      line-height: 1.35;
     }
 
-    .sidebar-note {
+    .stack-note {
       margin-top: 18px;
       border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.04);
       border-radius: 18px;
       padding: 14px;
-      background: rgba(255,255,255,.04);
-      color: rgba(234,242,255,.7);
       font-size: 12px;
-      line-height: 1.6;
+      line-height: 1.55;
+      color: rgba(238,244,255,.76);
     }
 
+    .stack-note strong { color: white; }
+
     .main {
-      padding: 20px 24px 28px;
+      padding: 16px 20px 28px;
     }
 
     .topbar {
       display: flex;
       justify-content: space-between;
-      gap: 12px;
       align-items: center;
+      gap: 12px;
       flex-wrap: wrap;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .topbar h2 {
       margin: 0;
-      font-size: 28px;
+      font-size: 18px;
     }
 
     .topbar p {
@@ -240,49 +235,33 @@
       padding: 11px 16px;
       font-weight: 700;
       cursor: pointer;
-      transition: .25s ease;
+      transition: .24s ease;
     }
 
     .btn:hover { transform: translateY(-2px); }
-
     .btn-primary {
       color: white;
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
       box-shadow: 0 10px 22px rgba(53,109,255,.18);
     }
-
     .btn-secondary {
-      background: #fff;
+      background: white;
       color: var(--text);
       border: 1px solid var(--line);
     }
-
     .btn-soft {
-      background: #edf4ff;
+      background: #edf5ff;
       color: var(--accent);
-      border: 1px solid #dbe8ff;
+      border: 1px solid #dce9ff;
     }
 
     .hero {
       background: linear-gradient(140deg, #ffffff 0%, #f9fbff 100%);
       border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: 26px;
+      border-radius: 26px;
+      padding: 24px;
       box-shadow: var(--shadow);
-      overflow: hidden;
-      position: relative;
-      margin-bottom: 18px;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      width: 320px;
-      height: 320px;
-      right: -90px;
-      top: -110px;
-      background: radial-gradient(circle, rgba(53,109,255,.10), transparent 62%);
-      pointer-events: none;
+      margin-bottom: 14px;
     }
 
     .hero-grid {
@@ -294,21 +273,20 @@
 
     .hero h3 {
       margin: 0 0 10px;
-      font-size: 32px;
+      font-size: 16px;
       line-height: 1.15;
     }
 
     .hero p {
       margin: 0;
       color: var(--muted);
-      line-height: 1.75;
-      max-width: 760px;
+      line-height: 1.7;
     }
 
     .chip-row {
       display: flex;
-      gap: 10px;
       flex-wrap: wrap;
+      gap: 10px;
       margin-top: 14px;
     }
 
@@ -319,39 +297,13 @@
       padding: 8px 12px;
       border-radius: 999px;
       background: #f3f8ff;
-      border: 1px solid #dbe8ff;
-      color: #5673a6;
+      border: 1px solid #dbe7ff;
+      color: #5673a5;
       font-size: 12px;
       font-weight: 700;
     }
 
-    .kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    .kpi {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 16px;
-    }
-
-    .kpi .value {
-      font-size: 28px;
-      font-weight: 800;
-      margin-bottom: 6px;
-    }
-
-    .kpi .label {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.4;
-    }
-
-    .hero-panel {
+    .hero-side {
       display: grid;
       gap: 12px;
     }
@@ -376,59 +328,37 @@
       line-height: 1.5;
     }
 
-    .dashboard-grid {
+    .top-metrics {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 18px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 16px;
     }
 
-    .mini-card {
+    .metric-card {
       background: white;
       border: 1px solid var(--line);
-      border-radius: 22px;
+      border-radius: 20px;
       padding: 18px;
       box-shadow: var(--shadow);
     }
 
-    .mini-card h4 {
-      margin: 0 0 10px;
-      font-size: 15px;
-    }
-
-    .mini-card p {
-      margin: 0;
+    .metric-card .label {
       color: var(--muted);
       font-size: 13px;
-      line-height: 1.6;
+      margin-bottom: 8px;
     }
 
-    .bars {
-      display: grid;
-      gap: 10px;
-      margin-top: 14px;
+    .metric-card .value {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 4px;
     }
 
-    .bar-row {
-      display: grid;
-      grid-template-columns: 90px 1fr 48px;
-      gap: 10px;
-      align-items: center;
+    .metric-card .delta {
       font-size: 12px;
-      color: var(--muted);
-    }
-
-    .bar-track {
-      height: 10px;
-      border-radius: 999px;
-      background: #edf2fa;
-      overflow: hidden;
-    }
-
-    .bar-fill {
-      height: 100%;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color: var(--good);
+      font-weight: 700;
     }
 
     .screen { display: none; animation: fade .35s ease; }
@@ -441,15 +371,15 @@
 
     .workspace {
       display: grid;
-      grid-template-columns: 1.16fr .84fr;
-      gap: 18px;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 16px;
     }
 
     .card {
-      background: #fff;
+      background: white;
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 22px;
+      padding: 20px;
       box-shadow: var(--shadow);
     }
 
@@ -457,38 +387,19 @@
     .muted { color: var(--muted); }
     .small { font-size: 13px; }
 
-    .dropzone {
-      min-height: 280px;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      padding: 24px;
-      border-radius: 22px;
-      border: 2px dashed #bfd4ff;
-      background: linear-gradient(180deg, #f8fbff, #f4f9ff);
-      transition: .25s ease;
-    }
-
-    .dropzone.ready {
-      border-style: solid;
-      border-color: #9ad7bb;
-      background: linear-gradient(180deg, #f2fbf5, #f7fffb);
-    }
-
-    .stack,
-    .summary-list,
-    .tile-list,
-    .security-list,
+    .list,
     .timeline,
+    .security-list,
+    .summary-list,
     .mapping-list {
       display: grid;
       gap: 12px;
     }
 
-    .info-row,
+    .row-box,
     .timeline-step,
-    .mapping-row,
-    .security-row {
+    .security-row,
+    .mapping-row {
       background: var(--panel-soft);
       border: 1px solid var(--line);
       border-radius: 16px;
@@ -508,14 +419,32 @@
       width: 28px;
       height: 28px;
       border-radius: 10px;
-      background: #e9f1ff;
+      background: #e8f0ff;
       color: var(--accent);
       display: grid;
       place-items: center;
       font-weight: 800;
     }
 
-    .progress-wrap { margin-top: 18px; }
+    .dropzone {
+      min-height: 250px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 24px;
+      border-radius: 22px;
+      border: 2px dashed #bfd4ff;
+      background: linear-gradient(180deg, #f8fbff, #f4f9ff);
+      transition: .24s ease;
+    }
+
+    .dropzone.ready {
+      border-style: solid;
+      border-color: #9fd7bd;
+      background: linear-gradient(180deg, #f2fbf5, #f8fffb);
+    }
+
+    .progress-wrap { margin-top: 16px; }
     .progress {
       height: 12px;
       border-radius: 999px;
@@ -553,7 +482,7 @@
 
     table {
       width: 100%;
-      min-width: 720px;
+      min-width: 740px;
       border-collapse: collapse;
     }
 
@@ -562,6 +491,7 @@
       padding: 13px 14px;
       border-bottom: 1px solid #edf2f8;
       font-size: 14px;
+      vertical-align: top;
     }
 
     th {
@@ -569,8 +499,6 @@
       color: #57708f;
       font-weight: 700;
     }
-
-    tr:hover td { background: #fbfdff; }
 
     .badge {
       display: inline-flex;
@@ -581,35 +509,179 @@
       font-size: 12px;
       font-weight: 700;
     }
+    .badge.good { background: rgba(108,166,36,.13); color: var(--good); }
+    .badge.warn { background: rgba(201,139,40,.14); color: var(--warn); }
+    .badge.bad { background: rgba(223,91,91,.14); color: var(--bad); }
+    .badge.info { background: rgba(47,126,247,.12); color: var(--accent); }
 
-    .badge.good { background: rgba(31,168,111,.12); color: var(--good); }
-    .badge.warn { background: rgba(231,154,32,.14); color: #b7770e; }
-    .badge.bad { background: rgba(223,89,103,.14); color: #bc4250; }
-    .badge.info { background: rgba(53,109,255,.12); color: var(--accent); }
+    .status-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+    }
 
-    .score-panel {
+    .control-list, .action-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .control-item, .action-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px dashed #e7edf6;
+    }
+
+    .control-item:last-child, .action-item:last-child { border-bottom: 0; }
+
+    .dot-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      display: inline-block;
+    }
+
+    .progress-mini {
+      height: 6px;
+      border-radius: 999px;
+      background: #edf2fa;
+      overflow: hidden;
+      margin-top: 6px;
+      max-width: 140px;
+    }
+
+    .progress-mini > span {
+      display: block;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #91e4d7, #59c3b8);
+    }
+
+    .action-right {
+      text-align: right;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .action-right small {
+      display: block;
+      color: var(--good);
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .assessment-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .bar-chart {
+      display: flex;
+      align-items: end;
+      gap: 12px;
+      height: 170px;
+      padding: 12px 8px 0;
+    }
+
+    .bar-group {
+      flex: 1;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .bar-stack {
+      height: 130px;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      gap: 3px;
+      margin-bottom: 8px;
+    }
+
+    .bar-red, .bar-blue {
+      width: 100%;
+      border-radius: 4px 4px 0 0;
+    }
+    .bar-red { background: #e75353; }
+    .bar-blue { background: #9ac3ef; }
+
+    .toggle-list {
       display: grid;
       gap: 14px;
     }
 
-    .metric {
-      background: linear-gradient(180deg, #f9fbff, #f4f8ff);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 18px;
+    .toggle-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      font-size: 15px;
     }
 
-    .metric .big {
-      font-size: 30px;
-      font-weight: 800;
-      margin: 8px 0 6px;
+    .toggle {
+      width: 44px;
+      height: 24px;
+      background: #7cad23;
+      border-radius: 999px;
+      position: relative;
+    }
+
+    .toggle::after {
+      content: "";
+      width: 18px;
+      height: 18px;
+      background: white;
+      border-radius: 999px;
+      position: absolute;
+      right: 3px;
+      top: 3px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.14);
+    }
+
+    .cost-bars {
+      display: grid;
+      gap: 14px;
+    }
+
+    .cost-row {
+      display: grid;
+      grid-template-columns: 140px 1fr 90px;
+      gap: 12px;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .cost-track {
+      height: 10px;
+      border-radius: 999px;
+      background: #edf2fa;
+      overflow: hidden;
+    }
+
+    .cost-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #4b87e8, #6ea9ff);
     }
 
     .tabs {
       display: flex;
       gap: 10px;
-      margin-bottom: 14px;
       flex-wrap: wrap;
+      margin-bottom: 14px;
     }
 
     .tab {
@@ -625,19 +697,17 @@
 
     .tab.active {
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      border-color: transparent;
       color: white;
+      border-color: transparent;
     }
 
     .accordion { display: grid; gap: 12px; }
-
     .acc-item {
       border: 1px solid var(--line);
       border-radius: 18px;
       overflow: hidden;
       background: #fbfdff;
     }
-
     .acc-head {
       padding: 16px 18px;
       display: flex;
@@ -646,7 +716,6 @@
       cursor: pointer;
       font-weight: 700;
     }
-
     .acc-body {
       display: none;
       padding: 0 18px 18px;
@@ -655,12 +724,30 @@
       font-size: 14px;
     }
 
+    .tech-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .tech-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+      background: #fbfdff;
+    }
+
+    .tech-card h4 {
+      margin: 0 0 10px;
+      font-size: 15px;
+    }
+
     .preview-shell {
       border-radius: 24px;
       background: linear-gradient(180deg, #f8fbff, #eef5ff);
       border: 1px solid var(--line);
       padding: 18px;
-      min-height: 450px;
+      min-height: 440px;
     }
 
     .preview-top {
@@ -734,7 +821,7 @@
       align-items: center;
     }
 
-    .dot {
+    .steps-dots .dot-step {
       width: 10px;
       height: 10px;
       border-radius: 999px;
@@ -742,45 +829,25 @@
       transition: .25s ease;
     }
 
-    .dot.active {
+    .steps-dots .dot-step.active {
       width: 34px;
       background: linear-gradient(90deg, var(--accent), var(--accent-2));
     }
 
-    @media (max-width: 1180px) {
+    @media (max-width: 1200px) {
       .app { grid-template-columns: 1fr; }
       .sidebar {
         position: relative;
         height: auto;
-        max-height: none;
         overflow: visible;
       }
       .hero-grid,
-      .dashboard-grid,
+      .top-metrics,
       .workspace,
-      .kpi-grid,
+      .status-layout,
+      .assessment-grid,
+      .tech-grid,
       .preview-grid { grid-template-columns: 1fr; }
-    }
-    }
-  .sidebar::-webkit-scrollbar {
-      width: 10px;
-    }
-
-    .sidebar::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    .sidebar::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,.18);
-      border-radius: 999px;
-      border: 2px solid transparent;
-      background-clip: padding-box;
-    }
-
-    .sidebar::-webkit-scrollbar-thumb:hover {
-      background: rgba(255,255,255,.28);
-      border: 2px solid transparent;
-      background-clip: padding-box;
     }
   </style>
 </head>
@@ -790,37 +857,31 @@
       <div class="brand">
         <div class="brand-mark"></div>
         <div>
-          <h1>Oracle Modernization Hub</h1>
-          <small>Enterprise demo v3</small>
+          <h1>CloudAtlas</h1>
+          <small>Oracle Modernization Hub</small>
         </div>
       </div>
 
-      <div class="workspace-switcher">
-        <div class="switch-card">
-          <strong>Workspace</strong>
-          <span>Assessment, migration planning, and UI modernization in one guided flow.</span>
-        </div>
-        <div class="switch-card">
-          <strong>Target outcome</strong>
-          <span>Explain the product like a real SaaS platform to leadership or engineering.</span>
-        </div>
-      </div>
-
-      <div class="nav-title">Modernization flow</div>
+      <div class="nav-title">Report flow</div>
       <div class="step-nav">
-        <div class="step-item active" data-target="screen-1"><div class="step-index">1</div><div class="step-copy"><strong>Project Intake</strong><span>Upload and scope a customer estate</span></div></div>
-        <div class="step-item" data-target="screen-2"><div class="step-index">2</div><div class="step-copy"><strong>Parser Engine</strong><span>Build canonical JSON from Forms</span></div></div>
-        <div class="step-item" data-target="screen-3"><div class="step-index">3</div><div class="step-copy"><strong>Logic Analyzer</strong><span>Interpret triggers and PL/SQL</span></div></div>
-        <div class="step-item" data-target="screen-4"><div class="step-index">4</div><div class="step-copy"><strong>Dependency Graph</strong><span>Map tables, packages, lookups</span></div></div>
-        <div class="step-item" data-target="screen-5"><div class="step-index">5</div><div class="step-copy"><strong>Scoring Engine</strong><span>Estimate risk and effort</span></div></div>
-        <div class="step-item" data-target="screen-6"><div class="step-index">6</div><div class="step-copy"><strong>Assessment Desk</strong><span>Generate CIO + architect report</span></div></div>
-        <div class="step-item" data-target="screen-7"><div class="step-index">7</div><div class="step-copy"><strong>Conversion Studio</strong><span>Preview Angular-ready output</span></div></div>
-        <div class="step-item" data-target="screen-8"><div class="step-index">8</div><div class="step-copy"><strong>Security Controls</strong><span>Finalize enterprise readiness</span></div></div>
-        <div class="step-item" data-target="screen-9"><div class="step-index">9</div><div class="step-copy"><strong>Executive Pitch</strong><span>Explain the product story</span></div></div>
+        <div class="step-item active" data-target="screen-1"><div class="step-index">1</div><div class="step-copy"><strong>Intake</strong><span>Upload Oracle Forms estate</span></div></div>
+        <div class="step-item" data-target="screen-2"><div class="step-index">2</div><div class="step-copy"><strong>Parser</strong><span>FMB/XML to canonical JSON</span></div></div>
+        <div class="step-item" data-target="screen-3"><div class="step-index">3</div><div class="step-copy"><strong>Analyzer</strong><span>PL/SQL and business-rule insight</span></div></div>
+        <div class="step-item" data-target="screen-4"><div class="step-index">4</div><div class="step-copy"><strong>Dependency Map</strong><span>Tables, packages, lookup graph</span></div></div>
+        <div class="step-item" data-target="screen-5"><div class="step-index">5</div><div class="step-copy"><strong>Assessment</strong><span>Azure + PostgreSQL cost view</span></div></div>
+        <div class="step-item" data-target="screen-6"><div class="step-index">6</div><div class="step-copy"><strong>Security & FinOps</strong><span>Post-migration recurring value</span></div></div>
+        <div class="step-item" data-target="screen-7"><div class="step-index">7</div><div class="step-copy"><strong>Conversion Studio</strong><span>.NET + Angular as default</span></div></div>
+        <div class="step-item" data-target="screen-8"><div class="step-index">8</div><div class="step-copy"><strong>Technology Decision</strong><span>Optional stacks and reasoning</span></div></div>
+        <div class="step-item" data-target="screen-9"><div class="step-index">9</div><div class="step-copy"><strong>Pitch Mode</strong><span>ready talking points</span></div></div>
       </div>
 
-      <div class="sidebar-note">
-        This version is styled like an enterprise product. It is meant for higher-impact screenshots, meetings, and product storytelling.
+      <div class="stack-note">
+        <strong>Default target stack</strong><br>
+        Frontend: Angular<br>
+        Backend: .NET Web API<br>
+        Database: PostgreSQL on Azure<br><br>
+        <strong>Optional support</strong><br>
+        Python for parsing/reporting, Java only if customer ecosystem requires it.
       </div>
     </aside>
 
@@ -840,79 +901,60 @@
       <section class="hero">
         <div class="hero-grid">
           <div>
-            <h3>One hub for Oracle Forms assessment, migration planning, and modernization storytelling</h3>
-            <p>This enterprise-style prototype shows how a customer project can move from uploaded Oracle Forms artifacts to parsed metadata, dependency intelligence, scoring, report generation, and Angular-style UI preview. Use it to explain the platform vision end to end without switching between tools or documents.</p>
+            <h3>Assessment-first Oracle modernization with security, cost, and conversion planning in one product story</h3>
+            <p>This demo combines your Oracle Forms analyzer flow with two important platform ideas from the deck: recurring post-migration AI value and Azure assessment reporting. It shows how we can move from Oracle Forms discovery to Azure PostgreSQL assessment, then into ongoing security, FinOps, and .NET + Angular modernization.</p>
             <div class="chip-row">
-              <span class="chip">Canonical JSON first</span>
-              <span class="chip">Assessment as lead-gen</span>
-              <span class="chip">Angular / React future path</span>
-              <span class="chip">Security-ready architecture</span>
-            </div>
-            <div class="kpi-grid">
-              <div class="kpi"><div class="value">12</div><div class="label">Forms in demo estate</div></div>
-              <div class="kpi"><div class="value">4,950</div><div class="label">Extracted PL/SQL lines</div></div>
-              <div class="kpi"><div class="value">3</div><div class="label">High-risk forms</div></div>
-              <div class="kpi"><div class="value">30%</div><div class="label">Assessment-to-engagement target</div></div>
+              <span class="chip">Forms analyzer</span>
+              <span class="chip">Azure cost assessment</span>
+              <span class="chip">Post-migration security</span>
+              <span class="chip">.NET + Angular default stack</span>
             </div>
           </div>
-          <div class="hero-panel">
-            <div class="hero-widget"><strong>Assessment Desk</strong><span>Executive summary, inventory, dependency matrix, and wave recommendations.</span></div>
-            <div class="hero-widget"><strong>Conversion Studio</strong><span>Turn Oracle blocks, items, and triggers into a modern web mapping story.</span></div>
-            <div class="hero-widget"><strong>Security Controls</strong><span>Address storage, AI privacy, retention policy, and deployment flexibility.</span></div>
+          <div class="hero-side">
+            <div class="hero-widget"><strong>Assessment Desk</strong><span>Inventory, dependency mapping, Azure PostgreSQL sizing, and executive summary.</span></div>
+            <div class="hero-widget"><strong>Post-migration AI value</strong><span>Token intelligence, FinOps agent, drift detector, and security monitoring.</span></div>
+            <div class="hero-widget"><strong>Conversion target</strong><span>Use .NET and Angular by default. Keep Python or Java optional when needed.</span></div>
           </div>
         </div>
       </section>
 
-      <section class="dashboard-grid">
-        <div class="mini-card">
-          <h4>Complexity Distribution</h4>
-          <div class="bars">
-            <div class="bar-row"><span>Simple</span><div class="bar-track"><div class="bar-fill" style="width:28%"></div></div><span>3</span></div>
-            <div class="bar-row"><span>Low</span><div class="bar-track"><div class="bar-fill" style="width:36%"></div></div><span>4</span></div>
-            <div class="bar-row"><span>Medium</span><div class="bar-track"><div class="bar-fill" style="width:54%"></div></div><span>6</span></div>
-            <div class="bar-row"><span>High</span><div class="bar-track"><div class="bar-fill" style="width:22%"></div></div><span>2</span></div>
-          </div>
-        </div>
-        <div class="mini-card">
-          <h4>Pipeline View</h4>
-          <p>Assessment projects should create a clear motion from intake to technical insight to paid modernization engagement. This hub is designed to support that commercial story.</p>
-        </div>
-        <div class="mini-card">
-          <h4>Why this matters</h4>
-          <p>Customers usually cannot start migration because they lack visibility into forms count, logic complexity, dependency mapping, and realistic effort estimates.</p>
-        </div>
-      </section>
+      <div class="top-metrics">
+        <div class="metric-card"><div class="label">Forms in demo estate</div><div class="value">12</div><div class="delta">3 high-risk forms</div></div>
+        <div class="metric-card"><div class="label">Azure cost assessment</div><div class="value">11,104.57</div><div class="delta">Total projected monthly cost</div></div>
+        <div class="metric-card"><div class="label">Security score</div><div class="value">87/100</div><div class="delta">+12 vs legacy Oracle Forms</div></div>
+        <div class="metric-card"><div class="label">Potential savings</div><div class="value">$1,640</div><div class="delta">3 optimization actions pending</div></div>
+      </div>
 
       <section id="screen-1" class="screen active">
         <div class="workspace">
           <div class="card">
             <h3>1. Project Intake</h3>
-            <p class="muted">The customer uploads Oracle Forms artifacts into a project workspace. This stage organizes the estate, tags the project, and prepares secure processing.</p>
+            <p class="muted">Customer uploads Oracle Forms source artifacts. We prefer .fmb and related libraries, but XML exports are even better for the parser. This is the starting point for the assessment pipeline.</p>
             <div class="dropzone" id="dropzone">
               <div>
                 <div style="font-size:46px; margin-bottom:10px;">☁</div>
-                <h4 style="margin:0 0 8px;">Secure Project Intake</h4>
-                <p class="muted">Load a sample Oracle estate to begin the enterprise workflow.</p>
-                <button class="btn btn-primary" id="simulateUpload">Load sample customer estate</button>
+                <h4 style="margin:0 0 8px;">Upload customer Oracle estate</h4>
+                <p class="muted">Simulate upload of forms, libraries, and optional DB metadata.</p>
+                <button class="btn btn-primary" id="simulateUpload">Load sample Oracle package</button>
               </div>
             </div>
             <div class="progress-wrap">
-              <div class="small muted" style="margin-bottom:8px;">Project upload progress</div>
+              <div class="small muted" style="margin-bottom:8px;">Upload progress</div>
               <div class="progress"><div class="bar" id="uploadBar"></div></div>
             </div>
           </div>
           <div class="card">
             <h3>Project Workspace</h3>
-            <div class="summary-list" id="uploadSummary">
-              <div class="info-row"><strong>Status</strong><div class="muted small">Waiting for project upload</div></div>
-              <div class="info-row"><strong>Accepted artifacts</strong><div class="muted small">.fmb, .fmx, XML export, package zip, optional schema files</div></div>
-              <div class="info-row"><strong>Business purpose</strong><div class="muted small">Create a no-obligation assessment that can convert into a migration engagement.</div></div>
+            <div class="list" id="uploadSummary">
+              <div class="row-box"><strong>Status</strong><div class="muted small">Waiting for upload</div></div>
+              <div class="row-box"><strong>Accepted artifacts</strong><div class="muted small">.fmb, .pll, .mmb, XML export, optional schema ddl, Oracle inventory files</div></div>
+              <div class="row-box"><strong>Why this matters</strong><div class="muted small">Without source artifacts and metadata, assessment quality and migration planning become weak.</div></div>
             </div>
           </div>
         </div>
         <div class="flow-footer">
           <div class="steps-dots"></div>
-          <button class="btn btn-primary next-btn" data-next="screen-2">Next: Parser Engine</button>
+          <button class="btn btn-primary next-btn" data-next="screen-2">Next: Parser</button>
         </div>
       </section>
 
@@ -920,22 +962,22 @@
         <div class="workspace">
           <div class="card">
             <h3>2. Parser Engine</h3>
-            <p class="muted">The parser reads Oracle Forms structure and converts it into a canonical JSON model. That model is the backbone for analysis, reporting, and later UI generation.</p>
+            <p class="muted">We do not directly ask AI to read raw Forms files. First we convert or extract metadata into a canonical JSON model. That model becomes the foundation for analysis, reporting, and code generation.</p>
             <div class="timeline">
-              <div class="timeline-step" data-step="A"><strong>Ingest form artifacts</strong><div class="muted small">Load windows, canvases, data blocks, items, LOVs, triggers, and libraries.</div></div>
-              <div class="timeline-step" data-step="B"><strong>Normalize Oracle concepts</strong><div class="muted small">Produce one stable model that is independent of the eventual target UI framework.</div></div>
-              <div class="timeline-step" data-step="C"><strong>Enable downstream stages</strong><div class="muted small">Analysis, Copilot Q&A, complexity scoring, reports, and conversion preview all depend on this model.</div></div>
+              <div class="timeline-step" data-step="A"><strong>Read source files</strong><div class="muted small">Prefer XML export from .fmb. Also ingest blocks, items, LOVs, triggers, program units, and attached libraries.</div></div>
+              <div class="timeline-step" data-step="B"><strong>Normalize structure</strong><div class="muted small">Produce one canonical JSON schema that is independent from target framework.</div></div>
+              <div class="timeline-step" data-step="C"><strong>Prepare AI-ready input</strong><div class="muted small">Send structured JSON chunks to AI for explanation, not raw binary forms.</div></div>
             </div>
             <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
               <button class="btn btn-primary" id="runParse">Run Parser</button>
-              <button class="btn btn-secondary">Schema Explorer</button>
+              <button class="btn btn-secondary">View schema</button>
             </div>
           </div>
           <div class="card">
-            <h3>Canonical JSON Model</h3>
+            <h3>Canonical JSON</h3>
             <div class="tabs">
               <div class="tab active">Form</div>
-              <div class="tab">Items</div>
+              <div class="tab">Blocks</div>
               <div class="tab">Triggers</div>
             </div>
             <div class="codebox" id="jsonPreview">{
@@ -948,7 +990,7 @@
           <div class="steps-dots"></div>
           <div style="display:flex; gap:10px;">
             <button class="btn btn-secondary prev-btn" data-prev="screen-1">Back</button>
-            <button class="btn btn-primary next-btn" data-next="screen-3">Next: Logic Analyzer</button>
+            <button class="btn btn-primary next-btn" data-next="screen-3">Next: Analyzer</button>
           </div>
         </div>
       </section>
@@ -956,20 +998,20 @@
       <section id="screen-3" class="screen">
         <div class="workspace">
           <div class="card">
-            <h3>3. Logic Analyzer</h3>
-            <p class="muted">This stage interprets triggers, PL/SQL logic, Oracle built-ins, and business behavior. It tells architects what the form does and what modernization path is realistic.</p>
-            <div class="tile-list" id="analysisCards">
-              <div class="info-row"><strong>Trigger Inventory</strong><div class="muted small">Run analysis to populate trigger details.</div></div>
-              <div class="info-row"><strong>Built-ins</strong><div class="muted small">Examples: GO_BLOCK, EXECUTE_QUERY, SET_ITEM_PROPERTY</div></div>
-              <div class="info-row"><strong>AI Summary</strong><div class="muted small">Explain the form in plain language for technical and non-technical audiences.</div></div>
+            <h3>3. AI Logic Analyzer</h3>
+            <p class="muted">AI is used after structured extraction. It explains triggers, identifies built-ins, summarizes business rules, and suggests modernization mapping.</p>
+            <div class="list" id="analysisCards">
+              <div class="row-box"><strong>Trigger inventory</strong><div class="muted small">Run analysis to populate details.</div></div>
+              <div class="row-box"><strong>Built-ins</strong><div class="muted small">GO_BLOCK, EXECUTE_QUERY, SET_ITEM_PROPERTY, MESSAGE</div></div>
+              <div class="row-box"><strong>Business summary</strong><div class="muted small">AI converts form logic into plain English for architects and decision makers.</div></div>
             </div>
             <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
               <button class="btn btn-primary" id="runAnalysis">Run Analysis</button>
-              <button class="btn btn-secondary">Trigger Map</button>
+              <button class="btn btn-secondary">Risk flags</button>
             </div>
           </div>
           <div class="card">
-            <h3>Analyzer Notes</h3>
+            <h3>Analysis Notes</h3>
             <div class="codebox" id="analysisNotes">Analysis not started yet.</div>
           </div>
         </div>
@@ -977,7 +1019,7 @@
           <div class="steps-dots"></div>
           <div style="display:flex; gap:10px;">
             <button class="btn btn-secondary prev-btn" data-prev="screen-2">Back</button>
-            <button class="btn btn-primary next-btn" data-next="screen-4">Next: Dependency Graph</button>
+            <button class="btn btn-primary next-btn" data-next="screen-4">Next: Dependency Map</button>
           </div>
         </div>
       </section>
@@ -985,8 +1027,8 @@
       <section id="screen-4" class="screen">
         <div class="workspace">
           <div class="card">
-            <h3>4. Dependency Graph</h3>
-            <p class="muted">The platform maps which forms depend on which tables, packages, procedures, and lookups. This is essential for migration wave design and backend decomposition.</p>
+            <h3>4. Dependency Map</h3>
+            <p class="muted">This stage maps forms to tables, packages, procedures, and lookups. It feeds migration wave planning and backend API design.</p>
             <div class="table-wrap">
               <table>
                 <thead>
@@ -1010,11 +1052,11 @@
             <div style="margin-top:16px;"><button class="btn btn-primary" id="loadDependencies">Map Dependencies</button></div>
           </div>
           <div class="card">
-            <h3>How teams use this</h3>
+            <h3>Scoring Direction</h3>
             <div class="mapping-list">
-              <div class="mapping-row"><strong>Frontend</strong><div class="muted small">Understand which blocks map to pages, sections, tabs, or editable grids.</div></div>
-              <div class="mapping-row"><strong>Backend</strong><div class="muted small">Identify package-driven logic that should become APIs and services.</div></div>
-              <div class="mapping-row"><strong>Migration Planning</strong><div class="muted small">Determine which forms must move together because of shared dependencies.</div></div>
+              <div class="mapping-row"><strong>Low complexity</strong><div class="muted small">Simple CRUD, light validation, few triggers, minimal package coupling.</div></div>
+              <div class="mapping-row"><strong>Medium complexity</strong><div class="muted small">Multiple blocks, LOV usage, moderate package or library dependencies.</div></div>
+              <div class="mapping-row"><strong>High complexity</strong><div class="muted small">Deep trigger chains, shared libraries, Oracle-specific behavior, heavy DB dependency.</div></div>
             </div>
           </div>
         </div>
@@ -1022,7 +1064,7 @@
           <div class="steps-dots"></div>
           <div style="display:flex; gap:10px;">
             <button class="btn btn-secondary prev-btn" data-prev="screen-3">Back</button>
-            <button class="btn btn-primary next-btn" data-next="screen-5">Next: Scoring Engine</button>
+            <button class="btn btn-primary next-btn" data-next="screen-5">Next: Assessment</button>
           </div>
         </div>
       </section>
@@ -1030,48 +1072,182 @@
       <section id="screen-5" class="screen">
         <div class="workspace">
           <div class="card">
-            <h3>5. Scoring Engine</h3>
-            <p class="muted">Complexity scoring converts technical discovery into delivery insight. It helps explain effort, risk, and sequencing to leadership and engineering.</p>
-            <div class="stack" id="scoringBreakdown">
-              <div class="info-row"><strong>Scoring Model</strong><div class="muted small">Pending calculation</div></div>
+            <h3>5. Azure Assessment Report</h3>
+            <p class="muted">This stage uses your in-house assessment pattern for Oracle to Azure PostgreSQL. It gives projected infrastructure cost and service recommendations.</p>
+            <div class="top-metrics" style="margin-bottom:14px; grid-template-columns: repeat(4, minmax(0, 1fr));">
+              <div class="metric-card"><div class="label">Oracle servers</div><div class="value">12</div><div class="delta">12 Oracle instances</div></div>
+              <div class="metric-card"><div class="label">Total cost</div><div class="value">11,104.57</div><div class="delta">Projected monthly view</div></div>
+              <div class="metric-card"><div class="label">Azure PostgreSQL compute</div><div class="value">4,803.4</div><div class="delta">Flexible server dominant</div></div>
+              <div class="metric-card"><div class="label">Azure PostgreSQL storage</div><div class="value">6,301.17</div><div class="delta">Storage-heavy estate</div></div>
             </div>
-            <div style="margin-top:16px;"><button class="btn btn-primary" id="runScoring">Calculate Score</button></div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Deployment Option</th>
+                    <th>Tier</th>
+                    <th>Service Count</th>
+                    <th>Compute Cost</th>
+                    <th>Storage Cost</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Single Server</td><td>Basic</td><td>0</td><td>0</td><td>0</td></tr>
+                  <tr><td>Single Server</td><td>General Purpose</td><td>0</td><td>0</td><td>0</td></tr>
+                  <tr><td>Single Server</td><td>Memory Optimized</td><td>0</td><td>0</td><td>0</td></tr>
+                  <tr><td>Flexible Server</td><td>Burstable</td><td>8</td><td>189.8</td><td>154.08</td></tr>
+                  <tr><td>Flexible Server</td><td>General Purpose</td><td>0</td><td>0</td><td>0</td></tr>
+                  <tr><td>Flexible Server</td><td>Memory Optimized</td><td>0</td><td>0</td><td>0</td></tr>
+                  <tr><td><strong>Total</strong></td><td></td><td><strong>8</strong></td><td><strong>189.8</strong></td><td><strong>154.08</strong></td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-          <div class="card score-panel">
-            <h3>Effort Snapshot</h3>
-            <div class="metric">
-              <span class="badge info" id="scoreBadge">Waiting</span>
-              <div class="big" id="scoreValue">--</div>
-              <div class="muted" id="scoreReason">Run the engine to estimate complexity and delivery effort.</div>
+          <div class="card">
+            <h3>Assessment Highlights</h3>
+            <div class="summary-list">
+              <div class="row-box"><strong>Recommend to Azure PostgreSQL</strong><div class="muted small">8 flexible server tier recommendations</div></div>
+              <div class="row-box"><strong>Recommend to Azure VM</strong><div class="muted small">0 Oracle VMs needed in current PostgreSQL path</div></div>
+              <div class="row-box"><strong>Recommend to Cosmos DB</strong><div class="muted small">4 hyperscale server recommendations for selected workloads</div></div>
+              <div class="row-box"><strong>Executive takeaway</strong><div class="muted small">Use this assessment to discuss target Azure footprint before modernization execution begins.</div></div>
             </div>
-            <div class="info-row"><strong>Why it matters</strong><div class="muted small">Makes the modernization story concrete for both commercial and delivery conversations.</div></div>
           </div>
         </div>
         <div class="flow-footer">
           <div class="steps-dots"></div>
           <div style="display:flex; gap:10px;">
             <button class="btn btn-secondary prev-btn" data-prev="screen-4">Back</button>
-            <button class="btn btn-primary next-btn" data-next="screen-6">Next: Assessment Desk</button>
+            <button class="btn btn-primary next-btn" data-next="screen-6">Next: Security & FinOps</button>
           </div>
         </div>
       </section>
 
       <section id="screen-6" class="screen">
-        <div class="workspace">
-          <div class="card">
-            <h3>6. Assessment Desk</h3>
-            <p class="muted">The assessment output is the primary customer deliverable. It must work as both an executive summary and a technical planning artifact.</p>
-            <div class="summary-list" id="reportSections">
-              <div class="info-row"><strong>Executive Summary</strong><div class="muted small">Pending...</div></div>
-              <div class="info-row"><strong>Estate Overview</strong><div class="muted small">Pending...</div></div>
-              <div class="info-row"><strong>Per-Form Detail</strong><div class="muted small">Pending...</div></div>
-              <div class="info-row"><strong>Wave Recommendations</strong><div class="muted small">Pending...</div></div>
-            </div>
-            <div style="margin-top:16px;"><button class="btn btn-primary" id="generateReport">Generate Assessment</button></div>
+        <div class="card">
+          <h3>6. Post-migration Security + FinOps Dashboard</h3>
+          <p class="muted">This screen uses the highlighted security and optimization ideas from slide 9. It shows why post-migration recurring value matters, not just one-time migration delivery.</p>
+          <div class="top-metrics" style="margin-top:16px;">
+            <div class="metric-card"><div class="label">Security score</div><div class="value">87/100</div><div class="delta">+12 vs Oracle Forms</div></div>
+            <div class="metric-card"><div class="label">Threats blocked</div><div class="value">1,284</div><div class="delta">Last 30 days</div></div>
+            <div class="metric-card"><div class="label">Monthly infra cost</div><div class="value">$4,210</div><div class="delta">-38% vs legacy</div></div>
+            <div class="metric-card"><div class="label">Potential savings</div><div class="value">$1,640</div><div class="delta">3 actions pending</div></div>
           </div>
-          <div class="card">
-            <h3>Assessment Preview</h3>
-            <div class="codebox" id="reportPreview">Assessment not generated yet.</div>
+
+          <div class="status-layout" style="margin-top:16px;">
+            <div class="card" style="padding:18px; box-shadow:none;">
+              <div style="display:flex; justify-content:space-between; gap:12px; align-items:center; margin-bottom:10px;">
+                <h4 style="margin:0;">Security control status</h4>
+                <span class="muted small">View all</span>
+              </div>
+              <div class="control-list">
+                <div class="control-item"><div><span class="dot-label"><span class="dot" style="background:var(--good)"></span>OAuth 2.0 / SSO</span></div><span class="badge good">Active</span></div>
+                <div class="control-item"><div><span class="dot-label"><span class="dot" style="background:var(--good)"></span>MFA enforcement</span></div><span class="badge good">Active</span></div>
+                <div class="control-item"><div><span class="dot-label"><span class="dot" style="background:var(--good)"></span>TLS 1.3 in transit</span></div><span class="badge good">Active</span></div>
+                <div class="control-item"><div><span class="dot-label"><span class="dot" style="background:var(--good)"></span>WAF rules</span></div><span class="badge good">Active</span></div>
+                <div class="control-item"><div><span class="dot-label"><span class="dot" style="background:var(--warn)"></span>CSRF token rotation</span></div><span class="badge warn">Review</span></div>
+                <div class="control-item"><div><span class="dot-label"><span class="dot" style="background:var(--bad)"></span>Dependency patching</span></div><span class="badge bad">Outdated</span></div>
+                <div class="control-item"><div><span class="dot-label"><span class="dot" style="background:var(--good)"></span>DB encryption (TDE)</span></div><span class="badge good">Active</span></div>
+                <div class="control-item"><div><span class="dot-label"><span class="dot" style="background:var(--good)"></span>RBAC roles synced</span></div><span class="badge good">Active</span></div>
+              </div>
+            </div>
+
+            <div class="card" style="padding:18px; box-shadow:none;">
+              <div style="display:flex; justify-content:space-between; gap:12px; align-items:center; margin-bottom:10px;">
+                <h4 style="margin:0;">Cost optimisation actions</h4>
+                <span class="small" style="color:var(--text); font-weight:700;">Run analysis ↗</span>
+              </div>
+              <div class="action-list">
+                <div class="action-item">
+                  <div>
+                    <strong>Right-size API instances</strong>
+                    <div class="muted small">3 over-provisioned nodes</div>
+                    <div class="progress-mini"><span style="width:58%"></span></div>
+                  </div>
+                  <div class="action-right">$580/mo<small>Save $390</small></div>
+                </div>
+                <div class="action-item">
+                  <div>
+                    <strong>Remove unused IAM roles</strong>
+                    <div class="muted small">14 stale roles detected</div>
+                    <div class="progress-mini"><span style="width:45%"></span></div>
+                  </div>
+                  <div class="action-right">Security + cost<small>Save $120/mo</small></div>
+                </div>
+                <div class="action-item">
+                  <div>
+                    <strong>Enable log compression</strong>
+                    <div class="muted small">SIEM ingest volume high</div>
+                    <div class="progress-mini"><span style="width:72%; background:linear-gradient(90deg,#f7c24f,#d79a29)"></span></div>
+                  </div>
+                  <div class="action-right">$940/mo<small>Save $430/mo</small></div>
+                </div>
+                <div class="action-item">
+                  <div>
+                    <strong>WAF rule deduplication</strong>
+                    <div class="muted small">38 redundant rules</div>
+                    <div class="progress-mini"><span style="width:40%"></span></div>
+                  </div>
+                  <div class="action-right">$210/mo<small>Save $90/mo</small></div>
+                </div>
+                <div class="action-item">
+                  <div>
+                    <strong>CDN cache for static assets</strong>
+                    <div class="muted small">React bundles uncached</div>
+                    <div class="progress-mini"><span style="width:55%"></span></div>
+                  </div>
+                  <div class="action-right">$320/mo<small>Save $610/mo</small></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="assessment-grid">
+            <div class="card" style="padding:18px; box-shadow:none;">
+              <h4 style="margin-top:0;">Threat volume · 7 days</h4>
+              <div class="bar-chart">
+                <div class="bar-group"><div class="bar-stack"><div class="bar-blue" style="height:18px"></div><div class="bar-red" style="height:62px"></div></div>Mon</div>
+                <div class="bar-group"><div class="bar-stack"><div class="bar-blue" style="height:16px"></div><div class="bar-red" style="height:54px"></div></div>Tue</div>
+                <div class="bar-group"><div class="bar-stack"><div class="bar-blue" style="height:19px"></div><div class="bar-red" style="height:70px"></div></div>Wed</div>
+                <div class="bar-group"><div class="bar-stack"><div class="bar-blue" style="height:18px"></div><div class="bar-red" style="height:72px"></div></div>Thu</div>
+                <div class="bar-group"><div class="bar-stack"><div class="bar-blue" style="height:14px"></div><div class="bar-red" style="height:58px"></div></div>Fri</div>
+                <div class="bar-group"><div class="bar-stack"><div class="bar-blue" style="height:8px"></div><div class="bar-red" style="height:30px"></div></div>Sat</div>
+                <div class="bar-group"><div class="bar-stack"><div class="bar-blue" style="height:5px"></div><div class="bar-red" style="height:16px"></div></div>Sun</div>
+              </div>
+              <div class="small muted">Blocked (red) and flagged (blue) events</div>
+            </div>
+            <div class="card" style="padding:18px; box-shadow:none;">
+              <h4 style="margin-top:0;">Security policies</h4>
+              <div class="toggle-list">
+                <div class="toggle-row"><span>Force HTTPS redirect</span><span class="toggle"></span></div>
+                <div class="toggle-row"><span>Auto-rotate JWT secrets</span><span class="toggle"></span></div>
+                <div class="toggle-row"><span>Block legacy TLS 1.0/1.1</span><span class="toggle"></span></div>
+                <div class="toggle-row"><span>PII masking in logs</span><span class="toggle"></span></div>
+                <div class="toggle-row"><span>Auto-disable idle accounts</span><span class="toggle"></span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="assessment-grid">
+            <div class="card" style="padding:18px; box-shadow:none;">
+              <h4 style="margin-top:0;">Cost by category</h4>
+              <div class="cost-bars">
+                <div class="cost-row"><span>Compute</span><div class="cost-track"><div class="cost-fill" style="width:78%"></div></div><strong>$1,540</strong></div>
+                <div class="cost-row"><span>SIEM / logs</span><div class="cost-track"><div class="cost-fill" style="width:58%"></div></div><strong>$940</strong></div>
+                <div class="cost-row"><span>WAF / CDN</span><div class="cost-track"><div class="cost-fill" style="width:42%"></div></div><strong>$530</strong></div>
+                <div class="cost-row"><span>DB / storage</span><div class="cost-track"><div class="cost-fill" style="width:48%"></div></div><strong>$720</strong></div>
+                <div class="cost-row"><span>IdP / auth</span><div class="cost-track"><div class="cost-fill" style="width:26%"></div></div><strong>$290</strong></div>
+                <div class="cost-row"><span>Scanning / CI</span><div class="cost-track"><div class="cost-fill" style="width:18%"></div></div><strong>$190</strong></div>
+              </div>
+            </div>
+            <div class="card" style="padding:18px; box-shadow:none;">
+              <h4 style="margin-top:0;">Layer 3 recurring value</h4>
+              <div class="list">
+                <div class="row-box"><strong>Token Intelligence</strong><div class="muted small">AI cost monitoring for prompts, model usage, and agent consumption.</div></div>
+                <div class="row-box"><strong>FinOps agent</strong><div class="muted small">Azure optimization, right-sizing, and cost action recommendations.</div></div>
+                <div class="row-box"><strong>Drift detector</strong><div class="muted small">Monitor config drift, compliance drift, and security posture changes.</div></div>
+                <div class="row-box"><strong>Copilot advisor</strong><div class="muted small">Natural language operational queries for post-migration support teams.</div></div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="flow-footer">
@@ -1087,34 +1263,36 @@
         <div class="workspace">
           <div class="card">
             <h3>7. Conversion Studio</h3>
-            <p class="muted">This studio demonstrates how Oracle Forms concepts can be translated into a modern page model. The goal is not direct blind conversion. The goal is controlled model-driven generation.</p>
+            <p class="muted">For modernization output, use .NET Web API and Angular as the default stack. This aligns well with enterprise forms, validations, DTOs, and service-based migration.</p>
             <div class="accordion">
               <div class="acc-item">
-                <div class="acc-head">UI Mapping Logic <span>+</span></div>
+                <div class="acc-head">Default modernization mapping <span>+</span></div>
                 <div class="acc-body">
-                  Window → Page or modal<br>
-                  Canvas → Section or tab<br>
-                  Data block → Form group or editable grid<br>
-                  Item → Form control<br>
-                  LOV → Dropdown or autocomplete<br>
-                  WHEN-VALIDATE-ITEM → blur validator or form rule<br>
-                  WHEN-BUTTON-PRESSED → click handler
+                  Oracle Window → Angular page / modal<br>
+                  Oracle Canvas → Angular section / tab<br>
+                  Oracle Data Block → Reactive Form group / grid<br>
+                  Oracle Item → FormControl<br>
+                  LOV → dropdown / autocomplete service<br>
+                  Trigger logic → TypeScript handlers + .NET APIs<br>
+                  Package calls → Application services / controllers
                 </div>
               </div>
               <div class="acc-item">
-                <div class="acc-head">Generated Assets <span>+</span></div>
+                <div class="acc-head">Generated assets <span>+</span></div>
                 <div class="acc-body">
-                  customer-master.component.html<br>
                   customer-master.component.ts<br>
+                  customer-master.component.html<br>
                   customer-master-api.service.ts<br>
                   customer-master.models.ts<br>
-                  customer-master.metadata.json
+                  CustomerController.cs<br>
+                  CustomerService.cs<br>
+                  CustomerRepository.cs (optional architecture-based)
                 </div>
               </div>
               <div class="acc-item">
-                <div class="acc-head">Manual Review Zones <span>+</span></div>
+                <div class="acc-head">What stays optional <span>+</span></div>
                 <div class="acc-body">
-                  OPEN_FORM chains, DDE/OLE integrations, custom Java beans, print/report logic, and deeply coupled library-based behavior.
+                  Python can stay for parser engine, XML extraction, report generation, and AI orchestration. Java should remain optional and only be used if a specific customer platform or internal ecosystem requires it.
                 </div>
               </div>
             </div>
@@ -1125,7 +1303,7 @@
             <div class="codebox" id="generatedCode" style="display:none; margin-top:16px;"></div>
           </div>
           <div class="card">
-            <h3>Modernized UI Preview</h3>
+            <h3>Angular Preview</h3>
             <div class="preview-shell" id="uiPreview">
               <div class="muted">Click “Generate UI Preview” to render the modern page.</div>
             </div>
@@ -1135,7 +1313,7 @@
           <div class="steps-dots"></div>
           <div style="display:flex; gap:10px;">
             <button class="btn btn-secondary prev-btn" data-prev="screen-6">Back</button>
-            <button class="btn btn-primary next-btn" data-next="screen-8">Next: Security Controls</button>
+            <button class="btn btn-primary next-btn" data-next="screen-8">Next: Technology Decision</button>
           </div>
         </div>
       </section>
@@ -1143,32 +1321,43 @@
       <section id="screen-8" class="screen">
         <div class="workspace">
           <div class="card">
-            <h3>8. Security Controls</h3>
-            <p class="muted">This is where you discuss product readiness with Ghanshyam. Storage, AI privacy, retention, RBAC, and deployment model all affect enterprise trust.</p>
-            <div class="security-list">
-              <div class="security-row"><strong>Secure Storage</strong><div class="muted small">Encrypt uploaded artifacts, isolate tenant data, and restrict file access.</div></div>
-              <div class="security-row"><strong>Private AI Use</strong><div class="muted small">Ensure customer artifacts are not used for training and stay within approved boundaries.</div></div>
-              <div class="security-row"><strong>Retention Policy</strong><div class="muted small">Decide how long raw files remain after parsing and reporting.</div></div>
-              <div class="security-row"><strong>Deployment Options</strong><div class="muted small">SaaS, private network, or on-prem agent for sensitive customers.</div></div>
+            <h3>8. Technology Decision</h3>
+            <p class="muted">This product should present .NET + Angular as the main modernization target. Other technologies should appear as optional support, not the default story.</p>
+            <div class="tech-grid">
+              <div class="tech-card">
+                <h4>Default stack</h4>
+                <div class="list">
+                  <div class="row-box"><strong>Frontend: Angular</strong><div class="muted small">Strong enterprise forms, routing, validation, componentization, and structured UI migration.</div></div>
+                  <div class="row-box"><strong>Backend: .NET Web API</strong><div class="muted small">Good for service layering, DTOs, auth, reporting APIs, and enterprise integration.</div></div>
+                  <div class="row-box"><strong>Database: PostgreSQL</strong><div class="muted small">Target cloud-native DB for Oracle exit strategy.</div></div>
+                </div>
+              </div>
+              <div class="tech-card">
+                <h4>Optional support</h4>
+                <div class="list">
+                  <div class="row-box"><strong>Python</strong><div class="muted small">Best suited for parser engine, XML transformation, dependency extraction, report generation, and AI orchestration.</div></div>
+                  <div class="row-box"><strong>Java</strong><div class="muted small">Use only if customer environment or integration requirements clearly justify it.</div></div>
+                  <div class="row-box"><strong>React</strong><div class="muted small">Can remain an optional output target, but Angular should be the main story here.</div></div>
+                </div>
+              </div>
             </div>
+            <div style="margin-top:16px;" class="row-box"><strong>ready message</strong><div class="muted small">We should position .NET and Angular as the standard modernization path because it is clearer, more controllable, and better aligned with enterprise migration delivery.</div></div>
           </div>
           <div class="card">
-            <h3>Security Readiness Checklist</h3>
-            <div class="security-list" id="securityChecklist">
-              <div class="security-row"><span class="badge info">Pending</span> Malware scanning on upload</div>
-              <div class="security-row"><span class="badge info">Pending</span> Encrypted storage and signed access</div>
-              <div class="security-row"><span class="badge info">Pending</span> RBAC and audit logging</div>
-              <div class="security-row"><span class="badge info">Pending</span> Retention + deletion workflow</div>
-              <div class="security-row"><span class="badge info">Pending</span> Private AI configuration</div>
+            <h3>Why this positioning helps</h3>
+            <div class="summary-list">
+              <div class="row-box"><strong>Cleaner go-to-market</strong><div class="muted small">One clear target architecture is easier to sell than too many framework choices.</div></div>
+              <div class="row-box"><strong>Faster delivery</strong><div class="muted small">Reusable templates and patterns can be built around one primary stack.</div></div>
+              <div class="row-box"><strong>Better demo story</strong><div class="muted small">Assessment → Angular UI → .NET API → PostgreSQL is easy to explain.</div></div>
+              <div class="row-box"><strong>Optional flexibility still exists</strong><div class="muted small">Python remains useful behind the scenes; Java stays optional for special cases.</div></div>
             </div>
-            <div style="margin-top:16px;"><button class="btn btn-primary" id="secureIt">Apply Security Plan</button></div>
           </div>
         </div>
         <div class="flow-footer">
           <div class="steps-dots"></div>
           <div style="display:flex; gap:10px;">
             <button class="btn btn-secondary prev-btn" data-prev="screen-7">Back</button>
-            <button class="btn btn-primary next-btn" data-next="screen-9">Next: Executive Pitch</button>
+            <button class="btn btn-primary next-btn" data-next="screen-9">Next: Pitch Mode</button>
           </div>
         </div>
       </section>
@@ -1176,21 +1365,23 @@
       <section id="screen-9" class="screen">
         <div class="workspace">
           <div class="card">
-            <h3>9. Executive Pitch Mode</h3>
+            <h3>9. Pitch Mode</h3>
             <div class="timeline">
-              <div class="timeline-step" data-step="1"><strong>Open with the market problem</strong><div class="muted small">Customers lack visibility into form inventory, complexity, and migration effort, so projects stall before they begin.</div></div>
-              <div class="timeline-step" data-step="2"><strong>Show the platform pipeline</strong><div class="muted small">Project Intake → Parser → Analyzer → Dependency Graph → Scoring → Assessment Desk → Conversion Studio.</div></div>
-              <div class="timeline-step" data-step="3"><strong>Emphasize the canonical model</strong><div class="muted small">One canonical JSON model powers assessment, search, reporting, and future UI generation.</div></div>
-              <div class="timeline-step" data-step="4"><strong>Close with enterprise readiness</strong><div class="muted small">Security, privacy, retention, and deployment flexibility make the offer credible to real customers.</div></div>
+              <div class="timeline-step" data-step="1"><strong>Start with the problem</strong><div class="muted small">Customers cannot begin Oracle modernization because they lack form inventory, complexity, dependency visibility, and target cost clarity.</div></div>
+              <div class="timeline-step" data-step="2"><strong>Show assessment value</strong><div class="muted small">Our hub analyzes Forms, maps dependencies, estimates Azure PostgreSQL targets, and gives a modernization report.</div></div>
+              <div class="timeline-step" data-step="3"><strong>Show recurring revenue layer</strong><div class="muted small">After migration, security monitoring, FinOps actions, and drift detection create ongoing value.</div></div>
+              <div class="timeline-step" data-step="4"><strong>Close with stack decision</strong><div class="muted small">Use .NET + Angular as the standard modernization output, while keeping Python and Java optional where useful.</div></div>
             </div>
           </div>
           <div class="card">
             <h3>Meeting-Ready Script</h3>
-            <div class="codebox">My recommendation is that we should not directly convert Oracle Forms into Angular first. We should first parse Forms into a canonical JSON model. That model can drive analysis, dependency mapping, scoring, reports, and later UI generation.
+            <div class="codebox">This project is not only a Forms parser. It is an Oracle modernization hub.
 
-From there, modernization becomes more controlled. Windows, canvases, blocks, items, triggers, and LOVs can map into modern web structures. Then we can split generation into layout generation, form generation, event mapping, and backend API scaffolding.
+First, we ingest Oracle Forms artifacts and convert them into a canonical JSON model. Then AI helps explain triggers, business rules, and dependencies. On top of that, we attach Azure assessment output to show likely PostgreSQL target costs and service recommendations.
 
-For the security discussion with Ghanshyam, we should align on upload scanning, encrypted storage, AI privacy controls, retention policy, RBAC, audit logging, and whether some customers will require a private or on-prem deployment path.</div>
+The next important layer is recurring post-migration value. We can show security controls, threat visibility, cost optimization actions, FinOps recommendations, and drift detection. That means the product story does not stop at migration.
+
+For modernization output, we should make .NET Web API and Angular our standard target stack. Python remains useful for parser and report automation, while Java should stay optional for customer-specific requirements.</div>
           </div>
         </div>
         <div class="flow-footer">
@@ -1217,7 +1408,7 @@ For the security discussion with Ghanshyam, we should align on upload scanning, 
           const wrapper = $(this);
           wrapper.empty();
           order.forEach((id, index) => {
-            wrapper.append('<span class="dot ' + ((index + 1) <= current ? 'active' : '') + '"></span>');
+            wrapper.append('<span class="dot-step ' + ((index + 1) <= current ? 'active' : '') + '"></span>');
           });
         });
       }
@@ -1239,38 +1430,20 @@ For the security discussion with Ghanshyam, we should align on upload scanning, 
         $('#dropzone').removeClass('ready');
         $('#uploadBar').css('width', '0%');
         $('#uploadSummary').html(`
-          <div class="info-row"><strong>Status</strong><div class="muted small">Waiting for project upload</div></div>
-          <div class="info-row"><strong>Accepted artifacts</strong><div class="muted small">.fmb, .fmx, XML export, package zip, optional schema files</div></div>
-          <div class="info-row"><strong>Business purpose</strong><div class="muted small">Create a no-obligation assessment that can convert into a migration engagement.</div></div>
+          <div class="row-box"><strong>Status</strong><div class="muted small">Waiting for upload</div></div>
+          <div class="row-box"><strong>Accepted artifacts</strong><div class="muted small">.fmb, .pll, .mmb, XML export, optional schema ddl, Oracle inventory files</div></div>
+          <div class="row-box"><strong>Why this matters</strong><div class="muted small">Without source artifacts and metadata, assessment quality and migration planning become weak.</div></div>
         `);
         $('#jsonPreview').text('{' + '\n  "formName": "CUSTOMER_MASTER",\n  "status": "waiting for parser"\n}');
         $('#analysisCards').html(`
-          <div class="info-row"><strong>Trigger Inventory</strong><div class="muted small">Run analysis to populate trigger details.</div></div>
-          <div class="info-row"><strong>Built-ins</strong><div class="muted small">Examples: GO_BLOCK, EXECUTE_QUERY, SET_ITEM_PROPERTY</div></div>
-          <div class="info-row"><strong>AI Summary</strong><div class="muted small">Explain the form in plain language for technical and non-technical audiences.</div></div>
+          <div class="row-box"><strong>Trigger inventory</strong><div class="muted small">Run analysis to populate details.</div></div>
+          <div class="row-box"><strong>Built-ins</strong><div class="muted small">GO_BLOCK, EXECUTE_QUERY, SET_ITEM_PROPERTY, MESSAGE</div></div>
+          <div class="row-box"><strong>Business summary</strong><div class="muted small">AI converts form logic into plain English for architects and decision makers.</div></div>
         `);
         $('#analysisNotes').text('Analysis not started yet.');
         $('#dependencyRows').html('<tr><td>CUSTOMER_MASTER</td><td>Waiting...</td><td>Waiting...</td><td>Pending mapping</td></tr>');
-        $('#scoringBreakdown').html('<div class="info-row"><strong>Scoring Model</strong><div class="muted small">Pending calculation</div></div>');
-        $('#scoreBadge').removeClass('good warn bad').addClass('info').text('Waiting');
-        $('#scoreValue').text('--');
-        $('#scoreReason').text('Run the engine to estimate complexity and delivery effort.');
-        $('#reportSections').html(`
-          <div class="info-row"><strong>Executive Summary</strong><div class="muted small">Pending...</div></div>
-          <div class="info-row"><strong>Estate Overview</strong><div class="muted small">Pending...</div></div>
-          <div class="info-row"><strong>Per-Form Detail</strong><div class="muted small">Pending...</div></div>
-          <div class="info-row"><strong>Wave Recommendations</strong><div class="muted small">Pending...</div></div>
-        `);
-        $('#reportPreview').text('Assessment not generated yet.');
         $('#uiPreview').html('<div class="muted">Click “Generate UI Preview” to render the modern page.</div>');
         $('#generatedCode').hide().text('');
-        $('#securityChecklist').html(`
-          <div class="security-row"><span class="badge info">Pending</span> Malware scanning on upload</div>
-          <div class="security-row"><span class="badge info">Pending</span> Encrypted storage and signed access</div>
-          <div class="security-row"><span class="badge info">Pending</span> RBAC and audit logging</div>
-          <div class="security-row"><span class="badge info">Pending</span> Retention + deletion workflow</div>
-          <div class="security-row"><span class="badge info">Pending</span> Private AI configuration</div>
-        `);
         showScreen('screen-1');
       }
 
@@ -1278,10 +1451,10 @@ For the security discussion with Ghanshyam, we should align on upload scanning, 
         $('#dropzone').addClass('ready');
         $('#uploadBar').css('width', '100%');
         $('#uploadSummary').html(`
-          <div class="info-row"><strong>Status</strong><div class="muted small">Upload complete — Oracle_CRM_Enterprise_Package.zip</div></div>
-          <div class="info-row"><strong>Artifacts detected</strong><div class="muted small">12 .fmb files, 2 attached libraries, 1 schema DDL bundle</div></div>
-          <div class="info-row"><strong>Selected form</strong><div class="muted small">CUSTOMER_MASTER.fmb</div></div>
-          <div class="info-row"><strong>Pipeline next step</strong><div class="muted small">Run parser and create canonical JSON for downstream analysis.</div></div>
+          <div class="row-box"><strong>Status</strong><div class="muted small">Upload complete — Oracle_CRM_Package.zip</div></div>
+          <div class="row-box"><strong>Artifacts detected</strong><div class="muted small">12 .fmb files, 2 libraries, 1 menu module, XML exports for top 3 critical forms</div></div>
+          <div class="row-box"><strong>Selected form</strong><div class="muted small">CUSTOMER_MASTER.fmb</div></div>
+          <div class="row-box"><strong>Next action</strong><div class="muted small">Convert source into canonical JSON for AI analysis and reporting.</div></div>
         `);
       }
 
@@ -1313,12 +1486,12 @@ For the security discussion with Ghanshyam, we should align on upload scanning, 
 
       function runAnalysis() {
         $('#analysisCards').html(`
-          <div class="info-row"><strong>Trigger Inventory</strong><div class="muted small">18 triggers found across form, block, and item levels.</div></div>
-          <div class="info-row"><strong>Built-ins</strong><div class="muted small">GO_BLOCK, SET_ITEM_PROPERTY, EXECUTE_QUERY, MESSAGE, CLEAR_BLOCK</div></div>
-          <div class="info-row"><strong>AI Summary</strong><div class="muted small">Validates email, manages lookup selection, controls field state, and handles save/query logic.</div></div>
-          <div class="info-row"><strong>Logic Size</strong><div class="muted small">Approx. 420 PL/SQL lines across triggers and program units.</div></div>
+          <div class="row-box"><strong>Trigger inventory</strong><div class="muted small">18 triggers identified across form, block, and item levels.</div></div>
+          <div class="row-box"><strong>Built-ins</strong><div class="muted small">GO_BLOCK, SET_ITEM_PROPERTY, EXECUTE_QUERY, MESSAGE, CLEAR_BLOCK</div></div>
+          <div class="row-box"><strong>Business summary</strong><div class="muted small">Validates email, handles lookup-driven country selection, and calls package-based save/query logic.</div></div>
+          <div class="row-box"><strong>Risk note</strong><div class="muted small">Moderate Oracle-specific behavior; suitable for assisted .NET + Angular modernization.</div></div>
         `);
-        $('#analysisNotes').text(`AI Summary:\n\nThis form manages customer master data for a CRM workflow. Core behaviors include field validation, conditional UI state changes, lookup-driven country selection, and package-based save/query operations.\n\nModernization note:\n- Item validation can map to Angular validators and UI handlers.\n- Save/query actions should move into APIs.\n- Oracle built-ins like GO_BLOCK and SET_ITEM_PROPERTY should map to state and navigation rules in the web layer.`);
+        $('#analysisNotes').text(`AI Summary:\n\nThis form manages customer master data in a CRM workflow. Primary behaviors include item-level validation, conditional state changes, LOV-driven country selection, and package-based save/query actions.\n\nRecommendation:\n- Move validations to Angular form rules where possible.\n- Convert package-driven save/query flows into .NET APIs.\n- Preserve business-rule explanations in the assessment report.`);
       }
 
       function loadDependencies() {
@@ -1335,30 +1508,13 @@ For the security discussion with Ghanshyam, we should align on upload scanning, 
             <td>PKG_ADDRESS_MAINT</td>
             <td><span class="badge info">Lookup dependent</span></td>
           </tr>
+          <tr>
+            <td>ORDER_SEARCH</td>
+            <td>ORDERS, ORDER_STATUS, CUSTOMERS</td>
+            <td>PKG_ORDER_QUERY</td>
+            <td><span class="badge good">Good early wave candidate</span></td>
+          </tr>
         `);
-      }
-
-      function runScoring() {
-        $('#scoringBreakdown').html(`
-          <div class="info-row"><strong>Trigger Count</strong><div class="muted small">18 triggers → medium impact</div></div>
-          <div class="info-row"><strong>PL/SQL Lines</strong><div class="muted small">420 lines → medium impact</div></div>
-          <div class="info-row"><strong>Oracle Built-ins</strong><div class="muted small">Moderate navigation and property control usage</div></div>
-          <div class="info-row"><strong>UI Structure</strong><div class="muted small">2 canvases with one main operational block</div></div>
-          <div class="info-row"><strong>External Dependency</strong><div class="muted small">Attached library plus package-based persistence</div></div>
-        `);
-        $('#scoreBadge').removeClass('info good bad').addClass('warn').text('Complexity: Medium-High');
-        $('#scoreValue').text('3.8 / 5');
-        $('#scoreReason').text('Estimated modernization effort: 1.5 to 2.5 weeks for frontend and service scaffolding, plus review of package-based business logic.');
-      }
-
-      function generateReport() {
-        $('#reportSections').html(`
-          <div class="info-row"><strong>Executive Summary</strong><div class="muted small">12 forms detected, 3 high-risk modules, phased modernization recommended.</div></div>
-          <div class="info-row"><strong>Estate Overview</strong><div class="muted small">Most forms are CRUD-heavy with shared lookups and package dependencies.</div></div>
-          <div class="info-row"><strong>Per-Form Detail</strong><div class="muted small">CUSTOMER_MASTER scored 3.8/5 with moderate Oracle-specific behavior.</div></div>
-          <div class="info-row"><strong>Wave Recommendations</strong><div class="muted small">Start with simple master-data forms, then move to higher-coupled transactional modules.</div></div>
-        `);
-        $('#reportPreview').text(`Executive Summary\n\n- Total forms assessed: 12\n- Total extracted PL/SQL lines: 4,950\n- High complexity forms: 3\n- Recommended migration pattern: phased waves\n\nTechnical Snapshot\n\n- CUSTOMER_MASTER depends on CUSTOMERS, COUNTRIES, and package-driven save/query logic.\n- Moderate Oracle built-in usage suggests assisted, not fully automatic, conversion.\n- Best early candidates are simple CRUD and LOV-driven forms with limited library coupling.`);
       }
 
       function generateUi() {
@@ -1366,9 +1522,9 @@ For the security discussion with Ghanshyam, we should align on upload scanning, 
           <div class="preview-top">
             <div>
               <div style="font-size:24px; font-weight:800; color:#22324d;">Customer Master</div>
-              <div style="color:#6880a4; margin-top:4px;">Angular-style page preview generated from the canonical form model</div>
+              <div style="color:#6880a4; margin-top:4px;">Angular page preview backed by .NET Web API</div>
             </div>
-            <div class="chip">Mapped from block: CUSTOMER</div>
+            <div class="chip">Default stack: Angular + .NET</div>
           </div>
           <div class="preview-card">
             <div class="preview-grid">
@@ -1404,17 +1560,8 @@ For the security discussion with Ghanshyam, we should align on upload scanning, 
             </div>
           </div>
         `);
-        $('#generatedCode').text(`// customer-master.component.ts\nthis.form = this.fb.group({\n  customerId: ['C-10021'],\n  status: ['Active'],\n  name: ['Rohan Malhotra', Validators.required],\n  email: ['rohan@example.com', [Validators.required, Validators.email]],\n  countryId: ['India']\n});\n\nonEmailBlur() {\n  // mapped from WHEN-VALIDATE-ITEM\n}\n\nsave() {\n  // mapped from WHEN-BUTTON-PRESSED -> PKG_CUSTOMER_SAVE API\n}`);
-      }
 
-      function applySecurityPlan() {
-        $('#securityChecklist').html(`
-          <div class="security-row"><span class="badge good">Enabled</span> Malware scanning on upload</div>
-          <div class="security-row"><span class="badge good">Enabled</span> Encrypted storage and signed access</div>
-          <div class="security-row"><span class="badge good">Enabled</span> RBAC and audit logging</div>
-          <div class="security-row"><span class="badge good">Enabled</span> Retention + deletion workflow</div>
-          <div class="security-row"><span class="badge good">Enabled</span> Private AI configuration</div>
-        `);
+        $('#generatedCode').text(`// Angular component (default UI target)\nthis.form = this.fb.group({\n  customerId: ['C-10021'],\n  status: ['Active'],\n  name: ['Rohan Malhotra', Validators.required],\n  email: ['rohan@example.com', [Validators.required, Validators.email]],\n  countryId: ['India']\n});\n\n// .NET API target\nPOST /api/customers/save\nGET /api/customers/query?status=Active\n\n// Optional support\n// Python: parser, XML extraction, report generation\n// Java: only for customer-specific integration cases`);
       }
 
       steps.on('click', function () { showScreen($(this).data('target')); });
@@ -1425,12 +1572,9 @@ For the security discussion with Ghanshyam, we should align on upload scanning, 
       $('#runParse').on('click', runParse);
       $('#runAnalysis').on('click', runAnalysis);
       $('#loadDependencies').on('click', loadDependencies);
-      $('#runScoring').on('click', runScoring);
-      $('#generateReport').on('click', generateReport);
       $('#generateUi').on('click', generateUi);
-      $('#secureIt').on('click', applySecurityPlan);
-      $('#restartEnd, #resetDemo').on('click', resetDemoState);
       $('#toggleCode').on('click', function () { $('#generatedCode').slideToggle(180); });
+      $('#restartEnd, #resetDemo').on('click', resetDemoState);
       $('.acc-head').on('click', function () {
         const body = $(this).next('.acc-body');
         $('.acc-body').not(body).slideUp(180);
@@ -1450,13 +1594,10 @@ For the security discussion with Ghanshyam, we should align on upload scanning, 
           () => showScreen('screen-4'),
           () => loadDependencies(),
           () => showScreen('screen-5'),
-          () => runScoring(),
           () => showScreen('screen-6'),
-          () => generateReport(),
           () => showScreen('screen-7'),
           () => generateUi(),
           () => showScreen('screen-8'),
-          () => applySecurityPlan(),
           () => showScreen('screen-9')
         ];
         autoIndex = 0;

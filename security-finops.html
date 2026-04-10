@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step 6: Security & FinOps - CloudAtlas</title>
+    <link href="assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <i class="fa-solid fa-cloud logo-icon"></i>
+            <span class="logo-text">CloudAtlas</span>
+        </div>
+        <div class="sidebar-menu">
+            <div class="menu-label">Overview</div>
+            <a href="index.html" class="menu-item"><i class="fa-solid fa-border-all"></i><span class="menu-text">Assessment Dashboard</span></a>
+            <a href="smb-guided-mode.html" class="menu-item bg-primary-soft text-primary"><i class="fa-solid fa-wand-magic-sparkles"></i><span class="menu-text fw-bold">SMB Guided Mode</span></a>
+            
+            <div class="menu-label">Evaluation Pipeline</div>
+            <a href="project-intake.html" class="menu-item"><i class="fa-solid fa-file-arrow-up"></i><span class="menu-text">1. Project Intake</span></a>
+            <a href="parser-engine.html" class="menu-item"><i class="fa-solid fa-gears"></i><span class="menu-text">2. Parser Engine</span></a>
+            <a href="ai-logic.html" class="menu-item"><i class="fa-solid fa-brain"></i><span class="menu-text">3. AI Logic Analyzer</span></a>
+            <a href="dependency-map.html" class="menu-item"><i class="fa-solid fa-diagram-project"></i><span class="menu-text">4. Dependency Map</span></a>
+            <a href="azure-assessment.html" class="menu-item"><i class="fa-solid fa-server"></i><span class="menu-text">5. Azure Assessment</span></a>
+            
+            <div class="menu-label">Planning & Targeting</div>
+            <a href="security-finops.html" class="menu-item active"><i class="fa-solid fa-shield-halved"></i><span class="menu-text">6. Security + FinOps</span></a>
+            <a href="conversion-studio.html" class="menu-item"><i class="fa-solid fa-code"></i><span class="menu-text">7. Conversion Studio</span></a>
+            <a href="review-validate.html" class="menu-item"><i class="fa-solid fa-user-check"></i><span class="menu-text">8. Review & Validate</span></a>
+            <a href="tech-decision.html" class="menu-item"><i class="fa-solid fa-layer-group"></i><span class="menu-text">9. Technology Decision</span></a>
+            
+            <div class="menu-label mt-4">Internal Tools</div>
+            <a href="pitch-mode.html" class="menu-item"><i class="fa-solid fa-person-chalkboard"></i><span class="menu-text">Pitch Mode Script</span></a>
+        </div>
+    </aside>
+
+    <main class="main-wrapper">
+        <header class="topbar">
+            <div class="d-flex align-items-center">
+                <button class="sidebar-toggle" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+                <div class="ms-3 text-muted d-none d-md-block"><span>Planning & Targeting > <strong class="text-dark">6. Security + FinOps</strong></span></div>
+            </div>
+            <div class="dropdown">
+                <div class="profile-dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=eff6ff&color=2563eb" alt="Profile">
+                    <div class="user-info d-none d-sm-flex"><span class="name">Admin User</span><span class="role">System Analyst</span></div>
+                </div>
+            </div>
+        </header>
+
+        <div class="page-content fade-in">
+            <div class="page-header">
+                <h1 class="page-title">Step 6: Post-Migration Security & FinOps</h1>
+                <p class="page-subtitle">Ensuring Azure native monitoring and compliance for your target React/.NET architecture.</p>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="modern-card border-success">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="fw-bold m-0"><i class="fa-solid fa-shield-check text-success me-2"></i>Security Posture</h5>
+                            <span class="badge bg-success">100% Secure Target</span>
+                        </div>
+                        <ul class="list-group list-group-flush small text-muted">
+                            <li class="list-group-item px-0 border-0 py-1"><i class="fa-solid fa-check text-success me-2"></i> OAuth & MFA Applied</li>
+                            <li class="list-group-item px-0 border-0 py-1"><i class="fa-solid fa-check text-success me-2"></i> Web Application Firewall Rules Engaged</li>
+                            <li class="list-group-item px-0 border-0 py-1"><i class="fa-solid fa-check text-success me-2"></i> TDE Encryption Active on Azure PGSQL</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="modern-card border-warning">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="fw-bold m-0"><i class="fa-solid fa-chart-line text-warning me-2"></i>Cost Optimizations</h5>
+                            <span class="badge bg-warning text-dark">2 Actions Found</span>
+                        </div>
+                        <p class="text-muted small">Downsizing App Service instances during off-hours can achieve an additional 12% compute savings.</p>
+                        <button class="btn btn-sm btn-outline-warning text-dark w-100">Review Auto-scaling Policies</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-12 text-end">
+                    <a href="conversion-studio.html" class="btn btn-dark">Next: Generation Studio <i class="fa-solid fa-arrow-right ms-2"></i></a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="assets/libs/jquery/jquery.min.js"></script>
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

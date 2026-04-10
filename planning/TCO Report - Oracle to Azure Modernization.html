@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!-- saved from url=(0061)file:///C:/Users/Dharmendra%20Kumar/Downloads/Oracle_TCO.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <title>TCO Report - Oracle to Azure Modernization</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        h1, h2, h3 { color: #2c3e50; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; font-size: 14px;}
+        table, th, td { border: 1px solid #ccc; }
+        th { background-color: #f4f4f4; padding: 8px; }
+        td { padding: 8px; text-align: center; }
+        .summary { background-color: #eef6ff; padding: 15px; border-left: 5px solid #3498db; }
+        .highlight { background-color: #e8f8f5; font-weight: bold; }
+        .risk { color: red; }
+        .good { color: green; font-weight: bold; }
+    </style>
+</head>
+
+<body>
+
+<h1>Total Cost of Ownership (TCO) Report</h1>
+
+<div class="summary">
+    <p><b>Objective:</b> Evaluate cost and strategy for modernization</p>
+    <p><b>Application Size:</b> 50 Forms, 50 Reports</p>
+    <p><b>Database Size:</b> 1.5 TB</p>
+    <p><b>Duration:</b> 5 Years</p>
+    <p><b>Currency:</b> USD ($)</p>
+</div>
+
+<h2>1. Current State (Oracle On-Premise)</h2>
+
+<table>
+<tbody><tr><th>Component</th><th>Annual Cost ($)</th><th>5-Year Cost ($)</th></tr>
+<tr><td>Oracle Licenses</td><td>$72,000</td><td>$360,000</td></tr>
+<tr><td>Support &amp; AMC</td><td>$14,000</td><td>$70,000</td></tr>
+<tr><td>Infrastructure</td><td>$30,000</td><td>$150,000</td></tr>
+<tr><td>Maintenance Team</td><td>$48,000</td><td>$240,000</td></tr>
+
+<tr class="highlight"><td>Total</td><td>-</td><td>$820,000</td></tr>
+</tbody></table>
+
+<h2>2. Option A: React + .NET + PostgreSQL on Azure</h2>
+
+<h3>2.1 One-Time Migration Cost</h3>
+<table>
+<tbody><tr><th>Component</th><th>Cost ($)</th></tr>
+<tr><td>Forms Migration</td><td>$145,000</td></tr>
+<tr><td>API Development</td><td>$48,000</td></tr>
+<tr><td>DB Migration</td><td>$42,000</td></tr>
+<tr><td>Testing</td><td>$30,000</td></tr>
+<tr class="highlight"><td>Total</td><td>$265,000</td></tr>
+</tbody></table>
+
+<h3>2.2 Running Cost (5 Years)</h3>
+<table>
+<tbody><tr><th>Component</th><th>Cost ($)</th></tr>
+<tr><td>Azure Hosting</td><td>$240,000</td></tr>
+<tr><td>Support &amp; DevOps</td><td>$150,000</td></tr>
+<tr class="highlight"><td>Total</td><td>$390,000</td></tr>
+</tbody></table>
+
+<h3 class="good">Total Cost (Option A): $655,000</h3>
+
+---
+
+<h2>3. Option B: Oracle on Azure (Lift &amp; Shift)</h2>
+
+<h3>3.1 One-Time Cost</h3>
+<table>
+<tbody><tr><th>Component</th><th>Cost ($)</th></tr>
+<tr><td>Migration to Azure</td><td>$60,000</td></tr>
+<tr><td>Minimal Modernization</td><td>$36,000</td></tr>
+<tr class="highlight"><td>Total</td><td>$96,000</td></tr>
+</tbody></table>
+
+<h3>3.2 Running Cost (5 Years)</h3>
+<table>
+<tbody><tr><th>Component</th><th>Cost ($)</th></tr>
+<tr><td>Oracle License</td><td>$360,000</td></tr>
+<tr><td>Azure Infra</td><td>$180,000</td></tr>
+<tr><td>Support</td><td>$90,000</td></tr>
+<tr class="highlight"><td>Total</td><td>$630,000</td></tr>
+</tbody></table>
+
+<h3>Total Cost (Option B): $726,000</h3>
+
+---
+
+<h2>4. TCO Comparison</h2>
+
+<table>
+<tbody><tr><th>Option</th><th>5-Year Cost ($)</th><th>Savings</th></tr>
+<tr><td>Current (On-Prem)</td><td>$820,000</td><td>-</td></tr>
+<tr class="highlight"><td>Option A (React + PostgreSQL)</td><td>$655,000</td><td class="good">$165,000</td></tr>
+<tr><td>Option B (Oracle on Azure)</td><td>$726,000</td><td>$94,000</td></tr>
+</tbody></table>
+
+---
+
+<h2>5. Strategic Comparison</h2>
+
+<table>
+<tbody><tr><th>Factor</th><th>Option A</th><th>Option B</th></tr>
+<tr><td>Cost Efficiency</td><td class="good">High</td><td class="risk">Medium</td></tr>
+<tr><td>Modern UI</td><td class="good">Yes</td><td class="risk">No</td></tr>
+<tr><td>Scalability</td><td class="good">High</td><td>Medium</td></tr>
+<tr><td>Vendor Lock-in</td><td class="good">Low</td><td class="risk">High</td></tr>
+<tr><td>Implementation Speed</td><td>Medium</td><td class="good">Fast</td></tr>
+</tbody></table>
+
+---
+
+<h2>6. Recommendation</h2>
+
+<div class="summary">
+    <p><b>Recommended Approach:</b> Phased Migration to React + .NET + PostgreSQL on Azure</p>
+    <p><b>Estimated Savings:</b> ~$165,000 over 5 years</p>
+</div>
+
+<h2>7. Conclusion</h2>
+
+<p>
+Modernization provides better scalability, lower cost, and improved user experience.
+A phased approach minimizes risk while maximizing ROI.
+</p>
+
+
+</body></html>

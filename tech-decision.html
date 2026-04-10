@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step 9: Technology Decision - CloudAtlas</title>
+    <link href="assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <aside class="sidebar">
+        <!-- New sidebar structure -->
+        <div class="sidebar-header">
+            <i class="fa-solid fa-cloud logo-icon"></i>
+            <span class="logo-text">CloudAtlas</span>
+        </div>
+        <div class="sidebar-menu">
+            <div class="menu-label">Overview</div>
+            <a href="index.html" class="menu-item"><i class="fa-solid fa-border-all"></i><span class="menu-text">Assessment Dashboard</span></a>
+            <a href="smb-guided-mode.html" class="menu-item bg-primary-soft text-primary"><i class="fa-solid fa-wand-magic-sparkles"></i><span class="menu-text fw-bold">SMB Guided Mode</span></a>
+            <div class="menu-label">Evaluation Pipeline</div>
+            <a href="project-intake.html" class="menu-item"><i class="fa-solid fa-file-arrow-up"></i><span class="menu-text">1. Project Intake</span></a>
+            <a href="parser-engine.html" class="menu-item"><i class="fa-solid fa-gears"></i><span class="menu-text">2. Parser Engine</span></a>
+            <a href="ai-logic.html" class="menu-item"><i class="fa-solid fa-brain"></i><span class="menu-text">3. AI Logic Analyzer</span></a>
+            <a href="dependency-map.html" class="menu-item"><i class="fa-solid fa-diagram-project"></i><span class="menu-text">4. Dependency Map</span></a>
+            <a href="azure-assessment.html" class="menu-item"><i class="fa-solid fa-server"></i><span class="menu-text">5. Azure Assessment</span></a>
+            <div class="menu-label">Planning & Targeting</div>
+            <a href="security-finops.html" class="menu-item"><i class="fa-solid fa-shield-halved"></i><span class="menu-text">6. Security + FinOps</span></a>
+            <a href="conversion-studio.html" class="menu-item"><i class="fa-solid fa-code"></i><span class="menu-text">7. Conversion Studio</span></a>
+            <a href="review-validate.html" class="menu-item"><i class="fa-solid fa-user-check"></i><span class="menu-text">8. Review & Validate</span></a>
+            <a href="tech-decision.html" class="menu-item active"><i class="fa-solid fa-layer-group"></i><span class="menu-text">9. Technology Decision</span></a>
+            <div class="menu-label mt-4">Internal Tools</div>
+            <a href="pitch-mode.html" class="menu-item"><i class="fa-solid fa-person-chalkboard"></i><span class="menu-text">Pitch Mode Script</span></a>
+        </div>
+    </aside>
+
+    <main class="main-wrapper">
+        <header class="topbar">
+            <!-- Topbar content -->
+            <div class="d-flex align-items-center">
+                <button class="sidebar-toggle" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+                <div class="ms-3 text-muted d-none d-md-block"><span>Planning & Targeting > <strong class="text-dark">9. Technology Decision</strong></span></div>
+            </div>
+            <div class="dropdown">
+                <div class="profile-dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=eff6ff&color=2563eb" alt="Profile">
+                    <div class="user-info d-none d-sm-flex"><span class="name">Admin User</span><span class="role">System Analyst</span></div>
+                </div>
+            </div>
+        </header>
+
+        <div class="page-content fade-in">
+            <div class="page-header">
+                <h1 class="page-title">Step 9: Technology Routing Decision</h1>
+                <p class="page-subtitle">Presenting the strategic positioning of Platform Architectures and our Standard Execution Environment.</p>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="modern-card border border-primary border-2 h-100">
+                        <div class="card-header-modern bg-primary-soft p-3 rounded mb-3">
+                            <h4 class="fw-bold m-0 text-primary"><i class="fa-solid fa-star me-2"></i>Default Target Stack</h4>
+                        </div>
+                        <div class="px-3">
+                            <h5 class="fw-bold">Frontend: React (TypeScript)</h5>
+                            <p class="text-muted small mb-4">Highly flexible, component-based view rendering mapped precisely to isolated Forms constraints via Hooks contexts.</p>
+                            
+                            <h5 class="fw-bold">Backend: .NET 8 Web API</h5>
+                            <p class="text-muted small">C# strongly-typed DTOs easily replicate Oracle record structures. Entity Framework offers optimal mapping to target Azure DB instances.</p>
+                            
+                            <hr>
+                            <span class="badge bg-success"><i class="fa-solid fa-check me-1"></i> Pre-Calculated in all Conversion Estimations</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-4">
+                    <div class="modern-card bg-light h-100">
+                        <div class="card-header-modern pb-2">
+                            <h4 class="fw-bold m-0 text-secondary">Optional Supported Outputs</h4>
+                        </div>
+                        <div class="px-3 pt-3">
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <h6 class="fw-bold text-dark"><i class="fa-brands fa-angular text-danger me-2"></i>Angular 17+</h6>
+                                    <p class="text-muted small">Supported for Enterprise teams wanting out-of-the-box structural rigidity and two-way-binding mechanisms commonly reflecting Oracle setups.</p>
+                                </li>
+                                <li class="mb-3">
+                                    <h6 class="fw-bold text-dark"><i class="fa-brands fa-java text-danger me-2"></i>Spring Boot (Java)</h6>
+                                    <p class="text-muted small">Available as a backend target for shops wishing to maintain JVM continuity instead of .NET migration.</p>
+                                </li>
+                            </ul>
+                            <div class="alert alert-secondary small py-2 mt-4">
+                                <i class="fa-solid fa-circle-info me-1"></i> Alternate targets might adjust projected deployment cycles slightly.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 text-end">
+                    <a href="index.html" class="btn btn-dark px-4 py-2">Return to Dashboard <i class="fa-solid fa-arrow-right ms-2"></i></a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="assets/libs/jquery/jquery.min.js"></script>
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
