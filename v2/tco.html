@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TCO Analysis — Oracle Migration Workbench</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="page-loader"><div class="loader-ring"></div></div>
+
+<aside id="sidebar">
+  <a href="dashboard.html" class="sidebar-brand">
+    <div class="brand-icon"><i class="fas fa-database"></i></div>
+    <div class="brand-text"><div class="brand-title">Oracle Workbench</div><div class="brand-subtitle">Migration Platform</div></div>
+  </a>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Overview</div>
+    <a href="dashboard.html" class="sidebar-link" data-label="Dashboard"><span class="link-icon"><i class="fas fa-gauge-high"></i></span><span class="link-text">Dashboard</span></a>
+    <div class="nav-section-label">Discovery</div>
+    <a href="discovery.html" class="sidebar-link" data-label="Discovery"><span class="link-icon"><i class="fas fa-magnifying-glass-chart"></i></span><span class="link-text">Discovery &amp; Intake</span></a>
+    <div class="nav-section-label">Assessment</div>
+    <a href="assessment-lift-shift.html" class="sidebar-link" data-label="Lift &amp; Shift"><span class="link-icon"><i class="fas fa-arrow-up-right-dots"></i></span><span class="link-text">Lift &amp; Shift</span></a>
+    <a href="assessment-modernization.html" class="sidebar-link" data-label="Modernization"><span class="link-icon"><i class="fas fa-wand-magic-sparkles"></i></span><span class="link-text">Modernization</span></a>
+    <a href="dependency-mapping.html" class="sidebar-link" data-label="Dependencies"><span class="link-icon"><i class="fas fa-diagram-project"></i></span><span class="link-text">Dependency Mapping</span></a>
+    <a href="risk-scoring.html" class="sidebar-link" data-label="Risk Scoring"><span class="link-icon"><i class="fas fa-shield-halved"></i></span><span class="link-text">Risk Scoring</span></a>
+    <a href="wave-planning.html" class="sidebar-link" data-label="Wave Planning"><span class="link-icon"><i class="fas fa-wave-square"></i></span><span class="link-text">Wave Planning</span></a>
+    <a href="tco.html" class="sidebar-link" data-label="TCO Analysis"><span class="link-icon"><i class="fas fa-coins"></i></span><span class="link-text">TCO Analysis</span></a>
+    <a href="readiness-check.html" class="sidebar-link" data-label="Readiness"><span class="link-icon"><i class="fas fa-clipboard-check"></i></span><span class="link-text">Readiness Check</span></a>
+    <div class="nav-section-label">Migration</div>
+    <a href="modernization-execution.html" class="sidebar-link" data-label="Execution"><span class="link-icon"><i class="fas fa-gears"></i></span><span class="link-text">Modernization Exec.</span></a>
+    <a href="schema-conversion.html" class="sidebar-link" data-label="Schema"><span class="link-icon"><i class="fas fa-code-branch"></i></span><span class="link-text">Schema Conversion</span></a>
+    <div class="nav-section-label">Infrastructure</div>
+    <a href="landing-zone.html" class="sidebar-link" data-label="Landing Zone"><span class="link-icon"><i class="fas fa-cloud"></i></span><span class="link-text">Landing Zone</span></a>
+    <a href="security-finops.html" class="sidebar-link" data-label="Security &amp; FinOps"><span class="link-icon"><i class="fas fa-lock"></i></span><span class="link-text">Security &amp; FinOps</span></a>
+    <div class="nav-section-label">Delivery</div>
+    <a href="review-validation.html" class="sidebar-link" data-label="Review"><span class="link-icon"><i class="fas fa-circle-check"></i></span><span class="link-text">Review &amp; Validation</span></a>
+    <a href="deployment.html" class="sidebar-link" data-label="Deployment"><span class="link-icon"><i class="fas fa-rocket"></i></span><span class="link-text">Deployment</span><span class="link-badge">Live</span></a>
+  </nav>
+  <div class="sidebar-footer">
+    <button class="sidebar-toggle-btn" id="sidebarToggle2"><i class="fas fa-chevron-left"></i><span>Collapse</span></button>
+  </div>
+</aside>
+
+<header id="topbar">
+  <button class="topbar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+  <div class="topbar-breadcrumb">
+    <h1 class="page-title">TCO Analysis</h1>
+    <p class="page-subtitle">Oracle Migration Workbench &middot; Total Cost of Ownership</p>
+  </div>
+  <div class="topbar-search d-none d-md-flex align-items-center">
+    <i class="fas fa-search search-icon"></i>
+    <input type="text" placeholder="Search cost items…">
+  </div>
+  <div class="d-flex align-items-center gap-2 ms-auto">
+    <button class="btn btn-primary btn-sm"><i class="fas fa-download"></i>Export Report</button>
+    <button class="topbar-btn"><i class="fas fa-gear"></i></button>
+    <div class="dropdown">
+      <a class="topbar-profile" data-bs-toggle="dropdown">
+        <div class="profile-avatar">SC</div>
+        <div class="d-none d-sm-block"><div class="profile-name">Sarah Chen</div><div class="profile-role">Migration Lead</div></div>
+        <i class="fas fa-chevron-down ms-1 text-muted" style="font-size:10px"></i>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end" style="min-width:200px">
+        <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i>My Profile</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-right-from-bracket text-danger"></i>Sign Out</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <!-- Summary Cards -->
+  <div class="row g-3 mb-4 stagger">
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card">
+        <div class="stat-icon red"><i class="fas fa-building-columns"></i></div>
+        <div class="stat-value"><span class="counter-animate" data-target="18.4" data-decimals="1" data-prefix="$">$0</span>M</div>
+        <div class="stat-label">On-Prem Oracle (5yr)</div>
+        <div class="stat-delta down"><i class="fas fa-arrow-trend-up text-danger"></i>Status quo cost</div>
+      </div>
+    </div>
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card">
+        <div class="stat-icon green"><i class="fas fa-cloud"></i></div>
+        <div class="stat-value"><span class="counter-animate" data-target="9.6" data-decimals="1" data-prefix="$">$0</span>M</div>
+        <div class="stat-label">Cloud Target (5yr)</div>
+        <div class="stat-delta up"><i class="fas fa-arrow-trend-down text-success"></i>Post-migration cost</div>
+      </div>
+    </div>
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card">
+        <div class="stat-icon purple"><i class="fas fa-piggy-bank"></i></div>
+        <div class="stat-value"><span class="counter-animate" data-target="8.8" data-decimals="1" data-prefix="$">$0</span>M</div>
+        <div class="stat-label">Total Savings</div>
+        <div class="stat-delta up"><i class="fas fa-arrow-trend-up"></i>48% cost reduction</div>
+      </div>
+    </div>
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card">
+        <div class="stat-icon blue"><i class="fas fa-chart-line"></i></div>
+        <div class="stat-value counter-animate" data-target="28" data-suffix=" mo">0</div>
+        <div class="stat-label">Payback Period</div>
+        <div class="stat-delta up"><i class="fas fa-check text-success"></i>ROI positive Y3+</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5-Year Chart + Comparison -->
+  <div class="row g-3 mb-4">
+    <div class="col-lg-8 fade-in-up">
+      <div class="card h-100">
+        <div class="card-header"><i class="fas fa-chart-area text-primary"></i><div class="card-title">5-Year Cost Projection</div><span class="ms-auto badge badge-success">$8.8M savings</span></div>
+        <div class="card-body"><canvas id="tcoChart" height="260"></canvas></div>
+      </div>
+    </div>
+    <div class="col-lg-4 fade-in-up">
+      <div class="card h-100">
+        <div class="card-header"><i class="fas fa-scale-balanced text-indigo"></i><div class="card-title">Cost Comparison</div></div>
+        <div class="card-body d-flex flex-column gap-3">
+          <div>
+            <div class="d-flex justify-content-between mb-1"><span class="small fw-600 text-danger"><i class="fas fa-server me-1"></i>On-Prem Licenses</span><strong class="text-danger">$6.2M</strong></div>
+            <div class="progress"><div class="progress-bar bg-danger" data-width="100" style="width:0%"></div></div>
+          </div>
+          <div>
+            <div class="d-flex justify-content-between mb-1"><span class="small fw-600 text-warning"><i class="fas fa-users-gear me-1"></i>On-Prem Support</span><strong class="text-warning">$4.8M</strong></div>
+            <div class="progress"><div class="progress-bar bg-warning" data-width="77" style="width:0%"></div></div>
+          </div>
+          <div>
+            <div class="d-flex justify-content-between mb-1"><span class="small fw-600 text-muted"><i class="fas fa-building me-1"></i>On-Prem Infra</span><strong>$7.4M</strong></div>
+            <div class="progress"><div class="progress-bar bg-muted" data-width="90" style="width:0%"></div></div>
+          </div>
+          <div class="divider"></div>
+          <div>
+            <div class="d-flex justify-content-between mb-1"><span class="small fw-600 text-primary"><i class="fas fa-cloud me-1"></i>Cloud Compute</span><strong class="text-primary">$3.1M</strong></div>
+            <div class="progress"><div class="progress-bar bg-primary" data-width="50" style="width:0%"></div></div>
+          </div>
+          <div>
+            <div class="d-flex justify-content-between mb-1"><span class="small fw-600 text-success"><i class="fas fa-database me-1"></i>Cloud Storage</span><strong class="text-success">$1.4M</strong></div>
+            <div class="progress"><div class="progress-bar bg-success" data-width="23" style="width:0%"></div></div>
+          </div>
+          <div>
+            <div class="d-flex justify-content-between mb-1"><span class="small fw-600" style="color:var(--cyan)"><i class="fas fa-network-wired me-1"></i>Cloud Network</span><strong style="color:var(--cyan)">$0.9M</strong></div>
+            <div class="progress"><div class="progress-bar" style="background:var(--cyan)" data-width="15" style="width:0%"></div></div>
+          </div>
+          <div>
+            <div class="d-flex justify-content-between mb-1"><span class="small fw-600 text-muted"><i class="fas fa-headset me-1"></i>Managed Services</span><strong>$4.2M</strong></div>
+            <div class="progress"><div class="progress-bar" style="background:#94a3b8" data-width="68" style="width:0%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- One-Time Migration Costs -->
+  <div class="card fade-in-up">
+    <div class="card-header"><i class="fas fa-receipt text-warning"></i><div class="card-title">One-Time Migration Costs</div><div class="ms-auto"><span class="badge badge-warning">$3.2M total</span></div></div>
+    <div class="card-body p-0">
+      <div class="table-container">
+        <table class="table">
+          <thead><tr><th>Cost Item</th><th>Category</th><th>Estimate</th><th>Actuals</th><th>Variance</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr class="hover-highlight"><td><strong>Schema Conversion Tools</strong></td><td><span class="badge badge-primary">Tooling</span></td><td>$180K</td><td>$165K</td><td class="text-success small fw-600">-$15K</td><td><span class="badge badge-success">Finalized</span></td></tr>
+            <tr class="hover-highlight"><td><strong>Professional Services</strong></td><td><span class="badge badge-purple">Services</span></td><td>$1.4M</td><td>$1.38M</td><td class="text-success small fw-600">-$20K</td><td><span class="badge badge-success">Finalized</span></td></tr>
+            <tr class="hover-highlight"><td><strong>Training &amp; Enablement</strong></td><td><span class="badge badge-cyan">People</span></td><td>$240K</td><td>$228K</td><td class="text-success small fw-600">-$12K</td><td><span class="badge badge-success">Finalized</span></td></tr>
+            <tr class="hover-highlight"><td><strong>Data Migration (ETL)</strong></td><td><span class="badge badge-warning">Data</span></td><td>$620K</td><td>$590K</td><td class="text-success small fw-600">-$30K</td><td><span class="badge badge-primary">In Progress</span></td></tr>
+            <tr class="hover-highlight"><td><strong>Testing &amp; Validation</strong></td><td><span class="badge badge-indigo">QA</span></td><td>$380K</td><td>—</td><td class="text-muted small">Pending</td><td><span class="badge badge-muted">Planned</span></td></tr>
+            <tr class="hover-highlight"><td><strong>Contingency (10%)</strong></td><td><span class="badge badge-muted">Buffer</span></td><td>$320K</td><td>—</td><td class="text-muted small">Reserved</td><td><span class="badge badge-muted">Reserved</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+function initPageCharts() {
+  var ctx = document.getElementById('tcoChart');
+  if (ctx) {
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+        datasets: [
+          { label: 'On-Prem Cost', data: [4.1, 4.0, 3.8, 3.4, 3.1], borderColor: '#ef4444', backgroundColor: 'rgba(239,68,68,.07)', borderWidth: 2.5, fill: true, tension: .3, pointRadius: 5, pointBackgroundColor: '#ef4444' },
+          { label: 'Cloud Cost',   data: [3.8, 1.9, 1.7, 1.2, 1.0], borderColor: '#2563eb', backgroundColor: 'rgba(37,99,235,.07)',  borderWidth: 2.5, fill: true, tension: .3, pointRadius: 5, pointBackgroundColor: '#2563eb' }
+        ]
+      },
+      options: {
+        plugins: { legend: { labels: { font: { size: 12 }, color: '#475569' } } },
+        scales: {
+          y: { ticks: { callback: v => '$' + v + 'M', color: '#64748b', font: { size: 11 } }, grid: { color: '#f1f5f9' } },
+          x: { ticks: { color: '#64748b', font: { size: 11 } }, grid: { display: false } }
+        },
+        animation: { duration: 900 }
+      }
+    });
+  }
+}
+</script>
+</body>
+</html>

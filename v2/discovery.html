@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discovery &amp; Intake — Oracle Estate Analyzer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="page-loader"><div class="loader-ring"></div></div>
+
+<aside id="sidebar">
+  <a href="dashboard.html" class="sidebar-brand">
+    <div class="brand-icon"><i class="fas fa-database"></i></div>
+    <div class="brand-text"><div class="brand-title">Oracle Estate</div><div class="brand-subtitle">Analyzer &amp; Workbench</div></div>
+  </a>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Overview</div>
+    <a href="dashboard.html" class="sidebar-link" data-label="Dashboard"><span class="link-icon"><i class="fas fa-gauge-high"></i></span><span class="link-text">Dashboard</span></a>
+    <div class="nav-section-label">Discovery</div>
+    <a href="discovery.html" class="sidebar-link" data-label="Discovery"><span class="link-icon"><i class="fas fa-magnifying-glass-chart"></i></span><span class="link-text">Discovery &amp; Intake</span></a>
+    <div class="nav-section-label">Assessment</div>
+    <a href="assessment-lift-shift.html" class="sidebar-link" data-label="Lift &amp; Shift"><span class="link-icon"><i class="fas fa-arrow-up-right-dots"></i></span><span class="link-text">Lift &amp; Shift</span></a>
+    <a href="assessment-modernization.html" class="sidebar-link" data-label="Modernization"><span class="link-icon"><i class="fas fa-wand-magic-sparkles"></i></span><span class="link-text">Modernization</span></a>
+    <a href="dependency-mapping.html" class="sidebar-link" data-label="Dependencies"><span class="link-icon"><i class="fas fa-diagram-project"></i></span><span class="link-text">Dependency Mapping</span></a>
+    <a href="risk-scoring.html" class="sidebar-link" data-label="Risk Scoring"><span class="link-icon"><i class="fas fa-shield-halved"></i></span><span class="link-text">Risk Scoring</span></a>
+    <a href="wave-planning.html" class="sidebar-link" data-label="Wave Planning"><span class="link-icon"><i class="fas fa-wave-square"></i></span><span class="link-text">Wave Planning</span></a>
+    <a href="tco.html" class="sidebar-link" data-label="TCO Analysis"><span class="link-icon"><i class="fas fa-coins"></i></span><span class="link-text">TCO Analysis</span></a>
+    <a href="readiness-check.html" class="sidebar-link" data-label="Readiness"><span class="link-icon"><i class="fas fa-clipboard-check"></i></span><span class="link-text">Readiness Check</span></a>
+    <div class="forms-path-group">
+      <div class="nav-section-label nav-section-forms"><i class="fas fa-wand-magic-sparkles"></i>Forms Modernization</div>
+      <a href="modernization-execution.html" class="sidebar-link" data-label="Execution"><span class="link-icon"><i class="fas fa-gears"></i></span><span class="link-text">Modernization Exec.</span></a>
+      <a href="schema-conversion.html" class="sidebar-link" data-label="Schema"><span class="link-icon"><i class="fas fa-code-branch"></i></span><span class="link-text">Schema Conversion</span></a>
+      <div class="nav-section-label nav-section-forms">Azure Infrastructure</div>
+      <a href="landing-zone.html" class="sidebar-link" data-label="Landing Zone"><span class="link-icon"><i class="fas fa-cloud"></i></span><span class="link-text">Landing Zone</span></a>
+      <a href="security-finops.html" class="sidebar-link" data-label="Security &amp; FinOps"><span class="link-icon"><i class="fas fa-lock"></i></span><span class="link-text">Security &amp; FinOps</span></a>
+      <div class="nav-section-label nav-section-forms">Delivery</div>
+      <a href="review-validation.html" class="sidebar-link" data-label="Review"><span class="link-icon"><i class="fas fa-circle-check"></i></span><span class="link-text">Review &amp; Validation</span></a>
+      <a href="deployment.html" class="sidebar-link" data-label="Deployment"><span class="link-icon"><i class="fas fa-rocket"></i></span><span class="link-text">Deployment</span><span class="link-badge">Live</span></a>
+    </div>
+  </nav>
+  <div class="sidebar-footer">
+    <button class="sidebar-toggle-btn" id="sidebarToggle2"><i class="fas fa-chevron-left"></i><span>Collapse</span></button>
+  </div>
+</aside>
+
+<header id="topbar">
+  <button class="topbar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+  <div class="topbar-breadcrumb">
+    <h1 class="page-title">Discovery &amp; Intake</h1>
+    <p class="page-subtitle">Oracle Estate Analyzer &middot; Workload Discovery</p>
+  </div>
+  <div class="topbar-search d-none d-md-flex align-items-center">
+    <i class="fas fa-search search-icon"></i>
+    <input type="text" placeholder="Search workloads…">
+  </div>
+  <div class="d-flex align-items-center gap-2 ms-auto">
+    <div class="dropdown">
+      <button class="topbar-btn" data-bs-toggle="dropdown"><i class="fas fa-bell"></i><span class="badge-dot"></span></button>
+      <div class="dropdown-menu dropdown-menu-end notif-dropdown">
+        <div class="notif-header"><h6>Notifications</h6></div>
+        <div class="notif-body">
+          <a href="#" class="notif-item unread">
+            <div class="notif-icon bg-success-light text-success"><i class="fas fa-circle-check"></i></div>
+            <div><div class="notif-title">Discovery Agent Ready</div><div class="notif-desc">Agent v2.4 available for download</div><div class="notif-time">Just now</div></div>
+          </a>
+        </div>
+        <a href="#" class="notif-footer">View all</a>
+      </div>
+    </div>
+    <button class="topbar-btn" data-bs-toggle="tooltip" title="Settings"><i class="fas fa-gear"></i></button>
+    <div class="dropdown">
+      <a class="topbar-profile" data-bs-toggle="dropdown">
+        <div class="profile-avatar">SC</div>
+        <div class="d-none d-sm-block"><div class="profile-name">Sarah Chen</div><div class="profile-role">Migration Lead</div></div>
+        <i class="fas fa-chevron-down ms-1 text-muted" style="font-size:10px"></i>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end" style="min-width:200px">
+        <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i>My Profile</a></li>
+        <li><a class="dropdown-item" href="#"><i class="fas fa-gear"></i>Settings</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-right-from-bracket text-danger"></i>Sign Out</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <!-- Summary Stats -->
+  <div class="row g-3 mb-4 stagger">
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card">
+        <div class="stat-icon blue"><i class="fas fa-database"></i></div>
+        <div class="stat-value counter-animate" data-target="246">0</div>
+        <div class="stat-label">Workloads Discovered</div>
+        <div class="stat-delta up"><i class="fas fa-arrow-trend-up"></i>+12 this week</div>
+      </div>
+    </div>
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card">
+        <div class="stat-icon green"><i class="fas fa-file-code"></i></div>
+        <div class="stat-value counter-animate" data-target="1847">0</div>
+        <div class="stat-label">Objects Catalogued</div>
+        <div class="stat-delta up"><i class="fas fa-arrow-trend-up"></i>Forms, Procs, Triggers</div>
+      </div>
+    </div>
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card">
+        <div class="stat-icon amber"><i class="fas fa-server"></i></div>
+        <div class="stat-value counter-animate" data-target="24">0</div>
+        <div class="stat-label">Source DB Instances</div>
+        <div class="stat-delta up"><i class="fas fa-circle-check text-success"></i>All reachable</div>
+      </div>
+    </div>
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card">
+        <div class="stat-icon purple"><i class="fas fa-hard-drive"></i></div>
+        <div class="stat-value"><span class="counter-animate" data-target="4.8" data-decimals="1">0</span>TB</div>
+        <div class="stat-label">Total Data Volume</div>
+        <div class="stat-delta up"><i class="fas fa-arrow-trend-up"></i>Scanned &amp; profiled</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Discovery Agents + Domain Upload Cards -->
+  <div class="row g-3 mb-4">
+    <div class="col-lg-3 fade-in-up">
+      <div class="card h-100">
+        <div class="card-header">
+          <i class="fas fa-robot text-primary"></i>
+          <div class="card-title">Discovery Agents</div>
+          <span class="ms-auto badge badge-success">v2.4</span>
+        </div>
+        <div class="card-body d-flex flex-column gap-3">
+          <div class="p-3 rounded-md border d-flex align-items-center gap-3 hover-highlight" style="cursor:pointer">
+            <div class="stat-icon blue mb-0"><i class="fas fa-windows"></i></div>
+            <div class="flex-1">
+              <div class="fw-700 small">Windows Agent</div>
+              <div class="text-muted" style="font-size:11px">For Oracle DB on Windows Server</div>
+            </div>
+            <button class="btn btn-primary btn-sm"><i class="fas fa-download"></i></button>
+          </div>
+          <div class="p-3 rounded-md border d-flex align-items-center gap-3 hover-highlight" style="cursor:pointer">
+            <div class="stat-icon green mb-0"><i class="fab fa-linux"></i></div>
+            <div class="flex-1">
+              <div class="fw-700 small">Linux Agent</div>
+              <div class="text-muted" style="font-size:11px">For Oracle DB on Linux / RHEL</div>
+            </div>
+            <button class="btn btn-primary btn-sm"><i class="fas fa-download"></i></button>
+          </div>
+          <div class="p-3 rounded-md border d-flex align-items-center gap-3 hover-highlight" style="cursor:pointer">
+            <div class="stat-icon amber mb-0"><i class="fas fa-terminal"></i></div>
+            <div class="flex-1">
+              <div class="fw-700 small">CLI Tool</div>
+              <div class="text-muted" style="font-size:11px">Cross-platform command line</div>
+            </div>
+            <button class="btn btn-primary btn-sm"><i class="fas fa-download"></i></button>
+          </div>
+          <div class="p-3 rounded-md border d-flex align-items-center gap-3 hover-highlight" style="cursor:pointer">
+            <div class="stat-icon purple mb-0"><i class="fab fa-docker"></i></div>
+            <div class="flex-1">
+              <div class="fw-700 small">Docker Image</div>
+              <div class="text-muted" style="font-size:11px">Container-based scanning</div>
+            </div>
+            <button class="btn btn-primary btn-sm"><i class="fas fa-download"></i></button>
+          </div>
+          <div class="mt-auto pt-2">
+            <div class="p-3 rounded-md" style="background:var(--primary-light);border:1px solid #bfdbfe">
+              <div class="small fw-700 text-primary mb-1"><i class="fas fa-info-circle me-1"></i>How to use</div>
+              <div class="text-muted" style="font-size:11px">Run the agent on your Oracle environment, then upload the generated exports in each domain card on the right.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-9 fade-in-up">
+      <div class="card h-100">
+        <div class="card-header">
+          <i class="fas fa-cloud-arrow-up text-primary"></i>
+          <div>
+            <div class="card-title">Upload Discovery Data</div>
+            <div class="card-subtitle">Upload artefacts for each discovery domain</div>
+          </div>
+          <div class="ms-auto d-flex align-items-center gap-2">
+            <span class="badge badge-muted">7 Domains</span>
+            <button class="btn btn-primary btn-sm"><i class="fas fa-play me-1"></i>Start Analysis</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row g-3">
+
+            <!-- 1. Infrastructure Discovery -->
+            <div class="col-md-6 col-xl-4">
+              <div class="domain-upload-card" id="domainInfra">
+                <input type="file" class="domain-file-input" multiple accept=".xlsx,.csv,.xml,.json,.pdf" style="display:none">
+                <span class="domain-file-badge badge badge-muted">0 files</span>
+                <div class="d-flex align-items-start gap-2 mb-2">
+                  <div class="domain-card-icon" style="background:#eff6ff;color:#2563eb"><i class="fas fa-server"></i></div>
+                  <div>
+                    <div class="domain-card-title">Infrastructure Discovery</div>
+                    <div class="domain-card-desc">Server inventory, network diagrams, hardware specs</div>
+                  </div>
+                </div>
+                <div class="domain-card-formats">.xlsx · .csv · .xml · .json · .pdf</div>
+                <div class="domain-card-dropzone">
+                  <i class="fas fa-cloud-arrow-up me-1"></i>
+                  <span>Drop files or <a href="#" class="text-primary domain-browse-link">browse</a></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Database & Schema -->
+            <div class="col-md-6 col-xl-4">
+              <div class="domain-upload-card has-files" id="domainDatabase">
+                <input type="file" class="domain-file-input" multiple accept=".dmp,.sql,.ddl,.xml,.exp" style="display:none">
+                <span class="domain-file-badge badge badge-success">3 files</span>
+                <div class="d-flex align-items-start gap-2 mb-2">
+                  <div class="domain-card-icon" style="background:#f0fdf4;color:#16a34a"><i class="fas fa-database"></i></div>
+                  <div>
+                    <div class="domain-card-title">Database &amp; Schema</div>
+                    <div class="domain-card-desc">Oracle dump files, SQL exports, DDL scripts</div>
+                  </div>
+                </div>
+                <div class="domain-card-formats">.dmp · .sql · .ddl · .xml · .exp</div>
+                <div class="domain-card-dropzone">
+                  <i class="fas fa-check-circle text-success me-1"></i>
+                  <span class="text-success">3 files uploaded — <a href="#" class="text-primary domain-browse-link">add more</a></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Oracle Forms & Reports -->
+            <div class="col-md-6 col-xl-4">
+              <div class="domain-upload-card has-files" id="domainForms">
+                <input type="file" class="domain-file-input" multiple accept=".fmb,.fmx,.pll,.rdf,.rep,.mmb,.olb" style="display:none">
+                <span class="domain-file-badge badge badge-success">12 files</span>
+                <div class="d-flex align-items-start gap-2 mb-2">
+                  <div class="domain-card-icon" style="background:#fff7ed;color:#ea580c"><i class="fas fa-file-code"></i></div>
+                  <div>
+                    <div class="domain-card-title">Oracle Forms &amp; Reports</div>
+                    <div class="domain-card-desc">Forms modules, report definitions, menu libraries</div>
+                  </div>
+                </div>
+                <div class="domain-card-formats">.fmb · .fmx · .pll · .rdf · .rep · .mmb</div>
+                <div class="domain-card-dropzone">
+                  <i class="fas fa-check-circle text-success me-1"></i>
+                  <span class="text-success">12 files uploaded — <a href="#" class="text-primary domain-browse-link">add more</a></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. Applications -->
+            <div class="col-md-6 col-xl-4">
+              <div class="domain-upload-card" id="domainApps">
+                <input type="file" class="domain-file-input" multiple accept=".xml,.properties,.yaml,.yml,.json,.war,.ear,.jar,.zip" style="display:none">
+                <span class="domain-file-badge badge badge-muted">0 files</span>
+                <div class="d-flex align-items-start gap-2 mb-2">
+                  <div class="domain-card-icon" style="background:#f5f3ff;color:#7c3aed"><i class="fas fa-layer-group"></i></div>
+                  <div>
+                    <div class="domain-card-title">Applications</div>
+                    <div class="domain-card-desc">App configs, deployment descriptors, source zips</div>
+                  </div>
+                </div>
+                <div class="domain-card-formats">.xml · .yaml · .json · .war · .ear · .zip</div>
+                <div class="domain-card-dropzone">
+                  <i class="fas fa-cloud-arrow-up me-1"></i>
+                  <span>Drop files or <a href="#" class="text-primary domain-browse-link">browse</a></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. Middleware -->
+            <div class="col-md-6 col-xl-4">
+              <div class="domain-upload-card" id="domainMiddleware">
+                <input type="file" class="domain-file-input" multiple accept=".xml,.properties,.jar,.zip,.conf" style="display:none">
+                <span class="domain-file-badge badge badge-warning">1 file</span>
+                <div class="d-flex align-items-start gap-2 mb-2">
+                  <div class="domain-card-icon" style="background:#eef2ff;color:#4f46e5"><i class="fas fa-gears"></i></div>
+                  <div>
+                    <div class="domain-card-title">Middleware</div>
+                    <div class="domain-card-desc">WebLogic, WebSphere, Tuxedo configurations</div>
+                  </div>
+                </div>
+                <div class="domain-card-formats">.xml · .jar · .properties · .conf · .zip</div>
+                <div class="domain-card-dropzone">
+                  <i class="fas fa-cloud-arrow-up me-1"></i>
+                  <span>Drop files or <a href="#" class="text-primary domain-browse-link">browse</a></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6. Licensing -->
+            <div class="col-md-6 col-xl-4">
+              <div class="domain-upload-card" id="domainLicensing">
+                <input type="file" class="domain-file-input" multiple accept=".pdf,.xlsx,.csv,.ldt,.xml" style="display:none">
+                <span class="domain-file-badge badge badge-muted">0 files</span>
+                <div class="d-flex align-items-start gap-2 mb-2">
+                  <div class="domain-card-icon" style="background:#fef2f2;color:#dc2626"><i class="fas fa-certificate"></i></div>
+                  <div>
+                    <div class="domain-card-title">Licensing</div>
+                    <div class="domain-card-desc">Oracle license agreements, inventory reports</div>
+                  </div>
+                </div>
+                <div class="domain-card-formats">.pdf · .xlsx · .csv · .ldt · .xml</div>
+                <div class="domain-card-dropzone">
+                  <i class="fas fa-cloud-arrow-up me-1"></i>
+                  <span>Drop files or <a href="#" class="text-primary domain-browse-link">browse</a></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 7. ETL & Data Integration -->
+            <div class="col-md-6 col-xl-4">
+              <div class="domain-upload-card" id="domainEtl">
+                <input type="file" class="domain-file-input" multiple accept=".xml,.zip,.dtsx,.json,.odi,.ktr,.kjb" style="display:none">
+                <span class="domain-file-badge badge badge-muted">0 files</span>
+                <div class="d-flex align-items-start gap-2 mb-2">
+                  <div class="domain-card-icon" style="background:#ecfeff;color:#0891b2"><i class="fas fa-arrows-split-up-and-left"></i></div>
+                  <div>
+                    <div class="domain-card-title">ETL &amp; Data Integration</div>
+                    <div class="domain-card-desc">ODI, SSIS, DataStage, Pentaho packages</div>
+                  </div>
+                </div>
+                <div class="domain-card-formats">.dtsx · .xml · .odi · .ktr · .kjb · .zip</div>
+                <div class="domain-card-dropzone">
+                  <i class="fas fa-cloud-arrow-up me-1"></i>
+                  <span>Drop files or <a href="#" class="text-primary domain-browse-link">browse</a></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Upload Progress Summary -->
+            <div class="col-md-6 col-xl-8">
+              <div class="p-3 rounded-md h-100" style="background:var(--bg);border:1px solid var(--border)">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <div class="fw-700 small">Domain Upload Progress</div>
+                  <span class="badge badge-primary">3 / 7 domains ready</span>
+                </div>
+                <div class="d-flex flex-column gap-2">
+                  <div class="d-flex align-items-center gap-2">
+                    <span class="small text-muted" style="min-width:120px">Infrastructure</span>
+                    <div class="progress flex-1 progress-sm"><div class="progress-bar bg-secondary" data-width="0" style="width:0%"></div></div>
+                    <span class="small text-muted" style="min-width:28px">—</span>
+                  </div>
+                  <div class="d-flex align-items-center gap-2">
+                    <span class="small text-success fw-600" style="min-width:120px">Database</span>
+                    <div class="progress flex-1 progress-sm"><div class="progress-bar bg-success" data-width="100" style="width:0%"></div></div>
+                    <span class="small text-success" style="min-width:28px">3</span>
+                  </div>
+                  <div class="d-flex align-items-center gap-2">
+                    <span class="small text-success fw-600" style="min-width:120px">Forms &amp; Reports</span>
+                    <div class="progress flex-1 progress-sm"><div class="progress-bar bg-success" data-width="100" style="width:0%"></div></div>
+                    <span class="small text-success" style="min-width:28px">12</span>
+                  </div>
+                  <div class="d-flex align-items-center gap-2">
+                    <span class="small text-muted" style="min-width:120px">Applications</span>
+                    <div class="progress flex-1 progress-sm"><div class="progress-bar bg-secondary" data-width="0" style="width:0%"></div></div>
+                    <span class="small text-muted" style="min-width:28px">—</span>
+                  </div>
+                  <div class="d-flex align-items-center gap-2">
+                    <span class="small text-warning fw-600" style="min-width:120px">Middleware</span>
+                    <div class="progress flex-1 progress-sm"><div class="progress-bar bg-warning" data-width="30" style="width:0%"></div></div>
+                    <span class="small text-warning" style="min-width:28px">1</span>
+                  </div>
+                  <div class="d-flex align-items-center gap-2">
+                    <span class="small text-muted" style="min-width:120px">Licensing</span>
+                    <div class="progress flex-1 progress-sm"><div class="progress-bar bg-secondary" data-width="0" style="width:0%"></div></div>
+                    <span class="small text-muted" style="min-width:28px">—</span>
+                  </div>
+                  <div class="d-flex align-items-center gap-2">
+                    <span class="small text-muted" style="min-width:120px">ETL &amp; Data Int.</span>
+                    <div class="progress flex-1 progress-sm"><div class="progress-bar bg-secondary" data-width="0" style="width:0%"></div></div>
+                    <span class="small text-muted" style="min-width:28px">—</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Infrastructure Summary + Uploaded Files Table -->
+  <div class="row g-3">
+    <div class="col-lg-4 fade-in-up">
+      <div class="card">
+        <div class="card-header"><i class="fas fa-sitemap text-indigo"></i><div class="card-title">Infrastructure Summary</div></div>
+        <div class="card-body">
+          <div class="d-flex flex-column gap-3">
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center gap-2"><i class="fas fa-server text-muted"></i><span class="small fw-500">Oracle 19c</span></div>
+              <div class="d-flex align-items-center gap-2"><span class="counter-animate fw-700" data-target="18">0</span><div class="progress progress-sm" style="width:80px"><div class="progress-bar bg-primary" data-width="75" style="width:0%"></div></div></div>
+            </div>
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center gap-2"><i class="fas fa-server text-muted"></i><span class="small fw-500">Oracle 12c</span></div>
+              <div class="d-flex align-items-center gap-2"><span class="counter-animate fw-700" data-target="4">0</span><div class="progress progress-sm" style="width:80px"><div class="progress-bar bg-warning" data-width="17" style="width:0%"></div></div></div>
+            </div>
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center gap-2"><i class="fas fa-server text-muted"></i><span class="small fw-500">Oracle 11g</span></div>
+              <div class="d-flex align-items-center gap-2"><span class="counter-animate fw-700" data-target="2">0</span><div class="progress progress-sm" style="width:80px"><div class="progress-bar bg-danger" data-width="8" style="width:0%"></div></div></div>
+            </div>
+            <div class="divider"></div>
+            <div class="d-flex align-items-center justify-content-between">
+              <span class="small fw-500 text-muted">Total Schemas</span><strong class="counter-animate" data-target="187">0</strong>
+            </div>
+            <div class="d-flex align-items-center justify-content-between">
+              <span class="small fw-500 text-muted">Forms Modules</span><strong class="counter-animate" data-target="312">0</strong>
+            </div>
+            <div class="d-flex align-items-center justify-content-between">
+              <span class="small fw-500 text-muted">PL/SQL Packages</span><strong class="counter-animate" data-target="894">0</strong>
+            </div>
+            <div class="d-flex align-items-center justify-content-between">
+              <span class="small fw-500 text-muted">Stored Procedures</span><strong class="counter-animate" data-target="2341">0</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-8 fade-in-up">
+      <div class="card">
+        <div class="card-header">
+          <i class="fas fa-folder-open text-warning"></i>
+          <div class="card-title">Uploaded Files</div>
+          <input type="text" class="form-control form-control-sm ms-auto table-search" data-target="#filesTable" placeholder="Filter files…" style="width:180px">
+        </div>
+        <div class="card-body p-0">
+          <div class="table-container">
+            <table class="table" id="filesTable">
+              <thead><tr><th>Filename</th><th>Domain</th><th>Schema</th><th>Objects</th><th>Size</th><th>Status</th><th></th></tr></thead>
+              <tbody>
+                <tr class="hover-highlight"><td><i class="fas fa-file-code text-primary me-2"></i><strong>FIN_GL_v3.dmp</strong></td><td><span class="badge badge-primary">Database</span></td><td>FIN_GL</td><td>324</td><td>4.2 MB</td><td><span class="badge badge-success">Complete</span></td><td><button class="btn btn-light btn-sm btn-icon"><i class="fas fa-eye"></i></button></td></tr>
+                <tr class="hover-highlight"><td><i class="fas fa-file-code text-warning me-2"></i><strong>HR_FORMS.fmb</strong></td><td><span class="badge badge-warning text-dark">Forms</span></td><td>HRMS</td><td>47</td><td>1.8 MB</td><td><span class="badge badge-success">Complete</span></td><td><button class="btn btn-light btn-sm btn-icon"><i class="fas fa-eye"></i></button></td></tr>
+                <tr class="hover-highlight"><td><i class="fas fa-file-code text-success me-2"></i><strong>INV_SCHEMA.sql</strong></td><td><span class="badge badge-primary">Database</span></td><td>INV_MGMT</td><td>218</td><td>2.1 MB</td><td><span class="badge badge-success">Complete</span></td><td><button class="btn btn-light btn-sm btn-icon"><i class="fas fa-eye"></i></button></td></tr>
+                <tr class="hover-highlight"><td><i class="fas fa-file-code text-warning me-2"></i><strong>PAYROLL_RPTS.rdf</strong></td><td><span class="badge badge-warning text-dark">Forms</span></td><td>PAYROLL</td><td>12</td><td>856 KB</td><td><span class="badge badge-primary">Processing</span></td><td><button class="btn btn-light btn-sm btn-icon"><i class="fas fa-eye"></i></button></td></tr>
+                <tr class="hover-highlight"><td><i class="fas fa-file-code text-muted me-2"></i><strong>WLS_config.xml</strong></td><td><span class="badge badge-muted">Middleware</span></td><td>—</td><td>—</td><td>124 KB</td><td><span class="badge badge-warning">Queued</span></td><td><button class="btn btn-light btn-sm btn-icon"><i class="fas fa-eye"></i></button></td></tr>
+                <tr class="hover-highlight"><td><i class="fas fa-file-code text-primary me-2"></i><strong>ASSET_MGMT_v2.sql</strong></td><td><span class="badge badge-primary">Database</span></td><td>ASSET</td><td>97</td><td>3.4 MB</td><td><span class="badge badge-success">Complete</span></td><td><button class="btn btn-light btn-sm btn-icon"><i class="fas fa-eye"></i></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+$(function() {
+  $('.domain-upload-card').each(function() {
+    var $card = $(this);
+    var $input = $card.find('.domain-file-input');
+    var $badge = $card.find('.domain-file-badge');
+    var $zone  = $card.find('.domain-card-dropzone');
+
+    $card.on('click', '.domain-browse-link, .domain-card-dropzone', function(e) {
+      e.preventDefault();
+      $input.trigger('click');
+    });
+
+    $input.on('change', function() {
+      var count = this.files ? this.files.length : 0;
+      if (count > 0) {
+        $badge.text(count + (count === 1 ? ' file' : ' files')).removeClass('badge-muted badge-warning').addClass('badge-success');
+        $zone.html('<i class="fas fa-check-circle text-success me-1"></i><span class="text-success">' + count + ' file(s) — <a href="#" class="text-primary domain-browse-link">add more</a></span>');
+        $card.addClass('has-files');
+      }
+    });
+
+    $card.on('dragover dragenter', function(e) {
+      e.preventDefault(); $card.addClass('drag-over');
+    }).on('dragleave', function() {
+      $card.removeClass('drag-over');
+    }).on('drop', function(e) {
+      e.preventDefault();
+      $card.removeClass('drag-over');
+      var files = e.originalEvent.dataTransfer ? e.originalEvent.dataTransfer.files : [];
+      if (files.length) {
+        $badge.text(files.length + (files.length === 1 ? ' file' : ' files')).removeClass('badge-muted badge-warning').addClass('badge-success');
+        $zone.html('<i class="fas fa-check-circle text-success me-1"></i><span class="text-success">' + files.length + ' file(s) dropped</span>');
+        $card.addClass('has-files');
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
