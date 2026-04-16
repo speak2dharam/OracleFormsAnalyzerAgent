@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schema Conversion — Oracle Estate Workbench</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="page-loader"><div class="loader-ring"></div></div>
+
+<aside id="sidebar">
+  <a href="dashboard.html" class="sidebar-brand">
+    <div class="brand-icon"><i class="fas fa-database"></i></div>
+    <div class="brand-text"><div class="brand-title">Oracle Estate</div><div class="brand-subtitle">Analyzer &amp; Workbench</div></div>
+  </a>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Overview</div>
+    <a href="dashboard.html" class="sidebar-link" data-label="Dashboard"><span class="link-icon"><i class="fas fa-gauge-high"></i></span><span class="link-text">Dashboard</span></a>
+    <div class="nav-section-label">Discovery</div>
+    <a href="discovery.html" class="sidebar-link" data-label="Discovery"><span class="link-icon"><i class="fas fa-magnifying-glass-chart"></i></span><span class="link-text">Discovery &amp; Intake</span></a>
+    <div class="nav-section-label">Assessment</div>
+    <a href="assessment-lift-shift.html" class="sidebar-link" data-label="Lift &amp; Shift"><span class="link-icon"><i class="fas fa-arrow-up-right-dots"></i></span><span class="link-text">Lift &amp; Shift</span></a>
+    <a href="assessment-modernization.html" class="sidebar-link" data-label="Modernization"><span class="link-icon"><i class="fas fa-wand-magic-sparkles"></i></span><span class="link-text">Modernization</span></a>
+    <a href="dependency-mapping.html" class="sidebar-link" data-label="Dependencies"><span class="link-icon"><i class="fas fa-diagram-project"></i></span><span class="link-text">Dependency Mapping</span></a>
+    <a href="risk-scoring.html" class="sidebar-link" data-label="Risk Scoring"><span class="link-icon"><i class="fas fa-shield-halved"></i></span><span class="link-text">Risk Scoring</span></a>
+    <a href="wave-planning.html" class="sidebar-link" data-label="Wave Planning"><span class="link-icon"><i class="fas fa-wave-square"></i></span><span class="link-text">Wave Planning</span></a>
+    <a href="tco.html" class="sidebar-link" data-label="TCO Analysis"><span class="link-icon"><i class="fas fa-coins"></i></span><span class="link-text">TCO Analysis</span></a>
+    <a href="readiness-check.html" class="sidebar-link" data-label="Readiness"><span class="link-icon"><i class="fas fa-clipboard-check"></i></span><span class="link-text">Readiness Check</span></a>
+    <div class="forms-path-group">
+      <div class="nav-section-label nav-section-forms"><i class="fas fa-wand-magic-sparkles"></i>Forms Modernization</div>
+      <a href="modernization-execution.html" class="sidebar-link" data-label="Execution"><span class="link-icon"><i class="fas fa-gears"></i></span><span class="link-text">Modernization Exec.</span></a>
+      <a href="schema-conversion.html" class="sidebar-link" data-label="Schema"><span class="link-icon"><i class="fas fa-code-branch"></i></span><span class="link-text">Schema Conversion</span></a>
+      <div class="nav-section-label nav-section-forms">Azure Infrastructure</div>
+      <a href="landing-zone.html" class="sidebar-link" data-label="Landing Zone"><span class="link-icon"><i class="fas fa-cloud"></i></span><span class="link-text">Landing Zone</span></a>
+      <a href="security-finops.html" class="sidebar-link" data-label="Security &amp; FinOps"><span class="link-icon"><i class="fas fa-lock"></i></span><span class="link-text">Security &amp; FinOps</span></a>
+      <div class="nav-section-label nav-section-forms">Delivery</div>
+      <a href="review-validation.html" class="sidebar-link" data-label="Review"><span class="link-icon"><i class="fas fa-circle-check"></i></span><span class="link-text">Review &amp; Validation</span></a>
+      <a href="deployment.html" class="sidebar-link" data-label="Deployment"><span class="link-icon"><i class="fas fa-rocket"></i></span><span class="link-text">Deployment</span><span class="link-badge">Live</span></a>
+    </div>
+  </nav>
+  <div class="sidebar-footer">
+    <button class="sidebar-toggle-btn" id="sidebarToggle2"><i class="fas fa-chevron-left"></i><span>Collapse</span></button>
+  </div>
+</aside>
+
+<header id="topbar">
+  <button class="topbar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+  <div class="topbar-breadcrumb">
+    <h1 class="page-title">Schema Conversion</h1>
+    <p class="page-subtitle">Oracle Estate Workbench &middot; Oracle 19c → PostgreSQL 15</p>
+  </div>
+  <div class="topbar-search d-none d-md-flex align-items-center">
+    <i class="fas fa-search search-icon"></i>
+    <input type="text" placeholder="Search objects…">
+  </div>
+  <div class="d-flex align-items-center gap-2 ms-auto">
+    <button class="btn btn-primary btn-sm"><i class="fas fa-wand-magic-sparkles"></i>Auto-Convert</button>
+    <button class="topbar-btn"><i class="fas fa-gear"></i></button>
+    <div class="dropdown">
+      <a class="topbar-profile" data-bs-toggle="dropdown">
+        <div class="profile-avatar">SC</div>
+        <div class="d-none d-sm-block"><div class="profile-name">Sarah Chen</div><div class="profile-role">Modernization Lead</div></div>
+        <i class="fas fa-chevron-down ms-1 text-muted" style="font-size:10px"></i>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end" style="min-width:200px">
+        <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i>My Profile</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-right-from-bracket text-danger"></i>Sign Out</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <!-- Conversion Summary -->
+  <div class="row g-3 mb-4 stagger">
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card"><div class="stat-icon green"><i class="fas fa-circle-check"></i></div><div class="stat-value counter-animate" data-target="1482">0</div><div class="stat-label">Auto-Converted</div><div class="stat-delta up"><i class="fas fa-wand-magic-sparkles"></i>No manual work</div></div>
+    </div>
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card"><div class="stat-icon amber"><i class="fas fa-pen-to-square"></i></div><div class="stat-value counter-animate" data-target="247">0</div><div class="stat-label">Manual Review</div><div class="stat-delta down"><i class="fas fa-exclamation"></i>Needs attention</div></div>
+    </div>
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card"><div class="stat-icon red"><i class="fas fa-xmark"></i></div><div class="stat-value counter-animate" data-target="118">0</div><div class="stat-label">Not Convertible</div><div class="stat-delta down"><i class="fas fa-exclamation text-danger"></i>Rewrite required</div></div>
+    </div>
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card"><div class="stat-icon purple"><i class="fas fa-percent"></i></div><div class="stat-value"><span class="counter-animate" data-target="81" data-suffix="%">0%</span></div><div class="stat-label">Auto-Convert Rate</div><div class="stat-delta up"><i class="fas fa-arrow-trend-up"></i>Industry avg: 68%</div></div>
+    </div>
+  </div>
+
+  <!-- DDL Side-by-Side Preview -->
+  <div class="row g-3 mb-4">
+    <div class="col-12 fade-in-up">
+      <div class="card">
+        <div class="card-header">
+          <i class="fas fa-code text-primary"></i>
+          <div class="card-title">DDL Conversion Preview</div>
+          <div class="ms-auto d-flex gap-2 align-items-center">
+            <select class="form-select form-select-sm" style="width:200px">
+              <option>INV_MGMT.INVENTORY_ITEMS</option>
+              <option>FIN_GL.GL_ACCOUNTS</option>
+              <option>HRMS.EMPLOYEES</option>
+            </select>
+            <span class="badge badge-success"><i class="fas fa-check me-1"></i>Auto-Converted</span>
+          </div>
+        </div>
+        <div class="card-body p-0">
+          <div class="row g-0">
+            <div class="col-md-6" style="border-right:1px solid var(--border)">
+              <div style="padding:12px 16px;background:var(--bg);border-bottom:1px solid var(--border);font-size:11.5px;font-weight:700;color:var(--text-muted)">
+                <i class="fas fa-database me-2 text-danger"></i>ORACLE 19c — Source
+              </div>
+              <div class="code-block" style="border-radius:0;margin:0;max-height:320px;overflow-y:auto">
+                <button class="copy-btn"><i class="fas fa-copy me-1"></i>Copy</button>
+<code><span class="kw">CREATE TABLE</span> inventory_items (
+  item_id       <span class="kw">NUMBER</span>(15) <span class="kw">NOT NULL</span>,
+  item_code     <span class="kw">VARCHAR2</span>(50),
+  description   <span class="kw">VARCHAR2</span>(500),
+  unit_cost     <span class="kw">NUMBER</span>(18,4),
+  quantity_on_hand <span class="kw">NUMBER</span>(15,3),
+  last_updated  <span class="kw">DATE</span>,
+  created_by    <span class="kw">VARCHAR2</span>(30),
+  <span class="kw">CONSTRAINT</span> pk_inv <span class="kw">PRIMARY KEY</span> (item_id)
+);
+
+<span class="cmt">-- Oracle sequence for auto-increment</span>
+<span class="kw">CREATE SEQUENCE</span> inv_seq
+  <span class="kw">START WITH</span> 1
+  <span class="kw">INCREMENT BY</span> 1
+  <span class="kw">NOCACHE NOCYCLE</span>;
+
+<span class="kw">CREATE OR REPLACE TRIGGER</span> trg_inv_id
+  <span class="kw">BEFORE INSERT ON</span> inventory_items
+  <span class="kw">FOR EACH ROW</span>
+<span class="kw">BEGIN</span>
+  <span class="kw">SELECT</span> inv_seq.NEXTVAL <span class="kw">INTO</span> :new.item_id <span class="kw">FROM</span> dual;
+<span class="kw">END</span>;
+</code>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div style="padding:12px 16px;background:var(--bg);border-bottom:1px solid var(--border);font-size:11.5px;font-weight:700;color:var(--text-muted)">
+                <i class="fas fa-database me-2 text-success"></i>POSTGRESQL 15 — Target
+              </div>
+              <div class="code-block" style="border-radius:0;margin:0;max-height:320px;overflow-y:auto">
+                <button class="copy-btn"><i class="fas fa-copy me-1"></i>Copy</button>
+<code><span class="kw">CREATE TABLE</span> inventory_items (
+  item_id       <span class="kw">BIGSERIAL PRIMARY KEY</span>,
+  item_code     <span class="kw">VARCHAR</span>(50),
+  description   <span class="kw">TEXT</span>,
+  unit_cost     <span class="kw">NUMERIC</span>(18,4),
+  quantity_on_hand <span class="kw">NUMERIC</span>(15,3),
+  last_updated  <span class="kw">TIMESTAMP</span>,
+  created_by    <span class="kw">VARCHAR</span>(30)
+);
+
+<span class="cmt">-- BIGSERIAL auto-handles sequence + trigger</span>
+<span class="cmt">-- Oracle sequence + trigger auto-converted</span>
+<span class="cmt">-- to native PostgreSQL BIGSERIAL column</span>
+
+<span class="str">-- Conversion note: NUMBER(18,4) → NUMERIC(18,4)</span>
+<span class="str">-- VARCHAR2 → VARCHAR / TEXT</span>
+<span class="str">-- DATE → TIMESTAMP</span>
+</code>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conversion Issues Table -->
+  <div class="card fade-in-up">
+    <div class="card-header">
+      <i class="fas fa-triangle-exclamation text-warning"></i>
+      <div><div class="card-title">Conversion Issues</div><div class="card-subtitle">Objects requiring manual attention</div></div>
+      <div class="ms-auto d-flex gap-2">
+        <input type="text" class="form-control form-control-sm table-search" data-target="#issueTable" placeholder="Filter…" style="width:160px">
+        <button class="btn btn-light btn-sm"><i class="fas fa-download me-1"></i>Export</button>
+      </div>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-container">
+        <table class="table" id="issueTable">
+          <thead><tr><th>Object</th><th>Type</th><th>Schema</th><th>Issue</th><th>Severity</th><th>Suggestion</th><th></th></tr></thead>
+          <tbody>
+            <tr class="hover-highlight"><td><strong>PKG_PAYROLL_CALC</strong></td><td><span class="badge badge-muted">Package</span></td><td>PAYROLL</td><td class="small text-muted">DBMS_SCHEDULER usage</td><td><span class="badge badge-danger">Critical</span></td><td class="small text-muted">Use pg_cron</td><td><button class="btn btn-danger btn-sm">Fix</button></td></tr>
+            <tr class="hover-highlight"><td><strong>FN_GET_BALANCE</strong></td><td><span class="badge badge-muted">Function</span></td><td>FIN_GL</td><td class="small text-muted">ROWNUM usage</td><td><span class="badge badge-warning">Medium</span></td><td class="small text-muted">Use LIMIT / ROW_NUMBER()</td><td><button class="btn btn-warning btn-sm text-dark">Fix</button></td></tr>
+            <tr class="hover-highlight"><td><strong>VW_CROSS_SCHEMA</strong></td><td><span class="badge badge-muted">View</span></td><td>FIN_GL</td><td class="small text-muted">Cross-schema reference</td><td><span class="badge badge-warning">Medium</span></td><td class="small text-muted">Qualify with schema name</td><td><button class="btn btn-warning btn-sm text-dark">Fix</button></td></tr>
+            <tr class="hover-highlight"><td><strong>TRG_AUDIT_LOG</strong></td><td><span class="badge badge-muted">Trigger</span></td><td>HRMS</td><td class="small text-muted">SYS_CONTEXT usage</td><td><span class="badge badge-primary">Low</span></td><td class="small text-muted">Use current_user, inet_client_addr()</td><td><button class="btn btn-light btn-sm">Fix</button></td></tr>
+            <tr class="hover-highlight"><td><strong>SP_GENERATE_REPORT</strong></td><td><span class="badge badge-muted">Procedure</span></td><td>INV_MGMT</td><td class="small text-muted">UTL_FILE dependency</td><td><span class="badge badge-danger">Critical</span></td><td class="small text-muted">Use COPY TO or pg_read_file()</td><td><button class="btn btn-danger btn-sm">Fix</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
