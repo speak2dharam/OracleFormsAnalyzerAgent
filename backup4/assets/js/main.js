@@ -126,21 +126,14 @@ $(function () {
   /* ================================================================
      PAGE LOADER HIDE
      ================================================================ */
-  function hideLoader() {
-    var $loader = $('#page-loader');
-    if (!$loader.length || $loader.hasClass('hidden')) return;
-    $loader.addClass('hidden');
-    setTimeout(function () { $loader.remove(); }, 220);
-  }
-
-  // Hide as soon as DOM + inline scripts are ready (fastest path)
-  hideLoader();
-
-  // Also cover any late-loading scenarios
-  $(window).on('load', hideLoader);
-
-  // Hard fallback — never show more than 350 ms
-  setTimeout(hideLoader, 350);
+  $(window).on('load', function () {
+    $('#page-loader').addClass('hidden');
+    setTimeout(function () { $('#page-loader').remove(); }, 400);
+  });
+  // Fallback
+  setTimeout(function () {
+    $('#page-loader').addClass('hidden');
+  }, 1500);
 
   /* ================================================================
      UPLOAD ZONE DRAG & DROP

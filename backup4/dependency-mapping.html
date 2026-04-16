@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dependency Mapping — Oracle Estate Workbench</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .topo-canvas { background: #f8fafc; border-radius: var(--radius-md); border: 1px solid var(--border); min-height: 340px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .node { position: absolute; display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; }
+    .node-circle { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,.15); transition: all .2s; }
+    .node-circle:hover { transform: scale(1.1); }
+    .node-label { font-size: 10.5px; font-weight: 700; color: var(--text); background: var(--card-bg); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border); white-space: nowrap; }
+    .edge { position: absolute; pointer-events: none; }
+  </style>
+</head>
+<body>
+<div id="page-loader"><div class="loader-ring"></div></div>
+
+<aside id="sidebar">
+  <a href="dashboard.html" class="sidebar-brand">
+    <div class="brand-icon"><i class="fas fa-database"></i></div>
+    <div class="brand-text"><div class="brand-title">Oracle Estate</div><div class="brand-subtitle">Analyzer &amp; Workbench</div></div>
+  </a>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Overview</div>
+    <a href="dashboard.html" class="sidebar-link" data-label="Dashboard"><span class="link-icon"><i class="fas fa-gauge-high"></i></span><span class="link-text">Dashboard</span></a>
+    <div class="nav-section-label">Discovery</div>
+    <a href="discovery.html" class="sidebar-link" data-label="Discovery"><span class="link-icon"><i class="fas fa-magnifying-glass-chart"></i></span><span class="link-text">Discovery &amp; Intake</span></a>
+    <div class="nav-section-label">Assessment</div>
+    <a href="assessment-lift-shift.html" class="sidebar-link" data-label="Lift &amp; Shift"><span class="link-icon"><i class="fas fa-arrow-up-right-dots"></i></span><span class="link-text">Lift &amp; Shift</span></a>
+    <a href="assessment-modernization.html" class="sidebar-link" data-label="Modernization"><span class="link-icon"><i class="fas fa-wand-magic-sparkles"></i></span><span class="link-text">Modernization</span></a>
+    <a href="dependency-mapping.html" class="sidebar-link" data-label="Dependencies"><span class="link-icon"><i class="fas fa-diagram-project"></i></span><span class="link-text">Dependency Mapping</span></a>
+    <a href="risk-scoring.html" class="sidebar-link" data-label="Risk Scoring"><span class="link-icon"><i class="fas fa-shield-halved"></i></span><span class="link-text">Risk Scoring</span></a>
+    <a href="wave-planning.html" class="sidebar-link" data-label="Wave Planning"><span class="link-icon"><i class="fas fa-wave-square"></i></span><span class="link-text">Wave Planning</span></a>
+    <a href="tco.html" class="sidebar-link" data-label="TCO Analysis"><span class="link-icon"><i class="fas fa-coins"></i></span><span class="link-text">TCO Analysis</span></a>
+    <a href="readiness-check.html" class="sidebar-link" data-label="Readiness"><span class="link-icon"><i class="fas fa-clipboard-check"></i></span><span class="link-text">Readiness Check</span></a>
+    <div class="forms-path-group">
+      <div class="nav-section-label nav-section-forms"><i class="fas fa-wand-magic-sparkles"></i>Forms Modernization</div>
+      <a href="modernization-execution.html" class="sidebar-link" data-label="Execution"><span class="link-icon"><i class="fas fa-gears"></i></span><span class="link-text">Modernization Exec.</span></a>
+      <a href="schema-conversion.html" class="sidebar-link" data-label="Schema"><span class="link-icon"><i class="fas fa-code-branch"></i></span><span class="link-text">Schema Conversion</span></a>
+      <div class="nav-section-label nav-section-forms">Azure Infrastructure</div>
+      <a href="landing-zone.html" class="sidebar-link" data-label="Landing Zone"><span class="link-icon"><i class="fas fa-cloud"></i></span><span class="link-text">Landing Zone</span></a>
+      <a href="security-finops.html" class="sidebar-link" data-label="Security &amp; FinOps"><span class="link-icon"><i class="fas fa-lock"></i></span><span class="link-text">Security &amp; FinOps</span></a>
+      <div class="nav-section-label nav-section-forms">Delivery</div>
+      <a href="review-validation.html" class="sidebar-link" data-label="Review"><span class="link-icon"><i class="fas fa-circle-check"></i></span><span class="link-text">Review &amp; Validation</span></a>
+      <a href="deployment.html" class="sidebar-link" data-label="Deployment"><span class="link-icon"><i class="fas fa-rocket"></i></span><span class="link-text">Deployment</span><span class="link-badge">Live</span></a>
+    </div>
+  </nav>
+  <div class="sidebar-footer">
+    <button class="sidebar-toggle-btn" id="sidebarToggle2"><i class="fas fa-chevron-left"></i><span>Collapse</span></button>
+  </div>
+</aside>
+
+<header id="topbar">
+  <button class="topbar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+  <div class="topbar-breadcrumb">
+    <h1 class="page-title">Dependency Mapping</h1>
+    <p class="page-subtitle">Oracle Estate Workbench &middot; Cross-System Dependencies</p>
+  </div>
+  <div class="topbar-search d-none d-md-flex align-items-center">
+    <i class="fas fa-search search-icon"></i>
+    <input type="text" placeholder="Search dependencies…">
+  </div>
+  <div class="d-flex align-items-center gap-2 ms-auto">
+    <button class="btn btn-primary btn-sm"><i class="fas fa-arrows-spin"></i>Re-scan</button>
+    <button class="topbar-btn"><i class="fas fa-gear"></i></button>
+    <div class="dropdown">
+      <a class="topbar-profile" data-bs-toggle="dropdown">
+        <div class="profile-avatar">SC</div>
+        <div class="d-none d-sm-block"><div class="profile-name">Sarah Chen</div><div class="profile-role">Modernization Lead</div></div>
+        <i class="fas fa-chevron-down ms-1 text-muted" style="font-size:10px"></i>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end" style="min-width:200px">
+        <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i>My Profile</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-right-from-bracket text-danger"></i>Sign Out</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <!-- Stats -->
+  <div class="row g-3 mb-4 stagger">
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card">
+        <div class="stat-icon blue"><i class="fas fa-diagram-project"></i></div>
+        <div class="stat-value counter-animate" data-target="1284">0</div>
+        <div class="stat-label">Total Dependencies</div>
+      </div>
+    </div>
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card">
+        <div class="stat-icon amber"><i class="fas fa-link-slash"></i></div>
+        <div class="stat-value counter-animate" data-target="47">0</div>
+        <div class="stat-label">Cross-Schema Links</div>
+      </div>
+    </div>
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card">
+        <div class="stat-icon red"><i class="fas fa-triangle-exclamation"></i></div>
+        <div class="stat-value counter-animate" data-target="12">0</div>
+        <div class="stat-label">Circular Conflicts</div>
+      </div>
+    </div>
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card">
+        <div class="stat-icon green"><i class="fas fa-circle-nodes"></i></div>
+        <div class="stat-value counter-animate" data-target="8">0</div>
+        <div class="stat-label">External Systems</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topology Visualization -->
+  <div class="row g-3 mb-4">
+    <div class="col-lg-8 fade-in-up">
+      <div class="card">
+        <div class="card-header">
+          <i class="fas fa-diagram-project text-primary"></i>
+          <div class="card-title">Dependency Topology</div>
+          <div class="ms-auto d-flex gap-2">
+            <span class="badge badge-success"><i class="fas fa-circle me-1" style="font-size:7px"></i>Low</span>
+            <span class="badge badge-warning"><i class="fas fa-circle me-1" style="font-size:7px"></i>Medium</span>
+            <span class="badge badge-danger"><i class="fas fa-circle me-1" style="font-size:7px"></i>High</span>
+          </div>
+        </div>
+        <div class="card-body p-0">
+          <div class="topo-canvas" style="height:360px">
+            <svg width="100%" height="100%" style="position:absolute;top:0;left:0">
+              <!-- Edges -->
+              <line x1="50%" y1="50%" x2="20%" y2="25%" stroke="#e2e8f0" stroke-width="2"/>
+              <line x1="50%" y1="50%" x2="80%" y2="25%" stroke="#e2e8f0" stroke-width="2"/>
+              <line x1="50%" y1="50%" x2="18%" y2="72%" stroke="#fca5a5" stroke-width="2" stroke-dasharray="6,3"/>
+              <line x1="50%" y1="50%" x2="82%" y2="72%" stroke="#e2e8f0" stroke-width="2"/>
+              <line x1="50%" y1="50%" x2="50%" y2="15%" stroke="#bfdbfe" stroke-width="2"/>
+              <line x1="20%" y1="25%" x2="18%" y2="72%" stroke="#fde68a" stroke-width="2" stroke-dasharray="4,4"/>
+            </svg>
+            <!-- Central node -->
+            <div class="node" style="left:50%;top:50%;transform:translate(-50%,-50%)">
+              <div class="node-circle" style="background:var(--primary);width:68px;height:68px;font-size:14px"><i class="fas fa-database"></i></div>
+              <div class="node-label">CORE_DB</div>
+            </div>
+            <div class="node" style="left:20%;top:22%">
+              <div class="node-circle" style="background:#10b981"><i class="fas fa-file-code"></i></div>
+              <div class="node-label">FIN_GL</div>
+            </div>
+            <div class="node" style="left:80%;top:22%">
+              <div class="node-circle" style="background:#8b5cf6"><i class="fas fa-users"></i></div>
+              <div class="node-label">HRMS</div>
+            </div>
+            <div class="node" style="left:18%;top:68%">
+              <div class="node-circle" style="background:#ef4444"><i class="fas fa-server"></i></div>
+              <div class="node-label">LEGACY_COM+</div>
+            </div>
+            <div class="node" style="left:82%;top:68%">
+              <div class="node-circle" style="background:#06b6d4"><i class="fas fa-boxes-stacked"></i></div>
+              <div class="node-label">INV_MGMT</div>
+            </div>
+            <div class="node" style="left:50%;top:10%">
+              <div class="node-circle" style="background:#f59e0b"><i class="fas fa-chart-line"></i></div>
+              <div class="node-label">REPORTING</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 fade-in-up">
+      <div class="card h-100">
+        <div class="card-header"><i class="fas fa-exclamation-triangle text-danger"></i><div class="card-title">Conflict Summary</div></div>
+        <div class="card-body d-flex flex-column gap-3">
+          <div class="p-3 rounded-md" style="background:var(--danger-light);border:1px solid #fca5a5">
+            <div class="d-flex align-items-center gap-2 mb-1">
+              <i class="fas fa-circle-exclamation text-danger"></i>
+              <span class="fw-700 small">Circular Dependency</span>
+              <span class="badge badge-danger ms-auto">Critical</span>
+            </div>
+            <div class="text-muted small">FIN_GL ↔ LEGACY_COM+ creates a conversion blocker. Must resolve before Wave 2.</div>
+          </div>
+          <div class="p-3 rounded-md" style="background:var(--warning-light);border:1px solid #fde68a">
+            <div class="d-flex align-items-center gap-2 mb-1">
+              <i class="fas fa-triangle-exclamation text-warning"></i>
+              <span class="fw-700 small">Cross-Schema Views</span>
+              <span class="badge badge-warning ms-auto">High</span>
+            </div>
+            <div class="text-muted small">17 views span HRMS and FIN schemas. Need remapping post-conversion.</div>
+          </div>
+          <div class="p-3 rounded-md" style="background:var(--warning-light);border:1px solid #fde68a">
+            <div class="d-flex align-items-center gap-2 mb-1">
+              <i class="fas fa-link text-warning"></i>
+              <span class="fw-700 small">DB Links</span>
+              <span class="badge badge-warning ms-auto">Medium</span>
+            </div>
+            <div class="text-muted small">8 Oracle DB Links reference decommissioned instances.</div>
+          </div>
+          <div class="p-3 rounded-md" style="background:var(--success-light);border:1px solid #a7f3d0">
+            <div class="d-flex align-items-center gap-2 mb-1">
+              <i class="fas fa-circle-check text-success"></i>
+              <span class="fw-700 small">INV_MGMT Isolated</span>
+              <span class="badge badge-success ms-auto">Clear</span>
+            </div>
+            <div class="text-muted small">No blocking dependencies. Ready for Wave 1 conversion.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dependency Table -->
+  <div class="card fade-in-up">
+    <div class="card-header">
+      <i class="fas fa-table-list text-indigo"></i>
+      <div class="card-title">Dependency Register</div>
+      <div class="ms-auto d-flex gap-2">
+        <input type="text" class="form-control form-control-sm table-search" data-target="#depTable" placeholder="Filter…" style="width:160px">
+        <button class="btn btn-light btn-sm"><i class="fas fa-download me-1"></i>Export</button>
+      </div>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-container">
+        <table class="table" id="depTable">
+          <thead><tr><th>Source</th><th>Target</th><th>Type</th><th>Count</th><th>Severity</th><th>Resolution</th></tr></thead>
+          <tbody>
+            <tr class="hover-highlight"><td><strong>HRMS_PAYROLL</strong></td><td>FIN_GL</td><td><span class="badge badge-muted">DB Link</span></td><td>14</td><td><span class="badge badge-danger">Critical</span></td><td class="text-muted small">Convert to API call</td></tr>
+            <tr class="hover-highlight"><td><strong>FIN_GL</strong></td><td>LEGACY_COM+</td><td><span class="badge badge-muted">COM+ Ref</span></td><td>6</td><td><span class="badge badge-danger">Critical</span></td><td class="text-muted small">Decouple &amp; replace</td></tr>
+            <tr class="hover-highlight"><td><strong>AR_BILLING</strong></td><td>CORE_DB</td><td><span class="badge badge-muted">View</span></td><td>9</td><td><span class="badge badge-warning">Medium</span></td><td class="text-muted small">Recreate in target</td></tr>
+            <tr class="hover-highlight"><td><strong>INV_MGMT</strong></td><td>REPORTING</td><td><span class="badge badge-muted">Procedure</span></td><td>3</td><td><span class="badge badge-success">Low</span></td><td class="text-muted small">Inline query</td></tr>
+            <tr class="hover-highlight"><td><strong>ASSET_MGMT</strong></td><td>FIN_GL</td><td><span class="badge badge-muted">FK Ref</span></td><td>22</td><td><span class="badge badge-warning">Medium</span></td><td class="text-muted small">Migrate together</td></tr>
+            <tr class="hover-highlight"><td><strong>CRM_CORE</strong></td><td>HRMS</td><td><span class="badge badge-muted">Synonym</span></td><td>4</td><td><span class="badge badge-success">Low</span></td><td class="text-muted small">Update synonym</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

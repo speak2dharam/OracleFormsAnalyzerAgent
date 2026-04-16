@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discovery &amp; Intake — Oracle Estate Analyzer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    #main-content.discovery-page { font-size: 15px; }
+    .discovery-hero {
+      background: linear-gradient(135deg, #12376f 0%, #2563eb 58%, #0f766e 100%);
+      border-radius: 8px;
+      color: #fff;
+      padding: 24px;
+      margin-bottom: 22px;
+      box-shadow: var(--shadow);
+    }
+    .discovery-hero h2 {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -.8px;
+      margin: 8px 0 8px;
+    }
+    .discovery-hero p {
+      color: rgba(255,255,255,.78);
+      font-size: 14px;
+      line-height: 1.7;
+      margin: 0;
+      max-width: 880px;
+    }
+    .discovery-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 10px;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 8px;
+      background: rgba(255,255,255,.12);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+    }
+    .discovery-hero-stat {
+      height: 100%;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .discovery-hero-stat .label {
+      font-size: 10px;
+      color: rgba(255,255,255,.68);
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .discovery-hero-stat .value {
+      font-size: 25px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -.8px;
+    }
+    .discovery-hero-stat .note { font-size: 12px; color: rgba(255,255,255,.68); margin-top: 6px; }
+    .discovery-section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 4px 0 14px;
+    }
+    .discovery-section-title .icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary-light);
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+    .discovery-section-title h3 { font-size: 18px; font-weight: 800; margin: 0; }
+    .discovery-section-title p { color: var(--text-muted); font-size: 13px; margin: 1px 0 0; }
+    #main-content.discovery-page .card {
+      border-radius: 8px;
+      border-color: #dbe3ef;
+      box-shadow: var(--shadow-sm);
+    }
+    #main-content.discovery-page .card-header {
+      min-height: 68px;
+      padding: 18px 20px;
+      background: #fff;
+      border-bottom: 1px solid #e8eef7;
+    }
+    #main-content.discovery-page .card-header > i {
+      width: 38px;
+      height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      background: var(--primary-light);
+      flex-shrink: 0;
+    }
+    #main-content.discovery-page .card-title { font-size: 16px; font-weight: 800; }
+    #main-content.discovery-page .card-subtitle { font-size: 13px; line-height: 1.45; }
+    #main-content.discovery-page .card-body { padding: 22px; }
+    #main-content.discovery-page .card-body.p-0 { padding: 0 !important; }
+    #main-content.discovery-page .domain-upload-card {
+      border-radius: 8px;
+      padding: 20px;
+      min-height: 222px;
+      border-width: 2px;
+      background: #fff;
+    }
+    #main-content.discovery-page .domain-upload-card.has-files { background: #f0fdf4; }
+    #main-content.discovery-page .domain-card-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
+      font-size: 21px;
+    }
+    #main-content.discovery-page .domain-card-title { font-size: 16px !important; line-height: 1.25; margin-bottom: 4px; padding-right: 54px; }
+    #main-content.discovery-page .domain-card-desc { font-size: 13px !important; line-height: 1.55; margin-bottom: 10px; }
+    #main-content.discovery-page .domain-card-formats { font-size: 12px !important; line-height: 1.5; margin-bottom: 12px; white-space: normal; }
+    #main-content.discovery-page .domain-card-dropzone { font-size: 13px !important; padding: 12px 14px; border-radius: 8px; }
+    #main-content.discovery-page .domain-file-badge { font-size: 12px !important; padding: 4px 10px; border-radius: 8px; }
+    #main-content.discovery-page .domain-details-btn { font-size: 13px !important; padding: 8px 12px; border-radius: 8px; }
+    #main-content.discovery-page .small,
+    #main-content.discovery-page small { font-size: 13px !important; }
+    #main-content.discovery-page .table { font-size: 14px; }
+    #main-content.discovery-page .table th {
+      font-size: 12px;
+      padding: 13px 16px;
+      background: #f8fafc;
+    }
+    #main-content.discovery-page .table td {
+      font-size: 13.5px;
+      padding: 14px 16px;
+      line-height: 1.55;
+    }
+    #main-content.discovery-page .table .text-muted.small { font-size: 13px !important; color: #475569 !important; }
+    #main-content.discovery-page .badge { font-size: 11.5px; border-radius: 8px; padding: 4px 9px; }
+    #main-content.discovery-page .btn-sm { font-size: 13px; padding: 7px 12px; border-radius: 8px; }
+    .discovery-progress-panel {
+      background: #fff;
+      border: 1px solid #dbe3ef;
+      border-radius: 8px;
+      padding: 18px;
+      height: 100%;
+    }
+    .discovery-progress-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #e8eef7;
+    }
+    .discovery-progress-title { font-size: 16px; font-weight: 800; margin: 0; }
+    .discovery-progress-subtitle { color: var(--text-muted); font-size: 12px; margin-top: 2px; }
+    .discovery-progress-total {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border-radius: 8px;
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 7px 10px;
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .discovery-progress-list { display: grid; gap: 10px; }
+    .discovery-progress-list > .d-flex {
+      display: grid !important;
+      grid-template-columns: minmax(145px, 190px) minmax(160px, 1fr) 88px;
+      gap: 14px !important;
+      align-items: center !important;
+      padding: 10px 12px;
+      border: 1px solid #edf2f7;
+      border-radius: 8px;
+      background: #fbfdff;
+    }
+    .discovery-progress-list > .d-flex:nth-child(2),
+    .discovery-progress-list > .d-flex:nth-child(3) {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+    }
+    .discovery-progress-list > .d-flex:nth-child(5) {
+      background: #fffbeb;
+      border-color: #fde68a;
+    }
+    .discovery-progress-list > .d-flex > span:first-child {
+      min-width: 0 !important;
+      font-size: 13.5px !important;
+      font-weight: 800 !important;
+      color: var(--text) !important;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .discovery-progress-list > .d-flex > span:last-child {
+      min-width: 74px !important;
+      justify-self: end;
+      text-align: center;
+      border-radius: 8px;
+      padding: 5px 8px;
+      font-size: 12px !important;
+      font-weight: 800 !important;
+      background: #f1f5f9;
+      color: #64748b !important;
+    }
+    .discovery-progress-list > .d-flex:nth-child(2) > span:last-child,
+    .discovery-progress-list > .d-flex:nth-child(3) > span:last-child {
+      background: #dcfce7;
+      color: #15803d !important;
+    }
+    .discovery-progress-list > .d-flex:nth-child(5) > span:last-child {
+      background: #fef3c7;
+      color: #b45309 !important;
+    }
+    .discovery-progress-list > .d-flex:nth-child(1) > span:last-child,
+    .discovery-progress-list > .d-flex:nth-child(4) > span:last-child,
+    .discovery-progress-list > .d-flex:nth-child(6) > span:last-child,
+    .discovery-progress-list > .d-flex:nth-child(7) > span:last-child {
+      font-size: 0 !important;
+    }
+    .discovery-progress-list > .d-flex:nth-child(1) > span:last-child::after,
+    .discovery-progress-list > .d-flex:nth-child(4) > span:last-child::after,
+    .discovery-progress-list > .d-flex:nth-child(6) > span:last-child::after,
+    .discovery-progress-list > .d-flex:nth-child(7) > span:last-child::after {
+      content: '0 files';
+      font-size: 12px;
+    }
+    .discovery-progress-list > .d-flex:nth-child(2) > span:last-child::after,
+    .discovery-progress-list > .d-flex:nth-child(3) > span:last-child::after {
+      content: ' files';
+    }
+    .discovery-progress-list > .d-flex:nth-child(5) > span:last-child::after {
+      content: ' file';
+    }
+    .discovery-progress-list .progress {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: #e5eaf2;
+      overflow: hidden;
+    }
+    .discovery-progress-list .progress-bar {
+      border-radius: 999px;
+    }
+    .discovery-progress-row {
+      display: grid;
+      grid-template-columns: minmax(145px, 190px) minmax(160px, 1fr) 88px;
+      gap: 14px;
+      align-items: center;
+      padding: 10px 12px;
+      border: 1px solid #edf2f7;
+      border-radius: 8px;
+      background: #fbfdff;
+    }
+    .discovery-progress-row.ready { background: #f0fdf4; border-color: #bbf7d0; }
+    .discovery-progress-row.partial { background: #fffbeb; border-color: #fde68a; }
+    .discovery-progress-name { display: flex; align-items: center; gap: 9px; min-width: 0; }
+    .discovery-progress-name i { width: 18px; text-align: center; }
+    .discovery-progress-name span { font-size: 13.5px; font-weight: 800; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .discovery-progress-track { height: 10px; border-radius: 999px; background: #e5eaf2; overflow: hidden; }
+    .discovery-progress-fill { height: 100%; border-radius: 999px; display: block; }
+    .discovery-progress-count { display: flex; justify-content: flex-end; }
+    .discovery-progress-count .pill {
+      min-width: 74px;
+      text-align: center;
+      border-radius: 8px;
+      padding: 5px 8px;
+      font-size: 12px;
+      font-weight: 800;
+      background: #f1f5f9;
+      color: #64748b;
+    }
+    .discovery-progress-count .pill.ready { background: #dcfce7; color: #15803d; }
+    .discovery-progress-count .pill.partial { background: #fef3c7; color: #b45309; }
+    .domain-template-steps .fw-700 { font-size: 13px !important; }
+    .domain-template-steps .text-muted { font-size: 12px !important; line-height: 1.45; }
+    #domainDetailPanel { width: 860px !important; max-width: 100vw; }
+    #domainDetailPanel .offcanvas-title { font-size: 18px; }
+    #domainDetailPanel .text-muted.small { font-size: 13px !important; }
+    #domainDetailPanel .detail-section-title { font-size: 12px; margin: 22px 24px 10px; }
+    #domainDetailPanel .detail-method-table th { font-size: 11px; padding: 11px 18px; }
+    #domainDetailPanel .detail-method-table td { font-size: 13px; padding: 13px 18px; line-height: 1.6; }
+    #domainDetailPanel .detail-build-quad { margin: 8px 0 0; padding: 16px; border-radius: 8px; }
+    #domainDetailPanel .detail-build-quad-title { font-size: 14px; }
+    #domainDetailPanel .detail-build-quad li { font-size: 13px; line-height: 1.5; }
+    .text-indigo { color: var(--indigo) !important; }
+    .text-cyan { color: var(--cyan) !important; }
+    .text-green { color: var(--success) !important; }
+    .text-teal { color: #0f766e !important; }
+    .text-orange { color: #f97316 !important; }
+    @media (max-width: 767px) {
+      .discovery-hero { padding: 18px; }
+      .discovery-hero h2 { font-size: 23px; }
+      #main-content.discovery-page .card-header { align-items: flex-start; }
+      #main-content.discovery-page .domain-upload-card { min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+<div id="page-loader"><div class="loader-ring"></div></div>
+
+<aside id="sidebar">
+  <a href="dashboard.html" class="sidebar-brand">
+    <div class="brand-icon"><i class="fas fa-database"></i></div>
+    <div class="brand-text"><div class="brand-title">Oracle Estate</div><div class="brand-subtitle">Analyzer &amp; Workbench</div></div>
+  </a>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Overview</div>
+    <a href="dashboard.html" class="sidebar-link" data-label="Dashboard"><span class="link-icon"><i class="fas fa-gauge-high"></i></span><span class="link-text">Dashboard</span></a>
+    <div class="nav-section-label">Discovery</div>
+    <a href="discovery.html" class="sidebar-link" data-label="Discovery"><span class="link-icon"><i class="fas fa-magnifying-glass-chart"></i></span><span class="link-text">Discovery &amp; Intake</span></a>
+    <div class="nav-section-label">Assessment</div>
+    <a href="assessment-lift-shift.html" class="sidebar-link" data-label="Lift &amp; Shift"><span class="link-icon"><i class="fas fa-arrow-up-right-dots"></i></span><span class="link-text">Lift &amp; Shift</span></a>
+    <a href="assessment-modernization.html" class="sidebar-link" data-label="Modernization"><span class="link-icon"><i class="fas fa-wand-magic-sparkles"></i></span><span class="link-text">Modernization</span></a>
+    <a href="dependency-mapping.html" class="sidebar-link" data-label="Dependencies"><span class="link-icon"><i class="fas fa-diagram-project"></i></span><span class="link-text">Dependency Mapping</span></a>
+    <a href="risk-scoring.html" class="sidebar-link" data-label="Risk Scoring"><span class="link-icon"><i class="fas fa-shield-halved"></i></span><span class="link-text">Risk Scoring</span></a>
+    <a href="wave-planning.html" class="sidebar-link" data-label="Wave Planning"><span class="link-icon"><i class="fas fa-wave-square"></i></span><span class="link-text">Wave Planning</span></a>
+    <a href="tco.html" class="sidebar-link" data-label="TCO Analysis"><span class="link-icon"><i class="fas fa-coins"></i></span><span class="link-text">TCO Analysis</span></a>
+    <a href="readiness-check.html" class="sidebar-link" data-label="Readiness"><span class="link-icon"><i class="fas fa-clipboard-check"></i></span><span class="link-text">Readiness Check</span></a>
+    <div class="forms-path-group">
+      <div class="nav-section-label nav-section-forms"><i class="fas fa-wand-magic-sparkles"></i>Forms Modernization</div>
+      <a href="modernization-execution.html" class="sidebar-link" data-label="Execution"><span class="link-icon"><i class="fas fa-gears"></i></span><span class="link-text">Modernization Exec.</span></a>
+      <a href="schema-conversion.html" class="sidebar-link" data-label="Schema"><span class="link-icon"><i class="fas fa-code-branch"></i></span><span class="link-text">Schema Conversion</span></a>
+      <div class="nav-section-label nav-section-forms">Azure Infrastructure</div>
+      <a href="landing-zone.html" class="sidebar-link" data-label="Landing Zone"><span class="link-icon"><i class="fas fa-cloud"></i></span><span class="link-text">Landing Zone</span></a>
+      <a href="security-finops.html" class="sidebar-link" data-label="Security &amp; FinOps"><span class="link-icon"><i class="fas fa-lock"></i></span><span class="link-text">Security &amp; FinOps</span></a>
+      <div class="nav-section-label nav-section-forms">Delivery</div>
+      <a href="review-validation.html" class="sidebar-link" data-label="Review"><span class="link-icon"><i class="fas fa-circle-check"></i></span><span class="link-text">Review &amp; Validation</span></a>
+      <a href="deployment.html" class="sidebar-link" data-label="Deployment"><span class="link-icon"><i class="fas fa-rocket"></i></span><span class="link-text">Deployment</span><span class="link-badge">Live</span></a>
+    </div>
+  </nav>
+  <div class="sidebar-footer">
+    <button class="sidebar-toggle-btn" id="sidebarToggle2"><i class="fas fa-chevron-left"></i><span>Collapse</span></button>
+  </div>
+</aside>
+
+<header id="topbar">
+  <button class="topbar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+  <div class="topbar-breadcrumb">
+    <h1 class="page-title">Discovery &amp; Intake</h1>
+    <p class="page-subtitle">Oracle Estate Analyzer &middot; Workload Discovery</p>
+  </div>
+  <div class="topbar-search d-none d-md-flex align-items-center">
+    <i class="fas fa-search search-icon"></i>
+    <input type="text" placeholder="Search workloads…">
+  </div>
+  <div class="d-flex align-items-center gap-2 ms-auto">
+    <div class="dropdown">
+      <button class="topbar-btn" data-bs-toggle="dropdown"><i class="fas fa-bell"></i><span class="badge-dot"></span></button>
+      <div class="dropdown-menu dropdown-menu-end notif-dropdown">
+        <div class="notif-header"><h6>Notifications</h6></div>
+        <div class="notif-body">
+          <a href="#" class="notif-item unread">
+            <div class="notif-icon bg-success-light text-success"><i class="fas fa-circle-check"></i></div>
+            <div><div class="notif-title">Discovery Agent Ready</div><div class="notif-desc">Agent v2.4 available for download</div><div class="notif-time">Just now</div></div>
+          </a>
+        </div>
+        <a href="#" class="notif-footer">View all</a>
+      </div>
+    </div>
+    <button class="topbar-btn" data-bs-toggle="tooltip" title="Settings"><i class="fas fa-gear"></i></button>
+    <div class="dropdown">
+      <a class="topbar-profile" data-bs-toggle="dropdown">
+        <div class="profile-avatar">SC</div>
+        <div class="d-none d-sm-block"><div class="profile-name">Sarah Chen</div><div class="profile-role">Modernization Lead</div></div>
+        <i class="fas fa-chevron-down ms-1 text-muted" style="font-size:10px"></i>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end" style="min-width:200px">
+        <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i>My Profile</a></li>
+        <li><a class="dropdown-item" href="#"><i class="fas fa-gear"></i>Settings</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-right-from-bracket text-danger"></i>Sign Out</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<main id="main-content" class="discovery-page">
+
+  <section class="discovery-hero fade-in-up">
+    <div class="row g-4 align-items-end">
+      <div class="col-xl-7">
+        <div class="discovery-eyebrow"><i class="fas fa-magnifying-glass-chart"></i> Discovery Intake</div>
+        <h2>Collect the estate inputs before assessment starts</h2>
+        <p>Upload infrastructure, database, Forms, middleware, licensing, and ETL artefacts into one intake workspace. Each domain has clear accepted formats, discovery methods, and build specifications for the analysis agent.</p>
+      </div>
+      <div class="col-xl-5">
+        <div class="row g-2">
+          <div class="col-6">
+            <div class="discovery-hero-stat">
+              <div class="label">Domains</div>
+              <div class="value">7</div>
+              <div class="note">Discovery areas tracked</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="discovery-hero-stat">
+              <div class="label">Ready</div>
+              <div class="value">3 / 7</div>
+              <div class="note">Database, Forms, Middleware</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="discovery-hero-stat">
+              <div class="label">Uploaded</div>
+              <div class="value">16</div>
+              <div class="note">Files queued for parsing</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="discovery-hero-stat">
+              <div class="label">Target</div>
+              <div class="value">HRDPRD</div>
+              <div class="note">Oracle DB + Forms estate</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Discovery Agents + Domain Upload Cards -->
+  <div class="discovery-section-title">
+    <div class="icon"><i class="fas fa-cloud-arrow-up"></i></div>
+    <div>
+      <h3>Domain Upload Workspace</h3>
+      <p>Upload known artefacts or open the domain method catalog to see exactly what the agent can collect.</p>
+    </div>
+  </div>
+  <div class="row g-3 mb-4">
+    
+
+    <div class="col-lg-12 fade-in-up">
+      <div class="card h-100">
+        <div class="card-header">
+          <i class="fas fa-cloud-arrow-up text-primary"></i>
+          <div>
+            <div class="card-title">Upload Discovery Data</div>
+            <div class="card-subtitle">Upload artefacts for each discovery domain</div>
+          </div>
+          <div class="ms-auto d-flex align-items-center gap-2">
+            <span class="badge badge-muted">7 Domains</span>
+            <button class="btn btn-primary btn-sm"><i class="fas fa-play me-1"></i>Start Analysis</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row g-3">
+
+            <!-- 1. Infrastructure Discovery -->
+            <div class="col-md-6 col-xl-4">
+              <div class="domain-upload-card" id="domainInfra">
+                <input type="file" class="domain-file-input" multiple accept=".xlsx,.csv,.xml,.json,.pdf" style="display:none">
+                <span class="domain-file-badge badge badge-muted">0 files</span>
+                <div class="d-flex align-items-start gap-2 mb-2">
+                  <div class="domain-card-icon" style="background:#eff6ff;color:#2563eb"><i class="fas fa-server"></i></div>
+                  <div>
+                    <div class="domain-card-title">Infrastructure Discovery</div>
+                    <div class="domain-card-desc">Server inventory, network diagrams, hardware specs</div>
+                  </div>
+                </div>
+                <div class="domain-card-formats">.xlsx · .csv · .xml · .json · .pdf</div>
+                <button class="btn btn-light btn-sm w-100 mb-2 domain-details-btn" data-domain="infra" style="font-size:11px;border-color:var(--border)"><i class="fas fa-table-list me-1 text-primary"></i>View Discovery Methods</button>
+                <div class="domain-card-dropzone">
+                  <i class="fas fa-cloud-arrow-up me-1"></i>
+                  <span>Drop files or <a href="#" class="text-primary domain-browse-link">browse</a></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Database & Schema -->
+            <div class="col-md-6 col-xl-4">
+              <div class="domain-upload-card has-files" id="domainDatabase">
+                <input type="file" class="domain-file-input" multiple accept=".dmp,.sql,.ddl,.xml,.exp" style="display:none">
+                <span class="domain-file-badge badge badge-success">3 files</span>
+                <div class="d-flex align-items-start gap-2 mb-2">
+                  <div class="domain-card-icon" style="background:#f0fdf4;color:#16a34a"><i class="fas fa-database"></i></div>
+                  <div>
+                    <div class="domain-card-title">Database &amp; Schema</div>
+                    <div class="domain-card-desc">Oracle dump files, SQL exports, DDL scripts</div>
+                  </div>
+                </div>
+                <div class="domain-card-formats">.dmp · .sql · .ddl · .xml · .exp</div>
+                <button class="btn btn-light btn-sm w-100 mb-2 domain-details-btn" data-domain="database" style="font-size:11px;border-color:var(--border)"><i class="fas fa-table-list me-1 text-success"></i>View Discovery Methods</button>
+                <div class="domain-card-dropzone">
+                  <i class="fas fa-check-circle text-success me-1"></i>
+                  <span class="text-success">3 files uploaded — <a href="#" class="text-primary domain-browse-link">add more</a></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Oracle Forms & Reports -->
+            <div class="col-md-6 col-xl-4">
+              <div class="domain-upload-card has-files" id="domainForms">
+                <input type="file" class="domain-file-input" multiple accept=".fmb,.fmx,.pll,.rdf,.rep,.mmb,.olb" style="display:none">
+                <span class="domain-file-badge badge badge-success">12 files</span>
+                <div class="d-flex align-items-start gap-2 mb-2">
+                  <div class="domain-card-icon" style="background:#fff7ed;color:#ea580c"><i class="fas fa-file-code"></i></div>
+                  <div>
+                    <div class="domain-card-title">Oracle Forms &amp; Reports</div>
+                    <div class="domain-card-desc">Forms modules, report definitions, menu libraries</div>
+                  </div>
+                </div>
+                <div class="domain-card-formats">.fmb · .fmx · .pll · .rdf · .rep · .mmb</div>
+                <button class="btn btn-light btn-sm w-100 mb-2 domain-details-btn" data-domain="forms" style="font-size:11px;border-color:var(--border)"><i class="fas fa-table-list me-1 text-warning"></i>View Discovery Methods</button>
+                <div class="domain-card-dropzone">
+                  <i class="fas fa-check-circle text-success me-1"></i>
+                  <span class="text-success">12 files uploaded — <a href="#" class="text-primary domain-browse-link">add more</a></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. Applications -->
+            <div class="col-md-6 col-xl-4">
+              <div class="domain-upload-card" id="domainApps">
+                <input type="file" class="domain-file-input" multiple accept=".xml,.properties,.yaml,.yml,.json,.war,.ear,.jar,.zip" style="display:none">
+                <span class="domain-file-badge badge badge-muted">0 files</span>
+                <div class="d-flex align-items-start gap-2 mb-2">
+                  <div class="domain-card-icon" style="background:#f5f3ff;color:#7c3aed"><i class="fas fa-layer-group"></i></div>
+                  <div>
+                    <div class="domain-card-title">Applications</div>
+                    <div class="domain-card-desc">App configs, deployment descriptors, source zips</div>
+                  </div>
+                </div>
+                <div class="domain-card-formats">.xml · .yaml · .json · .war · .ear · .zip</div>
+                <button class="btn btn-light btn-sm w-100 mb-2 domain-details-btn" data-domain="apps" style="font-size:11px;border-color:var(--border)"><i class="fas fa-table-list me-1 text-purple"></i>View Discovery Methods</button>
+                <div class="domain-card-dropzone">
+                  <i class="fas fa-cloud-arrow-up me-1"></i>
+                  <span>Drop files or <a href="#" class="text-primary domain-browse-link">browse</a></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. Middleware -->
+            <div class="col-md-6 col-xl-4">
+              <div class="domain-upload-card" id="domainMiddleware">
+                <input type="file" class="domain-file-input" multiple accept=".xml,.properties,.jar,.zip,.conf" style="display:none">
+                <span class="domain-file-badge badge badge-warning">1 file</span>
+                <div class="d-flex align-items-start gap-2 mb-2">
+                  <div class="domain-card-icon" style="background:#eef2ff;color:#4f46e5"><i class="fas fa-gears"></i></div>
+                  <div>
+                    <div class="domain-card-title">Middleware</div>
+                    <div class="domain-card-desc">WebLogic, WebSphere, Tuxedo configurations</div>
+                  </div>
+                </div>
+                <div class="domain-card-formats">.xml · .jar · .properties · .conf · .zip</div>
+                <button class="btn btn-light btn-sm w-100 mb-2 domain-details-btn" data-domain="middleware" style="font-size:11px;border-color:var(--border)"><i class="fas fa-table-list me-1" style="color:#4f46e5"></i>View Discovery Methods</button>
+                <div class="domain-card-dropzone">
+                  <i class="fas fa-cloud-arrow-up me-1"></i>
+                  <span>Drop files or <a href="#" class="text-primary domain-browse-link">browse</a></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6. Licensing -->
+            <div class="col-md-6 col-xl-4">
+              <div class="domain-upload-card" id="domainLicensing">
+                <input type="file" class="domain-file-input" multiple accept=".pdf,.xlsx,.csv,.ldt,.xml" style="display:none">
+                <span class="domain-file-badge badge badge-muted">0 files</span>
+                <div class="d-flex align-items-start gap-2 mb-2">
+                  <div class="domain-card-icon" style="background:#fef2f2;color:#dc2626"><i class="fas fa-certificate"></i></div>
+                  <div>
+                    <div class="domain-card-title">Licensing</div>
+                    <div class="domain-card-desc">Oracle license agreements, inventory reports</div>
+                  </div>
+                </div>
+                <div class="domain-card-formats">.pdf · .xlsx · .csv · .ldt · .xml</div>
+                <button class="btn btn-light btn-sm w-100 mb-2 domain-details-btn" data-domain="licensing" style="font-size:11px;border-color:var(--border)"><i class="fas fa-table-list me-1 text-danger"></i>View Discovery Methods</button>
+                <div class="domain-card-dropzone">
+                  <i class="fas fa-cloud-arrow-up me-1"></i>
+                  <span>Drop files or <a href="#" class="text-primary domain-browse-link">browse</a></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 7. ETL & Data Integration -->
+            <div class="col-md-6 col-xl-4">
+              <div class="domain-upload-card" id="domainEtl">
+                <input type="file" class="domain-file-input" multiple accept=".xml,.zip,.dtsx,.json,.odi,.ktr,.kjb" style="display:none">
+                <span class="domain-file-badge badge badge-muted">0 files</span>
+                <div class="d-flex align-items-start gap-2 mb-2">
+                  <div class="domain-card-icon" style="background:#ecfeff;color:#0891b2"><i class="fas fa-arrows-split-up-and-left"></i></div>
+                  <div>
+                    <div class="domain-card-title">ETL &amp; Data Integration</div>
+                    <div class="domain-card-desc">ODI, SSIS, DataStage, Pentaho packages</div>
+                  </div>
+                </div>
+                <div class="domain-card-formats">.dtsx · .xml · .odi · .ktr · .kjb · .zip</div>
+                <button class="btn btn-light btn-sm w-100 mb-2 domain-details-btn" data-domain="etl" style="font-size:11px;border-color:var(--border)"><i class="fas fa-table-list me-1" style="color:#0891b2"></i>View Discovery Methods</button>
+                <div class="domain-card-dropzone">
+                  <i class="fas fa-cloud-arrow-up me-1"></i>
+                  <span>Drop files or <a href="#" class="text-primary domain-browse-link">browse</a></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 8. Upload Custom Template -->
+            <div class="col-md-6 col-xl-4">
+              <div class="domain-upload-card" id="domainCustomTemplate" style="height:auto">
+                <input type="file" id="customTemplateInput" accept=".xlsx" style="display:none">
+                <div class="d-flex align-items-start gap-2 mb-2">
+                  <div class="domain-card-icon" style="background:#f0fdf4;color:#059669"><i class="fas fa-file-excel"></i></div>
+                  <div>
+                    <div class="domain-card-title">Upload Custom Template</div>
+                    <div class="domain-card-desc">Upload your on-premises inventory using a .xlsx template</div>
+                  </div>
+                </div>
+                <div class="domain-card-formats">.xlsx only</div>
+                <!-- Steps -->
+                <div class="d-flex flex-column gap-0 mt-2 domain-template-steps" style="position:relative">
+                  <!-- Step connector line -->
+                  <div style="position:absolute;left:11px;top:14px;bottom:14px;width:2px;background:var(--border);z-index:0"></div>
+                  <!-- Step 1 -->
+                  <div class="d-flex align-items-start gap-2 mb-2" style="position:relative;z-index:1">
+                    <div style="width:22px;height:22px;border-radius:50%;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">1</div>
+                    <div class="flex-1">
+                      <div class="fw-700" style="font-size:11px;color:#1e40af">Download .xlsx Template</div>
+                      <div class="text-muted" style="font-size:10px;margin-bottom:4px">Download the template to import your on-premises data</div>
+                      <a href="#" class="btn btn-primary btn-sm" style="font-size:10px;padding:2px 10px" onclick="event.preventDefault()"><i class="fas fa-download me-1"></i>Download</a>
+                    </div>
+                  </div>
+                  <!-- Step 2 -->
+                  <div class="d-flex align-items-start gap-2 mb-2" style="position:relative;z-index:1">
+                    <div style="width:22px;height:22px;border-radius:50%;background:#6b7280;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">2</div>
+                    <div class="flex-1">
+                      <div class="fw-700" style="font-size:11px;color:#374151">Add inventory data to .xlsx File</div>
+                      <div class="text-muted" style="font-size:10px">Fill the data into the downloaded .xlsx file from available data</div>
+                      <div class="text-muted" style="font-size:10px;margin-top:2px"><i class="fas fa-circle-info text-primary me-1"></i>Fields marked with <strong>*</strong> in the header are mandatory</div>
+                    </div>
+                  </div>
+                  <!-- Step 3 -->
+                  <div class="d-flex align-items-start gap-2 mb-2" style="position:relative;z-index:1">
+                    <div style="width:22px;height:22px;border-radius:50%;background:#6b7280;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">3</div>
+                    <div class="flex-1">
+                      <div class="fw-700" style="font-size:11px;color:#374151">Upload updated .xlsx file</div>
+                      <div class="text-muted" style="font-size:10px;margin-bottom:4px">After uploading, the file will be reviewed for errors and a report generated</div>
+                      <button class="btn btn-success btn-sm" style="font-size:10px;padding:2px 10px" onclick="document.getElementById('customTemplateInput').click()"><i class="fas fa-cloud-arrow-up me-1"></i>Upload Template</button>
+                      <div id="customTemplateStatus" class="mt-1" style="font-size:10px;display:none"></div>
+                    </div>
+                  </div>
+                  <!-- Step 4 -->
+                  <div class="d-flex align-items-start gap-2" style="position:relative;z-index:1">
+                    <div style="width:22px;height:22px;border-radius:50%;background:#6b7280;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">4</div>
+                    <div class="flex-1">
+                      <div class="fw-700" style="font-size:11px;color:#374151">Showing Generated Report</div>
+                      <div class="text-muted" style="font-size:10px">After processing completes, go back to dashboard to view report</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Upload Progress Summary -->
+            <div class="col-md-6 col-xl-8">
+              <div class="discovery-progress-panel">
+                <div class="discovery-progress-head">
+                  <div>
+                    <h4 class="discovery-progress-title">Domain Upload Progress</h4>
+                    <div class="discovery-progress-subtitle">Track intake coverage before running analysis.</div>
+                  </div>
+                  <div class="discovery-progress-total">
+                    <i class="fas fa-circle-check"></i>
+                    <span>3 / 7 ready</span>
+                  </div>
+                </div>
+                <div class="discovery-progress-list">
+                  <div class="d-flex align-items-center gap-2">
+                    <span class="small text-muted" style="min-width:120px">Infrastructure</span>
+                    <div class="progress flex-1 progress-sm"><div class="progress-bar bg-secondary" data-width="0" style="width:0%"></div></div>
+                    <span class="small text-muted" style="min-width:28px">—</span>
+                  </div>
+                  <div class="d-flex align-items-center gap-2">
+                    <span class="small text-success fw-600" style="min-width:120px">Database</span>
+                    <div class="progress flex-1 progress-sm"><div class="progress-bar bg-success" data-width="100" style="width:100%"></div></div>
+                    <span class="small text-success" style="min-width:28px">3</span>
+                  </div>
+                  <div class="d-flex align-items-center gap-2">
+                    <span class="small text-success fw-600" style="min-width:120px">Forms &amp; Reports</span>
+                    <div class="progress flex-1 progress-sm"><div class="progress-bar bg-success" data-width="100" style="width:100%"></div></div>
+                    <span class="small text-success" style="min-width:28px">12</span>
+                  </div>
+                  <div class="d-flex align-items-center gap-2">
+                    <span class="small text-muted" style="min-width:120px">Applications</span>
+                    <div class="progress flex-1 progress-sm"><div class="progress-bar bg-secondary" data-width="0" style="width:0%"></div></div>
+                    <span class="small text-muted" style="min-width:28px">—</span>
+                  </div>
+                  <div class="d-flex align-items-center gap-2">
+                    <span class="small text-warning fw-600" style="min-width:120px">Middleware</span>
+                    <div class="progress flex-1 progress-sm"><div class="progress-bar bg-warning" data-width="30" style="width:30%"></div></div>
+                    <span class="small text-warning" style="min-width:28px">1</span>
+                  </div>
+                  <div class="d-flex align-items-center gap-2">
+                    <span class="small text-muted" style="min-width:120px">Licensing</span>
+                    <div class="progress flex-1 progress-sm"><div class="progress-bar bg-secondary" data-width="0" style="width:0%"></div></div>
+                    <span class="small text-muted" style="min-width:28px">—</span>
+                  </div>
+                  <div class="d-flex align-items-center gap-2">
+                    <span class="small text-muted" style="min-width:120px">ETL &amp; Data Int.</span>
+                    <div class="progress flex-1 progress-sm"><div class="progress-bar bg-secondary" data-width="0" style="width:0%"></div></div>
+                    <span class="small text-muted" style="min-width:28px">—</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2.1 Oracle Forms Architecture Overview (HRDPRD) -->
+  <div class="discovery-section-title">
+    <div class="icon"><i class="fas fa-sitemap"></i></div>
+    <div>
+      <h3>Architecture Visibility</h3>
+      <p>Current Forms stack components, version posture, and mapped Azure targets.</p>
+    </div>
+  </div>
+  <div class="row g-3 mb-4 fade-in-up">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fas fa-sitemap text-warning"></i>
+          <div>
+            <div class="card-title">2.1 Oracle Forms Architecture Overview — HRDPRD</div>
+            <div class="card-subtitle">Current state, version, and Azure target for each Forms stack component</div>
+          </div>
+          <div class="ms-auto d-flex align-items-center gap-2">
+            <span class="badge badge-warning">Forms 12c · WLS 12c</span>
+            <span class="badge badge-primary">Azure Target Mapped</span>
+          </div>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Component</th>
+                  <th>Current State</th>
+                  <th>Version</th>
+                  <th>Azure Target</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="hover-highlight">
+                  <td><i class="fas fa-file-code text-warning me-2"></i><strong>Forms Runtime</strong></td>
+                  <td>Oracle Forms 12c</td>
+                  <td><span class="badge badge-muted">12.2.1.x</span></td>
+                  <td><span class="badge badge-primary">WebLogic VM or Modernized</span></td>
+                  <td class="text-muted small">Forms 14c released Dec 2024; WLS jointly supported on Azure</td>
+                </tr>
+                <tr class="hover-highlight">
+                  <td><i class="fas fa-server text-indigo me-2"></i><strong>App Server</strong></td>
+                  <td>Oracle WebLogic Server</td>
+                  <td><span class="badge badge-muted">12c (12.2.1.4)</span></td>
+                  <td><span class="badge badge-primary">Azure VM (BYOL) or AKS</span></td>
+                  <td class="text-muted small">Or integrate with Azure Front Door</td>
+                </tr>
+                <tr class="hover-highlight">
+                  <td><i class="fas fa-globe text-cyan me-2"></i><strong>Web Server</strong></td>
+                  <td>Oracle HTTP Server / Apache</td>
+                  <td><span class="badge badge-muted">12c</span></td>
+                  <td><span class="badge badge-primary">Azure App Gateway + NGINX</span></td>
+                  <td class="text-muted small">Replace OHS with Azure App Gateway + NGINX on VM</td>
+                </tr>
+                <tr class="hover-highlight">
+                  <td><i class="fas fa-plug text-green me-2"></i><strong>Forms Servlet</strong></td>
+                  <td>frmservlet / FormsServlet</td>
+                  <td><span class="badge badge-muted">12c</span></td>
+                  <td><span class="badge badge-success">Same (lift &amp; shift VM)</span></td>
+                  <td class="text-muted small">No change for lift &amp; shift</td>
+                </tr>
+                <tr class="hover-highlight">
+                  <td><i class="fas fa-database text-primary me-2"></i><strong>Database Tier</strong></td>
+                  <td>Oracle DB 12.2 EE RAC</td>
+                  <td><span class="badge badge-muted">12.2.0.1</span></td>
+                  <td><span class="badge badge-primary">Per DB option selected</span></td>
+                  <td class="text-muted small">Forms talks to DB via JDBC/SQLNET</td>
+                </tr>
+                <tr class="hover-highlight">
+                  <td><i class="fas fa-file-chart-column text-purple me-2"></i><strong>Reports</strong></td>
+                  <td>Oracle Reports (if any)</td>
+                  <td><span class="badge badge-muted">12c</span></td>
+                  <td><span class="badge badge-warning">Migrate separately</span></td>
+                  <td class="text-muted small"><span style="color:#c2410c;font-weight:600">Reports 12c deprecated — plan migration</span></td>
+                </tr>
+                <tr class="hover-highlight">
+                  <td><i class="fas fa-users text-teal me-2"></i><strong>Concurrent Users</strong></td>
+                  <td>~50–100 assumed</td>
+                  <td><span class="badge badge-muted">Peak ~150</span></td>
+                  <td><span class="badge badge-success">Azure VM D8ds_v5 sufficient</span></td>
+                  <td class="text-muted small">8 vCPUs handles 150+ concurrent users; AKS stateful sets if containerized</td>
+                </tr>
+                <tr class="hover-highlight">
+                  <td><i class="fas fa-clock-rotate-left text-orange me-2"></i><strong>Session Model</strong></td>
+                  <td>Stateful (Forms session)</td>
+                  <td><span class="badge badge-muted">Long-lived</span></td>
+                  <td><span class="badge badge-success">Preserve on lift &amp; shift</span></td>
+                  <td class="text-muted small">AKS stateful sets required if containerized</td>
+                </tr>
+                <tr class="hover-highlight">
+                  <td><i class="fas fa-display text-primary me-2"></i><strong>Browser Client</strong></td>
+                  <td><span style="color:#d97706;font-weight:600">Java Plugin (legacy) or JWS</span></td>
+                  <td><span class="badge badge-muted">Varies</span></td>
+                  <td><span class="badge badge-success">HTML5 via Forms Standalone</span></td>
+                  <td class="text-muted small">Forms 12c supports browser HTML5</td>
+                </tr>
+                <tr class="hover-highlight">
+                  <td><i class="fas fa-key text-danger me-2"></i><strong>SSO / Auth</strong></td>
+                  <td>Oracle SSO or AD</td>
+                  <td><span class="badge badge-muted">LDAP/AD</span></td>
+                  <td><span class="badge badge-primary">Azure AD / Entra ID</span></td>
+                  <td class="text-muted small">Configure WLS LDAP to Entra ID</td>
+                </tr>
+                <tr class="hover-highlight">
+                  <td><i class="fas fa-certificate text-danger me-2"></i><strong>License — WLS</strong></td>
+                  <td>WebLogic Suite perpetual</td>
+                  <td><span class="badge badge-muted">8 proc lic assumed</span></td>
+                  <td><span class="badge badge-warning">BYOL on Azure VM (2 vCPU = 1 lic)</span></td>
+                  <td class="text-muted small">8 proc lic = 16 vCPUs on Azure</td>
+                </tr>
+                <tr class="hover-highlight">
+                  <td><i class="fas fa-certificate text-warning me-2"></i><strong>License — Forms</strong></td>
+                  <td>Bundled in WLS Suite</td>
+                  <td><span class="badge badge-success">Included</span></td>
+                  <td><span class="badge badge-success">Included in WLS BYOL</span></td>
+                  <td class="text-muted small">Oracle Forms included in WLS Suite</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-body pt-0">
+          <div class="p-3 rounded" style="background:var(--primary-light);border:1px solid #bfdbfe;font-size:11px">
+            <i class="fas fa-circle-info text-primary me-1"></i>
+            <strong>Support timeline:</strong> Oracle Forms 12c Premier Support ended Dec 2024. Sustaining Support ends Dec 2028. Forms 14c (released Dec 2024) extends support to ~2034 but requires WebLogic 14c upgrade.
+            For HRDPRD HCM scenario, <strong>lift &amp; shift to Azure VM is the fastest path</strong>; modernization to React/Angular is the strategic long-term play.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Infrastructure Summary + Uploaded Files Table -->
+  <div class="discovery-section-title">
+    <div class="icon"><i class="fas fa-folder-open"></i></div>
+    <div>
+      <h3>Parsed Inventory Snapshot</h3>
+      <p>Summary counts and uploaded files currently available to the discovery pipeline.</p>
+    </div>
+  </div>
+  <div class="row g-3">
+    <div class="col-lg-4 fade-in-up">
+      <div class="card">
+        <div class="card-header"><i class="fas fa-sitemap text-indigo"></i><div class="card-title">Infrastructure Summary</div></div>
+        <div class="card-body">
+          <div class="d-flex flex-column gap-3">
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center gap-2"><i class="fas fa-server text-muted"></i><span class="small fw-500">Oracle 19c</span></div>
+              <div class="d-flex align-items-center gap-2"><span class="counter-animate fw-700" data-target="18">0</span><div class="progress progress-sm" style="width:80px"><div class="progress-bar bg-primary" data-width="75" style="width:0%"></div></div></div>
+            </div>
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center gap-2"><i class="fas fa-server text-muted"></i><span class="small fw-500">Oracle 12c</span></div>
+              <div class="d-flex align-items-center gap-2"><span class="counter-animate fw-700" data-target="4">0</span><div class="progress progress-sm" style="width:80px"><div class="progress-bar bg-warning" data-width="17" style="width:0%"></div></div></div>
+            </div>
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center gap-2"><i class="fas fa-server text-muted"></i><span class="small fw-500">Oracle 11g</span></div>
+              <div class="d-flex align-items-center gap-2"><span class="counter-animate fw-700" data-target="2">0</span><div class="progress progress-sm" style="width:80px"><div class="progress-bar bg-danger" data-width="8" style="width:0%"></div></div></div>
+            </div>
+            <div class="divider"></div>
+            <div class="d-flex align-items-center justify-content-between">
+              <span class="small fw-500 text-muted">Total Schemas</span><strong class="counter-animate" data-target="187">0</strong>
+            </div>
+            <div class="d-flex align-items-center justify-content-between">
+              <span class="small fw-500 text-muted">Forms Modules</span><strong class="counter-animate" data-target="312">0</strong>
+            </div>
+            <div class="d-flex align-items-center justify-content-between">
+              <span class="small fw-500 text-muted">PL/SQL Packages</span><strong class="counter-animate" data-target="894">0</strong>
+            </div>
+            <div class="d-flex align-items-center justify-content-between">
+              <span class="small fw-500 text-muted">Stored Procedures</span><strong class="counter-animate" data-target="2341">0</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-8 fade-in-up">
+      <div class="card">
+        <div class="card-header">
+          <i class="fas fa-folder-open text-warning"></i>
+          <div class="card-title">Uploaded Files</div>
+          <input type="text" class="form-control form-control-sm ms-auto table-search" data-target="#filesTable" placeholder="Filter files…" style="width:180px">
+        </div>
+        <div class="card-body p-0">
+          <div class="table-container">
+            <table class="table" id="filesTable">
+              <thead><tr><th>Filename</th><th>Domain</th><th>Schema</th><th>Objects</th><th>Size</th><th>Status</th><th></th></tr></thead>
+              <tbody>
+                <tr class="hover-highlight"><td><i class="fas fa-file-code text-primary me-2"></i><strong>FIN_GL_v3.dmp</strong></td><td><span class="badge badge-primary">Database</span></td><td>FIN_GL</td><td>324</td><td>4.2 MB</td><td><span class="badge badge-success">Complete</span></td><td><button class="btn btn-light btn-sm btn-icon"><i class="fas fa-eye"></i></button></td></tr>
+                <tr class="hover-highlight"><td><i class="fas fa-file-code text-warning me-2"></i><strong>HR_FORMS.fmb</strong></td><td><span class="badge badge-warning text-dark">Forms</span></td><td>HRMS</td><td>47</td><td>1.8 MB</td><td><span class="badge badge-success">Complete</span></td><td><button class="btn btn-light btn-sm btn-icon"><i class="fas fa-eye"></i></button></td></tr>
+                <tr class="hover-highlight"><td><i class="fas fa-file-code text-success me-2"></i><strong>INV_SCHEMA.sql</strong></td><td><span class="badge badge-primary">Database</span></td><td>INV_MGMT</td><td>218</td><td>2.1 MB</td><td><span class="badge badge-success">Complete</span></td><td><button class="btn btn-light btn-sm btn-icon"><i class="fas fa-eye"></i></button></td></tr>
+                <tr class="hover-highlight"><td><i class="fas fa-file-code text-warning me-2"></i><strong>PAYROLL_RPTS.rdf</strong></td><td><span class="badge badge-warning text-dark">Forms</span></td><td>PAYROLL</td><td>12</td><td>856 KB</td><td><span class="badge badge-primary">Processing</span></td><td><button class="btn btn-light btn-sm btn-icon"><i class="fas fa-eye"></i></button></td></tr>
+                <tr class="hover-highlight"><td><i class="fas fa-file-code text-muted me-2"></i><strong>WLS_config.xml</strong></td><td><span class="badge badge-muted">Middleware</span></td><td>—</td><td>—</td><td>124 KB</td><td><span class="badge badge-warning">Queued</span></td><td><button class="btn btn-light btn-sm btn-icon"><i class="fas fa-eye"></i></button></td></tr>
+                <tr class="hover-highlight"><td><i class="fas fa-file-code text-primary me-2"></i><strong>ASSET_MGMT_v2.sql</strong></td><td><span class="badge badge-primary">Database</span></td><td>ASSET</td><td>97</td><td>3.4 MB</td><td><span class="badge badge-success">Complete</span></td><td><button class="btn btn-light btn-sm btn-icon"><i class="fas fa-eye"></i></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- Domain Detail Offcanvas -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="domainDetailPanel" style="width:600px;max-width:100vw">
+  <div class="offcanvas-header border-bottom py-3">
+    <div class="d-flex align-items-center gap-3">
+      <div id="ddIcon" class="stat-icon blue mb-0" style="width:40px;height:40px;font-size:16px"><i class="fas fa-server"></i></div>
+      <div>
+        <h5 class="offcanvas-title fw-700 mb-0" id="ddTitle">Domain Details</h5>
+        <div class="text-muted small" id="ddSubtitle">Discovery methods &amp; build specification</div>
+      </div>
+    </div>
+    <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body p-0" id="ddBody" style="overflow-y:auto"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+// ---- Domain Detail Data ----
+var domainDetails = {
+  infra: {
+    title: 'Infrastructure Discovery', subtitle: 'Domain 1 — Servers, Storage, Clusters, Network',
+    iconClass: 'fas fa-server', iconBg: '#eff6ff', iconColor: '#2563eb',
+    methods: [
+      ['Server Hardware','WMI / SSH / LSHW','Windows: WMI &nbsp;|&nbsp; Linux: LSHW','CPU cores, sockets, threads, RAM, NIC count'],
+      ['Storage','OS commands + APIs','iostat, df, storage APIs','IOPS, throughput, latency, capacity, RAID'],
+      ['Virtualization','vCenter API / OVM CLI','VMware / OVM tools','vCPU, vRAM, overcommit ratios, cluster size'],
+      ['Oracle Exadata','dcli + cellcli','Cell CLI, v$cellevent','Cell config, storage servers, InfiniBand, Flash'],
+      ['RAC Cluster','crsctl + asmcmd','Oracle Grid Infrastructure','Node count, interconnect, voting disks, ASM DGs'],
+      ['Network','Device APIs + config','Switch configs, routing tables','VLANs, firewall rules, load balancers, MTU'],
+      ['Backup','RMAN + OS scripts','RMAN catalog, backup logs','Schedules, retention, tape vs disk, block size'],
+      ['OS','SSH + OS commands','uname, dmesg, systemctl','Distro, kernel, patches, systemd, env vars']
+    ],
+    build: [
+      {title:'Agent Component',items:['Python collector: paramiko, pywinrm, pyvmomi','Input: host credentials (WMI / SSH)','Output: JSON inventory per server']},
+      {title:'Key SQL Scripts',items:['v$osstat — CPU cores &amp; memory','v$asm_diskgroup — ASM storage','v$parameter — instance config','dba_data_files — tablespace sizing']},
+      {title:'Azure Mapping Engine',items:['CPU cores → Azure VM SKU','IOPS → Premium/Ultra disk tier','RAC nodes → Availability Zones','Exadata → Azure Dedicated Host']},
+      {title:'Output Schema',items:['servers: [{cpu, ram, storage, os}]','clusters: [{nodes, interconnect, asmdg}]','network: [{vlans, firewall_rules}]']}
+    ]
+  },
+  database: {
+    title: 'Database &amp; Schema Discovery', subtitle: 'Domain 2 — Schemas, PL/SQL, Performance, HA/DR',
+    iconClass: 'fas fa-database', iconBg: '#f0fdf4', iconColor: '#16a34a',
+    methods: [
+      ['Schema Objects','DBA_ catalog views','DBA_OBJECTS, DBA_TABLES','Object inventory by type &amp; owner'],
+      ['PL/SQL Code','DBA_SOURCE + deps','DBA_DEPENDENCIES','Code extraction + ANTLR4 complexity scoring'],
+      ['Performance','AWR / ASH / ADDM','DBA_HIST_% views','Execution stats, wait events, I/O, top SQL'],
+      ['Data Volumes','DBA_SEGMENTS + TABLES','Segment advisor','Sizes, row counts, growth trends'],
+      ['Security','DBA_USERS / ROLES','DBA_SYS_PRIVS','User / role / privilege map'],
+      ['HA/DR','V$DATABASE + V$ARCHIVE','Data Guard views','DataGuard / RAC topology &amp; lag'],
+      ['Jobs','DBA_SCHEDULER_JOBS','DBA_SCHEDULER_CHAINS','Scheduled tasks, chains, dependencies'],
+      ['Queues (AQ)','DBA_QUEUES + AQ views','DBA_QUEUE_SUBSCRIBERS','AQ config, subscribers, payload types']
+    ],
+    build: [
+      {title:'JDBC Collector',items:['Java/Python JDBC connector','Executes 50+ discovery queries','Handles Oracle 10g through 21c','Connection: TNS or Easy Connect']},
+      {title:'PL/SQL Analyzer',items:['Parses DBA_SOURCE code bodies','ANTLR4 Oracle grammar','Detects: DBMS_*, dynamic SQL usage','Outputs dependency graph JSON']},
+      {title:'AWR / ASH Parser',items:['Reads AWR HTML &amp; text reports','Extracts: Top SQL, wait events','I/O stats, SGA advisory data','Fallback: Statspack if unlicensed']},
+      {title:'Complexity Scorer (Azure OpenAI)',items:['Scoring scale 1–10','Factors: LOC, Oracle-specific constructs','Dynamic SQL, cross-schema deps','Data types, transaction patterns']}
+    ]
+  },
+  forms: {
+    title: 'Oracle Forms &amp; Reports Discovery', subtitle: 'Domain 4 — .fmb Parsing, Complexity Scoring, UI Mapping',
+    iconClass: 'fas fa-file-code', iconBg: '#fff7ed', iconColor: '#ea580c',
+    methods: [
+      ['Oracle Forms (.fmb)','Binary FMB parser + XML','FMB Parser, frmf2xml','Objects, PL/SQL triggers, UI tree, complexity score'],
+      ['Oracle Forms Runtime','Forms servlet discovery','HTTP discovery, form paths','Running forms, versions, active modules'],
+      ['Oracle Reports (.rdf)','RDF file parsing','Report Builder utilities','Query structure, parameters, layout sections'],
+      ['Report Server','Reports servlet enumeration','HTTP discovery, API scan','Report catalog, execution logs'],
+      ['SRW Programs','Dynamic report discovery','SQL queries on form server','Custom SRW programs, data sources'],
+      ['Triggers &amp; PL/SQL','Form trigger extraction','FMB parser + text analysis','Trigger code by event, complexity score'],
+      ['Shared Libraries (.pll)','Recursive .pll file scanning','Recursive library parsing','Library inventory, shared objects, dependencies']
+    ],
+    build: [
+      {title:'FMB Binary Parser',items:['Node.js FMB parser library','Extracts full form structure tree','PL/SQL trigger code per event','Returns structured JSON hierarchy']},
+      {title:'Form Complexity Scorer',items:['1–10 complexity scale','Factors: blocks, items, triggers','PL/SQL LOC + dynamic SQL usage','Reusability &amp; portability scoring']},
+      {title:'Form-to-App Mapper',items:['Correlates .fmb to business modules','Maps form data blocks to DB tables','Identifies shared library dependencies','Modernization feasibility score']},
+      {title:'Report Converter',items:['RDF → structured JSON','Query rewriting for PostgreSQL target','Layout metadata extraction','Scheduling &amp; integration point mapping']}
+    ]
+  },
+  apps: {
+    title: 'Applications Discovery', subtitle: 'Domain 3 — EBS, APEX, Custom Java, BI, Batch Jobs',
+    iconClass: 'fas fa-layer-group', iconBg: '#f5f3ff', iconColor: '#7c3aed',
+    methods: [
+      ['Oracle EBS','EBS system tables + AD utils','AD utilities, SQL*Plus','Modules, patches, customizations, concurrent programs'],
+      ['Oracle APEX','Workspace views + REST','APEX REST export','Apps, pages, LOVs, processes, theme catalog'],
+      ['Custom Java','JMX + classpath scan','JDBC, classpath scan','WAR/EAR structure, JDBC pools, ORM mappings'],
+      ['Oracle BI / OBIEE','RPD + web catalog','OBIEE tools, REST API','Subject areas, reports, dashboards, data sources'],
+      ['Batch / ETL','DBMS_SCHEDULER + crontab','ODI repository','Job chains, dependencies, data volumes'],
+      ['Oracle Reports (.rdf)','RDF file scan','File parsing tools','Layouts, queries, parameters, data sources'],
+      ['Custom PL/SQL','Schema analysis + tracing','v$session tracing','Entry points, call graphs, session activity']
+    ],
+    build: [
+      {title:'Session Analyzer',items:['Queries v$session: module, action','Maps SQL execution to application','Correlates JDBC connections to app tier','Generates app activity matrix']},
+      {title:'EBS Discovery',items:['Queries AD_APPLIED_PATCHES','FND_APPLICATION tables scan','Custom forms / reports / workflows','Concurrent program catalog extraction']},
+      {title:'APEX Extractor',items:['REST API export across all workspaces','Page inventory by type &amp; region','Process/computation extraction','Theme &amp; template catalog']},
+      {title:'App-to-DB Mapper',items:['Builds app → schema → objects graph','Identifies modernization impact radius','Dependency ordering for conversion waves','Data lineage tracking']}
+    ]
+  },
+  middleware: {
+    title: 'Middleware Discovery', subtitle: 'Domain 5 — WebLogic, SOA, OSB, ODI, GoldenGate',
+    iconClass: 'fas fa-gears', iconBg: '#eef2ff', iconColor: '#4f46e5',
+    methods: [
+      ['WebLogic Server','WLST scripts + JMX','WLST, Java, JMX API','Domains, managed servers, clusters, app deployments'],
+      ['SOA Suite / BPEL','SOA console API + MDS','Oracle Enterprise Manager','Composites, services, mediation routing rules'],
+      ['Oracle Service Bus','OSB console export','WLST + OSB SBCONSOLE','Proxies, business services, pipeline routes'],
+      ['Oracle HTTP Server','Config file parsing','mod_oc4j, mod_jk configs','Virtual hosts, load balancer rules, SSL config'],
+      ['Data Integrator (ODI)','ODI repository queries','JDBC to ODI metadata','Packages, projects, scenarios, scheduling config'],
+      ['GoldenGate','GGSCI + DBA views','DBA_GOLDENGATE*, ggsci','Trail config, replication flows, lag metrics']
+    ],
+    build: [
+      {title:'WLST Discovery Agent',items:['Python wrapper around WLST shell','Queries all WebLogic domains','Application topology extraction','Cluster + server mapping to Azure AKS']},
+      {title:'SOA Connector',items:['Enterprise Manager REST API','Queries MDS repository','Composite versioning inventory','Endpoint routing analysis']},
+      {title:'GoldenGate Mapper',items:['GGSCI + DBA_GOLDENGATE views','Replication topology graph','Trail lag &amp; throughput metrics','Source/target table mapping']},
+      {title:'Integration Catalog',items:['DB links &amp; REST endpoints','File-based integrations (FTP/SFTP)','Message queue subscribers (AQ)','Data flow dependency map']}
+    ]
+  },
+  licensing: {
+    title: 'Licensing &amp; Compliance Discovery', subtitle: 'Domain 6 — Edition, Options, ULA/NUP, Feature Usage',
+    iconClass: 'fas fa-certificate', iconBg: '#fef2f2', iconColor: '#dc2626',
+    methods: [
+      ['Oracle Edition','v$version + DBA_REGISTRY','Oracle views, license file','EE / SE / Personal / Express detection'],
+      ['Options &amp; Packs','DBA_FEATURE_USAGE_STATISTICS','License.xml, usage views','List of licensed options, usage percentage'],
+      ['Metric Type','License metadata + config','Oracle licensing files','Processor / NUP / ULA detection'],
+      ['Feature Usage','Feature usage stats table','DBA_FEATURE_USAGE_STATISTICS','Used/unused features, downgrade risk flags'],
+      ['Virtualization','vCenter + Oracle vmfacts','VMware + OS detection','VM soft partitioning, licensing impact calc'],
+      ['Support Level','Support contracts query','Oracle CRM, UXIC data','Premier / Extended / Sustaining status']
+    ],
+    build: [
+      {title:'License Detector',items:['Queries v$version, DBA_REGISTRY','Oracle edition + option detection','License.xml file parser','Returns: edition, options, packs list']},
+      {title:'Feature Usage Scanner',items:['DBA_FEATURE_USAGE_STATISTICS','90-day rolling window analysis','Usage percentage by feature','Downgrade opportunity flagging']},
+      {title:'Virtualization Impact',items:['vCenter API integration','Oracle vmfacts tool execution','Soft partitioning detection','Licensing impact calculation']},
+      {title:'Compliance Report',items:['TCO baseline vs. negotiated rates','Optimization opportunities summary','ULA vs. BYOL recommendation','Azure licensing pathway guidance']}
+    ]
+  },
+  etl: {
+    title: 'ETL &amp; Data Integration Discovery', subtitle: 'Domain 7 — Jobs, Replication, Third-Party ETL, Data Flows',
+    iconClass: 'fas fa-arrows-split-up-and-left', iconBg: '#ecfeff', iconColor: '#0891b2',
+    methods: [
+      ['Oracle Scheduler Jobs','DBA_SCHEDULER_JOBS query','job_name, job_action, repeat_interval','Scheduled job inventory, run counts, state — Critical'],
+      ['Legacy DBMS_JOB','DBA_JOBS query','job, schema_user, interval, what','Legacy job catalog, broken status — Critical'],
+      ['Oracle Replication','GoldenGate/Streams scan','DBA_GOLDENGATE_*, DBA_MVIEWS','Replication topology, CDC config — Critical'],
+      ['Third-Party ETL Tools','Config file + service scan','.dtsx, .kjb/.ktr, Informatica repo','SSIS, Talend, Kettle package inventory — High'],
+      ['Custom Scripts','Crontab + filesystem scan','crontab -l, /etc/cron.d/*, grep','Shell/Python script catalog — High'],
+      ['Database Links','DBA_DB_LINKS query','owner, db_link, host','Active connections, target host mapping — High'],
+      ['External Tables','DBA_EXTERNAL_TABLES query','table_name, directory, access_params','External file dependencies, formats — Medium'],
+      ['Data Feeds','Network + file watch analysis','netstat scan, FTP dirs, MQ topics','Inbound/outbound data feeds — Medium']
+    ],
+    build: [
+      {title:'ETL Job Scanner (Sprint 3)',items:['Python + cx_Oracle','Scheduled jobs: DBMS_JOB + DBMS_SCHEDULER','Job action, schedule, run count, state']},
+      {title:'Crontab &amp; Windows Task Scanner (Sprint 3)',items:['Python + paramiko (Linux SSH)','Python + pywinrm (Windows WMI)','All OS users crontabs &amp; scheduled tasks']},
+      {title:'Config File Parser (Sprint 4)',items:['Node.js + fast-xml-parser','SSIS .dtsx, Talend .kjb, ODI exports','Connection string extraction from configs']},
+      {title:'Data Lineage Builder (Sprint 4)',items:['Source → transform → target graph','Cross-domain lineage (DB + ETL + App)','Azure Data Factory mapping targets','Data flow dependency visualisation']}
+    ]
+  }
+};
+
+// ---- Offcanvas Population ----
+$(function() {
+  // Domain detail button click
+  $(document).on('click', '.domain-details-btn', function() {
+    var key = $(this).data('domain');
+    var d = domainDetails[key];
+    if (!d) return;
+
+    // Header
+    $('#ddTitle').html(d.title);
+    $('#ddSubtitle').text(d.subtitle);
+    $('#ddIcon').html('<i class="' + d.iconClass + '"></i>').css({'background': d.iconBg, 'color': d.iconColor});
+
+    // Methods table
+    var methodRows = d.methods.map(function(m) {
+      return '<tr><td><strong>' + m[0] + '</strong></td><td>' + m[1] + '</td><td class="text-muted">' + m[2] + '</td><td>' + m[3] + '</td></tr>';
+    }).join('');
+
+    // Build spec quads
+    var buildHtml = '<div class="row g-2" style="margin:0 12px 12px">';
+    d.build.forEach(function(b) {
+      var items = b.items.map(function(i) { return '<li>' + i + '</li>'; }).join('');
+      buildHtml += '<div class="col-md-6"><div class="detail-build-quad"><div class="detail-build-quad-title"><i class="fas fa-wrench text-primary me-1"></i>' + b.title + '</div><ul>' + items + '</ul></div></div>';
+    });
+    buildHtml += '</div>';
+
+    $('#ddBody').html(
+      '<div class="detail-section-title">Discovery Methods &amp; Data Points</div>' +
+      '<div style="overflow-x:auto;padding:0 0 4px">' +
+      '<table class="detail-method-table"><thead><tr><th>Object / Category</th><th>Discovery Method</th><th>Tool / Script</th><th>Data Collected</th></tr></thead>' +
+      '<tbody>' + methodRows + '</tbody></table></div>' +
+      '<div class="detail-section-title">Build Specification</div>' +
+      buildHtml +
+      '<div style="height:20px"></div>'
+    );
+
+    var offcanvas = new bootstrap.Offcanvas(document.getElementById('domainDetailPanel'));
+    offcanvas.show();
+  });
+
+  // Custom Template upload handler — activates step indicators on file select
+  $('#customTemplateInput').on('change', function() {
+    var file = this.files && this.files[0];
+    if (!file) return;
+    var $status = $('#customTemplateStatus');
+    $status.html('<i class="fas fa-check-circle text-success me-1"></i><span class="text-success fw-600">' + file.name + ' ready</span>').show();
+    // Highlight step 3 circle green, step 4 circle blue
+    var $steps = $('#domainCustomTemplate .d-flex[style*="z-index:1"]');
+    $steps.eq(2).find('div[style*="border-radius:50%"]').css({'background':'#059669'});
+    $steps.eq(3).find('div[style*="border-radius:50%"]').css({'background':'#2563eb'});
+    $('#domainCustomTemplate').addClass('has-files');
+  });
+
+  // Upload card drag/drop
+  $('.domain-upload-card').each(function() {
+    var $card = $(this);
+    var $input = $card.find('.domain-file-input');
+    var $badge = $card.find('.domain-file-badge');
+    var $zone  = $card.find('.domain-card-dropzone');
+
+    $card.on('click', '.domain-browse-link, .domain-card-dropzone', function(e) {
+      e.preventDefault();
+      $input.trigger('click');
+    });
+
+    $input.on('change', function() {
+      var count = this.files ? this.files.length : 0;
+      if (count > 0) {
+        $badge.text(count + (count === 1 ? ' file' : ' files')).removeClass('badge-muted badge-warning').addClass('badge-success');
+        $zone.html('<i class="fas fa-check-circle text-success me-1"></i><span class="text-success">' + count + ' file(s) — <a href="#" class="text-primary domain-browse-link">add more</a></span>');
+        $card.addClass('has-files');
+      }
+    });
+
+    $card.on('dragover dragenter', function(e) {
+      e.preventDefault(); $card.addClass('drag-over');
+    }).on('dragleave', function() {
+      $card.removeClass('drag-over');
+    }).on('drop', function(e) {
+      e.preventDefault();
+      $card.removeClass('drag-over');
+      var files = e.originalEvent.dataTransfer ? e.originalEvent.dataTransfer.files : [];
+      if (files.length) {
+        $badge.text(files.length + (files.length === 1 ? ' file' : ' files')).removeClass('badge-muted badge-warning').addClass('badge-success');
+        $zone.html('<i class="fas fa-check-circle text-success me-1"></i><span class="text-success">' + files.length + ' file(s) dropped</span>');
+        $card.addClass('has-files');
+      }
+    });
+  });
+});
+$(function() {
+  $('.domain-upload-card').each(function() {
+    var $card = $(this);
+    var $input = $card.find('.domain-file-input');
+    var $badge = $card.find('.domain-file-badge');
+    var $zone  = $card.find('.domain-card-dropzone');
+
+    $card.on('click', '.domain-browse-link, .domain-card-dropzone', function(e) {
+      e.preventDefault();
+      $input.trigger('click');
+    });
+
+    $input.on('change', function() {
+      var count = this.files ? this.files.length : 0;
+      if (count > 0) {
+        $badge.text(count + (count === 1 ? ' file' : ' files')).removeClass('badge-muted badge-warning').addClass('badge-success');
+        $zone.html('<i class="fas fa-check-circle text-success me-1"></i><span class="text-success">' + count + ' file(s) — <a href="#" class="text-primary domain-browse-link">add more</a></span>');
+        $card.addClass('has-files');
+      }
+    });
+
+    $card.on('dragover dragenter', function(e) {
+      e.preventDefault(); $card.addClass('drag-over');
+    }).on('dragleave', function() {
+      $card.removeClass('drag-over');
+    }).on('drop', function(e) {
+      e.preventDefault();
+      $card.removeClass('drag-over');
+      var files = e.originalEvent.dataTransfer ? e.originalEvent.dataTransfer.files : [];
+      if (files.length) {
+        $badge.text(files.length + (files.length === 1 ? ' file' : ' files')).removeClass('badge-muted badge-warning').addClass('badge-success');
+        $zone.html('<i class="fas fa-check-circle text-success me-1"></i><span class="text-success">' + files.length + ' file(s) dropped</span>');
+        $card.addClass('has-files');
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
