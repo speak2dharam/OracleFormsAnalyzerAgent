@@ -7,6 +7,306 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    #main-content.discovery-page { font-size: 15px; }
+    .discovery-hero {
+      background: linear-gradient(135deg, #12376f 0%, #2563eb 58%, #0f766e 100%);
+      border-radius: 8px;
+      color: #fff;
+      padding: 24px;
+      margin-bottom: 22px;
+      box-shadow: var(--shadow);
+    }
+    .discovery-hero h2 {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -.8px;
+      margin: 8px 0 8px;
+    }
+    .discovery-hero p {
+      color: rgba(255,255,255,.78);
+      font-size: 14px;
+      line-height: 1.7;
+      margin: 0;
+      max-width: 880px;
+    }
+    .discovery-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 10px;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 8px;
+      background: rgba(255,255,255,.12);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+    }
+    .discovery-hero-stat {
+      height: 100%;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .discovery-hero-stat .label {
+      font-size: 10px;
+      color: rgba(255,255,255,.68);
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .discovery-hero-stat .value {
+      font-size: 25px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -.8px;
+    }
+    .discovery-hero-stat .note { font-size: 12px; color: rgba(255,255,255,.68); margin-top: 6px; }
+    .discovery-section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 4px 0 14px;
+    }
+    .discovery-section-title .icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary-light);
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+    .discovery-section-title h3 { font-size: 18px; font-weight: 800; margin: 0; }
+    .discovery-section-title p { color: var(--text-muted); font-size: 13px; margin: 1px 0 0; }
+    #main-content.discovery-page .card {
+      border-radius: 8px;
+      border-color: #dbe3ef;
+      box-shadow: var(--shadow-sm);
+    }
+    #main-content.discovery-page .card-header {
+      min-height: 68px;
+      padding: 18px 20px;
+      background: #fff;
+      border-bottom: 1px solid #e8eef7;
+    }
+    #main-content.discovery-page .card-header > i {
+      width: 38px;
+      height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      background: var(--primary-light);
+      flex-shrink: 0;
+    }
+    #main-content.discovery-page .card-title { font-size: 16px; font-weight: 800; }
+    #main-content.discovery-page .card-subtitle { font-size: 13px; line-height: 1.45; }
+    #main-content.discovery-page .card-body { padding: 22px; }
+    #main-content.discovery-page .card-body.p-0 { padding: 0 !important; }
+    #main-content.discovery-page .domain-upload-card {
+      border-radius: 8px;
+      padding: 20px;
+      min-height: 222px;
+      border-width: 2px;
+      background: #fff;
+    }
+    #main-content.discovery-page .domain-upload-card.has-files { background: #f0fdf4; }
+    #main-content.discovery-page .domain-card-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
+      font-size: 21px;
+    }
+    #main-content.discovery-page .domain-card-title { font-size: 16px !important; line-height: 1.25; margin-bottom: 4px; padding-right: 54px; }
+    #main-content.discovery-page .domain-card-desc { font-size: 13px !important; line-height: 1.55; margin-bottom: 10px; }
+    #main-content.discovery-page .domain-card-formats { font-size: 12px !important; line-height: 1.5; margin-bottom: 12px; white-space: normal; }
+    #main-content.discovery-page .domain-card-dropzone { font-size: 13px !important; padding: 12px 14px; border-radius: 8px; }
+    #main-content.discovery-page .domain-file-badge { font-size: 12px !important; padding: 4px 10px; border-radius: 8px; }
+    #main-content.discovery-page .domain-details-btn { font-size: 13px !important; padding: 8px 12px; border-radius: 8px; }
+    #main-content.discovery-page .small,
+    #main-content.discovery-page small { font-size: 13px !important; }
+    #main-content.discovery-page .table { font-size: 14px; }
+    #main-content.discovery-page .table th {
+      font-size: 12px;
+      padding: 13px 16px;
+      background: #f8fafc;
+    }
+    #main-content.discovery-page .table td {
+      font-size: 13.5px;
+      padding: 14px 16px;
+      line-height: 1.55;
+    }
+    #main-content.discovery-page .table .text-muted.small { font-size: 13px !important; color: #475569 !important; }
+    #main-content.discovery-page .badge { font-size: 11.5px; border-radius: 8px; padding: 4px 9px; }
+    #main-content.discovery-page .btn-sm { font-size: 13px; padding: 7px 12px; border-radius: 8px; }
+    .discovery-progress-panel {
+      background: #fff;
+      border: 1px solid #dbe3ef;
+      border-radius: 8px;
+      padding: 18px;
+      height: 100%;
+    }
+    .discovery-progress-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #e8eef7;
+    }
+    .discovery-progress-title { font-size: 16px; font-weight: 800; margin: 0; }
+    .discovery-progress-subtitle { color: var(--text-muted); font-size: 12px; margin-top: 2px; }
+    .discovery-progress-total {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border-radius: 8px;
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 7px 10px;
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .discovery-progress-list { display: grid; gap: 10px; }
+    .discovery-progress-list > .d-flex {
+      display: grid !important;
+      grid-template-columns: minmax(145px, 190px) minmax(160px, 1fr) 88px;
+      gap: 14px !important;
+      align-items: center !important;
+      padding: 10px 12px;
+      border: 1px solid #edf2f7;
+      border-radius: 8px;
+      background: #fbfdff;
+    }
+    .discovery-progress-list > .d-flex:nth-child(2),
+    .discovery-progress-list > .d-flex:nth-child(3) {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+    }
+    .discovery-progress-list > .d-flex:nth-child(5) {
+      background: #fffbeb;
+      border-color: #fde68a;
+    }
+    .discovery-progress-list > .d-flex > span:first-child {
+      min-width: 0 !important;
+      font-size: 13.5px !important;
+      font-weight: 800 !important;
+      color: var(--text) !important;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .discovery-progress-list > .d-flex > span:last-child {
+      min-width: 74px !important;
+      justify-self: end;
+      text-align: center;
+      border-radius: 8px;
+      padding: 5px 8px;
+      font-size: 12px !important;
+      font-weight: 800 !important;
+      background: #f1f5f9;
+      color: #64748b !important;
+    }
+    .discovery-progress-list > .d-flex:nth-child(2) > span:last-child,
+    .discovery-progress-list > .d-flex:nth-child(3) > span:last-child {
+      background: #dcfce7;
+      color: #15803d !important;
+    }
+    .discovery-progress-list > .d-flex:nth-child(5) > span:last-child {
+      background: #fef3c7;
+      color: #b45309 !important;
+    }
+    .discovery-progress-list > .d-flex:nth-child(1) > span:last-child,
+    .discovery-progress-list > .d-flex:nth-child(4) > span:last-child,
+    .discovery-progress-list > .d-flex:nth-child(6) > span:last-child,
+    .discovery-progress-list > .d-flex:nth-child(7) > span:last-child {
+      font-size: 0 !important;
+    }
+    .discovery-progress-list > .d-flex:nth-child(1) > span:last-child::after,
+    .discovery-progress-list > .d-flex:nth-child(4) > span:last-child::after,
+    .discovery-progress-list > .d-flex:nth-child(6) > span:last-child::after,
+    .discovery-progress-list > .d-flex:nth-child(7) > span:last-child::after {
+      content: '0 files';
+      font-size: 12px;
+    }
+    .discovery-progress-list > .d-flex:nth-child(2) > span:last-child::after,
+    .discovery-progress-list > .d-flex:nth-child(3) > span:last-child::after {
+      content: ' files';
+    }
+    .discovery-progress-list > .d-flex:nth-child(5) > span:last-child::after {
+      content: ' file';
+    }
+    .discovery-progress-list .progress {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: #e5eaf2;
+      overflow: hidden;
+    }
+    .discovery-progress-list .progress-bar {
+      border-radius: 999px;
+    }
+    .discovery-progress-row {
+      display: grid;
+      grid-template-columns: minmax(145px, 190px) minmax(160px, 1fr) 88px;
+      gap: 14px;
+      align-items: center;
+      padding: 10px 12px;
+      border: 1px solid #edf2f7;
+      border-radius: 8px;
+      background: #fbfdff;
+    }
+    .discovery-progress-row.ready { background: #f0fdf4; border-color: #bbf7d0; }
+    .discovery-progress-row.partial { background: #fffbeb; border-color: #fde68a; }
+    .discovery-progress-name { display: flex; align-items: center; gap: 9px; min-width: 0; }
+    .discovery-progress-name i { width: 18px; text-align: center; }
+    .discovery-progress-name span { font-size: 13.5px; font-weight: 800; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .discovery-progress-track { height: 10px; border-radius: 999px; background: #e5eaf2; overflow: hidden; }
+    .discovery-progress-fill { height: 100%; border-radius: 999px; display: block; }
+    .discovery-progress-count { display: flex; justify-content: flex-end; }
+    .discovery-progress-count .pill {
+      min-width: 74px;
+      text-align: center;
+      border-radius: 8px;
+      padding: 5px 8px;
+      font-size: 12px;
+      font-weight: 800;
+      background: #f1f5f9;
+      color: #64748b;
+    }
+    .discovery-progress-count .pill.ready { background: #dcfce7; color: #15803d; }
+    .discovery-progress-count .pill.partial { background: #fef3c7; color: #b45309; }
+    .domain-template-steps .fw-700 { font-size: 13px !important; }
+    .domain-template-steps .text-muted { font-size: 12px !important; line-height: 1.45; }
+    #domainDetailPanel { width: 860px !important; max-width: 100vw; }
+    #domainDetailPanel .offcanvas-title { font-size: 18px; }
+    #domainDetailPanel .text-muted.small { font-size: 13px !important; }
+    #domainDetailPanel .detail-section-title { font-size: 12px; margin: 22px 24px 10px; }
+    #domainDetailPanel .detail-method-table th { font-size: 11px; padding: 11px 18px; }
+    #domainDetailPanel .detail-method-table td { font-size: 13px; padding: 13px 18px; line-height: 1.6; }
+    #domainDetailPanel .detail-build-quad { margin: 8px 0 0; padding: 16px; border-radius: 8px; }
+    #domainDetailPanel .detail-build-quad-title { font-size: 14px; }
+    #domainDetailPanel .detail-build-quad li { font-size: 13px; line-height: 1.5; }
+    .text-indigo { color: var(--indigo) !important; }
+    .text-cyan { color: var(--cyan) !important; }
+    .text-green { color: var(--success) !important; }
+    .text-teal { color: #0f766e !important; }
+    .text-orange { color: #f97316 !important; }
+    @media (max-width: 767px) {
+      .discovery-hero { padding: 18px; }
+      .discovery-hero h2 { font-size: 23px; }
+      #main-content.discovery-page .card-header { align-items: flex-start; }
+      #main-content.discovery-page .domain-upload-card { min-height: auto; }
+    }
+  </style>
 </head>
 <body>
 <div id="page-loader"><div class="loader-ring"></div></div>
@@ -87,10 +387,59 @@
   </div>
 </header>
 
-<main id="main-content">
+<main id="main-content" class="discovery-page">
+
+  <section class="discovery-hero fade-in-up">
+    <div class="row g-4 align-items-end">
+      <div class="col-xl-7">
+        <div class="discovery-eyebrow"><i class="fas fa-magnifying-glass-chart"></i> Discovery Intake</div>
+        <h2>Collect the estate inputs before assessment starts</h2>
+        <p>Upload infrastructure, database, Forms, middleware, licensing, and ETL artefacts into one intake workspace. Each domain has clear accepted formats, discovery methods, and build specifications for the analysis agent.</p>
+      </div>
+      <div class="col-xl-5">
+        <div class="row g-2">
+          <div class="col-6">
+            <div class="discovery-hero-stat">
+              <div class="label">Domains</div>
+              <div class="value">7</div>
+              <div class="note">Discovery areas tracked</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="discovery-hero-stat">
+              <div class="label">Ready</div>
+              <div class="value">3 / 7</div>
+              <div class="note">Database, Forms, Middleware</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="discovery-hero-stat">
+              <div class="label">Uploaded</div>
+              <div class="value">16</div>
+              <div class="note">Files queued for parsing</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="discovery-hero-stat">
+              <div class="label">Target</div>
+              <div class="value">HRDPRD</div>
+              <div class="note">Oracle DB + Forms estate</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 
   <!-- Discovery Agents + Domain Upload Cards -->
+  <div class="discovery-section-title">
+    <div class="icon"><i class="fas fa-cloud-arrow-up"></i></div>
+    <div>
+      <h3>Domain Upload Workspace</h3>
+      <p>Upload known artefacts or open the domain method catalog to see exactly what the agent can collect.</p>
+    </div>
+  </div>
   <div class="row g-3 mb-4">
     
 
@@ -270,7 +619,7 @@
                 </div>
                 <div class="domain-card-formats">.xlsx only</div>
                 <!-- Steps -->
-                <div class="d-flex flex-column gap-0 mt-2" style="position:relative">
+                <div class="d-flex flex-column gap-0 mt-2 domain-template-steps" style="position:relative">
                   <!-- Step connector line -->
                   <div style="position:absolute;left:11px;top:14px;bottom:14px;width:2px;background:var(--border);z-index:0"></div>
                   <!-- Step 1 -->
@@ -315,12 +664,18 @@
 
             <!-- Upload Progress Summary -->
             <div class="col-md-6 col-xl-8">
-              <div class="p-3 rounded-md h-100" style="background:var(--bg);border:1px solid var(--border)">
-                <div class="d-flex align-items-center justify-content-between mb-3">
-                  <div class="fw-700 small">Domain Upload Progress</div>
-                  <span class="badge badge-primary">3 / 7 domains ready</span>
+              <div class="discovery-progress-panel">
+                <div class="discovery-progress-head">
+                  <div>
+                    <h4 class="discovery-progress-title">Domain Upload Progress</h4>
+                    <div class="discovery-progress-subtitle">Track intake coverage before running analysis.</div>
+                  </div>
+                  <div class="discovery-progress-total">
+                    <i class="fas fa-circle-check"></i>
+                    <span>3 / 7 ready</span>
+                  </div>
                 </div>
-                <div class="d-flex flex-column gap-2">
+                <div class="discovery-progress-list">
                   <div class="d-flex align-items-center gap-2">
                     <span class="small text-muted" style="min-width:120px">Infrastructure</span>
                     <div class="progress flex-1 progress-sm"><div class="progress-bar bg-secondary" data-width="0" style="width:0%"></div></div>
@@ -328,12 +683,12 @@
                   </div>
                   <div class="d-flex align-items-center gap-2">
                     <span class="small text-success fw-600" style="min-width:120px">Database</span>
-                    <div class="progress flex-1 progress-sm"><div class="progress-bar bg-success" data-width="100" style="width:0%"></div></div>
+                    <div class="progress flex-1 progress-sm"><div class="progress-bar bg-success" data-width="100" style="width:100%"></div></div>
                     <span class="small text-success" style="min-width:28px">3</span>
                   </div>
                   <div class="d-flex align-items-center gap-2">
                     <span class="small text-success fw-600" style="min-width:120px">Forms &amp; Reports</span>
-                    <div class="progress flex-1 progress-sm"><div class="progress-bar bg-success" data-width="100" style="width:0%"></div></div>
+                    <div class="progress flex-1 progress-sm"><div class="progress-bar bg-success" data-width="100" style="width:100%"></div></div>
                     <span class="small text-success" style="min-width:28px">12</span>
                   </div>
                   <div class="d-flex align-items-center gap-2">
@@ -343,7 +698,7 @@
                   </div>
                   <div class="d-flex align-items-center gap-2">
                     <span class="small text-warning fw-600" style="min-width:120px">Middleware</span>
-                    <div class="progress flex-1 progress-sm"><div class="progress-bar bg-warning" data-width="30" style="width:0%"></div></div>
+                    <div class="progress flex-1 progress-sm"><div class="progress-bar bg-warning" data-width="30" style="width:30%"></div></div>
                     <span class="small text-warning" style="min-width:28px">1</span>
                   </div>
                   <div class="d-flex align-items-center gap-2">
@@ -367,6 +722,13 @@
   </div>
 
   <!-- 2.1 Oracle Forms Architecture Overview (HRDPRD) -->
+  <div class="discovery-section-title">
+    <div class="icon"><i class="fas fa-sitemap"></i></div>
+    <div>
+      <h3>Architecture Visibility</h3>
+      <p>Current Forms stack components, version posture, and mapped Azure targets.</p>
+    </div>
+  </div>
   <div class="row g-3 mb-4 fade-in-up">
     <div class="col-12">
       <div class="card">
@@ -494,6 +856,13 @@
   </div>
 
   <!-- Infrastructure Summary + Uploaded Files Table -->
+  <div class="discovery-section-title">
+    <div class="icon"><i class="fas fa-folder-open"></i></div>
+    <div>
+      <h3>Parsed Inventory Snapshot</h3>
+      <p>Summary counts and uploaded files currently available to the discovery pipeline.</p>
+    </div>
+  </div>
   <div class="row g-3">
     <div class="col-lg-4 fade-in-up">
       <div class="card">
