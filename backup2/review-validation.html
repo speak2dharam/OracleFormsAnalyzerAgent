@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Review &amp; Validation — Oracle Estate Workbench</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="page-loader"><div class="loader-ring"></div></div>
+
+<aside id="sidebar">
+  <a href="dashboard.html" class="sidebar-brand">
+    <div class="brand-icon"><i class="fas fa-database"></i></div>
+    <div class="brand-text"><div class="brand-title">Oracle Estate</div><div class="brand-subtitle">Analyzer &amp; Workbench</div></div>
+  </a>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Overview</div>
+    <a href="dashboard.html" class="sidebar-link" data-label="Dashboard"><span class="link-icon"><i class="fas fa-gauge-high"></i></span><span class="link-text">Dashboard</span></a>
+    <div class="nav-section-label">Discovery</div>
+    <a href="discovery.html" class="sidebar-link" data-label="Discovery"><span class="link-icon"><i class="fas fa-magnifying-glass-chart"></i></span><span class="link-text">Discovery &amp; Intake</span></a>
+    <div class="nav-section-label">Assessment</div>
+    <a href="assessment-lift-shift.html" class="sidebar-link" data-label="Lift &amp; Shift"><span class="link-icon"><i class="fas fa-arrow-up-right-dots"></i></span><span class="link-text">Lift &amp; Shift</span></a>
+    <a href="assessment-modernization.html" class="sidebar-link" data-label="Modernization"><span class="link-icon"><i class="fas fa-wand-magic-sparkles"></i></span><span class="link-text">Modernization</span></a>
+    <a href="dependency-mapping.html" class="sidebar-link" data-label="Dependencies"><span class="link-icon"><i class="fas fa-diagram-project"></i></span><span class="link-text">Dependency Mapping</span></a>
+    <a href="risk-scoring.html" class="sidebar-link" data-label="Risk Scoring"><span class="link-icon"><i class="fas fa-shield-halved"></i></span><span class="link-text">Risk Scoring</span></a>
+    <a href="wave-planning.html" class="sidebar-link" data-label="Wave Planning"><span class="link-icon"><i class="fas fa-wave-square"></i></span><span class="link-text">Wave Planning</span></a>
+    <a href="tco.html" class="sidebar-link" data-label="TCO Analysis"><span class="link-icon"><i class="fas fa-coins"></i></span><span class="link-text">TCO Analysis</span></a>
+    <a href="readiness-check.html" class="sidebar-link" data-label="Readiness"><span class="link-icon"><i class="fas fa-clipboard-check"></i></span><span class="link-text">Readiness Check</span></a>
+    <div class="forms-path-group">
+      <div class="nav-section-label nav-section-forms"><i class="fas fa-wand-magic-sparkles"></i>Forms Modernization</div>
+      <a href="modernization-execution.html" class="sidebar-link" data-label="Execution"><span class="link-icon"><i class="fas fa-gears"></i></span><span class="link-text">Modernization Exec.</span></a>
+      <a href="schema-conversion.html" class="sidebar-link" data-label="Schema"><span class="link-icon"><i class="fas fa-code-branch"></i></span><span class="link-text">Schema Conversion</span></a>
+      <div class="nav-section-label nav-section-forms">Azure Infrastructure</div>
+      <a href="landing-zone.html" class="sidebar-link" data-label="Landing Zone"><span class="link-icon"><i class="fas fa-cloud"></i></span><span class="link-text">Landing Zone</span></a>
+      <a href="security-finops.html" class="sidebar-link" data-label="Security &amp; FinOps"><span class="link-icon"><i class="fas fa-lock"></i></span><span class="link-text">Security &amp; FinOps</span></a>
+      <div class="nav-section-label nav-section-forms">Delivery</div>
+      <a href="review-validation.html" class="sidebar-link" data-label="Review"><span class="link-icon"><i class="fas fa-circle-check"></i></span><span class="link-text">Review &amp; Validation</span></a>
+      <a href="deployment.html" class="sidebar-link" data-label="Deployment"><span class="link-icon"><i class="fas fa-rocket"></i></span><span class="link-text">Deployment</span><span class="link-badge">Live</span></a>
+    </div>
+  </nav>
+  <div class="sidebar-footer">
+    <button class="sidebar-toggle-btn" id="sidebarToggle2"><i class="fas fa-chevron-left"></i><span>Collapse</span></button>
+  </div>
+</aside>
+
+<header id="topbar">
+  <button class="topbar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+  <div class="topbar-breadcrumb">
+    <h1 class="page-title">Review &amp; Validation</h1>
+    <p class="page-subtitle">Oracle Estate Workbench &middot; Testing &amp; Sign-off</p>
+  </div>
+  <div class="topbar-search d-none d-md-flex align-items-center">
+    <i class="fas fa-search search-icon"></i>
+    <input type="text" placeholder="Search tests…">
+  </div>
+  <div class="d-flex align-items-center gap-2 ms-auto">
+    <button class="btn btn-primary btn-sm"><i class="fas fa-play"></i>Run Full Suite</button>
+    <button class="topbar-btn"><i class="fas fa-gear"></i></button>
+    <div class="dropdown">
+      <a class="topbar-profile" data-bs-toggle="dropdown">
+        <div class="profile-avatar">SC</div>
+        <div class="d-none d-sm-block"><div class="profile-name">Sarah Chen</div><div class="profile-role">Modernization Lead</div></div>
+        <i class="fas fa-chevron-down ms-1 text-muted" style="font-size:10px"></i>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end" style="min-width:200px">
+        <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i>My Profile</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-right-from-bracket text-danger"></i>Sign Out</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <!-- Stats -->
+  <div class="row g-3 mb-4 stagger">
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card"><div class="stat-icon green"><i class="fas fa-vial-circle-check"></i></div><div class="stat-value counter-animate" data-target="1284">0</div><div class="stat-label">Tests Passed</div><div class="stat-delta up"><i class="fas fa-arrow-trend-up"></i>94% pass rate</div></div>
+    </div>
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card"><div class="stat-icon red"><i class="fas fa-xmark"></i></div><div class="stat-value counter-animate" data-target="82">0</div><div class="stat-label">Tests Failed</div><div class="stat-delta down"><i class="fas fa-exclamation text-danger"></i>6% failure rate</div></div>
+    </div>
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card"><div class="stat-icon blue"><i class="fas fa-gauge-high"></i></div><div class="stat-value counter-animate" data-target="98" data-suffix="%">0%</div><div class="stat-label">Perf Baseline Met</div><div class="stat-delta up"><i class="fas fa-check text-success"></i>SLA compliant</div></div>
+    </div>
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card"><div class="stat-icon purple"><i class="fas fa-signature"></i></div><div class="stat-value counter-animate" data-target="7">0</div><div class="stat-label">UAT Sign-offs</div><div class="stat-delta up"><i class="fas fa-spinner text-primary"></i>3 pending</div></div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="card fade-in-up">
+    <div class="card-header">
+      <ul class="nav nav-tabs border-0" id="rvTab">
+        <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-tests"><i class="fas fa-vial me-2"></i>Test Results</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-perf"><i class="fas fa-gauge me-2"></i>Performance</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-rollback"><i class="fas fa-rotate-left me-2"></i>Rollback Plan</button></li>
+      </ul>
+    </div>
+    <div class="card-body">
+      <div class="tab-content">
+
+        <!-- Test Results -->
+        <div class="tab-pane fade show active" id="tab-tests">
+          <div class="table-container">
+            <table class="table">
+              <thead><tr><th>Test Suite</th><th>Module</th><th>Total</th><th>Passed</th><th>Failed</th><th>Coverage</th><th>Last Run</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr class="hover-highlight"><td><strong>Unit Tests</strong></td><td><span class="badge badge-muted">All</span></td><td>847</td><td class="text-success fw-600">804</td><td class="text-danger fw-600">43</td><td><div class="progress" style="width:80px"><div class="progress-bar bg-success" data-width="95" style="width:0%"></div></div></td><td class="text-muted small">Apr 15, 08:42</td><td><span class="badge badge-success">Pass</span></td></tr>
+                <tr class="hover-highlight"><td><strong>Integration Tests</strong></td><td><span class="badge badge-muted">API</span></td><td>312</td><td class="text-success fw-600">284</td><td class="text-danger fw-600">28</td><td><div class="progress" style="width:80px"><div class="progress-bar bg-warning" data-width="91" style="width:0%"></div></div></td><td class="text-muted small">Apr 15, 09:15</td><td><span class="badge badge-warning">Warning</span></td></tr>
+                <tr class="hover-highlight"><td><strong>Performance Tests</strong></td><td><span class="badge badge-muted">DB</span></td><td>48</td><td class="text-success fw-600">47</td><td class="text-danger fw-600">1</td><td><div class="progress" style="width:80px"><div class="progress-bar bg-success" data-width="98" style="width:0%"></div></div></td><td class="text-muted small">Apr 14, 16:00</td><td><span class="badge badge-success">Pass</span></td></tr>
+                <tr class="hover-highlight"><td><strong>Security Tests</strong></td><td><span class="badge badge-muted">All</span></td><td>92</td><td class="text-success fw-600">82</td><td class="text-danger fw-600">10</td><td><div class="progress" style="width:80px"><div class="progress-bar bg-warning" data-width="89" style="width:0%"></div></div></td><td class="text-muted small">Apr 14, 11:30</td><td><span class="badge badge-warning">Warning</span></td></tr>
+                <tr class="hover-highlight"><td><strong>UAT Scenarios</strong></td><td><span class="badge badge-muted">Business</span></td><td>264</td><td class="text-success fw-600">264</td><td class="text-success fw-600">0</td><td><div class="progress" style="width:80px"><div class="progress-bar bg-success" data-width="100" style="width:0%"></div></div></td><td class="text-muted small">Apr 15, 10:00</td><td><span class="badge badge-success">Pass</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Performance Comparison -->
+        <div class="tab-pane fade" id="tab-perf">
+          <div class="row g-3">
+            <div class="col-lg-7">
+              <canvas id="perfChart" height="240"></canvas>
+            </div>
+            <div class="col-lg-5">
+              <div class="fw-700 mb-3">Key Metrics Comparison</div>
+              <div class="d-flex flex-column gap-3">
+                <div class="d-flex align-items-center justify-content-between p-3 rounded-md" style="background:var(--success-light)">
+                  <span class="fw-600 small">Avg Query Time</span>
+                  <div class="d-flex gap-3"><span class="text-muted small">Oracle: 124ms</span><span class="text-success fw-700">PG: 89ms <i class="fas fa-arrow-down"></i></span></div>
+                </div>
+                <div class="d-flex align-items-center justify-content-between p-3 rounded-md" style="background:var(--success-light)">
+                  <span class="fw-600 small">Throughput (TPS)</span>
+                  <div class="d-flex gap-3"><span class="text-muted small">Oracle: 4,200</span><span class="text-success fw-700">PG: 5,800 <i class="fas fa-arrow-up"></i></span></div>
+                </div>
+                <div class="d-flex align-items-center justify-content-between p-3 rounded-md" style="background:var(--warning-light)">
+                  <span class="fw-600 small">P99 Latency</span>
+                  <div class="d-flex gap-3"><span class="text-muted small">Oracle: 380ms</span><span class="text-warning fw-700">PG: 410ms <i class="fas fa-arrow-up"></i></span></div>
+                </div>
+                <div class="d-flex align-items-center justify-content-between p-3 rounded-md" style="background:var(--success-light)">
+                  <span class="fw-600 small">Connection Pool</span>
+                  <div class="d-flex gap-3"><span class="text-muted small">Oracle: 100</span><span class="text-success fw-700">PG: 200 <i class="fas fa-arrow-up"></i></span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rollback Plan -->
+        <div class="tab-pane fade" id="tab-rollback">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="fw-700 mb-3">Rollback Triggers</div>
+              <div class="d-flex flex-column gap-2">
+                <div class="p-3 rounded-md border-start border-danger border-3 bg-danger-light"><div class="fw-700 small text-danger">Critical Error Rate &gt; 5%</div><div class="text-muted small mt-1">Automatically trigger rollback within 15 minutes</div></div>
+                <div class="p-3 rounded-md border-start border-warning border-3 bg-warning-light"><div class="fw-700 small text-warning">P99 Latency &gt; 2s</div><div class="text-muted small mt-1">Alert on-call team, evaluate manual rollback</div></div>
+                <div class="p-3 rounded-md border-start border-danger border-3 bg-danger-light"><div class="fw-700 small text-danger">Data Integrity Failure</div><div class="text-muted small mt-1">Immediate stop — do not proceed</div></div>
+                <div class="p-3 rounded-md border-start border-warning border-3 bg-warning-light"><div class="fw-700 small text-warning">Business Process Blocked</div><div class="text-muted small mt-1">Stakeholder decision within 30 minutes</div></div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="fw-700 mb-3">Rollback Steps</div>
+              <div class="timeline">
+                <div class="timeline-item"><div class="timeline-dot blue"><i class="fas fa-1"></i></div><div class="timeline-title">Initiate Rollback Decision</div><div class="timeline-desc">Modernization Lead + Stakeholder approval (~5 min)</div></div>
+                <div class="timeline-item"><div class="timeline-dot amber"><i class="fas fa-2"></i></div><div class="timeline-title">Stop Active Jobs</div><div class="timeline-desc">Halt all conversion processes immediately (~2 min)</div></div>
+                <div class="timeline-item"><div class="timeline-dot blue"><i class="fas fa-3"></i></div><div class="timeline-title">Restore Oracle DB</div><div class="timeline-desc">Point-in-time snapshot restore (~20 min)</div></div>
+                <div class="timeline-item"><div class="timeline-dot blue"><i class="fas fa-4"></i></div><div class="timeline-title">Redirect Traffic</div><div class="timeline-desc">Update DNS / load balancer rules (~5 min)</div></div>
+                <div class="timeline-item"><div class="timeline-dot green"><i class="fas fa-5"></i></div><div class="timeline-title">Validate &amp; Confirm</div><div class="timeline-desc">Smoke tests on Oracle baseline (~15 min)</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+function initPageCharts() {
+  var ctx = document.getElementById('perfChart');
+  if (ctx) {
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Avg Query', 'P95 Latency', 'Throughput', 'CPU Usage', 'Memory'],
+        datasets: [
+          { label: 'Oracle (Baseline)', data: [124, 280, 70, 68, 62], backgroundColor: 'rgba(239,68,68,.7)', borderRadius: 5, borderSkipped: false },
+          { label: 'PostgreSQL (Target)', data: [89, 190, 97, 52, 48], backgroundColor: 'rgba(37,99,235,.7)', borderRadius: 5, borderSkipped: false }
+        ]
+      },
+      options: {
+        plugins: { legend: { labels: { font: { size: 11 }, color: '#475569' } } },
+        scales: {
+          x: { grid: { display: false }, ticks: { color: '#64748b', font: { size: 11 } } },
+          y: { ticks: { color: '#64748b', font: { size: 11 } }, grid: { color: '#f1f5f9' } }
+        },
+        animation: { duration: 900 }
+      }
+    });
+  }
+}
+</script>
+</body>
+</html>
