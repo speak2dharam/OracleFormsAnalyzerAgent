@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modernization Assessment — Oracle Migration Workbench</title>
+  <title>Modernization Assessment — Oracle Estate Workbench</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
@@ -50,7 +50,7 @@
   <button class="topbar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
   <div class="topbar-breadcrumb">
     <h1 class="page-title">Modernization Assessment</h1>
-    <p class="page-subtitle">Oracle Migration Workbench &middot; Forms &amp; PL/SQL Analysis</p>
+    <p class="page-subtitle">Oracle Estate Workbench &middot; Forms &amp; PL/SQL Analysis</p>
   </div>
   <div class="topbar-search d-none d-md-flex align-items-center">
     <i class="fas fa-search search-icon"></i>
@@ -62,7 +62,7 @@
     <div class="dropdown">
       <a class="topbar-profile" data-bs-toggle="dropdown">
         <div class="profile-avatar">SC</div>
-        <div class="d-none d-sm-block"><div class="profile-name">Sarah Chen</div><div class="profile-role">Migration Lead</div></div>
+        <div class="d-none d-sm-block"><div class="profile-name">Sarah Chen</div><div class="profile-role">Modernization Lead</div></div>
         <i class="fas fa-chevron-down ms-1 text-muted" style="font-size:10px"></i>
       </a>
       <ul class="dropdown-menu dropdown-menu-end" style="min-width:200px">
@@ -156,11 +156,181 @@
     </div>
   </div>
 
-  <!-- Reports Migration -->
+  <!-- Complexity Scorer -->
+  <div class="card fade-in-up mb-4">
+    <div class="card-header">
+      <i class="fas fa-brain text-purple"></i>
+      <div>
+        <div class="card-title">AI Complexity Scorer</div>
+        <div class="card-subtitle">Automated 1–10 complexity score per Forms module · Powered by Azure OpenAI</div>
+      </div>
+      <span class="ms-auto badge badge-purple" style="font-size:11px;padding:5px 12px"><i class="fas fa-wand-magic-sparkles me-1"></i>AI Scored</span>
+    </div>
+    <div class="card-body">
+      <div class="row g-3">
+
+        <!-- FRM_HRMS_MASTER -->
+        <div class="col-lg-6 col-xl-4">
+          <div class="card" style="border:1px solid var(--border)">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <div class="complexity-score-ring" style="color:#ef4444;border-color:#ef4444;background:#fef2f2">9.2</div>
+                <div>
+                  <div class="fw-700" style="font-size:13px">FRM_HRMS_MASTER</div>
+                  <span class="badge badge-danger">Critical</span>
+                  <span class="badge badge-muted ms-1">HR</span>
+                </div>
+              </div>
+              <div class="d-flex flex-column gap-2">
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Lines of Code</span><span class="fw-700 small">4,812</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:96%;background:#ef4444"></div></div></div>
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Oracle-Specific Constructs</span><span class="fw-700 small">38</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:90%;background:#f97316"></div></div></div>
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Dynamic SQL Usage</span><span class="fw-700 small">High</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:85%;background:#f59e0b"></div></div></div>
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Cross-Schema Dependencies</span><span class="fw-700 small">12 schemas</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:92%;background:#ef4444"></div></div></div>
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Transaction Patterns</span><span class="fw-700 small">Nested / Autonomous</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:88%;background:#f97316"></div></div></div>
+              </div>
+              <div class="mt-3 pt-2 border-top"><span class="text-muted" style="font-size:11px"><i class="fas fa-lightbulb text-warning me-1"></i>Recommended: React SPA + microservices decomposition</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FRM_PAYROLL_MAIN -->
+        <div class="col-lg-6 col-xl-4">
+          <div class="card" style="border:1px solid var(--border)">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <div class="complexity-score-ring" style="color:#ef4444;border-color:#ef4444;background:#fef2f2">8.7</div>
+                <div>
+                  <div class="fw-700" style="font-size:13px">FRM_PAYROLL_MAIN</div>
+                  <span class="badge badge-danger">High</span>
+                  <span class="badge badge-muted ms-1">HR</span>
+                </div>
+              </div>
+              <div class="d-flex flex-column gap-2">
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Lines of Code</span><span class="fw-700 small">3,241</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:80%;background:#ef4444"></div></div></div>
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Oracle-Specific Constructs</span><span class="fw-700 small">29</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:72%;background:#f97316"></div></div></div>
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Dynamic SQL Usage</span><span class="fw-700 small">Medium</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:60%;background:#f59e0b"></div></div></div>
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Cross-Schema Dependencies</span><span class="fw-700 small">8 schemas</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:78%;background:#f97316"></div></div></div>
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Transaction Patterns</span><span class="fw-700 small">Complex batching</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:82%;background:#ef4444"></div></div></div>
+              </div>
+              <div class="mt-3 pt-2 border-top"><span class="text-muted" style="font-size:11px"><i class="fas fa-lightbulb text-warning me-1"></i>Recommended: React SPA with dedicated payroll API</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FRM_AR_INVOICE -->
+        <div class="col-lg-6 col-xl-4">
+          <div class="card" style="border:1px solid var(--border)">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <div class="complexity-score-ring" style="color:#f59e0b;border-color:#f59e0b;background:#fffbeb">6.3</div>
+                <div>
+                  <div class="fw-700" style="font-size:13px">FRM_AR_INVOICE</div>
+                  <span class="badge badge-warning">Medium</span>
+                  <span class="badge badge-indigo ms-1">Finance</span>
+                </div>
+              </div>
+              <div class="d-flex flex-column gap-2">
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Lines of Code</span><span class="fw-700 small">2,108</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:62%;background:#f59e0b"></div></div></div>
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Oracle-Specific Constructs</span><span class="fw-700 small">17</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:55%;background:#f59e0b"></div></div></div>
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Dynamic SQL Usage</span><span class="fw-700 small">Low</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:30%;background:#10b981"></div></div></div>
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Cross-Schema Dependencies</span><span class="fw-700 small">5 schemas</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:58%;background:#f59e0b"></div></div></div>
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Transaction Patterns</span><span class="fw-700 small">Standard CRUD</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:45%;background:#f59e0b"></div></div></div>
+              </div>
+              <div class="mt-3 pt-2 border-top"><span class="text-muted" style="font-size:11px"><i class="fas fa-lightbulb text-primary me-1"></i>Recommended: React SPA · feasible in single sprint</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FRM_GL_ENTRY -->
+        <div class="col-lg-6 col-xl-4">
+          <div class="card" style="border:1px solid var(--border)">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <div class="complexity-score-ring" style="color:#f59e0b;border-color:#f59e0b;background:#fffbeb">5.9</div>
+                <div>
+                  <div class="fw-700" style="font-size:13px">FRM_GL_ENTRY</div>
+                  <span class="badge badge-warning">Medium</span>
+                  <span class="badge badge-indigo ms-1">Finance</span>
+                </div>
+              </div>
+              <div class="d-flex flex-column gap-2">
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Lines of Code</span><span class="fw-700 small">1,876</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:58%;background:#f59e0b"></div></div></div>
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Oracle-Specific Constructs</span><span class="fw-700 small">14</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:48%;background:#f59e0b"></div></div></div>
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Dynamic SQL Usage</span><span class="fw-700 small">Medium</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:55%;background:#f59e0b"></div></div></div>
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Cross-Schema Dependencies</span><span class="fw-700 small">4 schemas</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:50%;background:#f59e0b"></div></div></div>
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Transaction Patterns</span><span class="fw-700 small">Multi-entry journal</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:62%;background:#f59e0b"></div></div></div>
+              </div>
+              <div class="mt-3 pt-2 border-top"><span class="text-muted" style="font-size:11px"><i class="fas fa-lightbulb text-purple me-1"></i>Recommended: REST API with journal validation service</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FRM_ASSET_REGISTER -->
+        <div class="col-lg-6 col-xl-4">
+          <div class="card" style="border:1px solid var(--border)">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <div class="complexity-score-ring" style="color:#10b981;border-color:#10b981;background:#f0fdf4">3.1</div>
+                <div>
+                  <div class="fw-700" style="font-size:13px">FRM_ASSET_REGISTER</div>
+                  <span class="badge badge-success">Low</span>
+                  <span class="badge badge-indigo ms-1">Finance</span>
+                </div>
+              </div>
+              <div class="d-flex flex-column gap-2">
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Lines of Code</span><span class="fw-700 small">892</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:28%;background:#10b981"></div></div></div>
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Oracle-Specific Constructs</span><span class="fw-700 small">6</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:22%;background:#10b981"></div></div></div>
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Dynamic SQL Usage</span><span class="fw-700 small">None</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:5%;background:#10b981"></div></div></div>
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Cross-Schema Dependencies</span><span class="fw-700 small">2 schemas</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:25%;background:#10b981"></div></div></div>
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Transaction Patterns</span><span class="fw-700 small">Simple CRUD</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:18%;background:#10b981"></div></div></div>
+              </div>
+              <div class="mt-3 pt-2 border-top"><span class="text-muted" style="font-size:11px"><i class="fas fa-lightbulb text-success me-1"></i>Recommended: Oracle APEX · fast-track candidate</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FRM_INV_RECEIPT -->
+        <div class="col-lg-6 col-xl-4">
+          <div class="card" style="border:1px solid var(--border)">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <div class="complexity-score-ring" style="color:#10b981;border-color:#10b981;background:#f0fdf4">2.4</div>
+                <div>
+                  <div class="fw-700" style="font-size:13px">FRM_INV_RECEIPT</div>
+                  <span class="badge badge-success">Low</span>
+                  <span class="badge badge-cyan ms-1">Inventory</span>
+                </div>
+              </div>
+              <div class="d-flex flex-column gap-2">
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Lines of Code</span><span class="fw-700 small">641</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:20%;background:#10b981"></div></div></div>
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Oracle-Specific Constructs</span><span class="fw-700 small">4</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:15%;background:#10b981"></div></div></div>
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Dynamic SQL Usage</span><span class="fw-700 small">None</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:5%;background:#10b981"></div></div></div>
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Cross-Schema Dependencies</span><span class="fw-700 small">1 schema</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:12%;background:#10b981"></div></div></div>
+                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Transaction Patterns</span><span class="fw-700 small">Insert/Update only</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:15%;background:#10b981"></div></div></div>
+              </div>
+              <div class="mt-3 pt-2 border-top"><span class="text-muted" style="font-size:11px"><i class="fas fa-lightbulb text-success me-1"></i>Recommended: Oracle APEX · 1-week conversion</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Score legend -->
+      <div class="d-flex align-items-center gap-4 mt-3 pt-3 border-top flex-wrap">
+        <div class="fw-600 small text-muted">Complexity Scale:</div>
+        <div class="d-flex align-items-center gap-2"><div style="width:12px;height:12px;border-radius:50%;background:#10b981"></div><span class="small">1–4 · Low → APEX</span></div>
+        <div class="d-flex align-items-center gap-2"><div style="width:12px;height:12px;border-radius:50%;background:#f59e0b"></div><span class="small">5–7 · Medium → React SPA</span></div>
+        <div class="d-flex align-items-center gap-2"><div style="width:12px;height:12px;border-radius:50%;background:#ef4444"></div><span class="small">8–10 · High/Critical → Microservices</span></div>
+        <div class="ms-auto text-muted" style="font-size:11px"><i class="fas fa-info-circle me-1"></i>Scores computed from AST analysis + Azure OpenAI GPT-4o</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reports Conversion -->
   <div class="card fade-in-up">
     <div class="card-header">
       <i class="fas fa-file-chart-column text-warning"></i>
-      <div><div class="card-title">Oracle Reports Migration</div><div class="card-subtitle">Legacy reports conversion status</div></div>
+      <div><div class="card-title">Oracle Reports Conversion</div><div class="card-subtitle">Legacy reports conversion status</div></div>
       <div class="ms-auto d-flex gap-2">
         <input type="text" class="form-control form-control-sm table-search" data-target="#reportsTable" placeholder="Filter…" style="width:160px">
         <button class="btn btn-light btn-sm"><i class="fas fa-download me-1"></i>Export</button>

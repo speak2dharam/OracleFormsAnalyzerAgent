@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dependency Mapping — Oracle Estate Workbench</title>
+  <title>Dependency Mapping — Oracle Migration Workbench</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
@@ -58,7 +58,7 @@
   <button class="topbar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
   <div class="topbar-breadcrumb">
     <h1 class="page-title">Dependency Mapping</h1>
-    <p class="page-subtitle">Oracle Estate Workbench &middot; Cross-System Dependencies</p>
+    <p class="page-subtitle">Oracle Migration Workbench &middot; Cross-System Dependencies</p>
   </div>
   <div class="topbar-search d-none d-md-flex align-items-center">
     <i class="fas fa-search search-icon"></i>
@@ -70,7 +70,7 @@
     <div class="dropdown">
       <a class="topbar-profile" data-bs-toggle="dropdown">
         <div class="profile-avatar">SC</div>
-        <div class="d-none d-sm-block"><div class="profile-name">Sarah Chen</div><div class="profile-role">Modernization Lead</div></div>
+        <div class="d-none d-sm-block"><div class="profile-name">Sarah Chen</div><div class="profile-role">Migration Lead</div></div>
         <i class="fas fa-chevron-down ms-1 text-muted" style="font-size:10px"></i>
       </a>
       <ul class="dropdown-menu dropdown-menu-end" style="min-width:200px">
@@ -180,7 +180,7 @@
               <span class="fw-700 small">Circular Dependency</span>
               <span class="badge badge-danger ms-auto">Critical</span>
             </div>
-            <div class="text-muted small">FIN_GL ↔ LEGACY_COM+ creates a conversion blocker. Must resolve before Wave 2.</div>
+            <div class="text-muted small">FIN_GL ↔ LEGACY_COM+ creates a migration blocker. Must resolve before Wave 2.</div>
           </div>
           <div class="p-3 rounded-md" style="background:var(--warning-light);border:1px solid #fde68a">
             <div class="d-flex align-items-center gap-2 mb-1">
@@ -188,7 +188,7 @@
               <span class="fw-700 small">Cross-Schema Views</span>
               <span class="badge badge-warning ms-auto">High</span>
             </div>
-            <div class="text-muted small">17 views span HRMS and FIN schemas. Need remapping post-conversion.</div>
+            <div class="text-muted small">17 views span HRMS and FIN schemas. Need remapping post-migration.</div>
           </div>
           <div class="p-3 rounded-md" style="background:var(--warning-light);border:1px solid #fde68a">
             <div class="d-flex align-items-center gap-2 mb-1">
@@ -204,7 +204,7 @@
               <span class="fw-700 small">INV_MGMT Isolated</span>
               <span class="badge badge-success ms-auto">Clear</span>
             </div>
-            <div class="text-muted small">No blocking dependencies. Ready for Wave 1 conversion.</div>
+            <div class="text-muted small">No blocking dependencies. Ready for Wave 1 migration.</div>
           </div>
         </div>
       </div>

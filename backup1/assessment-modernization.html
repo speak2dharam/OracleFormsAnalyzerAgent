@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modernization Assessment — Oracle Migration Workbench</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="page-loader"><div class="loader-ring"></div></div>
+
+<aside id="sidebar">
+  <a href="dashboard.html" class="sidebar-brand">
+    <div class="brand-icon"><i class="fas fa-database"></i></div>
+    <div class="brand-text"><div class="brand-title">Oracle Estate</div><div class="brand-subtitle">Analyzer &amp; Workbench</div></div>
+  </a>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Overview</div>
+    <a href="dashboard.html" class="sidebar-link" data-label="Dashboard"><span class="link-icon"><i class="fas fa-gauge-high"></i></span><span class="link-text">Dashboard</span></a>
+    <div class="nav-section-label">Discovery</div>
+    <a href="discovery.html" class="sidebar-link" data-label="Discovery"><span class="link-icon"><i class="fas fa-magnifying-glass-chart"></i></span><span class="link-text">Discovery &amp; Intake</span></a>
+    <div class="nav-section-label">Assessment</div>
+    <a href="assessment-lift-shift.html" class="sidebar-link" data-label="Lift &amp; Shift"><span class="link-icon"><i class="fas fa-arrow-up-right-dots"></i></span><span class="link-text">Lift &amp; Shift</span></a>
+    <a href="assessment-modernization.html" class="sidebar-link" data-label="Modernization"><span class="link-icon"><i class="fas fa-wand-magic-sparkles"></i></span><span class="link-text">Modernization</span></a>
+    <a href="dependency-mapping.html" class="sidebar-link" data-label="Dependencies"><span class="link-icon"><i class="fas fa-diagram-project"></i></span><span class="link-text">Dependency Mapping</span></a>
+    <a href="risk-scoring.html" class="sidebar-link" data-label="Risk Scoring"><span class="link-icon"><i class="fas fa-shield-halved"></i></span><span class="link-text">Risk Scoring</span></a>
+    <a href="wave-planning.html" class="sidebar-link" data-label="Wave Planning"><span class="link-icon"><i class="fas fa-wave-square"></i></span><span class="link-text">Wave Planning</span></a>
+    <a href="tco.html" class="sidebar-link" data-label="TCO Analysis"><span class="link-icon"><i class="fas fa-coins"></i></span><span class="link-text">TCO Analysis</span></a>
+    <a href="readiness-check.html" class="sidebar-link" data-label="Readiness"><span class="link-icon"><i class="fas fa-clipboard-check"></i></span><span class="link-text">Readiness Check</span></a>
+    <div class="forms-path-group">
+      <div class="nav-section-label nav-section-forms"><i class="fas fa-wand-magic-sparkles"></i>Forms Modernization</div>
+      <a href="modernization-execution.html" class="sidebar-link" data-label="Execution"><span class="link-icon"><i class="fas fa-gears"></i></span><span class="link-text">Modernization Exec.</span></a>
+      <a href="schema-conversion.html" class="sidebar-link" data-label="Schema"><span class="link-icon"><i class="fas fa-code-branch"></i></span><span class="link-text">Schema Conversion</span></a>
+      <div class="nav-section-label nav-section-forms">Azure Infrastructure</div>
+      <a href="landing-zone.html" class="sidebar-link" data-label="Landing Zone"><span class="link-icon"><i class="fas fa-cloud"></i></span><span class="link-text">Landing Zone</span></a>
+      <a href="security-finops.html" class="sidebar-link" data-label="Security &amp; FinOps"><span class="link-icon"><i class="fas fa-lock"></i></span><span class="link-text">Security &amp; FinOps</span></a>
+      <div class="nav-section-label nav-section-forms">Delivery</div>
+      <a href="review-validation.html" class="sidebar-link" data-label="Review"><span class="link-icon"><i class="fas fa-circle-check"></i></span><span class="link-text">Review &amp; Validation</span></a>
+      <a href="deployment.html" class="sidebar-link" data-label="Deployment"><span class="link-icon"><i class="fas fa-rocket"></i></span><span class="link-text">Deployment</span><span class="link-badge">Live</span></a>
+    </div>
+  </nav>
+  <div class="sidebar-footer">
+    <button class="sidebar-toggle-btn" id="sidebarToggle2"><i class="fas fa-chevron-left"></i><span>Collapse</span></button>
+  </div>
+</aside>
+
+<header id="topbar">
+  <button class="topbar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+  <div class="topbar-breadcrumb">
+    <h1 class="page-title">Modernization Assessment</h1>
+    <p class="page-subtitle">Oracle Migration Workbench &middot; Forms &amp; PL/SQL Analysis</p>
+  </div>
+  <div class="topbar-search d-none d-md-flex align-items-center">
+    <i class="fas fa-search search-icon"></i>
+    <input type="text" placeholder="Search modules…">
+  </div>
+  <div class="d-flex align-items-center gap-2 ms-auto">
+    <button class="btn btn-primary btn-sm"><i class="fas fa-wand-magic-sparkles"></i>AI Analyze</button>
+    <button class="topbar-btn"><i class="fas fa-gear"></i></button>
+    <div class="dropdown">
+      <a class="topbar-profile" data-bs-toggle="dropdown">
+        <div class="profile-avatar">SC</div>
+        <div class="d-none d-sm-block"><div class="profile-name">Sarah Chen</div><div class="profile-role">Migration Lead</div></div>
+        <i class="fas fa-chevron-down ms-1 text-muted" style="font-size:10px"></i>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end" style="min-width:200px">
+        <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i>My Profile</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-right-from-bracket text-danger"></i>Sign Out</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <!-- Paths -->
+  <div class="row g-3 mb-4 stagger">
+    <div class="col-md-4 fade-in-up">
+      <div class="card" style="border-top: 3px solid var(--primary)">
+        <div class="card-body text-center py-4">
+          <div class="stat-icon blue mx-auto mb-3"><i class="fas fa-code"></i></div>
+          <div class="fw-800" style="font-size:28px;letter-spacing:-1px" class="counter-animate" data-target="18">18</div>
+          <div class="fw-600 mb-1">React / Angular SPA</div>
+          <div class="text-muted small">Oracle Forms → Modern Web App</div>
+          <div class="mt-3"><span class="badge badge-primary">Recommended</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 fade-in-up">
+      <div class="card" style="border-top: 3px solid var(--purple)">
+        <div class="card-body text-center py-4">
+          <div class="stat-icon purple mx-auto mb-3"><i class="fas fa-cloud"></i></div>
+          <div class="fw-800" style="font-size:28px;letter-spacing:-1px">12</div>
+          <div class="fw-600 mb-1">Cloud-Native APIs</div>
+          <div class="text-muted small">PL/SQL → REST Microservices</div>
+          <div class="mt-3"><span class="badge badge-purple">Strategic</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 fade-in-up">
+      <div class="card" style="border-top: 3px solid var(--success)">
+        <div class="card-body text-center py-4">
+          <div class="stat-icon green mx-auto mb-3"><i class="fas fa-layer-group"></i></div>
+          <div class="fw-800" style="font-size:28px;letter-spacing:-1px">7</div>
+          <div class="fw-600 mb-1">APEX Modernization</div>
+          <div class="text-muted small">Oracle Forms → Oracle APEX</div>
+          <div class="mt-3"><span class="badge badge-success">Fast Track</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Oracle Forms Analysis + Reports Table -->
+  <div class="row g-3 mb-4">
+    <div class="col-lg-7 fade-in-up">
+      <div class="card">
+        <div class="card-header">
+          <i class="fas fa-file-code text-primary"></i>
+          <div class="card-title">Oracle Forms Analysis</div>
+          <span class="ms-auto badge badge-muted">312 total</span>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-container">
+            <table class="table" id="formsTable">
+              <thead><tr><th>Form Name</th><th>Module</th><th>Blocks</th><th>Triggers</th><th>Target</th><th>Complexity</th></tr></thead>
+              <tbody>
+                <tr class="hover-highlight"><td><strong>FRM_PAYROLL_MAIN</strong></td><td><span class="badge badge-muted">HR</span></td><td>14</td><td>87</td><td><span class="badge badge-primary">React SPA</span></td><td><span class="badge badge-danger">High</span></td></tr>
+                <tr class="hover-highlight"><td><strong>FRM_GL_ENTRY</strong></td><td><span class="badge badge-indigo">Finance</span></td><td>8</td><td>42</td><td><span class="badge badge-purple">REST API</span></td><td><span class="badge badge-warning">Medium</span></td></tr>
+                <tr class="hover-highlight"><td><strong>FRM_INV_RECEIPT</strong></td><td><span class="badge badge-cyan">Inventory</span></td><td>5</td><td>19</td><td><span class="badge badge-success">APEX</span></td><td><span class="badge badge-success">Low</span></td></tr>
+                <tr class="hover-highlight"><td><strong>FRM_AR_INVOICE</strong></td><td><span class="badge badge-indigo">Finance</span></td><td>11</td><td>63</td><td><span class="badge badge-primary">React SPA</span></td><td><span class="badge badge-warning">Medium</span></td></tr>
+                <tr class="hover-highlight"><td><strong>FRM_ASSET_REGISTER</strong></td><td><span class="badge badge-indigo">Finance</span></td><td>7</td><td>31</td><td><span class="badge badge-success">APEX</span></td><td><span class="badge badge-success">Low</span></td></tr>
+                <tr class="hover-highlight"><td><strong>FRM_HRMS_MASTER</strong></td><td><span class="badge badge-muted">HR</span></td><td>19</td><td>112</td><td><span class="badge badge-primary">React SPA</span></td><td><span class="badge badge-danger">Critical</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-5 fade-in-up">
+      <div class="card h-100">
+        <div class="card-header"><i class="fas fa-chart-pie text-purple"></i><div class="card-title">Target Technology Mix</div></div>
+        <div class="card-body d-flex flex-column justify-content-center">
+          <canvas id="techChart" height="200"></canvas>
+          <div class="chart-legend mt-3 justify-content-center">
+            <div class="legend-item"><div class="legend-dot" style="background:#2563eb"></div>React/Angular</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#8b5cf6"></div>REST APIs</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#10b981"></div>Oracle APEX</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div>Microservices</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reports Migration -->
+  <div class="card fade-in-up">
+    <div class="card-header">
+      <i class="fas fa-file-chart-column text-warning"></i>
+      <div><div class="card-title">Oracle Reports Migration</div><div class="card-subtitle">Legacy reports conversion status</div></div>
+      <div class="ms-auto d-flex gap-2">
+        <input type="text" class="form-control form-control-sm table-search" data-target="#reportsTable" placeholder="Filter…" style="width:160px">
+        <button class="btn btn-light btn-sm"><i class="fas fa-download me-1"></i>Export</button>
+      </div>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-container">
+        <table class="table" id="reportsTable">
+          <thead><tr><th>Report</th><th>Type</th><th>Pages</th><th>Data Sources</th><th>Target</th><th>Status</th><th>ETA</th></tr></thead>
+          <tbody>
+            <tr class="hover-highlight"><td><strong>RPT_PAYSLIP_MONTHLY</strong></td><td><span class="badge badge-muted">RDF</span></td><td>4</td><td>3</td><td>Jasper Reports</td><td><span class="badge badge-success">Done</span></td><td class="text-muted small">—</td></tr>
+            <tr class="hover-highlight"><td><strong>RPT_GL_TRIAL_BAL</strong></td><td><span class="badge badge-muted">XML/BI</span></td><td>12</td><td>7</td><td>Power BI</td><td><span class="badge badge-primary">In Progress</span></td><td class="text-muted small">Apr 28</td></tr>
+            <tr class="hover-highlight"><td><strong>RPT_INV_VALUATION</strong></td><td><span class="badge badge-muted">RDF</span></td><td>6</td><td>4</td><td>Jasper Reports</td><td><span class="badge badge-warning">Pending</span></td><td class="text-muted small">May 10</td></tr>
+            <tr class="hover-highlight"><td><strong>RPT_AR_AGING</strong></td><td><span class="badge badge-muted">XML/BI</span></td><td>8</td><td>5</td><td>Power BI</td><td><span class="badge badge-warning">Pending</span></td><td class="text-muted small">May 15</td></tr>
+            <tr class="hover-highlight"><td><strong>RPT_ASSET_DEPREC</strong></td><td><span class="badge badge-muted">RDF</span></td><td>3</td><td>2</td><td>Jasper Reports</td><td><span class="badge badge-muted">Queued</span></td><td class="text-muted small">May 20</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+function initPageCharts() {
+  var ctx = document.getElementById('techChart');
+  if (ctx) {
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['React/Angular', 'REST APIs', 'Oracle APEX', 'Microservices'],
+        datasets: [{ data: [48, 27, 18, 7], backgroundColor: ['#2563eb','#8b5cf6','#10b981','#f59e0b'], borderWidth: 0, hoverOffset: 8 }]
+      },
+      options: { cutout: '68%', plugins: { legend: { display: false } }, animation: { animateScale: true, duration: 900 } }
+    });
+  }
+}
+</script>
+</body>
+</html>

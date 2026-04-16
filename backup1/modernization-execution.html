@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modernization Execution — Oracle Estate Workbench</title>
+  <title>Modernization Execution — Oracle Migration Workbench</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
@@ -50,7 +50,7 @@
   <button class="topbar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
   <div class="topbar-breadcrumb">
     <h1 class="page-title">Modernization Execution</h1>
-    <p class="page-subtitle">Oracle Estate Workbench &middot; Active Execution Jobs</p>
+    <p class="page-subtitle">Oracle Migration Workbench &middot; Active Migration Jobs</p>
   </div>
   <div class="topbar-search d-none d-md-flex align-items-center">
     <i class="fas fa-search search-icon"></i>
@@ -62,7 +62,7 @@
     <div class="dropdown">
       <a class="topbar-profile" data-bs-toggle="dropdown">
         <div class="profile-avatar">SC</div>
-        <div class="d-none d-sm-block"><div class="profile-name">Sarah Chen</div><div class="profile-role">Modernization Lead</div></div>
+        <div class="d-none d-sm-block"><div class="profile-name">Sarah Chen</div><div class="profile-role">Migration Lead</div></div>
         <i class="fas fa-chevron-down ms-1 text-muted" style="font-size:10px"></i>
       </a>
       <ul class="dropdown-menu dropdown-menu-end" style="min-width:200px">
@@ -99,7 +99,7 @@
       <div class="card-title">Execution Jobs</div>
       <ul class="nav nav-tabs ms-auto border-0" id="execTab">
         <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-forms">Forms Conversion</button></li>
-        <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-db">DB Conversion</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-db">DB Migration</button></li>
       </ul>
     </div>
     <div class="card-body p-0">
@@ -119,17 +119,17 @@
             </table>
           </div>
         </div>
-        <!-- DB Conversion Tab -->
+        <!-- DB Migration Tab -->
         <div class="tab-pane fade" id="tab-db">
           <div class="table-container">
             <table class="table">
-              <thead><tr><th>Schema</th><th>Source DB</th><th>Target DB</th><th>Tables</th><th>Rows Converted</th><th>Progress</th><th>Status</th></tr></thead>
+              <thead><tr><th>Schema</th><th>Source DB</th><th>Target DB</th><th>Tables</th><th>Rows Migrated</th><th>Progress</th><th>Status</th></tr></thead>
               <tbody>
                 <tr class="hover-highlight"><td><strong>INV_MGMT</strong></td><td>Oracle 19c</td><td>PostgreSQL 15</td><td>142</td><td>18.4M / 18.4M</td><td><div class="d-flex align-items-center gap-2"><div class="progress" style="width:90px"><div class="progress-bar bg-success" data-width="100" style="width:0%"></div></div><span class="small text-success fw-600">100%</span></div></td><td><span class="badge badge-success">Complete</span></td></tr>
                 <tr class="hover-highlight"><td><strong>FIN_AR</strong></td><td>Oracle 19c</td><td>PostgreSQL 15</td><td>87</td><td>9.1M / 12.6M</td><td><div class="d-flex align-items-center gap-2"><div class="progress" style="width:90px"><div class="progress-bar bg-primary" data-width="72" style="width:0%"></div></div><span class="small text-primary fw-600">72%</span></div></td><td><span class="badge badge-primary">Running</span></td></tr>
-                <tr class="hover-highlight"><td><strong>HRMS_CORE</strong></td><td>Oracle 12c</td><td>Azure DB for PostgreSQL</td><td>214</td><td>4.2M / 31.8M</td><td><div class="d-flex align-items-center gap-2"><div class="progress" style="width:90px"><div class="progress-bar bg-primary" data-width="13" style="width:0%"></div></div><span class="small text-primary fw-600">13%</span></div></td><td><span class="badge badge-primary">Running</span></td></tr>
+                <tr class="hover-highlight"><td><strong>HRMS_CORE</strong></td><td>Oracle 12c</td><td>Aurora PG</td><td>214</td><td>4.2M / 31.8M</td><td><div class="d-flex align-items-center gap-2"><div class="progress" style="width:90px"><div class="progress-bar bg-primary" data-width="13" style="width:0%"></div></div><span class="small text-primary fw-600">13%</span></div></td><td><span class="badge badge-primary">Running</span></td></tr>
                 <tr class="hover-highlight"><td><strong>FIN_GL</strong></td><td>Oracle 19c</td><td>PostgreSQL 15</td><td>198</td><td>—</td><td><div class="d-flex align-items-center gap-2"><div class="progress" style="width:90px"><div class="progress-bar bg-warning" data-width="0" style="width:0%"></div></div><span class="small text-muted fw-600">0%</span></div></td><td><span class="badge badge-warning">Queued</span></td></tr>
-                <tr class="hover-highlight"><td><strong>PAYROLL</strong></td><td>Oracle 11g</td><td>Azure DB for PostgreSQL</td><td>412</td><td>—</td><td><div class="d-flex align-items-center gap-2"><div class="progress" style="width:90px"><div class="progress-bar" style="width:0%"></div></div><span class="small text-muted fw-600">—</span></div></td><td><span class="badge badge-danger">Blocked</span></td></tr>
+                <tr class="hover-highlight"><td><strong>PAYROLL</strong></td><td>Oracle 11g</td><td>Aurora PG</td><td>412</td><td>—</td><td><div class="d-flex align-items-center gap-2"><div class="progress" style="width:90px"><div class="progress-bar" style="width:0%"></div></div><span class="small text-muted fw-600">—</span></div></td><td><span class="badge badge-danger">Blocked</span></td></tr>
               </tbody>
             </table>
           </div>
