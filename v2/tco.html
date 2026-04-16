@@ -3,10 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TCO Analysis — Oracle Estate Workbench</title>
+  <title>TCO Analysis - Oracle Estate Workbench</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .tco-admin-hero { background: linear-gradient(135deg,#12376f 0%,#2563eb 58%,#0f766e 100%); border-radius: 8px; color: #fff; padding: 22px; box-shadow: var(--shadow); }
+    .tco-admin-hero .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 5px 10px; border: 1px solid rgba(255,255,255,.22); border-radius: 8px; background: rgba(255,255,255,.12); font-size: 11px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; }
+    .tco-admin-hero h2 { font-size: 26px; font-weight: 800; letter-spacing: -.8px; margin: 12px 0 8px; }
+    .tco-admin-hero p { color: rgba(255,255,255,.78); margin: 0; max-width: 860px; }
+    .tco-hero-stat { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.18); border-radius: 8px; padding: 12px; height: 100%; }
+    .tco-hero-stat .label { color: rgba(255,255,255,.66); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; margin-bottom: 4px; }
+    .tco-hero-stat .value { font-size: 22px; line-height: 1; font-weight: 800; letter-spacing: -.7px; }
+    .tco-hero-stat .sub { color: rgba(255,255,255,.66); font-size: 11px; margin-top: 4px; }
+    .admin-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-sm); height: 100%; }
+    .admin-card-header { padding: 16px 18px; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; gap: 10px; }
+    .admin-card-title { font-size: 14px; font-weight: 800; margin: 0; }
+    .admin-card-subtitle { color: var(--text-muted); font-size: 12px; margin: 1px 0 0; }
+    .admin-card-body { padding: 18px; }
+    .scenario-panel { position: relative; overflow: hidden; border-radius: 8px; border: 1px solid var(--border); background: #fff; padding: 18px; height: 100%; transition: var(--transition); }
+    .scenario-panel:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    .scenario-panel.recommended { border-color: #f59e0b; box-shadow: 0 0 0 3px rgba(245,158,11,.12), var(--shadow-sm); }
+    .scenario-panel::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--border); }
+    .scenario-panel.exascale::before { background: #f59e0b; }
+    .scenario-panel.dedicated::before { background: #6366f1; }
+    .scenario-panel.azvm::before { background: #06b6d4; }
+    .scenario-panel.pg::before { background: #10b981; }
+    .text-indigo { color: var(--indigo) !important; }
+    .text-cyan { color: var(--cyan) !important; }
+    .scenario-title { font-size: 13px; font-weight: 800; padding-right: 70px; min-height: 34px; }
+    .scenario-platform { color: var(--text-muted); font-size: 12px; margin: 6px 0 14px; min-height: 34px; }
+    .scenario-tco { font-size: 32px; font-weight: 800; letter-spacing: -1.4px; line-height: 1; }
+    .scenario-save { font-size: 12px; font-weight: 700; margin-top: 6px; }
+    .mini-row { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; padding: 6px 0; border-top: 1px solid var(--border-light); }
+    .mini-row span:first-child { color: var(--text-muted); }
+    .tco-progress { height: 8px; border-radius: 4px; background: var(--border-light); overflow: hidden; }
+    .tco-progress > span { display: block; height: 100%; border-radius: 4px; }
+    .metric-tile { border: 1px solid var(--border); border-radius: 8px; padding: 14px; background: #fff; min-height: 106px; }
+    .metric-tile .metric-label { color: var(--text-muted); font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .6px; margin-bottom: 8px; }
+    .metric-tile .metric-value { font-size: 24px; font-weight: 800; line-height: 1; letter-spacing: -.8px; }
+    .metric-tile .metric-note { color: var(--text-muted); font-size: 11px; margin-top: 8px; }
+    .table.admin-table { margin: 0; vertical-align: middle; }
+    .table.admin-table th { background: #f8fafc; color: var(--text-muted); font-size: 10px; text-transform: uppercase; letter-spacing: .7px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+    .table.admin-table td { font-size: 12px; }
+    .table.admin-table .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .row-highlight td { background: #fffbeb; }
+    .score-dot { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 8px; font-size: 12px; font-weight: 800; }
+    .s5 { background: #dcfce7; color: #166534; } .s4 { background: #dbeafe; color: #1d4ed8; } .s3 { background: #fef3c7; color: #b45309; } .s2 { background: #fed7aa; color: #c2410c; } .s1 { background: #fee2e2; color: #991b1b; }
+    .risk-item { border: 1px solid var(--border); border-radius: 8px; padding: 14px; background: #fff; height: 100%; }
+    .risk-item .risk-title { font-size: 13px; font-weight: 800; margin-bottom: 6px; }
+    .risk-item .risk-body { color: var(--text-muted); font-size: 12px; line-height: 1.55; }
+    .risk-item .risk-mitigation { margin-top: 10px; padding: 10px; border-radius: 8px; background: #f8fafc; color: var(--text); font-size: 11px; }
+    .roadmap-step { display: grid; grid-template-columns: 42px 1fr; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--border-light); }
+    .roadmap-step:last-child { border-bottom: 0; }
+    .roadmap-num { width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: var(--primary-light); color: var(--primary); font-weight: 800; }
+    .roadmap-step h6 { font-size: 13px; font-weight: 800; margin: 0 0 4px; }
+    .roadmap-step p { font-size: 12px; color: var(--text-muted); margin: 0; }
+    @media (max-width: 767px) { .tco-admin-hero { padding: 18px; } .tco-admin-hero h2 { font-size: 22px; } .scenario-title { padding-right: 0; } }
+  </style>
 </head>
 <body>
 <div id="page-loader"><div class="loader-ring"></div></div>
@@ -50,14 +104,14 @@
   <button class="topbar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
   <div class="topbar-breadcrumb">
     <h1 class="page-title">TCO Analysis</h1>
-    <p class="page-subtitle">Oracle Estate Workbench &middot; Total Cost of Ownership</p>
+    <p class="page-subtitle">Oracle DB + Forms Migration Assessment</p>
   </div>
   <div class="topbar-search d-none d-md-flex align-items-center">
     <i class="fas fa-search search-icon"></i>
-    <input type="text" placeholder="Search cost items…">
+    <input type="text" placeholder="Search TCO report...">
   </div>
   <div class="d-flex align-items-center gap-2 ms-auto">
-    <button class="btn btn-primary btn-sm"><i class="fas fa-download"></i>Export Report</button>
+    <button class="btn btn-primary btn-sm"><i class="fas fa-download"></i>Export</button>
     <button class="topbar-btn"><i class="fas fa-gear"></i></button>
     <div class="dropdown">
       <a class="topbar-profile" data-bs-toggle="dropdown">
@@ -75,563 +129,258 @@
 </header>
 
 <main id="main-content">
-
-  <!-- Customer Profile Banner -->
-  <div class="tco-profile-banner fade-in-up mb-4">
-    <div class="me-2"><i class="fas fa-building-columns" style="font-size:22px;opacity:.8"></i></div>
-    <div class="me-auto">
-      <div class="fw-800" style="font-size:15px;letter-spacing:-.3px">Mid-Market Customer Profile</div>
-      <div style="font-size:12px;opacity:.75">Oracle-to-Azure Business Case · 3-Scenario 5-Year Analysis</div>
+  <section class="tco-admin-hero fade-in-up mb-4">
+    <div class="row g-4 align-items-end">
+      <div class="col-xl-7">
+        <div class="hero-eyebrow"><i class="fas fa-shield-check"></i> Confidential Assessment</div>
+        <h2>HRDPRD Oracle DB + Forms 3-Year TCO Control Center</h2>
+        <p>Five migration options evaluated for Oracle 12.2 EE RAC and Oracle Forms 12c/WebLogic. The model includes database, Forms tier, BYOL support, Azure consumption, migration effort, risk, and roadmap readiness.</p>
+      </div>
+      <div class="col-xl-5">
+        <div class="row g-2">
+          <div class="col-6"><div class="tco-hero-stat"><div class="label">Recommended</div><div class="value">$3.574M</div><div class="sub">ODB@Azure Exascale 3-year TCO</div></div></div>
+          <div class="col-6"><div class="tco-hero-stat"><div class="label">Savings</div><div class="value">$1.793M</div><div class="sub">33% below on-prem baseline</div></div></div>
+          <div class="col-6"><div class="tco-hero-stat"><div class="label">Break-even</div><div class="value">Month 10</div><div class="sub">~$55K monthly run-rate saving</div></div></div>
+          <div class="col-6"><div class="tco-hero-stat"><div class="label">Execution</div><div class="value">4-5 mo</div><div class="sub">Zero DB and Forms code change</div></div></div>
+        </div>
+      </div>
     </div>
-    <div class="tco-profile-pill"><i class="fas fa-coins me-1"></i>$3.2M Oracle Spend</div>
-    <div class="tco-profile-pill"><i class="fas fa-file-code me-1"></i>120 Forms</div>
-    <div class="tco-profile-pill"><i class="fas fa-database me-1"></i>1.2 TB</div>
-    <div class="tco-profile-pill"><i class="fas fa-users me-1"></i>200 Users</div>
-  </div>
+  </section>
 
-  <!-- 3 Scenario Cards -->
   <div class="row g-3 mb-4 stagger">
-    <div class="col-md-4 fade-in-up">
-      <div class="tco-scenario-card active-danger" id="sc-stay" onclick="setScenario('stay')">
-        <span class="tco-scenario-badge"><span class="badge badge-muted">Baseline</span></span>
-        <div class="fw-700" style="font-size:16px;margin-bottom:4px">Stay Oracle</div>
-        <div class="text-muted small mb-3">Continue current licensing &amp; on-prem infrastructure</div>
-        <div class="tco-scenario-label">5-Year Total Cost</div>
-        <div class="tco-scenario-amount text-danger">$30.9M</div>
-        <div class="mt-3 d-flex align-items-center gap-2" style="font-size:12px;color:#dc2626">
-          <i class="fas fa-circle-info"></i>
-          <span>Baseline — costs escalate <strong>5% annually</strong></span>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 fade-in-up">
-      <div class="tco-scenario-card" id="sc-azure" onclick="setScenario('azure')">
-        <span class="tco-scenario-badge"><span class="badge badge-primary">Track A</span></span>
-        <div class="fw-700" style="font-size:16px;margin-bottom:4px">Oracle@Azure</div>
-        <div class="text-muted small mb-3">Oracle licensing on Azure infrastructure</div>
-        <div class="tco-scenario-label">5-Year Total Cost</div>
-        <div class="tco-scenario-amount text-primary">$24.4M</div>
-        <div class="mt-3 d-flex align-items-center gap-2" style="font-size:12px;color:var(--primary)">
-          <i class="fas fa-arrow-trend-down"></i>
-          <span><strong>21% Savings</strong> vs Stay on Oracle — saves <strong>$6.6M</strong> over 5 years</span>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 fade-in-up">
-      <div class="tco-scenario-card active-success" id="sc-leave" onclick="setScenario('leave')">
-        <span class="tco-scenario-badge"><span class="badge badge-success">Track B · Recommended</span></span>
-        <div class="fw-700" style="font-size:16px;margin-bottom:4px">Leave Oracle</div>
-        <div class="text-muted small mb-3">Full conversion to PostgreSQL + modern stack</div>
-        <div class="tco-scenario-label">5-Year Total Cost</div>
-        <div class="tco-scenario-amount text-success">$14.0M</div>
-        <div class="mt-3 d-flex align-items-center gap-2" style="font-size:12px;color:var(--success)">
-          <i class="fas fa-arrow-trend-down"></i>
-          <span><strong>55% Savings</strong> vs Stay on Oracle — saves <strong>$17.0M</strong> over 5 years</span>
-        </div>
-      </div>
-    </div>
+    <div class="col-6 col-xl-3 fade-in-up"><div class="stat-card"><div class="stat-icon blue"><i class="fas fa-database"></i></div><div class="stat-value">HRDPRD</div><div class="stat-label">Oracle 12.2 EE RAC</div></div></div>
+    <div class="col-6 col-xl-3 fade-in-up"><div class="stat-card"><div class="stat-icon green"><i class="fas fa-window-restore"></i></div><div class="stat-value">Forms 12c</div><div class="stat-label">WebLogic front end</div></div></div>
+    <div class="col-6 col-xl-3 fade-in-up"><div class="stat-card"><div class="stat-icon amber"><i class="fas fa-chart-line"></i></div><div class="stat-value">35 <span style="font-size:16px;font-weight:500">days</span></div><div class="stat-label">AWR capture window</div></div></div>
+    <div class="col-6 col-xl-3 fade-in-up"><div class="stat-card"><div class="stat-icon purple"><i class="fas fa-users"></i></div><div class="stat-value">150</div><div class="stat-label">Peak Forms users to test</div></div></div>
   </div>
 
-  <!-- Annual Bar Chart + Cumulative Trend -->
+  <section class="mb-4">
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+      <div><h3 class="mb-1" style="font-size:17px;font-weight:800">Migration Options</h3><p class="text-muted mb-0 small">3-year combined TCO for database and Oracle Forms tier.</p></div>
+      <span class="badge badge-warning">Recommended: ODB@Azure Exascale + Forms VM</span>
+    </div>
+    <div class="row g-3">
+      <div class="col-md-6 col-xl"><div class="scenario-panel"><span class="badge badge-muted position-absolute top-0 end-0 m-3">Baseline</span><div class="scenario-title">On-Prem Oracle RAC + Forms</div><div class="scenario-platform">Oracle 12.2 EE RAC, WLS on-prem server</div><div class="scenario-tco text-dark">$5.367M</div><div class="scenario-save text-muted">Reference cost</div><div class="mt-3"><div class="mini-row"><span>DB code change</span><strong>None</strong></div><div class="mini-row"><span>Forms change</span><strong>None</strong></div><div class="mini-row"><span>Strategic issue</span><strong>Support and capex</strong></div></div></div></div>
+      <div class="col-md-6 col-xl"><div class="scenario-panel recommended exascale"><span class="badge badge-warning position-absolute top-0 end-0 m-3">Best fit</span><div class="scenario-title">ODB@Azure Exascale + Forms VM</div><div class="scenario-platform">Exadata in Azure DC, D8ds_v5 Forms VM</div><div class="scenario-tco text-warning">$3.574M</div><div class="scenario-save text-success">Saves $1.793M / 33%</div><div class="mt-3"><div class="mini-row"><span>Break-even</span><strong>Month 10</strong></div><div class="mini-row"><span>Code change</span><strong class="text-success">Zero</strong></div><div class="mini-row"><span>Weighted score</span><strong>4.47 / 5</strong></div></div></div></div>
+      <div class="col-md-6 col-xl"><div class="scenario-panel dedicated"><span class="badge badge-indigo position-absolute top-0 end-0 m-3">HA</span><div class="scenario-title">ODB@Azure Dedicated + Forms VM</div><div class="scenario-platform">Dedicated X11M Exadata, D8ds_v5 Forms VM</div><div class="scenario-tco text-indigo">$4.832M</div><div class="scenario-save text-success">Saves $535K / 10%</div><div class="mt-3"><div class="mini-row"><span>DB HA</span><strong>RAC + Exadata</strong></div><div class="mini-row"><span>Code change</span><strong class="text-success">Zero</strong></div><div class="mini-row"><span>Weighted score</span><strong>4.10 / 5</strong></div></div></div></div>
+      <div class="col-md-6 col-xl"><div class="scenario-panel azvm"><span class="badge badge-cyan position-absolute top-0 end-0 m-3">IaaS</span><div class="scenario-title">Oracle on Azure VM + Forms VM</div><div class="scenario-platform">E32ds_v5 DB VM, D8ds_v5 Forms VM</div><div class="scenario-tco text-cyan">$4.190M</div><div class="scenario-save text-success">Saves $1.177M / 22%</div><div class="mt-3"><div class="mini-row"><span>Break-even</span><strong>Month 14</strong></div><div class="mini-row"><span>Support rewards</span><strong>No</strong></div><div class="mini-row"><span>Weighted score</span><strong>3.34 / 5</strong></div></div></div></div>
+      <div class="col-md-6 col-xl"><div class="scenario-panel pg"><span class="badge badge-success position-absolute top-0 end-0 m-3">Max saving</span><div class="scenario-title">Azure PostgreSQL + Modern App</div><div class="scenario-platform">D32ds_v5 PG, React/Angular + Java API</div><div class="scenario-tco text-success">$2.031M</div><div class="scenario-save text-success">Saves $3.336M / 62%</div><div class="mt-3"><div class="mini-row"><span>Break-even</span><strong>Month 28</strong></div><div class="mini-row"><span>Forms change</span><strong class="text-danger">Full rewrite</strong></div><div class="mini-row"><span>Weighted score</span><strong>3.20 / 5</strong></div></div></div></div>
+    </div>
+  </section>
+
   <div class="row g-3 mb-4">
-    <div class="col-lg-6 fade-in-up">
-      <div class="card h-100">
-        <div class="card-header">
-          <i class="fas fa-chart-bar text-primary"></i>
-          <div>
-            <div class="card-title">Annual Cost Comparison</div>
-            <div class="card-subtitle">Year-by-year cost across all three scenarios ($M)</div>
-          </div>
+    <div class="col-xl-7">
+      <div class="admin-card fade-in-up">
+        <div class="admin-card-header">
+          <i class="fas fa-chart-column text-primary"></i>
+          <div><div class="admin-card-title">3-Year TCO Comparison</div><div class="admin-card-subtitle">DB + Oracle Forms combined, USD thousands</div></div>
         </div>
-        <div class="card-body"><canvas id="annualChart" height="240"></canvas></div>
-        <div class="card-body pt-0 d-flex gap-3 justify-content-center flex-wrap" style="font-size:12px">
-          <span><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#10b981;margin-right:5px"></span>Leave Oracle</span>
-          <span><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#2563eb;margin-right:5px"></span>Oracle@Azure</span>
-          <span><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#ef4444;margin-right:5px"></span>Stay Oracle</span>
-        </div>
+        <div class="admin-card-body"><canvas id="tcoOptionChart" height="190"></canvas></div>
       </div>
     </div>
-    <div class="col-lg-6 fade-in-up">
-      <div class="card h-100">
-        <div class="card-header">
-          <i class="fas fa-chart-line text-purple"></i>
-          <div>
-            <div class="card-title">Cumulative 5-Year Cost Trend</div>
-            <div class="card-subtitle">Total spend trajectory — where scenarios diverge from baseline</div>
-          </div>
+    <div class="col-xl-5">
+      <div class="admin-card fade-in-up">
+        <div class="admin-card-header">
+          <i class="fas fa-gauge-high text-warning"></i>
+          <div><div class="admin-card-title">Executive Decision Signals</div><div class="admin-card-subtitle">Why Exascale wins the risk-adjusted case</div></div>
         </div>
-        <div class="card-body"><canvas id="cumulChart" height="200"></canvas></div>
-        <div class="card-body pt-0">
-          <div class="row g-2 text-center">
-            <div class="col-4">
-              <div class="text-muted" style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px">Stay Oracle</div>
-              <div class="fw-800 text-danger" style="font-size:18px;letter-spacing:-1px">$30.9M</div>
-              <div class="text-muted" style="font-size:10px">5-Year Cumulative</div>
-            </div>
-            <div class="col-4">
-              <div class="text-muted" style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px">Oracle@Azure</div>
-              <div class="fw-800 text-primary" style="font-size:18px;letter-spacing:-1px">$24.4M</div>
-              <div class="text-muted" style="font-size:10px">5-Year Cumulative</div>
-            </div>
-            <div class="col-4">
-              <div class="text-muted" style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px">Leave Oracle</div>
-              <div class="fw-800 text-success" style="font-size:18px;letter-spacing:-1px">$14.0M</div>
-              <div class="text-muted" style="font-size:10px">5-Year Cumulative</div>
-            </div>
+        <div class="admin-card-body">
+          <div class="row g-2">
+            <div class="col-6"><div class="metric-tile"><div class="metric-label">ROI</div><div class="metric-value text-success">10x</div><div class="metric-note">Savings divided by migration cost</div></div></div>
+            <div class="col-6"><div class="metric-tile"><div class="metric-label">Yr1 Net Benefit</div><div class="metric-value text-success">$410K</div><div class="metric-note">After one-time migration cost</div></div></div>
+            <div class="col-6"><div class="metric-tile"><div class="metric-label">Run-rate Saving</div><div class="metric-value text-success">~$660K</div><div class="metric-note">Annual saving from Year 2 onward</div></div></div>
+            <div class="col-6"><div class="metric-tile"><div class="metric-label">Support Rewards</div><div class="metric-value text-primary">~$50K</div><div class="metric-note">Annual ODB@Azure credit</div></div></div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Detailed Cost Category Breakdown -->
-  <div class="card fade-in-up mb-4">
-    <div class="card-header">
+  <div class="admin-card fade-in-up mb-4">
+    <div class="admin-card-header">
+      <i class="fas fa-window-restore text-primary"></i>
+      <div><div class="admin-card-title">Oracle Forms Migration Paths</div><div class="admin-card-subtitle">Forms 12c Premier Support ended December 2024; sustaining support runs to December 2028</div></div>
+    </div>
+    <div class="admin-card-body">
+      <div class="row g-3">
+        <div class="col-md-6 col-xl-3"><div class="metric-tile h-100"><span class="badge badge-warning mb-2">Path 1 - Recommended</span><div class="fw-800 mb-2">Lift & Shift</div><div class="small text-muted mb-3">Forms 12c + WLS 12c on Azure VM with Load Balancer and Entra ID.</div><div class="mini-row"><span>Timeline</span><strong>4-6 weeks</strong></div><div class="mini-row"><span>Cost</span><strong>$40K-$80K</strong></div><div class="mini-row"><span>Code change</span><strong class="text-success">Zero</strong></div><div class="mini-row"><span>Risk</span><strong class="text-success">Low</strong></div></div></div>
+        <div class="col-md-6 col-xl-3"><div class="metric-tile h-100"><span class="badge badge-primary mb-2">Path 2</span><div class="fw-800 mb-2">Upgrade & Lift</div><div class="small text-muted mb-3">Upgrade to Forms 14c and WebLogic 14c, then lift to Azure VM.</div><div class="mini-row"><span>Timeline</span><strong>8-14 weeks</strong></div><div class="mini-row"><span>Cost</span><strong>$80K-$150K</strong></div><div class="mini-row"><span>Code change</span><strong class="text-success">Minimal</strong></div><div class="mini-row"><span>Support</span><strong>~2034</strong></div></div></div>
+        <div class="col-md-6 col-xl-3"><div class="metric-tile h-100"><span class="badge badge-success mb-2">Path 3</span><div class="fw-800 mb-2">Forms to APEX</div><div class="small text-muted mb-3">Convert Forms to Oracle APEX and eliminate the Forms server tier.</div><div class="mini-row"><span>Timeline</span><strong>6-12 months</strong></div><div class="mini-row"><span>Cost</span><strong>$200K-$400K</strong></div><div class="mini-row"><span>WLS impact</span><strong class="text-success">$176K/yr saved</strong></div><div class="mini-row"><span>Risk</span><strong class="text-warning">Medium</strong></div></div></div>
+        <div class="col-md-6 col-xl-3"><div class="metric-tile h-100"><span class="badge badge-danger mb-2">Path 4</span><div class="fw-800 mb-2">Full Rewrite</div><div class="small text-muted mb-3">Rewrite as React/Angular plus REST API and Java/.NET backend.</div><div class="mini-row"><span>Timeline</span><strong>12-18 months</strong></div><div class="mini-row"><span>Cost</span><strong>$400K-$800K</strong></div><div class="mini-row"><span>Code change</span><strong class="text-danger">Full rewrite</strong></div><div class="mini-row"><span>Risk</span><strong class="text-danger">High</strong></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3 mb-4">
+    <div class="col-xl-7">
+      <div class="admin-card fade-in-up">
+        <div class="admin-card-header"><i class="fas fa-ranking-star text-warning"></i><div><div class="admin-card-title">Weighted Decision Scorecard</div><div class="admin-card-subtitle">10 criteria scored 1-5 and weighted for HRDPRD DB + Forms</div></div></div>
+        <div class="table-responsive">
+          <table class="table admin-table">
+            <thead><tr><th>Criterion</th><th>Wt</th><th>On-Prem</th><th class="text-warning">Exascale</th><th>Dedicated</th><th>AzVM</th><th>PG + App</th></tr></thead>
+            <tbody>
+              <tr><td>Oracle DB compatibility</td><td>18%</td><td><span class="score-dot s5">5</span></td><td><span class="score-dot s5">5</span></td><td><span class="score-dot s5">5</span></td><td><span class="score-dot s4">4</span></td><td><span class="score-dot s2">2</span></td></tr>
+              <tr><td>DB performance vs baseline</td><td>13%</td><td><span class="score-dot s3">3</span></td><td><span class="score-dot s5">5</span></td><td><span class="score-dot s5">5</span></td><td><span class="score-dot s3">3</span></td><td><span class="score-dot s3">3</span></td></tr>
+              <tr><td>DB HA and disaster recovery</td><td>12%</td><td><span class="score-dot s3">3</span></td><td><span class="score-dot s5">5</span></td><td><span class="score-dot s5">5</span></td><td><span class="score-dot s3">3</span></td><td><span class="score-dot s4">4</span></td></tr>
+              <tr><td>Oracle Forms compatibility</td><td>15%</td><td><span class="score-dot s5">5</span></td><td><span class="score-dot s5">5</span></td><td><span class="score-dot s5">5</span></td><td><span class="score-dot s5">5</span></td><td><span class="score-dot s1">1</span></td></tr>
+              <tr><td>Total cost of ownership</td><td>15%</td><td><span class="score-dot s1">1</span></td><td><span class="score-dot s4">4</span></td><td><span class="score-dot s2">2</span></td><td><span class="score-dot s3">3</span></td><td><span class="score-dot s5">5</span></td></tr>
+              <tr><td>Migration risk and complexity</td><td>7%</td><td><span class="score-dot s5">5</span></td><td><span class="score-dot s5">5</span></td><td><span class="score-dot s4">4</span></td><td><span class="score-dot s3">3</span></td><td><span class="score-dot s1">1</span></td></tr>
+              <tr class="row-highlight"><td><strong>Weighted total</strong></td><td>100%</td><td>3.10</td><td class="text-warning fw-bold">4.47</td><td>4.10</td><td>3.34</td><td>3.20</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-5">
+      <div class="admin-card fade-in-up">
+        <div class="admin-card-header"><i class="fas fa-triangle-exclamation text-warning"></i><div><div class="admin-card-title">Risk Register</div><div class="admin-card-subtitle">Priority risks and mitigations</div></div></div>
+        <div class="admin-card-body">
+          <div class="row g-2">
+            <div class="col-12"><div class="risk-item"><div class="d-flex justify-content-between gap-2"><div class="risk-title">TX Row Lock Application Bug</div><span class="badge badge-danger">High</span></div><div class="risk-body">enq: TX row lock is 11.47% of DB time and persists across all migration options.</div><div class="risk-mitigation">Mitigation: Engage app team, enable lock diagnostics, and complete ADDM-guided investigation before migration.</div></div></div>
+            <div class="col-md-6"><div class="risk-item"><div class="d-flex justify-content-between gap-2"><div class="risk-title">Forms 12c EOL</div><span class="badge badge-warning">Medium</span></div><div class="risk-body">Only sustaining support through December 2028.</div><div class="risk-mitigation">Plan Forms 14c upgrade or APEX migration by end of 2027.</div></div></div>
+            <div class="col-md-6"><div class="risk-item"><div class="d-flex justify-content-between gap-2"><div class="risk-title">Payroll Peak Sizing</div><span class="badge badge-warning">Medium</span></div><div class="risk-body">Average AAS is 4.05, but payroll peaks around 80 AAS.</div><div class="risk-mitigation">Run payroll simulation and validate ECPU scaling before cutover.</div></div></div>
+            <div class="col-md-6"><div class="risk-item"><div class="d-flex justify-content-between gap-2"><div class="risk-title">BYOL Compliance</div><span class="badge badge-primary">Low</span></div><div class="risk-body">Azure VM rule is 2 vCPU = 1 processor license.</div><div class="risk-mitigation">Confirm DB and WLS entitlements with Oracle account team.</div></div></div>
+            <div class="col-md-6"><div class="risk-item"><div class="d-flex justify-content-between gap-2"><div class="risk-title">DB to Forms Latency</div><span class="badge badge-primary">Low</span></div><div class="risk-body">Forms depends on stateful SQL*Net/JDBC sessions.</div><div class="risk-mitigation">Co-locate ODB@Azure and Forms VM in East US 2 and validate under 2ms.</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="admin-card fade-in-up">
+    <div class="admin-card-header"><i class="fas fa-route text-success"></i><div><div class="admin-card-title">Recommended Migration Roadmap</div><div class="admin-card-subtitle">ODB@Azure Exascale BYOL + Oracle Forms 12c lift and shift to Azure VM</div></div></div>
+    <div class="admin-card-body">
+      <div class="row g-4">
+        <div class="col-xl-5">
+          <div class="p-3 rounded h-100" style="background:#ecfdf5;border:1px solid #a7f3d0">
+            <h5 class="fw-800 text-success mb-2">Recommended Path</h5>
+            <p class="small text-muted mb-3">Migrate HRDPRD database to ODB@Azure Exadata Exascale while lifting Oracle Forms 12c + WebLogic 12c to a D8ds_v5 Azure VM. Preserve RAC, eliminate on-prem infrastructure, integrate Entra ID SSO, and evaluate APEX modernization in Year 2-3.</p>
+            <div class="row g-2">
+              <div class="col-6"><div class="metric-tile"><div class="metric-label">3-Year TCO</div><div class="metric-value text-success">$3.574M</div></div></div>
+              <div class="col-6"><div class="metric-tile"><div class="metric-label">Savings</div><div class="metric-value text-success">33%</div></div></div>
+              <div class="col-6"><div class="metric-tile"><div class="metric-label">DB Change</div><div class="metric-value text-success">Zero</div></div></div>
+              <div class="col-6"><div class="metric-tile"><div class="metric-label">Forms Change</div><div class="metric-value text-success">Zero</div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-7">
+          <div class="roadmap-step"><div class="roadmap-num">1</div><div><h6>Planning and License Setup - Weeks 1-3</h6><p>Confirm 32 Oracle EE+RAC processor licenses and 8 WLS Suite processor licenses. Activate ODB@Azure via MACC and Support Rewards.</p></div></div>
+          <div class="roadmap-step"><div class="roadmap-num">2</div><div><h6>Provision Exascale DB Cluster - Weeks 3-6</h6><p>Provision 32 ECPUs across two nodes, configure Oracle Net, Data Guard, listeners, wallet, and TDE keys.</p></div></div>
+          <div class="roadmap-step"><div class="roadmap-num">3</div><div><h6>Provision Forms VM - Weeks 4-8</h6><p>Deploy D8ds_v5 VM, install Forms 12c + WLS 12c BYOL, configure Entra ID LDAP, and connect Forms to Exascale.</p></div></div>
+          <div class="roadmap-step"><div class="roadmap-num">4</div><div><h6>Data Migration - Weeks 6-10</h6><p>Run RMAN initial load and GoldenGate CDC with schema freeze and DBMS_COMPARISON validation.</p></div></div>
+          <div class="roadmap-step"><div class="roadmap-num">5</div><div><h6>Test and Validate - Weeks 9-13</h6><p>Execute HR/payroll batch testing, Forms regression, DR drill, SSO validation, and 150-user load test.</p></div></div>
+          <div class="roadmap-step"><div class="roadmap-num">6</div><div><h6>Production Cutover + Hypercare - Weeks 13-14</h6><p>Switch TNS, Forms app config, and DNS. Run 30-day hypercare and decommission on-prem after 60-day parallel run.</p></div></div>
+        </div>
+      </div>
+      <div class="mt-3 pt-3 border-top text-muted" style="font-size:11px">Assumptions: HRDPRD AWR 35-day capture, 2 RAC nodes, Forms 12c/WebLogic 12c, peak 150 concurrent Forms users, existing 32 EE+RAC and 8 WLS Suite processor licenses, ODB@Azure Exascale BYOL ECPU rate $1.77/hr, Support Rewards at 25% of ECPU spend, WLS support 8 proc x $100K x 22% = $176K/yr.</div>
+    </div>
+  </div>
+
+  <div class="admin-card fade-in-up mb-4">
+    <div class="admin-card-header">
       <i class="fas fa-layer-group text-warning"></i>
-      <div>
-        <div class="card-title">Detailed Cost Category Breakdown</div>
-        <div class="card-subtitle">5-year cost per category across all scenarios</div>
-      </div>
+      <div><div class="admin-card-title">Year 1 Detailed Cost Components</div><div class="admin-card-subtitle">Database, Forms/WebLogic, infrastructure, labor, and migration charges</div></div>
     </div>
-    <div class="card-body">
-      <div class="accordion tco-cat-accordion" id="costAccordion">
-
-        <!-- Licensing & Support -->
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#cat1">
-              <i class="fas fa-file-contract text-danger me-2"></i>Licensing &amp; Support
-              <span class="text-muted ms-2 fw-400" style="font-size:11px">Oracle licensing, support, subscriptions</span>
-            </button>
-          </h2>
-          <div id="cat1" class="accordion-collapse collapse show" data-bs-parent="#costAccordion">
-            <div class="accordion-body">
-              <div class="tco-cat-bar-row"><span class="tco-cat-bar-label text-danger">Stay Oracle</span><div class="tco-cat-bar-track"><div class="tco-cat-bar-fill" style="width:100%;background:#ef4444"></div></div><span class="tco-cat-bar-val text-danger">$12.5M</span></div>
-              <div class="tco-cat-bar-row"><span class="tco-cat-bar-label text-primary">Oracle@Azure</span><div class="tco-cat-bar-track"><div class="tco-cat-bar-fill" style="width:68%;background:#2563eb"></div></div><span class="tco-cat-bar-val text-primary">$8.5M</span></div>
-              <div class="tco-cat-bar-row"><span class="tco-cat-bar-label text-success">Leave Oracle</span><div class="tco-cat-bar-track"><div class="tco-cat-bar-fill" style="width:4%;background:#10b981"></div></div><span class="tco-cat-bar-val text-success">$0.5M</span></div>
-              <div class="text-muted mt-2" style="font-size:11px"><i class="fas fa-lightbulb me-1 text-warning"></i>Leaving Oracle eliminates 96% of licensing &amp; support costs over 5 years.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Infrastructure -->
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cat2">
-              <i class="fas fa-server text-orange me-2" style="color:#f97316"></i>Infrastructure
-              <span class="text-muted ms-2 fw-400" style="font-size:11px">On-prem servers, storage, maintenance</span>
-            </button>
-          </h2>
-          <div id="cat2" class="accordion-collapse collapse" data-bs-parent="#costAccordion">
-            <div class="accordion-body">
-              <div class="tco-cat-bar-row"><span class="tco-cat-bar-label text-danger">Stay Oracle</span><div class="tco-cat-bar-track"><div class="tco-cat-bar-fill" style="width:100%;background:#ef4444"></div></div><span class="tco-cat-bar-val text-danger">$8.4M</span></div>
-              <div class="tco-cat-bar-row"><span class="tco-cat-bar-label text-primary">Oracle@Azure</span><div class="tco-cat-bar-track"><div class="tco-cat-bar-fill" style="width:65%;background:#2563eb"></div></div><span class="tco-cat-bar-val text-primary">$5.5M</span></div>
-              <div class="tco-cat-bar-row"><span class="tco-cat-bar-label text-success">Leave Oracle</span><div class="tco-cat-bar-track"><div class="tco-cat-bar-fill" style="width:33%;background:#10b981"></div></div><span class="tco-cat-bar-val text-success">$2.8M</span></div>
-              <div class="text-muted mt-2" style="font-size:11px"><i class="fas fa-lightbulb me-1 text-warning"></i>On-prem hardware refresh cycle due Year 3 adds ~$1.8M to Stay Oracle baseline.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Conversion & Consulting -->
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cat3">
-              <i class="fas fa-arrows-rotate text-purple me-2"></i>Conversion &amp; Consulting
-              <span class="text-muted ms-2 fw-400" style="font-size:11px">One-time conversion costs, consulting, tools</span>
-            </button>
-          </h2>
-          <div id="cat3" class="accordion-collapse collapse" data-bs-parent="#costAccordion">
-            <div class="accordion-body">
-              <div class="tco-cat-bar-row"><span class="tco-cat-bar-label text-danger">Stay Oracle</span><div class="tco-cat-bar-track"><div class="tco-cat-bar-fill" style="width:0%;background:#ef4444"></div></div><span class="tco-cat-bar-val text-danger">$0</span></div>
-              <div class="tco-cat-bar-row"><span class="tco-cat-bar-label text-primary">Oracle@Azure</span><div class="tco-cat-bar-track"><div class="tco-cat-bar-fill" style="width:41%;background:#2563eb"></div></div><span class="tco-cat-bar-val text-primary">$1.8M</span></div>
-              <div class="tco-cat-bar-row"><span class="tco-cat-bar-label text-success">Leave Oracle</span><div class="tco-cat-bar-track"><div class="tco-cat-bar-fill" style="width:100%;background:#10b981"></div></div><span class="tco-cat-bar-val text-success">$4.4M</span></div>
-              <div class="text-muted mt-2" style="font-size:11px"><i class="fas fa-lightbulb me-1 text-warning"></i>Leave Oracle's $4.4M upfront investment is recovered within ~18 months via operational savings.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Operations & Staff -->
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cat4">
-              <i class="fas fa-users-gear text-indigo me-2"></i>Operations &amp; Staff
-              <span class="text-muted ms-2 fw-400" style="font-size:11px">DBA, SysAdmin, support staff costs</span>
-            </button>
-          </h2>
-          <div id="cat4" class="accordion-collapse collapse" data-bs-parent="#costAccordion">
-            <div class="accordion-body">
-              <div class="tco-cat-bar-row"><span class="tco-cat-bar-label text-danger">Stay Oracle</span><div class="tco-cat-bar-track"><div class="tco-cat-bar-fill" style="width:100%;background:#ef4444"></div></div><span class="tco-cat-bar-val text-danger">$6.2M</span></div>
-              <div class="tco-cat-bar-row"><span class="tco-cat-bar-label text-primary">Oracle@Azure</span><div class="tco-cat-bar-track"><div class="tco-cat-bar-fill" style="width:87%;background:#2563eb"></div></div><span class="tco-cat-bar-val text-primary">$5.4M</span></div>
-              <div class="tco-cat-bar-row"><span class="tco-cat-bar-label text-success">Leave Oracle</span><div class="tco-cat-bar-track"><div class="tco-cat-bar-fill" style="width:61%;background:#10b981"></div></div><span class="tco-cat-bar-val text-success">$3.8M</span></div>
-              <div class="text-muted mt-2" style="font-size:11px"><i class="fas fa-lightbulb me-1 text-warning"></i>PostgreSQL managed services reduce Oracle DBA headcount needs by ~35% post-conversion.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- App Maintenance -->
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cat5">
-              <i class="fas fa-screwdriver-wrench text-cyan me-2"></i>App Maintenance
-              <span class="text-muted ms-2 fw-400" style="font-size:11px">Application updates, patches, enhancements</span>
-            </button>
-          </h2>
-          <div id="cat5" class="accordion-collapse collapse" data-bs-parent="#costAccordion">
-            <div class="accordion-body">
-              <div class="tco-cat-bar-row"><span class="tco-cat-bar-label text-danger">Stay Oracle</span><div class="tco-cat-bar-track"><div class="tco-cat-bar-fill" style="width:100%;background:#ef4444"></div></div><span class="tco-cat-bar-val text-danger">$3.8M</span></div>
-              <div class="tco-cat-bar-row"><span class="tco-cat-bar-label text-primary">Oracle@Azure</span><div class="tco-cat-bar-track"><div class="tco-cat-bar-fill" style="width:76%;background:#2563eb"></div></div><span class="tco-cat-bar-val text-primary">$2.9M</span></div>
-              <div class="tco-cat-bar-row"><span class="tco-cat-bar-label text-success">Leave Oracle</span><div class="tco-cat-bar-track"><div class="tco-cat-bar-fill" style="width:39%;background:#10b981"></div></div><span class="tco-cat-bar-val text-success">$1.5M</span></div>
-              <div class="text-muted mt-2" style="font-size:11px"><i class="fas fa-lightbulb me-1 text-warning"></i>Modern React/Angular SPA reduces patch complexity; CI/CD pipelines lower maintenance overhead.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Cloud Consumption -->
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cat6">
-              <i class="fas fa-cloud text-primary me-2"></i>Cloud Consumption
-              <span class="text-muted ms-2 fw-400" style="font-size:11px">Azure compute, storage, services</span>
-            </button>
-          </h2>
-          <div id="cat6" class="accordion-collapse collapse" data-bs-parent="#costAccordion">
-            <div class="accordion-body">
-              <div class="tco-cat-bar-row"><span class="tco-cat-bar-label text-danger">Stay Oracle</span><div class="tco-cat-bar-track"><div class="tco-cat-bar-fill" style="width:0%;background:#ef4444"></div></div><span class="tco-cat-bar-val text-danger">$0</span></div>
-              <div class="tco-cat-bar-row"><span class="tco-cat-bar-label text-primary">Oracle@Azure</span><div class="tco-cat-bar-track"><div class="tco-cat-bar-fill" style="width:100%;background:#2563eb"></div></div><span class="tco-cat-bar-val text-primary">$2.0M</span></div>
-              <div class="tco-cat-bar-row"><span class="tco-cat-bar-label text-success">Leave Oracle</span><div class="tco-cat-bar-track"><div class="tco-cat-bar-fill" style="width:50%;background:#10b981"></div></div><span class="tco-cat-bar-val text-success">$1.0M</span></div>
-              <div class="text-muted mt-2" style="font-size:11px"><i class="fas fa-lightbulb me-1 text-warning"></i>Azure DB for PostgreSQL Flexible Server + AKS gives 50% lower cloud consumption vs Oracle@Azure.</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
+    <div class="table-responsive">
+      <table class="table admin-table">
+        <thead><tr><th>Cost Category</th><th>On-Prem</th><th class="text-warning">ODB Exascale</th><th>ODB Dedicated</th><th>Oracle AzVM</th><th>Azure PG + App</th><th>Note</th></tr></thead>
+        <tbody>
+          <tr><td>Oracle DB License Support</td><td class="mono">$700,000</td><td class="mono">$700,000</td><td class="mono">$700,000</td><td class="mono">$700,000</td><td class="mono text-success">$0</td><td>BYOL reuse; PG eliminates Oracle DB support</td></tr>
+          <tr><td>DB Support Rewards</td><td class="mono">-</td><td class="mono text-success">-$49,920</td><td class="mono text-success">-$49,920</td><td class="mono">-</td><td class="mono">-</td><td>25% of ECPU spend credited</td></tr>
+          <tr><td>ODB Exascale Infra + ECPU</td><td class="mono">-</td><td class="mono">$53,896</td><td class="mono">-</td><td class="mono">-</td><td class="mono">-</td><td>32 ECPUs at BYOL rate</td></tr>
+          <tr><td>ODB Dedicated Infra</td><td class="mono">-</td><td class="mono">-</td><td class="mono">$96,000</td><td class="mono">-</td><td class="mono">-</td><td>Quarter rack estimate</td></tr>
+          <tr><td>Oracle / PG Compute + Storage</td><td class="mono">-</td><td class="mono">-</td><td class="mono">-</td><td class="mono">$50,184</td><td class="mono">$81,600</td><td>Azure VM or PostgreSQL compute</td></tr>
+          <tr><td>DB Backup</td><td class="mono">$40,000</td><td class="mono">$6,000</td><td class="mono">$6,000</td><td class="mono">$18,000</td><td class="mono">$12,000</td><td>RMAN, ARS, or Azure Backup</td></tr>
+          <tr><td>DB Network / Interconnect</td><td class="mono">$30,000</td><td class="mono">$12,000</td><td class="mono">$12,000</td><td class="mono">$18,000</td><td class="mono">$24,000</td><td>No OCI egress for ODB@Azure</td></tr>
+          <tr><td>DB Migration Cost</td><td class="mono">-</td><td class="mono">$120,000</td><td class="mono">$150,000</td><td class="mono">$180,000</td><td class="mono">$280,000</td><td>Year 1 only</td></tr>
+          <tr><td>WLS Annual Support (8 proc)</td><td class="mono">$176,000</td><td class="mono">$176,000</td><td class="mono">$176,000</td><td class="mono">$176,000</td><td class="mono text-success">$0</td><td>Forms bundled in WLS Suite</td></tr>
+          <tr><td>Forms/WLS Server Compute</td><td class="mono">$60,000</td><td class="mono">$6,312</td><td class="mono">$6,312</td><td class="mono">$6,312</td><td class="mono">$7,368</td><td>D8ds_v5 Forms VM</td></tr>
+          <tr><td>Forms App Migration</td><td class="mono">-</td><td class="mono">$60,000</td><td class="mono">$60,000</td><td class="mono">$60,000</td><td class="mono">$350,000</td><td>Lift and shift vs full rewrite</td></tr>
+          <tr><td>On-Prem CapEx + Data Center</td><td class="mono">$440,000</td><td class="mono text-success">$0</td><td class="mono text-success">$0</td><td class="mono text-success">$0</td><td class="mono text-success">$0</td><td>Hardware, DC, cooling, SAN</td></tr>
+          <tr><td>DBA + App Admin Labor</td><td class="mono">$400,000</td><td class="mono">$300,000</td><td class="mono">$300,000</td><td class="mono">$300,000</td><td class="mono">$200,000</td><td>Cloud operating model</td></tr>
+          <tr><td>Azure Support + Monitoring</td><td class="mono">$40,000</td><td class="mono">$36,000</td><td class="mono">$36,000</td><td class="mono">$48,000</td><td class="mono">$30,000</td><td>Business support and monitoring</td></tr>
+          <tr class="row-highlight"><td><strong>Total Year 1</strong></td><td class="mono fw-bold">$1,918K</td><td class="mono fw-bold text-warning">$1,253K</td><td class="mono fw-bold">$1,517K</td><td class="mono fw-bold">$1,491K</td><td class="mono fw-bold">$743K</td><td></td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
-  <!-- ROI Analysis — 3 Scenarios -->
   <div class="row g-3 mb-4">
-    <div class="col-12 fade-in-up">
-      <div class="card-header px-0 pb-3" style="background:transparent;border:none">
-        <i class="fas fa-chart-pie text-primary"></i>
-        <div class="card-title">ROI Analysis</div>
-        <div class="card-subtitle">Net Present Value at 8% discount rate · 5-year horizon</div>
-      </div>
-    </div>
-
-    <!-- Stay Oracle ROI -->
-    <div class="col-lg-4 fade-in-up">
-      <div class="card h-100" style="border-top:3px solid var(--danger)">
-        <div class="card-header"><i class="fas fa-building-columns text-danger"></i><div class="card-title">Stay Oracle — ROI</div></div>
-        <div class="card-body d-flex flex-column gap-0">
-          <div class="tco-roi-block">
-            <div class="tco-roi-label"><i class="fas fa-dollar-sign text-muted me-1"></i>NPV Savings (8%)</div>
-            <div class="tco-roi-value text-muted">Baseline</div>
-            <div class="tco-roi-sub">Reference scenario — no NPV improvement</div>
-          </div>
-          <div class="tco-roi-block">
-            <div class="tco-roi-label"><i class="fas fa-arrow-trend-down text-muted me-1"></i>5-Year Savings</div>
-            <div class="tco-roi-value text-muted">N/A</div>
-            <div class="tco-roi-sub">No savings vs self</div>
-          </div>
-          <div class="tco-roi-block">
-            <div class="tco-roi-label"><i class="fas fa-calendar-check text-muted me-1"></i>Break-Even</div>
-            <div class="tco-roi-value text-danger">N/A</div>
-          </div>
-          <div class="tco-roi-block">
-            <div class="tco-roi-label"><i class="fas fa-triangle-exclamation text-warning me-1"></i>Key Risks</div>
-            <ul class="tco-risk-list mt-1">
-              <li>Oracle audit exposure</li>
-              <li>License compliance costs</li>
-              <li>Aging hardware refresh</li>
-            </ul>
-          </div>
+    <div class="col-xl-4">
+      <div class="admin-card fade-in-up">
+        <div class="admin-card-header"><i class="fas fa-clock text-warning"></i><div><div class="admin-card-title">Break-even Analysis</div><div class="admin-card-subtitle">Migration investment payback</div></div></div>
+        <div class="admin-card-body">
+          <div class="mb-3"><div class="d-flex justify-content-between small fw-bold mb-1"><span>ODB Exascale</span><span>Month 10</span></div><div class="tco-progress"><span style="width:72%;background:#f59e0b"></span></div></div>
+          <div class="mb-3"><div class="d-flex justify-content-between small fw-bold mb-1"><span>Oracle on Azure VM</span><span>Month 14</span></div><div class="tco-progress"><span style="width:61%;background:#06b6d4"></span></div></div>
+          <div><div class="d-flex justify-content-between small fw-bold mb-1"><span>Azure PG + Modern App</span><span>Month 28</span></div><div class="tco-progress"><span style="width:28%;background:#10b981"></span></div></div>
+          <div class="mt-3 p-3 rounded" style="background:#fffbeb;border:1px solid #fde68a;font-size:12px">Exascale reaches payback earliest because it combines infrastructure savings, labor savings, and Support Rewards while keeping DB and Forms code unchanged.</div>
         </div>
       </div>
     </div>
-
-    <!-- Oracle@Azure ROI -->
-    <div class="col-lg-4 fade-in-up">
-      <div class="card h-100" style="border-top:3px solid var(--primary)">
-        <div class="card-header"><i class="fas fa-cloud text-primary"></i><div class="card-title">Oracle@Azure — ROI</div></div>
-        <div class="card-body d-flex flex-column gap-0">
-          <div class="tco-roi-block">
-            <div class="tco-roi-label"><i class="fas fa-dollar-sign text-primary me-1"></i>NPV Savings (8%)</div>
-            <div class="tco-roi-value text-primary">$4.9M</div>
-            <div class="tco-roi-sub">Net present value of savings</div>
-          </div>
-          <div class="tco-roi-block">
-            <div class="tco-roi-label"><i class="fas fa-arrow-trend-down text-primary me-1"></i>5-Year Savings</div>
-            <div class="tco-roi-value text-primary">$6.6M</div>
-            <div class="tco-roi-sub">21% vs baseline</div>
-          </div>
-          <div class="tco-roi-block">
-            <div class="tco-roi-label"><i class="fas fa-calendar-check text-warning me-1"></i>Break-Even</div>
-            <div class="tco-roi-value text-warning">~18 months</div>
-          </div>
-          <div class="tco-roi-block">
-            <div class="tco-roi-label"><i class="fas fa-triangle-exclamation text-warning me-1"></i>Key Risks</div>
-            <ul class="tco-risk-list mt-1">
-              <li>Vendor lock-in (Microsoft)</li>
-              <li>Licensing complexity</li>
-              <li>Ongoing Oracle costs</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Leave Oracle ROI -->
-    <div class="col-lg-4 fade-in-up">
-      <div class="card h-100" style="border-top:3px solid var(--success)">
-        <div class="card-header"><i class="fas fa-circle-check text-success"></i><div class="card-title">Leave Oracle — ROI</div></div>
-        <div class="card-body d-flex flex-column gap-0">
-          <div class="tco-roi-block">
-            <div class="tco-roi-label"><i class="fas fa-dollar-sign text-success me-1"></i>NPV Savings (8%)</div>
-            <div class="tco-roi-value text-success">$12.6M</div>
-            <div class="tco-roi-sub">Best NPV across all scenarios</div>
-          </div>
-          <div class="tco-roi-block">
-            <div class="tco-roi-label"><i class="fas fa-arrow-trend-down text-success me-1"></i>5-Year Savings</div>
-            <div class="tco-roi-value text-success">$17.0M</div>
-            <div class="tco-roi-sub">55% vs baseline</div>
-          </div>
-          <div class="tco-roi-block">
-            <div class="tco-roi-label"><i class="fas fa-calendar-check text-success me-1"></i>Break-Even</div>
-            <div class="tco-roi-value text-success">~18 months</div>
-          </div>
-          <div class="tco-roi-block">
-            <div class="tco-roi-label"><i class="fas fa-triangle-exclamation text-warning me-1"></i>Key Risks</div>
-            <ul class="tco-risk-list mt-1">
-              <li>Application rewrite complexity</li>
-              <li>Execution timeline risk</li>
-              <li>Knowledge transfer</li>
-            </ul>
-          </div>
+    <div class="col-xl-8">
+      <div class="admin-card fade-in-up">
+        <div class="admin-card-header"><i class="fas fa-certificate text-danger"></i><div><div class="admin-card-title">License Cost by Migration Option</div><div class="admin-card-subtitle">BYOL, WLS support, Support Rewards, and elimination opportunities</div></div></div>
+        <div class="table-responsive">
+          <table class="table admin-table">
+            <thead><tr><th>Dimension</th><th>On-Prem</th><th class="text-warning">ODB Exascale</th><th>Oracle AzVM</th><th>Azure PG + App</th></tr></thead>
+            <tbody>
+              <tr><td>DB License Support</td><td class="mono">$700K/yr</td><td class="mono">$700K/yr BYOL</td><td class="mono">$700K/yr BYOL</td><td class="mono text-success">$0</td></tr>
+              <tr><td>WLS Support (8 proc)</td><td class="mono">$176K/yr</td><td class="mono">$176K/yr BYOL</td><td class="mono">$176K/yr BYOL</td><td class="mono text-success">$0</td></tr>
+              <tr><td>Support Rewards</td><td>None</td><td class="text-success">~$50K/yr credit</td><td>None</td><td>None</td></tr>
+              <tr><td>Net Oracle License</td><td class="mono">$876K/yr</td><td class="mono">~$826K/yr</td><td class="mono">$876K/yr</td><td class="mono text-success">$0</td></tr>
+              <tr><td>Azure license rule</td><td>N/A</td><td>ECPU billing</td><td>2 vCPU = 1 processor license</td><td>N/A</td></tr>
+              <tr><td>License risk</td><td><span class="badge badge-warning">Medium</span></td><td><span class="badge badge-success">Low</span></td><td><span class="badge badge-success">Low</span></td><td><span class="badge badge-success">None</span></td></tr>
+              <tr><td>Rewrite investment</td><td>-</td><td>-</td><td>-</td><td class="mono text-warning">$630K upfront</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Strategic Risk Factors -->
-  <div class="card fade-in-up mb-4">
-    <div class="card-header">
-      <i class="fas fa-triangle-exclamation text-warning"></i>
-      <div class="card-title">Strategic Risk Factors</div>
-    </div>
-    <div class="card-body">
-      <div class="row g-3">
-        <div class="col-lg-4">
-          <div class="p-3 rounded" style="background:var(--danger-light);border:1px solid #fecaca">
-            <div class="d-flex align-items-center gap-2 mb-3">
-              <i class="fas fa-lock text-danger"></i>
-              <div class="fw-700 text-danger">Stay Oracle</div>
-            </div>
-            <ul class="tco-risk-list">
-              <li>Oracle audit exposure increases 3% annually</li>
-              <li>Hardware refresh cycle due in Year 3</li>
-              <li>Rising license compliance costs</li>
-              <li>Limited scalability without major capex</li>
-            </ul>
-          </div>
+  <div class="row g-3 mb-4">
+    <div class="col-xl-6">
+      <div class="admin-card fade-in-up">
+        <div class="admin-card-header">
+          <i class="fas fa-calendar-days text-primary"></i>
+          <div><div class="admin-card-title">Year-by-Year TCO</div><div class="admin-card-subtitle">Year 1 includes one-time migration cost</div></div>
         </div>
-        <div class="col-lg-4">
-          <div class="p-3 rounded" style="background:var(--primary-light);border:1px solid #bfdbfe">
-            <div class="d-flex align-items-center gap-2 mb-3">
-              <i class="fas fa-clock text-primary"></i>
-              <div class="fw-700 text-primary">Oracle@Azure</div>
-            </div>
-            <ul class="tco-risk-list">
-              <li>Vendor lock-in to Microsoft ecosystem</li>
-              <li>Oracle licensing complexity remains</li>
-              <li>Conversion timeline 8–12 months</li>
-              <li>Hybrid cost model dependencies</li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="p-3 rounded" style="background:var(--success-light);border:1px solid #a7f3d0">
-            <div class="d-flex align-items-center gap-2 mb-3">
-              <i class="fas fa-circle-check text-success"></i>
-              <div class="fw-700 text-success">Leave Oracle</div>
-            </div>
-            <ul class="tco-risk-list">
-              <li>Largest upfront investment ($4.4M)</li>
-              <li>Application rewrite of 120 Forms required</li>
-              <li>12–18 month execution timeline</li>
-              <li>Best long-term flexibility &amp; $17M savings</li>
-            </ul>
-          </div>
+        <div class="table-responsive">
+          <table class="table admin-table">
+            <thead><tr><th>Scenario</th><th>Year 1</th><th>Year 2</th><th>Year 3</th><th>Total</th><th>Savings</th></tr></thead>
+            <tbody>
+              <tr><td>On-Prem Oracle RAC + Forms</td><td class="mono">$1,918K</td><td class="mono">$1,962K</td><td class="mono">$2,008K</td><td class="mono fw-bold">$5,367K</td><td>-</td></tr>
+              <tr class="row-highlight"><td><strong>ODB@Azure Exascale + Forms VM</strong></td><td class="mono fw-bold">$1,253K</td><td class="mono fw-bold">$957K</td><td class="mono fw-bold">$974K</td><td class="mono fw-bold text-warning">$3,574K</td><td class="mono text-success">$1,793K</td></tr>
+              <tr><td>ODB@Azure Dedicated + Forms VM</td><td class="mono">$1,671K</td><td class="mono">$1,343K</td><td class="mono">$1,361K</td><td class="mono">$4,832K</td><td class="mono text-success">$535K</td></tr>
+              <tr><td>Oracle on Azure VM + Forms VM</td><td class="mono">$1,491K</td><td class="mono">$1,311K</td><td class="mono">$1,329K</td><td class="mono">$4,190K</td><td class="mono text-success">$1,177K</td></tr>
+              <tr><td>Azure PG + Modern Web App</td><td class="mono">$743K</td><td class="mono">$523K</td><td class="mono">$541K</td><td class="mono">$2,031K</td><td class="mono text-success">$3,336K</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- Oracle Estate Recommendation -->
-  <div class="card fade-in-up mb-4">
-    <div class="card-header">
-      <i class="fas fa-wand-magic-sparkles text-purple"></i>
-      <div class="card-title">Oracle Estate Recommendation</div>
-      <div class="card-subtitle">Based on 5-year TCO, NPV, and risk analysis</div>
-    </div>
-    <div class="card-body">
-      <div class="row g-3">
-        <div class="col-lg-6">
-          <div class="tco-recommend-primary">
-            <div class="d-flex align-items-center gap-2 mb-2">
-              <i class="fas fa-circle-check text-success" style="font-size:18px"></i>
-              <div class="fw-800 text-success" style="font-size:15px">Primary: Leave Oracle (Track B)</div>
-            </div>
-            <div class="text-muted small mb-3">55% TCO reduction, zero Oracle dependency, modern cloud-native stack</div>
-            <div class="d-flex flex-column gap-1">
-              <div class="small"><i class="fas fa-arrow-right text-success me-2"></i>5-Year savings: <strong class="text-success">$17.0M</strong></div>
-              <div class="small"><i class="fas fa-arrow-right text-success me-2"></i>NPV at 8%: <strong class="text-success">$12.6M</strong></div>
-              <div class="small"><i class="fas fa-arrow-right text-success me-2"></i>Break-even: <strong class="text-success">~18 months</strong></div>
-              <div class="small"><i class="fas fa-arrow-right text-success me-2"></i>Oracle Forms → React/Angular SPA modernization</div>
-              <div class="small"><i class="fas fa-arrow-right text-success me-2"></i>Oracle DB → Azure DB for PostgreSQL conversion</div>
-            </div>
-          </div>
+    <div class="col-xl-6">
+      <div class="admin-card fade-in-up">
+        <div class="admin-card-header">
+          <i class="fas fa-scissors text-success"></i>
+          <div><div class="admin-card-title">Where Savings Come From</div><div class="admin-card-subtitle">ODB@Azure Exascale vs on-prem, Year 2 run-rate</div></div>
         </div>
-        <div class="col-lg-6">
-          <div class="tco-recommend-conservative">
-            <div class="d-flex align-items-center gap-2 mb-2">
-              <i class="fas fa-shield-halved text-primary" style="font-size:18px"></i>
-              <div class="fw-800 text-primary" style="font-size:15px">Conservative: Oracle@Azure (Track A)</div>
-            </div>
-            <div class="text-muted small mb-3">21% TCO reduction, lower conversion risk, keeps Oracle familiarity</div>
-            <div class="d-flex flex-column gap-1">
-              <div class="small"><i class="fas fa-arrow-right text-primary me-2"></i>5-Year savings: <strong class="text-primary">$6.6M</strong></div>
-              <div class="small"><i class="fas fa-arrow-right text-primary me-2"></i>NPV at 8%: <strong class="text-primary">$4.9M</strong></div>
-              <div class="small"><i class="fas fa-arrow-right text-primary me-2"></i>Conversion timeline: <strong class="text-primary">8–12 months</strong></div>
-              <div class="small"><i class="fas fa-arrow-right text-primary me-2"></i>No Forms rewrite required</div>
-              <div class="small"><i class="fas fa-arrow-right text-primary me-2"></i>Lower upfront investment risk</div>
-            </div>
-          </div>
+        <div class="table-responsive">
+          <table class="table admin-table">
+            <thead><tr><th>Saving Category</th><th>On-Prem</th><th>Exascale</th><th>Annual Saving</th></tr></thead>
+            <tbody>
+              <tr><td>Server hardware</td><td class="mono">$240,000</td><td class="mono text-success">$0</td><td class="mono text-success">$240,000</td></tr>
+              <tr><td>Data center / power / cooling</td><td class="mono">$80,000</td><td class="mono text-success">$0</td><td class="mono text-success">$80,000</td></tr>
+              <tr><td>On-prem storage SAN</td><td class="mono">$120,000</td><td class="mono text-success">$0</td><td class="mono text-success">$120,000</td></tr>
+              <tr><td>Forms/WLS server compute</td><td class="mono">$60,000</td><td class="mono">$6,312</td><td class="mono text-success">$53,688</td></tr>
+              <tr><td>DBA labor</td><td class="mono">$280,000</td><td class="mono">$210,000</td><td class="mono text-success">$70,000</td></tr>
+              <tr><td>App/WLS admin labor</td><td class="mono">$120,000</td><td class="mono">$90,000</td><td class="mono text-success">$30,000</td></tr>
+              <tr><td>Oracle Support Rewards</td><td class="mono">$0</td><td class="mono text-success">-$52,500</td><td class="mono text-success">$52,500</td></tr>
+              <tr><td>Backup, network, monitoring</td><td class="mono">$110,000</td><td class="mono">$30,000</td><td class="mono text-success">$80,000</td></tr>
+              <tr class="row-highlight"><td><strong>Total run-rate saving</strong></td><td></td><td></td><td class="mono text-success fw-bold">~$726,188</td></tr>
+            </tbody>
+          </table>
         </div>
-      </div>
-      <div class="mt-3 pt-3 border-top text-muted" style="font-size:11px">
-        <i class="fas fa-circle-info me-1"></i>All figures in USD. 8% discount rate applied for NPV. Mid-Market Profile: $3.2M Oracle spend, 1.2TB database, 200 users, 120 Forms.
-      </div>
-    </div>
-  </div>
-
-  <!-- 2.3 Forms License Implications per Migration Option -->
-  <div class="card fade-in-up mb-4">
-    <div class="card-header">
-      <i class="fas fa-certificate text-danger"></i>
-      <div>
-        <div class="card-title">2.3 Forms License Implications per Migration Option</div>
-        <div class="card-subtitle">WLS / Forms licensing impact across all 4 migration paths — HRDPRD baseline: 8 proc licenses · ~$176K/yr support</div>
-      </div>
-    </div>
-    <div class="card-body p-0">
-      <div class="table-container">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Dimension</th>
-              <th><span class="badge badge-muted">On-Prem</span></th>
-              <th><span class="badge badge-success">Path 1 — Lift &amp; Shift</span></th>
-              <th><span class="badge badge-warning">Path 2 — Upgrade &amp; Lift</span></th>
-              <th><span class="badge badge-purple">Path 3 — Forms → APEX</span></th>
-              <th><span class="badge badge-danger">Path 4 — Full Rewrite</span></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="hover-highlight">
-              <td><i class="fas fa-certificate text-danger me-2"></i><strong>WLS License Required</strong></td>
-              <td>YES (8 proc)</td>
-              <td>YES (8 proc BYOL)</td>
-              <td>YES (8 proc BYOL)</td>
-              <td><span class="text-success fw-600">NO — APEX in DB</span></td>
-              <td><span class="text-success fw-600">NO — open-source stack</span></td>
-            </tr>
-            <tr class="hover-highlight">
-              <td><i class="fas fa-file-contract text-warning me-2"></i><strong>Forms License</strong></td>
-              <td>Incl. WLS Suite</td>
-              <td>Incl. WLS BYOL</td>
-              <td>Incl. WLS BYOL</td>
-              <td><span class="badge badge-success">Eliminated</span></td>
-              <td><span class="badge badge-success">Eliminated</span></td>
-            </tr>
-            <tr class="hover-highlight">
-              <td><i class="fas fa-cloud text-primary me-2"></i><strong>WLS Azure License Rule</strong></td>
-              <td class="text-muted">N/A</td>
-              <td>2 vCPU = 1 lic</td>
-              <td>2 vCPU = 1 lic</td>
-              <td class="text-muted">N/A</td>
-              <td class="text-muted">N/A</td>
-            </tr>
-            <tr class="hover-highlight">
-              <td><i class="fas fa-microchip text-primary me-2"></i><strong>vCPUs Needed (Azure)</strong></td>
-              <td class="text-muted">N/A</td>
-              <td>8–16 vCPU</td>
-              <td>8–16 vCPU</td>
-              <td>ORDS: 4 vCPU</td>
-              <td>4–8 vCPU (App Svc)</td>
-            </tr>
-            <tr class="hover-highlight">
-              <td><i class="fas fa-layer-group text-indigo me-2"></i><strong>Proc Licenses Needed</strong></td>
-              <td>8 proc</td>
-              <td>4–8 proc</td>
-              <td>4–8 proc</td>
-              <td><span class="text-success fw-600">0 (APEX in DB)</span></td>
-              <td><span class="text-success fw-600">0</span></td>
-            </tr>
-            <tr class="hover-highlight">
-              <td><i class="fas fa-dollar-sign text-danger me-2"></i><strong>Annual WLS Support</strong></td>
-              <td class="text-danger fw-600">~$176K/yr</td>
-              <td>~$176K/yr (no change)</td>
-              <td>~$176K/yr</td>
-              <td><span class="badge badge-success">Eliminated</span></td>
-              <td><span class="badge badge-success">Eliminated</span></td>
-            </tr>
-            <tr class="hover-highlight">
-              <td><i class="fas fa-gift text-purple me-2"></i><strong>Oracle Support Rewards</strong></td>
-              <td class="text-muted">N/A</td>
-              <td><span class="text-danger small fw-600">NO (Azure VM)</span></td>
-              <td><span class="text-danger small fw-600">NO (Azure VM)</span></td>
-              <td><span class="text-success fw-600">YES if ODB@Azure</span></td>
-              <td><span class="text-danger small fw-600">NO</span></td>
-            </tr>
-            <tr class="hover-highlight">
-              <td><i class="fas fa-shield-halved text-warning me-2"></i><strong>License Risk</strong></td>
-              <td><span class="badge badge-warning">Medium</span></td>
-              <td><span class="badge badge-success">Low (Azure authorized)</span></td>
-              <td><span class="badge badge-success">Low</span></td>
-              <td><span class="badge badge-success">None</span></td>
-              <td><span class="badge badge-success">None</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="card-body pt-0">
-      <div class="p-3 rounded" style="background:var(--danger-light);border:1px solid #fecaca;font-size:11px">
-        <i class="fas fa-circle-info text-danger me-1"></i>
-        <strong>Key insight:</strong> Paths 1 &amp; 2 preserve the full $176K/yr WLS support cost. Paths 3 &amp; 4 eliminate it entirely.
-        Path 3 (APEX) also qualifies for <strong>Oracle Support Rewards</strong> if using ODB@Azure, partially offsetting Oracle DB costs.
-        The 2 vCPU = 1 processor license rule means 8 proc licenses covers up to 16 vCPUs on Azure.
-      </div>
-    </div>
-  </div>
-
-  <!-- One-Time Conversion Costs -->
-  <div class="card fade-in-up">
-    <div class="card-header"><i class="fas fa-receipt text-warning"></i><div class="card-title">One-Time Conversion Costs</div><div class="ms-auto"><span class="badge badge-warning">$4.4M total (Leave Oracle)</span></div></div>
-    <div class="card-body p-0">
-      <div class="table-container">
-        <table class="table">
-          <thead><tr><th>Cost Item</th><th>Category</th><th>Estimate</th><th>Actuals</th><th>Variance</th><th>Status</th></tr></thead>
-          <tbody>
-            <tr class="hover-highlight"><td><strong>Schema Conversion Tools</strong></td><td><span class="badge badge-primary">Tooling</span></td><td>$180K</td><td>$165K</td><td class="text-success small fw-600">-$15K</td><td><span class="badge badge-success">Finalized</span></td></tr>
-            <tr class="hover-highlight"><td><strong>Professional Services</strong></td><td><span class="badge badge-purple">Services</span></td><td>$1.4M</td><td>$1.38M</td><td class="text-success small fw-600">-$20K</td><td><span class="badge badge-success">Finalized</span></td></tr>
-            <tr class="hover-highlight"><td><strong>Training &amp; Enablement</strong></td><td><span class="badge badge-cyan">People</span></td><td>$240K</td><td>$228K</td><td class="text-success small fw-600">-$12K</td><td><span class="badge badge-success">Finalized</span></td></tr>
-            <tr class="hover-highlight"><td><strong>Data Conversion (ETL)</strong></td><td><span class="badge badge-warning">Data</span></td><td>$620K</td><td>$590K</td><td class="text-success small fw-600">-$30K</td><td><span class="badge badge-primary">In Progress</span></td></tr>
-            <tr class="hover-highlight"><td><strong>Forms Modernization (120 Forms)</strong></td><td><span class="badge badge-indigo">Dev</span></td><td>$1.5M</td><td>—</td><td class="text-muted small">Pending</td><td><span class="badge badge-muted">Planned</span></td></tr>
-            <tr class="hover-highlight"><td><strong>Testing &amp; Validation</strong></td><td><span class="badge badge-indigo">QA</span></td><td>$140K</td><td>—</td><td class="text-muted small">Pending</td><td><span class="badge badge-muted">Planned</span></td></tr>
-            <tr class="hover-highlight"><td><strong>Contingency (10%)</strong></td><td><span class="badge badge-muted">Buffer</span></td><td>$320K</td><td>—</td><td class="text-muted small">Reserved</td><td><span class="badge badge-muted">Reserved</span></td></tr>
-          </tbody>
-        </table>
       </div>
     </div>
   </div>
@@ -643,77 +392,49 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script src="assets/js/main.js"></script>
 <script>
-var _annualChart, _cumulChart;
-
-var tcoData = {
-  labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
-  stay:  [5.5, 5.8, 6.1, 6.5, 7.0],
-  azure: [5.8, 4.7, 4.6, 4.6, 4.7],
-  leave: [5.8, 2.8, 1.9, 1.8, 1.7],
-  stayCumul:  [5.5, 11.3, 17.4, 23.9, 30.9],
-  azureCumul: [5.8, 10.5, 15.1, 19.7, 24.4],
-  leaveCumul: [5.8,  8.6, 10.5, 12.3, 14.0]
+var tcoOptions = {
+  labels: ['On-Prem', 'ODB Exascale', 'ODB Dedicated', 'Oracle AzVM', 'Azure PG + App'],
+  totals: [5367, 3574, 4832, 4190, 2031],
+  savings: [0, 1793, 535, 1177, 3336]
 };
 
-function setScenario(sc) {
-  document.querySelectorAll('.tco-scenario-card').forEach(function(el) {
-    el.style.opacity = '0.55';
-    el.style.transform = 'scale(0.98)';
-  });
-  var sel = document.getElementById('sc-' + sc);
-  if (sel) { sel.style.opacity = '1'; sel.style.transform = 'scale(1)'; }
-}
-
 function initPageCharts() {
-  // Annual Bar Chart
-  var a = document.getElementById('annualChart');
-  if (a) {
-    _annualChart = new Chart(a, {
-      type: 'bar',
-      data: {
-        labels: tcoData.labels,
-        datasets: [
-          { label: 'Leave Oracle',  data: tcoData.leave, backgroundColor: '#10b981', borderRadius: 4 },
-          { label: 'Oracle@Azure',  data: tcoData.azure, backgroundColor: '#2563eb', borderRadius: 4 },
-          { label: 'Stay Oracle',   data: tcoData.stay,  backgroundColor: '#ef4444', borderRadius: 4 }
-        ]
+  var chartEl = document.getElementById('tcoOptionChart');
+  if (!chartEl || typeof Chart === 'undefined') return;
+  new Chart(chartEl, {
+    type: 'bar',
+    data: {
+      labels: tcoOptions.labels,
+      datasets: [
+        {
+          label: '3-Year TCO',
+          data: tcoOptions.totals,
+          backgroundColor: ['#94a3b8', '#f59e0b', '#6366f1', '#06b6d4', '#10b981'],
+          borderRadius: 6
+        },
+        {
+          label: 'Savings vs On-Prem',
+          data: tcoOptions.savings,
+          backgroundColor: 'rgba(16,185,129,.28)',
+          borderColor: '#10b981',
+          borderWidth: 1,
+          borderRadius: 6
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { color: '#475569', boxWidth: 14, font: { size: 11 } } },
+        tooltip: { callbacks: { label: function(ctx) { return ctx.dataset.label + ': $' + ctx.raw.toLocaleString() + 'K'; } } }
       },
-      options: {
-        plugins: { legend: { display: false } },
-        scales: {
-          y: { ticks: { callback: function(v){ return '$' + v + 'M'; }, color: '#64748b', font: { size: 11 } }, grid: { color: '#f1f5f9' } },
-          x: { ticks: { color: '#64748b', font: { size: 11 } }, grid: { display: false } }
-        },
-        animation: { duration: 900 }
+      scales: {
+        y: { ticks: { color: '#64748b', callback: function(v) { return '$' + v.toLocaleString() + 'K'; } }, grid: { color: '#f1f5f9' } },
+        x: { ticks: { color: '#64748b', font: { size: 11 } }, grid: { display: false } }
       }
-    });
-  }
-
-  // Cumulative Line Chart
-  var c = document.getElementById('cumulChart');
-  if (c) {
-    _cumulChart = new Chart(c, {
-      type: 'line',
-      data: {
-        labels: tcoData.labels,
-        datasets: [
-          { label: 'Leave Oracle',  data: tcoData.leaveCumul,  borderColor: '#10b981', backgroundColor: 'rgba(16,185,129,.08)',  borderWidth: 2.5, fill: true, tension: .35, pointRadius: 5, pointBackgroundColor: '#10b981' },
-          { label: 'Oracle@Azure',  data: tcoData.azureCumul,  borderColor: '#2563eb', backgroundColor: 'rgba(37,99,235,.06)',   borderWidth: 2.5, fill: true, tension: .35, pointRadius: 5, pointBackgroundColor: '#2563eb' },
-          { label: 'Stay Oracle',   data: tcoData.stayCumul,   borderColor: '#ef4444', backgroundColor: 'rgba(239,68,68,.06)',   borderWidth: 2.5, fill: true, tension: .35, pointRadius: 5, pointBackgroundColor: '#ef4444' }
-        ]
-      },
-      options: {
-        plugins: {
-          legend: { labels: { font: { size: 11 }, color: '#475569', boxWidth: 14 }, position: 'bottom' }
-        },
-        scales: {
-          y: { ticks: { callback: function(v){ return '$' + v + 'M'; }, color: '#64748b', font: { size: 11 } }, grid: { color: '#f1f5f9' }, suggestedMax: 34 },
-          x: { ticks: { color: '#64748b', font: { size: 11 } }, grid: { display: false } }
-        },
-        animation: { duration: 900 }
-      }
-    });
-  }
+    }
+  });
 }
 </script>
 </body>

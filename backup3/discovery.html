@@ -89,12 +89,210 @@
 
 <main id="main-content">
 
+  <!-- Summary Stats -->
+  <div class="row g-3 mb-4 stagger">
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card">
+        <div class="stat-icon blue"><i class="fas fa-database"></i></div>
+        <div class="stat-value counter-animate" data-target="246">0</div>
+        <div class="stat-label">Workloads Discovered</div>
+        <div class="stat-delta up"><i class="fas fa-arrow-trend-up"></i>+12 this week</div>
+      </div>
+    </div>
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card">
+        <div class="stat-icon green"><i class="fas fa-file-code"></i></div>
+        <div class="stat-value counter-animate" data-target="1847">0</div>
+        <div class="stat-label">Objects Catalogued</div>
+        <div class="stat-delta up"><i class="fas fa-arrow-trend-up"></i>Forms, Procs, Triggers</div>
+      </div>
+    </div>
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card">
+        <div class="stat-icon amber"><i class="fas fa-server"></i></div>
+        <div class="stat-value counter-animate" data-target="24">0</div>
+        <div class="stat-label">Source DB Instances</div>
+        <div class="stat-delta up"><i class="fas fa-circle-check text-success"></i>All reachable</div>
+      </div>
+    </div>
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card">
+        <div class="stat-icon purple"><i class="fas fa-hard-drive"></i></div>
+        <div class="stat-value"><span class="counter-animate" data-target="4.8" data-decimals="1">0</span>TB</div>
+        <div class="stat-label">Total Data Volume</div>
+        <div class="stat-delta up"><i class="fas fa-arrow-trend-up"></i>Scanned &amp; profiled</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Why AWR Is Not Enough -->
+  <div class="row g-3 mb-3 fade-in-up">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fas fa-triangle-exclamation text-warning"></i>
+          <div>
+            <div class="card-title">Why AWR Is Not Enough</div>
+            <div class="card-subtitle">AWR only covers database internals — full estate discovery captures the complete picture</div>
+          </div>
+          <div class="ms-auto">
+            <div class="awr-tco-banner"><i class="fas fa-chart-line"></i>Without full discovery, TCO is 30–50% inaccurate</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="awr-capture-panel">
+                <div class="fw-700 mb-3" style="color:#16a34a;font-size:13px"><i class="fas fa-circle-check me-2"></i>What AWR Captures</div>
+                <div class="awr-list-item"><i class="fas fa-check text-success"></i><span>SQL execution stats &amp; query plans</span></div>
+                <div class="awr-list-item"><i class="fas fa-check text-success"></i><span>Wait events &amp; I/O metrics</span></div>
+                <div class="awr-list-item"><i class="fas fa-check text-success"></i><span>Tablespace &amp; segment sizes</span></div>
+                <div class="awr-list-item"><i class="fas fa-check text-success"></i><span>CPU &amp; memory utilization</span></div>
+                <div class="awr-list-item"><i class="fas fa-check text-success"></i><span>SGA / PGA advisory</span></div>
+                <div class="awr-list-item"><i class="fas fa-check text-success"></i><span>Buffer cache hit ratios</span></div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="awr-miss-panel">
+                <div class="fw-700 mb-3" style="color:#c2410c;font-size:13px"><i class="fas fa-circle-xmark me-2"></i>Critical Gaps AWR Misses</div>
+                <div class="awr-list-item"><i class="fas fa-xmark text-danger"></i><span>Application tier inventory (EBS, APEX, Java)</span></div>
+                <div class="awr-list-item"><i class="fas fa-xmark text-danger"></i><span>Oracle Forms .fmb / .fmx / .pll files</span></div>
+                <div class="awr-list-item"><i class="fas fa-xmark text-danger"></i><span>PL/SQL cross-schema dependencies</span></div>
+                <div class="awr-list-item"><i class="fas fa-xmark text-danger"></i><span>Middleware topology (WebLogic, SOA Suite, OSB)</span></div>
+                <div class="awr-list-item"><i class="fas fa-xmark text-danger"></i><span>Licensing model (ULA / NUP / Processor)</span></div>
+                <div class="awr-list-item"><i class="fas fa-xmark text-danger"></i><span>Integration endpoints (APIs, ETL pipelines, ESB)</span></div>
+                <div class="awr-list-item"><i class="fas fa-xmark text-danger"></i><span>Hardware specs, VM clusters, Exadata config</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Discovery Architecture -->
+  <div class="row g-3 mb-4 fade-in-up">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fas fa-layer-group text-primary"></i>
+          <div>
+            <div class="card-title">Discovery Architecture</div>
+            <div class="card-subtitle">6-layer pipeline — data flows bottom-up: Collection → Parsing → Analysis → Storage → API → Dashboard</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="arch-layer-row">
+            <span class="arch-layer-label" style="background:#ecfdf5;color:#16a34a">L1: Collection</span>
+            <div>
+              <div class="arch-layer-tools">Discovery Agents &nbsp;&middot;&nbsp; Agentless Scanners &nbsp;&middot;&nbsp; File Upload</div>
+              <div class="arch-layer-items">Connects to Oracle instances, OS, middleware via WMI/SSH/JDBC — no agent install required for agentless mode</div>
+            </div>
+            <span class="arch-layer-tech d-none d-lg-block">Python + PowerShell + JDBC + SSH</span>
+          </div>
+          <div class="arch-flow-arrow"><i class="fas fa-chevron-down"></i></div>
+          <div class="arch-layer-row">
+            <span class="arch-layer-label" style="background:#eff6ff;color:#2563eb">L2: Parsing</span>
+            <div>
+              <div class="arch-layer-tools">AWR Parser &nbsp;&middot;&nbsp; FMB Binary Parser &nbsp;&middot;&nbsp; DDL Parser</div>
+              <div class="arch-layer-items">Extracts structured metadata from binary Oracle Forms files, AWR HTML reports, DDL exports, RDF report definitions</div>
+            </div>
+            <span class="arch-layer-tech d-none d-lg-block">Python + Node.js + ANTLR4</span>
+          </div>
+          <div class="arch-flow-arrow"><i class="fas fa-chevron-down"></i></div>
+          <div class="arch-layer-row">
+            <span class="arch-layer-label" style="background:#f5f3ff;color:#7c3aed">L3: Analysis</span>
+            <div>
+              <div class="arch-layer-tools">Dependency Mapper &nbsp;&middot;&nbsp; AI Complexity Scorer</div>
+              <div class="arch-layer-items">Builds cross-domain dependency graph, scores PL/SQL &amp; Forms complexity 1–10 using Azure OpenAI</div>
+            </div>
+            <span class="arch-layer-tech d-none d-lg-block">.NET Core + Neo4j + Azure OpenAI</span>
+          </div>
+          <div class="arch-flow-arrow"><i class="fas fa-chevron-down"></i></div>
+          <div class="arch-layer-row">
+            <span class="arch-layer-label" style="background:#fff7ed;color:#c2410c">L4: Storage</span>
+            <div>
+              <div class="arch-layer-tools">Metadata Repository</div>
+              <div class="arch-layer-items">Persists all discovery artefacts, object inventories, complexity scores, and data lineage graphs</div>
+            </div>
+            <span class="arch-layer-tech d-none d-lg-block">Azure SQL + Cosmos DB</span>
+          </div>
+          <div class="arch-flow-arrow"><i class="fas fa-chevron-down"></i></div>
+          <div class="arch-layer-row">
+            <span class="arch-layer-label" style="background:#ecfdf5;color:#16a34a">L5: API</span>
+            <div>
+              <div class="arch-layer-tools">Discovery REST API</div>
+              <div class="arch-layer-items">Serves structured discovery data to downstream assessment, TCO, wave planning, and modernization modules</div>
+            </div>
+            <span class="arch-layer-tech d-none d-lg-block">.NET Core 8</span>
+          </div>
+          <div class="arch-flow-arrow"><i class="fas fa-chevron-down"></i></div>
+          <div class="arch-layer-row">
+            <span class="arch-layer-label" style="background:#fef2f2;color:#dc2626">L6: Dashboard</span>
+            <div>
+              <div class="arch-layer-tools">Estate Explorer &nbsp;&middot;&nbsp; Dependency Viewer</div>
+              <div class="arch-layer-items">Interactive workload browser, cross-domain dependency graph explorer, and per-domain drill-down views</div>
+            </div>
+            <span class="arch-layer-tech d-none d-lg-block">React + TypeScript</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Discovery Agents + Domain Upload Cards -->
   <div class="row g-3 mb-4">
-    
+    <div class="col-lg-3 fade-in-up">
+      <div class="card h-100">
+        <div class="card-header">
+          <i class="fas fa-robot text-primary"></i>
+          <div class="card-title">Discovery Agents</div>
+          <span class="ms-auto badge badge-success">v2.4</span>
+        </div>
+        <div class="card-body d-flex flex-column gap-3">
+          <div class="p-3 rounded-md border d-flex align-items-center gap-3 hover-highlight" style="cursor:pointer">
+            <div class="stat-icon blue mb-0"><i class="fas fa-windows"></i></div>
+            <div class="flex-1">
+              <div class="fw-700 small">Windows Agent</div>
+              <div class="text-muted" style="font-size:11px">For Oracle DB on Windows Server</div>
+            </div>
+            <button class="btn btn-primary btn-sm"><i class="fas fa-download"></i></button>
+          </div>
+          <div class="p-3 rounded-md border d-flex align-items-center gap-3 hover-highlight" style="cursor:pointer">
+            <div class="stat-icon green mb-0"><i class="fab fa-linux"></i></div>
+            <div class="flex-1">
+              <div class="fw-700 small">Linux Agent</div>
+              <div class="text-muted" style="font-size:11px">For Oracle DB on Linux / RHEL</div>
+            </div>
+            <button class="btn btn-primary btn-sm"><i class="fas fa-download"></i></button>
+          </div>
+          <div class="p-3 rounded-md border d-flex align-items-center gap-3 hover-highlight" style="cursor:pointer">
+            <div class="stat-icon amber mb-0"><i class="fas fa-terminal"></i></div>
+            <div class="flex-1">
+              <div class="fw-700 small">CLI Tool</div>
+              <div class="text-muted" style="font-size:11px">Cross-platform command line</div>
+            </div>
+            <button class="btn btn-primary btn-sm"><i class="fas fa-download"></i></button>
+          </div>
+          <div class="p-3 rounded-md border d-flex align-items-center gap-3 hover-highlight" style="cursor:pointer">
+            <div class="stat-icon purple mb-0"><i class="fab fa-docker"></i></div>
+            <div class="flex-1">
+              <div class="fw-700 small">Docker Image</div>
+              <div class="text-muted" style="font-size:11px">Container-based scanning</div>
+            </div>
+            <button class="btn btn-primary btn-sm"><i class="fas fa-download"></i></button>
+          </div>
+          <div class="mt-auto pt-2">
+            <div class="p-3 rounded-md" style="background:var(--primary-light);border:1px solid #bfdbfe">
+              <div class="small fw-700 text-primary mb-1"><i class="fas fa-info-circle me-1"></i>How to use</div>
+              <div class="text-muted" style="font-size:11px">Run the agent on your Oracle environment, then upload the generated exports in each domain card on the right.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <div class="col-lg-12 fade-in-up">
+    <div class="col-lg-9 fade-in-up">
       <div class="card h-100">
         <div class="card-header">
           <i class="fas fa-cloud-arrow-up text-primary"></i>
@@ -253,62 +451,6 @@
                 <div class="domain-card-dropzone">
                   <i class="fas fa-cloud-arrow-up me-1"></i>
                   <span>Drop files or <a href="#" class="text-primary domain-browse-link">browse</a></span>
-                </div>
-              </div>
-            </div>
-
-            <!-- 8. Upload Custom Template -->
-            <div class="col-md-6 col-xl-4">
-              <div class="domain-upload-card" id="domainCustomTemplate" style="height:auto">
-                <input type="file" id="customTemplateInput" accept=".xlsx" style="display:none">
-                <div class="d-flex align-items-start gap-2 mb-2">
-                  <div class="domain-card-icon" style="background:#f0fdf4;color:#059669"><i class="fas fa-file-excel"></i></div>
-                  <div>
-                    <div class="domain-card-title">Upload Custom Template</div>
-                    <div class="domain-card-desc">Upload your on-premises inventory using a .xlsx template</div>
-                  </div>
-                </div>
-                <div class="domain-card-formats">.xlsx only</div>
-                <!-- Steps -->
-                <div class="d-flex flex-column gap-0 mt-2" style="position:relative">
-                  <!-- Step connector line -->
-                  <div style="position:absolute;left:11px;top:14px;bottom:14px;width:2px;background:var(--border);z-index:0"></div>
-                  <!-- Step 1 -->
-                  <div class="d-flex align-items-start gap-2 mb-2" style="position:relative;z-index:1">
-                    <div style="width:22px;height:22px;border-radius:50%;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">1</div>
-                    <div class="flex-1">
-                      <div class="fw-700" style="font-size:11px;color:#1e40af">Download .xlsx Template</div>
-                      <div class="text-muted" style="font-size:10px;margin-bottom:4px">Download the template to import your on-premises data</div>
-                      <a href="#" class="btn btn-primary btn-sm" style="font-size:10px;padding:2px 10px" onclick="event.preventDefault()"><i class="fas fa-download me-1"></i>Download</a>
-                    </div>
-                  </div>
-                  <!-- Step 2 -->
-                  <div class="d-flex align-items-start gap-2 mb-2" style="position:relative;z-index:1">
-                    <div style="width:22px;height:22px;border-radius:50%;background:#6b7280;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">2</div>
-                    <div class="flex-1">
-                      <div class="fw-700" style="font-size:11px;color:#374151">Add inventory data to .xlsx File</div>
-                      <div class="text-muted" style="font-size:10px">Fill the data into the downloaded .xlsx file from available data</div>
-                      <div class="text-muted" style="font-size:10px;margin-top:2px"><i class="fas fa-circle-info text-primary me-1"></i>Fields marked with <strong>*</strong> in the header are mandatory</div>
-                    </div>
-                  </div>
-                  <!-- Step 3 -->
-                  <div class="d-flex align-items-start gap-2 mb-2" style="position:relative;z-index:1">
-                    <div style="width:22px;height:22px;border-radius:50%;background:#6b7280;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">3</div>
-                    <div class="flex-1">
-                      <div class="fw-700" style="font-size:11px;color:#374151">Upload updated .xlsx file</div>
-                      <div class="text-muted" style="font-size:10px;margin-bottom:4px">After uploading, the file will be reviewed for errors and a report generated</div>
-                      <button class="btn btn-success btn-sm" style="font-size:10px;padding:2px 10px" onclick="document.getElementById('customTemplateInput').click()"><i class="fas fa-cloud-arrow-up me-1"></i>Upload Template</button>
-                      <div id="customTemplateStatus" class="mt-1" style="font-size:10px;display:none"></div>
-                    </div>
-                  </div>
-                  <!-- Step 4 -->
-                  <div class="d-flex align-items-start gap-2" style="position:relative;z-index:1">
-                    <div style="width:22px;height:22px;border-radius:50%;background:#6b7280;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">4</div>
-                    <div class="flex-1">
-                      <div class="fw-700" style="font-size:11px;color:#374151">Showing Generated Report</div>
-                      <div class="text-muted" style="font-size:10px">After processing completes, go back to dashboard to view report</div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -753,19 +895,6 @@ $(function() {
 
     var offcanvas = new bootstrap.Offcanvas(document.getElementById('domainDetailPanel'));
     offcanvas.show();
-  });
-
-  // Custom Template upload handler — activates step indicators on file select
-  $('#customTemplateInput').on('change', function() {
-    var file = this.files && this.files[0];
-    if (!file) return;
-    var $status = $('#customTemplateStatus');
-    $status.html('<i class="fas fa-check-circle text-success me-1"></i><span class="text-success fw-600">' + file.name + ' ready</span>').show();
-    // Highlight step 3 circle green, step 4 circle blue
-    var $steps = $('#domainCustomTemplate .d-flex[style*="z-index:1"]');
-    $steps.eq(2).find('div[style*="border-radius:50%"]').css({'background':'#059669'});
-    $steps.eq(3).find('div[style*="border-radius:50%"]').css({'background':'#2563eb'});
-    $('#domainCustomTemplate').addClass('has-files');
   });
 
   // Upload card drag/drop
