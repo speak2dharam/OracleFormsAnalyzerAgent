@@ -472,6 +472,7 @@
                 </div>
                 <div class="domain-card-formats">.xlsx · .csv · .xml · .json · .pdf</div>
                 <button class="btn btn-light btn-sm w-100 mb-2 domain-details-btn" data-domain="infra" style="font-size:11px;border-color:var(--border)"><i class="fas fa-table-list me-1 text-primary"></i>View Discovery Methods</button>
+                <button class="btn btn-primary btn-sm w-100 mb-2" style="font-size:11px"><i class="fas fa-download me-1"></i>Download Infrastructure Discovery Agent</button>
                 <div class="domain-card-dropzone">
                   <i class="fas fa-cloud-arrow-up me-1"></i>
                   <span>Drop files or <a href="#" class="text-primary domain-browse-link">browse</a></span>
@@ -493,6 +494,7 @@
                 </div>
                 <div class="domain-card-formats">.dmp · .sql · .ddl · .xml · .exp</div>
                 <button class="btn btn-light btn-sm w-100 mb-2 domain-details-btn" data-domain="database" style="font-size:11px;border-color:var(--border)"><i class="fas fa-table-list me-1 text-success"></i>View Discovery Methods</button>
+                <button class="btn btn-primary btn-sm w-100 mb-2" style="font-size:11px"><i class="fas fa-download me-1"></i>Download Database Discovery Agent</button>
                 <div class="domain-card-dropzone">
                   <i class="fas fa-check-circle text-success me-1"></i>
                   <span class="text-success">3 files uploaded — <a href="#" class="text-primary domain-browse-link">add more</a></span>
@@ -514,6 +516,7 @@
                 </div>
                 <div class="domain-card-formats">.fmb · .fmx · .pll · .rdf · .rep · .mmb</div>
                 <button class="btn btn-light btn-sm w-100 mb-2 domain-details-btn" data-domain="forms" style="font-size:11px;border-color:var(--border)"><i class="fas fa-table-list me-1 text-warning"></i>View Discovery Methods</button>
+                <button class="btn btn-primary btn-sm w-100 mb-2" style="font-size:11px"><i class="fas fa-download me-1"></i>Download Forms Discovery Agent</button>
                 <div class="domain-card-dropzone">
                   <i class="fas fa-check-circle text-success me-1"></i>
                   <span class="text-success">12 files uploaded — <a href="#" class="text-primary domain-browse-link">add more</a></span>
@@ -535,6 +538,7 @@
                 </div>
                 <div class="domain-card-formats">.dtsx · .xml · .odi · .ktr · .kjb · .zip</div>
                 <button class="btn btn-light btn-sm w-100 mb-2 domain-details-btn" data-domain="etl" style="font-size:11px;border-color:var(--border)"><i class="fas fa-table-list me-1" style="color:#0891b2"></i>View Discovery Methods</button>
+                <button class="btn btn-primary btn-sm w-100 mb-2" style="font-size:11px"><i class="fas fa-download me-1"></i>Download ETL Discovery Agent</button>
                 <div class="domain-card-dropzone">
                   <i class="fas fa-cloud-arrow-up me-1"></i>
                   <span>Drop files or <a href="#" class="text-primary domain-browse-link">browse</a></span>
@@ -556,6 +560,7 @@
                 </div>
                 <div class="domain-card-formats">.xml · .jar · .properties · .conf · .zip</div>
                 <button class="btn btn-light btn-sm w-100 mb-2 domain-details-btn" data-domain="middleware" style="font-size:11px;border-color:var(--border)"><i class="fas fa-table-list me-1" style="color:#4f46e5"></i>View Discovery Methods</button>
+                <button class="btn btn-primary btn-sm w-100 mb-2" style="font-size:11px"><i class="fas fa-download me-1"></i>Download Middleware Discovery Agent</button>
                 <div class="domain-card-dropzone">
                   <i class="fas fa-cloud-arrow-up me-1"></i>
                   <span>Drop files or <a href="#" class="text-primary domain-browse-link">browse</a></span>
@@ -577,6 +582,7 @@
                 </div>
                 <div class="domain-card-formats">.pdf · .xlsx · .csv · .ldt · .xml</div>
                 <button class="btn btn-light btn-sm w-100 mb-2 domain-details-btn" data-domain="licensing" style="font-size:11px;border-color:var(--border)"><i class="fas fa-table-list me-1 text-danger"></i>View Discovery Methods</button>
+                <button class="btn btn-primary btn-sm w-100 mb-2" style="font-size:11px"><i class="fas fa-download me-1"></i>Download Licensing Discovery Agent</button>
                 <div class="domain-card-dropzone">
                   <i class="fas fa-cloud-arrow-up me-1"></i>
                   <span>Drop files or <a href="#" class="text-primary domain-browse-link">browse</a></span>
@@ -643,7 +649,7 @@
             </div>
 
             <!-- Upload Progress Summary -->
-            <div class="col-md-6 col-xl-8">
+            <div class="col-md-12 col-xl-12">
               <div class="discovery-progress-panel">
                 <div class="discovery-progress-head">
                   <div>
@@ -672,7 +678,7 @@
                     <span class="small text-success" style="min-width:28px">12</span>
                   </div>
                   <div class="d-flex align-items-center gap-2">
-                    <span class="small text-muted" style="min-width:120px">Applications</span>
+                    <span class="small text-muted" style="min-width:120px">ETL &amp; Data Int.</span>
                     <div class="progress flex-1 progress-sm"><div class="progress-bar bg-secondary" data-width="0" style="width:0%"></div></div>
                     <span class="small text-muted" style="min-width:28px">—</span>
                   </div>
@@ -686,11 +692,7 @@
                     <div class="progress flex-1 progress-sm"><div class="progress-bar bg-secondary" data-width="0" style="width:0%"></div></div>
                     <span class="small text-muted" style="min-width:28px">—</span>
                   </div>
-                  <div class="d-flex align-items-center gap-2">
-                    <span class="small text-muted" style="min-width:120px">ETL &amp; Data Int.</span>
-                    <div class="progress flex-1 progress-sm"><div class="progress-bar bg-secondary" data-width="0" style="width:0%"></div></div>
-                    <span class="small text-muted" style="min-width:28px">—</span>
-                  </div>
+                  
                 </div>
               </div>
             </div>
@@ -701,140 +703,7 @@
     </div>
   </div>
 
-  <!-- 2.1 Oracle Forms Architecture Overview (HRDPRD) -->
-  <div class="discovery-section-title">
-    <div class="icon"><i class="fas fa-sitemap"></i></div>
-    <div>
-      <h3>Architecture Visibility</h3>
-      <p>Current Forms stack components, version posture, and mapped Azure targets.</p>
-    </div>
-  </div>
-  <div class="row g-3 mb-4 fade-in-up">
-    <div class="col-12">
-      <div class="card">
-        <div class="card-header">
-          <i class="fas fa-sitemap text-warning"></i>
-          <div>
-            <div class="card-title">2.1 Oracle Forms Architecture Overview — HRDPRD</div>
-            <div class="card-subtitle">Current state, version, and Azure target for each Forms stack component</div>
-          </div>
-          <div class="ms-auto d-flex align-items-center gap-2">
-            <span class="badge badge-warning">Forms 12c · WLS 12c</span>
-            <span class="badge badge-primary">Azure Target Mapped</span>
-          </div>
-        </div>
-        <div class="card-body p-0">
-          <div class="table-container">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Component</th>
-                  <th>Current State</th>
-                  <th>Version</th>
-                  <th>Azure Target</th>
-                  <th>Notes</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="hover-highlight">
-                  <td><i class="fas fa-file-code text-warning me-2"></i><strong>Forms Runtime</strong></td>
-                  <td>Oracle Forms 12c</td>
-                  <td><span class="badge badge-muted">12.2.1.x</span></td>
-                  <td><span class="badge badge-primary">WebLogic VM or Modernized</span></td>
-                  <td class="text-muted small">Forms 14c released Dec 2024; WLS jointly supported on Azure</td>
-                </tr>
-                <tr class="hover-highlight">
-                  <td><i class="fas fa-server text-indigo me-2"></i><strong>App Server</strong></td>
-                  <td>Oracle WebLogic Server</td>
-                  <td><span class="badge badge-muted">12c (12.2.1.4)</span></td>
-                  <td><span class="badge badge-primary">Linux VM (BYOL) or container runtime</span></td>
-                  <td class="text-muted small">Or integrate with Azure Front Door</td>
-                </tr>
-                <tr class="hover-highlight">
-                  <td><i class="fas fa-globe text-cyan me-2"></i><strong>Web Server</strong></td>
-                  <td>Oracle HTTP Server / Apache</td>
-                  <td><span class="badge badge-muted">12c</span></td>
-                  <td><span class="badge badge-primary">Azure App Gateway + NGINX</span></td>
-                  <td class="text-muted small">Replace OHS with Azure App Gateway + NGINX on VM</td>
-                </tr>
-                <tr class="hover-highlight">
-                  <td><i class="fas fa-plug text-green me-2"></i><strong>Forms Servlet</strong></td>
-                  <td>frmservlet / FormsServlet</td>
-                  <td><span class="badge badge-muted">12c</span></td>
-                  <td><span class="badge badge-success">Same (lift &amp; shift VM)</span></td>
-                  <td class="text-muted small">No change for lift &amp; shift</td>
-                </tr>
-                <tr class="hover-highlight">
-                  <td><i class="fas fa-database text-primary me-2"></i><strong>PostgreSQL Data Tier</strong></td>
-                  <td>Oracle DB 12.2 EE RAC</td>
-                  <td><span class="badge badge-muted">12.2.0.1</span></td>
-                  <td><span class="badge badge-primary">Per DB option selected</span></td>
-                  <td class="text-muted small">Forms talks to DB via JDBC/SQLNET</td>
-                </tr>
-                <tr class="hover-highlight">
-                  <td><i class="fas fa-file-chart-column text-purple me-2"></i><strong>Reports</strong></td>
-                  <td>Oracle Reports (if any)</td>
-                  <td><span class="badge badge-muted">12c</span></td>
-                  <td><span class="badge badge-warning">Migrate separately</span></td>
-                  <td class="text-muted small"><span style="color:#c2410c;font-weight:600">Reports 12c deprecated — plan migration</span></td>
-                </tr>
-                <tr class="hover-highlight">
-                  <td><i class="fas fa-users text-teal me-2"></i><strong>Concurrent Users</strong></td>
-                  <td>~50–100 assumed</td>
-                  <td><span class="badge badge-muted">Peak ~150</span></td>
-                  <td><span class="badge badge-success">Azure VM D8ds_v5 sufficient</span></td>
-                  <td class="text-muted small">8 vCPUs handles 150+ concurrent users; container runtime profile if containerized</td>
-                </tr>
-                <tr class="hover-highlight">
-                  <td><i class="fas fa-clock-rotate-left text-orange me-2"></i><strong>Session Model</strong></td>
-                  <td>Stateful (Forms session)</td>
-                  <td><span class="badge badge-muted">Long-lived</span></td>
-                  <td><span class="badge badge-success">Preserve on lift &amp; shift</span></td>
-                  <td class="text-muted small">container runtime profile required if containerized</td>
-                </tr>
-                <tr class="hover-highlight">
-                  <td><i class="fas fa-display text-primary me-2"></i><strong>Browser Client</strong></td>
-                  <td><span style="color:#d97706;font-weight:600">Java Plugin (legacy) or JWS</span></td>
-                  <td><span class="badge badge-muted">Varies</span></td>
-                  <td><span class="badge badge-success">HTML5 via Forms Standalone</span></td>
-                  <td class="text-muted small">Forms 12c supports browser HTML5</td>
-                </tr>
-                <tr class="hover-highlight">
-                  <td><i class="fas fa-key text-danger me-2"></i><strong>SSO / Auth</strong></td>
-                  <td>Oracle SSO or AD</td>
-                  <td><span class="badge badge-muted">LDAP/AD</span></td>
-                  <td><span class="badge badge-primary">Azure AD / Entra ID</span></td>
-                  <td class="text-muted small">Configure WLS LDAP to Entra ID</td>
-                </tr>
-                <tr class="hover-highlight">
-                  <td><i class="fas fa-certificate text-danger me-2"></i><strong>License — WLS</strong></td>
-                  <td>WebLogic Suite perpetual</td>
-                  <td><span class="badge badge-muted">8 proc lic assumed</span></td>
-                  <td><span class="badge badge-warning">BYOL on Azure VM (2 vCPU = 1 lic)</span></td>
-                  <td class="text-muted small">8 proc lic = 16 vCPUs on Azure</td>
-                </tr>
-                <tr class="hover-highlight">
-                  <td><i class="fas fa-certificate text-warning me-2"></i><strong>License — Forms</strong></td>
-                  <td>Bundled in WLS Suite</td>
-                  <td><span class="badge badge-success">Included</span></td>
-                  <td><span class="badge badge-success">Included in WLS BYOL</span></td>
-                  <td class="text-muted small">Oracle Forms included in WLS Suite</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="card-body pt-0">
-          <div class="p-3 rounded" style="background:var(--primary-light);border:1px solid #bfdbfe;font-size:11px">
-            <i class="fas fa-circle-info text-primary me-1"></i>
-            <strong>Support timeline:</strong> Oracle Forms 12c Premier Support ended Dec 2024. Sustaining Support ends Dec 2028. Forms 14c (released Dec 2024) extends support to ~2034 but requires WebLogic 14c upgrade.
-            For HRDPRD HCM scenario, <strong>lift &amp; shift to Azure VM is the fastest path</strong>; modernization to React is the strategic long-term play.
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
+ 
   <!-- Infrastructure Summary + Uploaded Files Table -->
   <div class="discovery-section-title">
     <div class="icon"><i class="fas fa-folder-open"></i></div>
@@ -844,42 +713,8 @@
     </div>
   </div>
   <div class="row g-3">
-    <div class="col-lg-4 fade-in-up">
-      <div class="card">
-        <div class="card-header"><i class="fas fa-sitemap text-indigo"></i><div class="card-title">Infrastructure Summary</div></div>
-        <div class="card-body">
-          <div class="d-flex flex-column gap-3">
-            <div class="d-flex align-items-center justify-content-between">
-              <div class="d-flex align-items-center gap-2"><i class="fas fa-server text-muted"></i><span class="small fw-500">Oracle 19c</span></div>
-              <div class="d-flex align-items-center gap-2"><span class="counter-animate fw-700" data-target="18">0</span><div class="progress progress-sm" style="width:80px"><div class="progress-bar bg-primary" data-width="75" style="width:0%"></div></div></div>
-            </div>
-            <div class="d-flex align-items-center justify-content-between">
-              <div class="d-flex align-items-center gap-2"><i class="fas fa-server text-muted"></i><span class="small fw-500">Oracle 12c</span></div>
-              <div class="d-flex align-items-center gap-2"><span class="counter-animate fw-700" data-target="4">0</span><div class="progress progress-sm" style="width:80px"><div class="progress-bar bg-warning" data-width="17" style="width:0%"></div></div></div>
-            </div>
-            <div class="d-flex align-items-center justify-content-between">
-              <div class="d-flex align-items-center gap-2"><i class="fas fa-server text-muted"></i><span class="small fw-500">Oracle 11g</span></div>
-              <div class="d-flex align-items-center gap-2"><span class="counter-animate fw-700" data-target="2">0</span><div class="progress progress-sm" style="width:80px"><div class="progress-bar bg-danger" data-width="8" style="width:0%"></div></div></div>
-            </div>
-            <div class="divider"></div>
-            <div class="d-flex align-items-center justify-content-between">
-              <span class="small fw-500 text-muted">Total Schemas</span><strong class="counter-animate" data-target="187">0</strong>
-            </div>
-            <div class="d-flex align-items-center justify-content-between">
-              <span class="small fw-500 text-muted">Forms Modules</span><strong class="counter-animate" data-target="312">0</strong>
-            </div>
-            <div class="d-flex align-items-center justify-content-between">
-              <span class="small fw-500 text-muted">PL/SQL Packages</span><strong class="counter-animate" data-target="894">0</strong>
-            </div>
-            <div class="d-flex align-items-center justify-content-between">
-              <span class="small fw-500 text-muted">Stored Procedures</span><strong class="counter-animate" data-target="2341">0</strong>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-lg-8 fade-in-up">
+    
+    <div class="col-lg-12 fade-in-up">
       <div class="card">
         <div class="card-header">
           <i class="fas fa-folder-open text-warning"></i>
@@ -1194,5 +1029,4 @@ $(function() {
 </script>
 </body>
 </html>
-
 
