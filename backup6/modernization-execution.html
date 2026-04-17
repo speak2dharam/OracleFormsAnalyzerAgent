@@ -14,7 +14,7 @@
 <aside id="sidebar">
   <a href="dashboard.html" class="sidebar-brand">
     <div class="brand-icon"><i class="fas fa-database"></i></div>
-    <div class="brand-text"><div class="brand-title">Oracle Estate</div><div class="brand-subtitle">Enterprise Modernization</div></div>
+    <div class="brand-text"><div class="brand-title">Oracle Estate</div><div class="brand-subtitle">Analyzer &amp; Workbench</div></div>
   </a>
   <nav class="sidebar-nav">
     <div class="nav-section-label">Overview</div>
@@ -50,7 +50,7 @@
   <button class="topbar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
   <div class="topbar-breadcrumb">
     <h1 class="page-title">Modernization Execution</h1>
-    <p class="page-subtitle">Oracle Estate Workbench &middot; AI-Assisted Oracle Conversion Jobs</p>
+    <p class="page-subtitle">Oracle Estate Workbench &middot; Active Execution Jobs</p>
   </div>
   <div class="topbar-search d-none d-md-flex align-items-center">
     <i class="fas fa-search search-icon"></i>
@@ -98,21 +98,21 @@
       <i class="fas fa-gears text-primary"></i>
       <div class="card-title">Execution Jobs</div>
       <ul class="nav nav-tabs ms-auto border-0" id="execTab">
-        <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-forms">Forms to React Conversion</button></li>
+        <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-forms">Forms Conversion</button></li>
         <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-db">DB Conversion</button></li>
       </ul>
     </div>
     <div class="card-body p-0">
       <div class="tab-content">
-        <!-- Forms to React Conversion Tab -->
+        <!-- Forms Conversion Tab -->
         <div class="tab-pane fade show active" id="tab-forms">
           <div class="table-container">
             <table class="table">
               <thead><tr><th>Form Module</th><th>Source</th><th>Target Tech</th><th>Objects</th><th>Progress</th><th>Duration</th><th>Status</th><th></th></tr></thead>
               <tbody>
-                <tr class="hover-highlight"><td><strong>FRM_INV_RECEIPT</strong></td><td><span class="badge badge-muted">Oracle Forms 6i</span></td><td><span class="badge badge-success">React SPA</span></td><td>48</td><td><div class="d-flex align-items-center gap-2"><div class="progress" style="width:90px"><div class="progress-bar bg-success" data-width="100" style="width:0%"></div></div><span class="small fw-600 text-success">100%</span></div></td><td class="text-muted small">3h 12m</td><td><span class="badge badge-success">Done</span></td><td><button class="btn btn-light btn-sm btn-icon"><i class="fas fa-eye"></i></button></td></tr>
+                <tr class="hover-highlight"><td><strong>FRM_INV_RECEIPT</strong></td><td><span class="badge badge-muted">Oracle Forms 6i</span></td><td><span class="badge badge-success">APEX 22.2</span></td><td>48</td><td><div class="d-flex align-items-center gap-2"><div class="progress" style="width:90px"><div class="progress-bar bg-success" data-width="100" style="width:0%"></div></div><span class="small fw-600 text-success">100%</span></div></td><td class="text-muted small">3h 12m</td><td><span class="badge badge-success">Done</span></td><td><button class="btn btn-light btn-sm btn-icon"><i class="fas fa-eye"></i></button></td></tr>
                 <tr class="hover-highlight"><td><strong>FRM_AR_INVOICE</strong></td><td><span class="badge badge-muted">Oracle Forms 10g</span></td><td><span class="badge badge-primary">React SPA</span></td><td>124</td><td><div class="d-flex align-items-center gap-2"><div class="progress" style="width:90px"><div class="progress-bar bg-primary" data-width="68" style="width:0%"></div></div><span class="small fw-600 text-primary">68%</span></div></td><td class="text-muted small">5h 44m</td><td><span class="badge badge-primary">Running</span></td><td><button class="btn btn-warning btn-sm btn-icon"><i class="fas fa-pause"></i></button></td></tr>
-                <tr class="hover-highlight"><td><strong>FRM_GL_ENTRY</strong></td><td><span class="badge badge-muted">Oracle Forms 10g</span></td><td><span class="badge badge-purple">.NET API</span></td><td>87</td><td><div class="d-flex align-items-center gap-2"><div class="progress" style="width:90px"><div class="progress-bar bg-primary" data-width="45" style="width:0%"></div></div><span class="small fw-600 text-primary">45%</span></div></td><td class="text-muted small">2h 18m</td><td><span class="badge badge-primary">Running</span></td><td><button class="btn btn-warning btn-sm btn-icon"><i class="fas fa-pause"></i></button></td></tr>
+                <tr class="hover-highlight"><td><strong>FRM_GL_ENTRY</strong></td><td><span class="badge badge-muted">Oracle Forms 10g</span></td><td><span class="badge badge-purple">REST API</span></td><td>87</td><td><div class="d-flex align-items-center gap-2"><div class="progress" style="width:90px"><div class="progress-bar bg-primary" data-width="45" style="width:0%"></div></div><span class="small fw-600 text-primary">45%</span></div></td><td class="text-muted small">2h 18m</td><td><span class="badge badge-primary">Running</span></td><td><button class="btn btn-warning btn-sm btn-icon"><i class="fas fa-pause"></i></button></td></tr>
                 <tr class="hover-highlight"><td><strong>FRM_PAYROLL_MAIN</strong></td><td><span class="badge badge-muted">Oracle Forms 6i</span></td><td><span class="badge badge-primary">React SPA</span></td><td>312</td><td><div class="d-flex align-items-center gap-2"><div class="progress" style="width:90px"><div class="progress-bar bg-warning" data-width="12" style="width:0%"></div></div><span class="small fw-600 text-warning">12%</span></div></td><td class="text-muted small">48m</td><td><span class="badge badge-warning">Paused</span></td><td><button class="btn btn-primary btn-sm btn-icon"><i class="fas fa-play"></i></button></td></tr>
                 <tr class="hover-highlight"><td><strong>FRM_HRMS_MASTER</strong></td><td><span class="badge badge-muted">Oracle Forms 12c</span></td><td><span class="badge badge-primary">React SPA</span></td><td>418</td><td><div class="d-flex align-items-center gap-2"><div class="progress" style="width:90px"><div class="progress-bar bg-danger" data-width="5" style="width:0%"></div></div><span class="small fw-600 text-danger">5%</span></div></td><td class="text-muted small">22m</td><td><span class="badge badge-danger">Failed</span></td><td><button class="btn btn-danger btn-sm btn-icon"><i class="fas fa-rotate-right"></i></button></td></tr>
               </tbody>
@@ -127,9 +127,9 @@
               <tbody>
                 <tr class="hover-highlight"><td><strong>INV_MGMT</strong></td><td>Oracle 19c</td><td>PostgreSQL 15</td><td>142</td><td>18.4M / 18.4M</td><td><div class="d-flex align-items-center gap-2"><div class="progress" style="width:90px"><div class="progress-bar bg-success" data-width="100" style="width:0%"></div></div><span class="small text-success fw-600">100%</span></div></td><td><span class="badge badge-success">Complete</span></td></tr>
                 <tr class="hover-highlight"><td><strong>FIN_AR</strong></td><td>Oracle 19c</td><td>PostgreSQL 15</td><td>87</td><td>9.1M / 12.6M</td><td><div class="d-flex align-items-center gap-2"><div class="progress" style="width:90px"><div class="progress-bar bg-primary" data-width="72" style="width:0%"></div></div><span class="small text-primary fw-600">72%</span></div></td><td><span class="badge badge-primary">Running</span></td></tr>
-                <tr class="hover-highlight"><td><strong>HRMS_CORE</strong></td><td>Oracle 12c</td><td>PostgreSQL 15</td><td>214</td><td>4.2M / 31.8M</td><td><div class="d-flex align-items-center gap-2"><div class="progress" style="width:90px"><div class="progress-bar bg-primary" data-width="13" style="width:0%"></div></div><span class="small text-primary fw-600">13%</span></div></td><td><span class="badge badge-primary">Running</span></td></tr>
+                <tr class="hover-highlight"><td><strong>HRMS_CORE</strong></td><td>Oracle 12c</td><td>Azure DB for PostgreSQL</td><td>214</td><td>4.2M / 31.8M</td><td><div class="d-flex align-items-center gap-2"><div class="progress" style="width:90px"><div class="progress-bar bg-primary" data-width="13" style="width:0%"></div></div><span class="small text-primary fw-600">13%</span></div></td><td><span class="badge badge-primary">Running</span></td></tr>
                 <tr class="hover-highlight"><td><strong>FIN_GL</strong></td><td>Oracle 19c</td><td>PostgreSQL 15</td><td>198</td><td>—</td><td><div class="d-flex align-items-center gap-2"><div class="progress" style="width:90px"><div class="progress-bar bg-warning" data-width="0" style="width:0%"></div></div><span class="small text-muted fw-600">0%</span></div></td><td><span class="badge badge-warning">Queued</span></td></tr>
-                <tr class="hover-highlight"><td><strong>PAYROLL</strong></td><td>Oracle 11g</td><td>PostgreSQL 15</td><td>412</td><td>—</td><td><div class="d-flex align-items-center gap-2"><div class="progress" style="width:90px"><div class="progress-bar" style="width:0%"></div></div><span class="small text-muted fw-600">—</span></div></td><td><span class="badge badge-danger">Blocked</span></td></tr>
+                <tr class="hover-highlight"><td><strong>PAYROLL</strong></td><td>Oracle 11g</td><td>Azure DB for PostgreSQL</td><td>412</td><td>—</td><td><div class="d-flex align-items-center gap-2"><div class="progress" style="width:90px"><div class="progress-bar" style="width:0%"></div></div><span class="small text-muted fw-600">—</span></div></td><td><span class="badge badge-danger">Blocked</span></td></tr>
               </tbody>
             </table>
           </div>
@@ -145,6 +145,3 @@
 <script src="assets/js/main.js"></script>
 </body>
 </html>
-
-
-

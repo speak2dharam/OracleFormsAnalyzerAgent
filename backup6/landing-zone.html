@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Landing Zone — Oracle Estate Workbench</title>
+  <title>Landing Zone — Oracle Estate Analyzer</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
@@ -14,7 +14,7 @@
 <aside id="sidebar">
   <a href="dashboard.html" class="sidebar-brand">
     <div class="brand-icon"><i class="fas fa-database"></i></div>
-    <div class="brand-text"><div class="brand-title">Oracle Estate</div><div class="brand-subtitle">Enterprise Modernization</div></div>
+    <div class="brand-text"><div class="brand-title">Oracle Estate</div><div class="brand-subtitle">Analyzer &amp; Workbench</div></div>
   </a>
   <nav class="sidebar-nav">
     <div class="nav-section-label">Overview</div>
@@ -50,7 +50,7 @@
   <button class="topbar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
   <div class="topbar-breadcrumb">
     <h1 class="page-title">Landing Zone</h1>
-    <p class="page-subtitle">Oracle Estate Workbench &middot; React + .NET + PostgreSQL Landing Zone</p>
+    <p class="page-subtitle">Oracle Estate Analyzer &middot; Azure Cloud Infrastructure</p>
   </div>
   <div class="topbar-search d-none d-md-flex align-items-center">
     <i class="fas fa-search search-icon"></i>
@@ -79,13 +79,13 @@
   <!-- Infra Stats -->
   <div class="row g-3 mb-4 stagger">
     <div class="col-6 col-xl-3 fade-in-up">
-      <div class="stat-card"><div class="stat-icon blue"><i class="fas fa-cloud"></i></div><div class="stat-value counter-animate" data-target="2">0</div><div class="stat-label">Target Regions</div><div class="stat-delta up"><span class="status-dot online">Primary + DR</span></div></div>
+      <div class="stat-card"><div class="stat-icon blue"><i class="fas fa-cloud"></i></div><div class="stat-value counter-animate" data-target="2">0</div><div class="stat-label">Azure Regions</div><div class="stat-delta up"><span class="status-dot online">All healthy</span></div></div>
     </div>
     <div class="col-6 col-xl-3 fade-in-up">
-      <div class="stat-card"><div class="stat-icon green"><i class="fas fa-server"></i></div><div class="stat-value counter-animate" data-target="36">0</div><div class="stat-label">Oracle VM Hosts</div><div class="stat-delta up"><i class="fas fa-arrow-trend-up"></i>Linux-first baseline</div></div>
+      <div class="stat-card"><div class="stat-icon green"><i class="fas fa-server"></i></div><div class="stat-value counter-animate" data-target="36">0</div><div class="stat-label">Virtual Machines</div><div class="stat-delta up"><i class="fas fa-arrow-trend-up"></i>Running</div></div>
     </div>
     <div class="col-6 col-xl-3 fade-in-up">
-      <div class="stat-card"><div class="stat-icon purple"><i class="fas fa-database"></i></div><div class="stat-value counter-animate" data-target="8">0</div><div class="stat-label">PostgreSQL Targets</div><div class="stat-delta up"><i class="fas fa-check text-success"></i>Private endpoint ready</div></div>
+      <div class="stat-card"><div class="stat-icon purple"><i class="fas fa-database"></i></div><div class="stat-value counter-animate" data-target="8">0</div><div class="stat-label">Azure SQL Clusters</div><div class="stat-delta up"><i class="fas fa-check text-success"></i>Zone redundant</div></div>
     </div>
     <div class="col-6 col-xl-3 fade-in-up">
       <div class="stat-card"><div class="stat-icon cyan"><i class="fas fa-network-wired"></i></div><div class="stat-value counter-animate" data-target="4">0</div><div class="stat-label">VNets Provisioned</div><div class="stat-delta up"><i class="fas fa-shield-halved text-success"></i>Peered &amp; segmented</div></div>
@@ -94,7 +94,7 @@
 
   <!-- Infrastructure Components Grid -->
   <div class="card mb-4 fade-in-up">
-    <div class="card-header"><i class="fas fa-sitemap text-primary"></i><div class="card-title">Oracle Landing Zone Components</div><span class="ms-auto badge badge-success">All Provisioned</span></div>
+    <div class="card-header"><i class="fas fa-sitemap text-primary"></i><div class="card-title">Azure Infrastructure Components</div><span class="ms-auto badge badge-success">All Provisioned</span></div>
     <div class="card-body">
       <div class="row g-3">
         <div class="col-6 col-md-3 col-xl-2">
@@ -108,15 +108,15 @@
         <div class="col-6 col-md-3 col-xl-2">
           <div class="infra-component">
             <div class="infra-icon" style="background:#fff3cd"><i class="fas fa-shield-halved" style="color:#d97706;font-size:20px"></i></div>
-            <div class="infra-name">App Gateway &amp; WAF</div>
-            <div class="infra-desc">Forms replacement entry point</div>
+            <div class="infra-name">Front Door &amp; WAF</div>
+            <div class="infra-desc">CDN &amp; DDoS protection</div>
             <div class="infra-badge"><span class="badge badge-success">Active</span></div>
           </div>
         </div>
         <div class="col-6 col-md-3 col-xl-2">
           <div class="infra-component">
             <div class="infra-icon" style="background:#f0fdf4"><i class="fas fa-database" style="color:#16a34a;font-size:20px"></i></div>
-            <div class="infra-name">Azure Database for PostgreSQL</div>
+            <div class="infra-name">Azure DB for PostgreSQL</div>
             <div class="infra-desc">Flexible Server primary</div>
             <div class="infra-badge"><span class="badge badge-success">Running</span></div>
           </div>
@@ -125,7 +125,7 @@
           <div class="infra-component">
             <div class="infra-icon" style="background:#fef3c7"><i class="fas fa-circle-nodes" style="color:#d97706;font-size:20px"></i></div>
             <div class="infra-name">Azure Cache for Redis</div>
-            <div class="infra-desc">Session/cache layer</div>
+            <div class="infra-desc">Distributed caching</div>
             <div class="infra-badge"><span class="badge badge-success">Active</span></div>
           </div>
         </div>
@@ -164,16 +164,16 @@
         <div class="col-6 col-md-3 col-xl-2">
           <div class="infra-component">
             <div class="infra-icon" style="background:#f0fdf4"><i class="fas fa-code" style="color:#15803d;font-size:20px"></i></div>
-            <div class="infra-name">.NET Worker Services</div>
-            <div class="infra-desc">Jobs converted from DBMS_SCHEDULER</div>
+            <div class="infra-name">Azure Functions</div>
+            <div class="infra-desc">Serverless compute</div>
             <div class="infra-badge"><span class="badge badge-primary">Deploying</span></div>
           </div>
         </div>
         <div class="col-6 col-md-3 col-xl-2">
           <div class="infra-component">
             <div class="infra-icon" style="background:#fff7ed"><i class="fas fa-cube" style="color:#ea580c;font-size:20px"></i></div>
-            <div class="infra-name">.NET Container Runtime</div>
-            <div class="infra-desc">React + API containers</div>
+            <div class="infra-name">AKS Cluster</div>
+            <div class="infra-desc">Container orchestration</div>
             <div class="infra-badge"><span class="badge badge-warning">Pending</span></div>
           </div>
         </div>
@@ -181,7 +181,7 @@
           <div class="infra-component">
             <div class="infra-icon" style="background:#f5f3ff"><i class="fas fa-envelope" style="color:#7c3aed;font-size:20px"></i></div>
             <div class="infra-name">Azure Service Bus</div>
-            <div class="infra-desc">Oracle integration queues</div>
+            <div class="infra-desc">Messaging &amp; event queues</div>
             <div class="infra-badge"><span class="badge badge-success">Active</span></div>
           </div>
         </div>
@@ -189,7 +189,7 @@
           <div class="infra-component">
             <div class="infra-icon" style="background:#ecfeff"><i class="fas fa-plug" style="color:#0891b2;font-size:20px"></i></div>
             <div class="infra-name">Azure API Management</div>
-            <div class="infra-desc">REST API gateway</div>
+            <div class="infra-desc">REST / GraphQL gateway</div>
             <div class="infra-badge"><span class="badge badge-success">Active</span></div>
           </div>
         </div>
@@ -199,15 +199,15 @@
 
   <!-- Bicep Modules -->
   <div class="card fade-in-up">
-    <div class="card-header"><i class="fas fa-code text-purple"></i><div class="card-title">Oracle Landing Zone IaC Modules</div><span class="ms-auto badge badge-success">IaC Applied</span></div>
+    <div class="card-header"><i class="fas fa-code text-purple"></i><div class="card-title">Azure Bicep Modules</div><span class="ms-auto badge badge-success">IaC Applied</span></div>
     <div class="card-body p-0">
       <div class="table-container">
         <table class="table">
           <thead><tr><th>Module</th><th>Version</th><th>Resources</th><th>State</th><th>Last Applied</th><th>Action</th></tr></thead>
           <tbody>
             <tr class="hover-highlight"><td><strong>vnet-core</strong></td><td><span class="badge badge-muted">v1.2.0</span></td><td>28</td><td><span class="status-dot online">Applied</span></td><td class="text-muted small">Apr 14, 09:12</td><td><button class="btn btn-light btn-sm">What-if</button></td></tr>
-            <tr class="hover-highlight"><td><strong>postgres-flex</strong></td><td><span class="badge badge-muted">v2.1.0</span></td><td>15</td><td><span class="status-dot online">Applied</span></td><td class="text-muted small">Apr 14, 09:48</td><td><button class="btn btn-light btn-sm">What-if</button></td></tr>
-            <tr class="hover-highlight"><td><strong>dotnet-app-runtime</strong></td><td><span class="badge badge-muted">v1.8.3</span></td><td>38</td><td><span class="status-dot warning">Pending</span></td><td class="text-muted small">Pending approval</td><td><button class="btn btn-primary btn-sm">Deploy</button></td></tr>
+            <tr class="hover-highlight"><td><strong>azure-sql-flex</strong></td><td><span class="badge badge-muted">v2.1.0</span></td><td>15</td><td><span class="status-dot online">Applied</span></td><td class="text-muted small">Apr 14, 09:48</td><td><button class="btn btn-light btn-sm">What-if</button></td></tr>
+            <tr class="hover-highlight"><td><strong>aks-cluster</strong></td><td><span class="badge badge-muted">v1.8.3</span></td><td>38</td><td><span class="status-dot warning">Pending</span></td><td class="text-muted small">—</td><td><button class="btn btn-primary btn-sm">Deploy</button></td></tr>
             <tr class="hover-highlight"><td><strong>security-baseline</strong></td><td><span class="badge badge-muted">v1.5.0</span></td><td>20</td><td><span class="status-dot online">Applied</span></td><td class="text-muted small">Apr 13, 14:30</td><td><button class="btn btn-light btn-sm">What-if</button></td></tr>
             <tr class="hover-highlight"><td><strong>monitor-stack</strong></td><td><span class="badge badge-muted">v1.3.1</span></td><td>12</td><td><span class="status-dot online">Applied</span></td><td class="text-muted small">Apr 14, 10:05</td><td><button class="btn btn-light btn-sm">What-if</button></td></tr>
           </tbody>
@@ -223,5 +223,3 @@
 <script src="assets/js/main.js"></script>
 </body>
 </html>
-
-

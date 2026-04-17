@@ -51,7 +51,7 @@
 
     .font-mono { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
 
-    /* Oracle Security Tab */
+    /* Post-Migration Security Tab */
     .sec-event-badge { font-size:10px; padding:2px 7px; border-radius:999px; display:inline-block; margin-top:3px; font-weight:500; }
     .sec-evt-security { background:#dbeafe; color:#1e40af; }
     .sec-evt-cost { background:#dcfce7; color:#14532d; }
@@ -64,7 +64,7 @@
 <aside id="sidebar">
   <a href="dashboard.html" class="sidebar-brand">
     <div class="brand-icon"><i class="fas fa-database"></i></div>
-    <div class="brand-text"><div class="brand-title">Oracle Estate</div><div class="brand-subtitle">Enterprise Modernization</div></div>
+    <div class="brand-text"><div class="brand-title">Oracle Estate</div><div class="brand-subtitle">Analyzer &amp; Workbench</div></div>
   </a>
   <nav class="sidebar-nav">
     <div class="nav-section-label">Overview</div>
@@ -100,7 +100,7 @@
   <button class="topbar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
   <div class="topbar-breadcrumb">
     <h1 class="page-title">Security &amp; FinOps</h1>
-    <p class="page-subtitle">Oracle Estate Workbench &middot; Oracle Security &amp; FinOps Controls</p>
+    <p class="page-subtitle">Oracle Estate Workbench &middot; Governance &amp; Cost Management</p>
   </div>
   <div class="topbar-search d-none d-md-flex align-items-center">
     <i class="fas fa-search search-icon"></i>
@@ -132,13 +132,13 @@
       <div class="stat-card"><div class="stat-icon green"><i class="fas fa-shield-check"></i></div><div class="stat-value counter-animate" data-target="87">0</div><div class="stat-label">Security Score</div><div class="stat-delta up"><i class="fas fa-arrow-trend-up"></i>+12 vs Oracle Forms</div></div>
     </div>
     <div class="col-6 col-xl-3 fade-in-up">
-      <div class="stat-card"><div class="stat-icon amber"><i class="fas fa-triangle-exclamation"></i></div><div class="stat-value counter-animate" data-target="2">0</div><div class="stat-label">Open Findings</div><div class="stat-delta down"><i class="fas fa-exclamation"></i>CSRF + dependency patching</div></div>
+      <div class="stat-card"><div class="stat-icon amber"><i class="fas fa-triangle-exclamation"></i></div><div class="stat-value counter-animate" data-target="2">0</div><div class="stat-label">Open Findings</div><div class="stat-delta down"><i class="fas fa-exclamation"></i>CSRF + Dep. patching</div></div>
     </div>
     <div class="col-6 col-xl-3 fade-in-up">
-      <div class="stat-card"><div class="stat-icon purple"><i class="fas fa-coins"></i></div><div class="stat-value"><span class="counter-animate" data-target="4.2" data-decimals="1" data-suffix="K" data-prefix="$">$0</span></div><div class="stat-label">Monthly Platform Cost</div><div class="stat-delta up"><i class="fas fa-arrow-trend-down text-success"></i>−38% vs legacy Forms stack</div></div>
+      <div class="stat-card"><div class="stat-icon purple"><i class="fas fa-coins"></i></div><div class="stat-value"><span class="counter-animate" data-target="4.2" data-decimals="1" data-suffix="K" data-prefix="$">$0</span></div><div class="stat-label">Monthly Infra Cost</div><div class="stat-delta up"><i class="fas fa-arrow-trend-down text-success"></i>−38% vs legacy</div></div>
     </div>
     <div class="col-6 col-xl-3 fade-in-up">
-      <div class="stat-card"><div class="stat-icon cyan"><i class="fas fa-piggy-bank"></i></div><div class="stat-value"><span class="counter-animate" data-target="11" data-suffix="K" data-prefix="$">$0</span></div><div class="stat-label">Reserved Savings (Annual)</div><div class="stat-delta up"><i class="fas fa-arrow-trend-up"></i>1-yr RI plan active</div></div>
+      <div class="stat-card"><div class="stat-icon cyan"><i class="fas fa-piggy-bank"></i></div><div class="stat-value"><span class="counter-animate" data-target="11" data-suffix="K" data-prefix="$">$0</span></div><div class="stat-label">RI Savings (Annual)</div><div class="stat-delta up"><i class="fas fa-arrow-trend-up"></i>1-yr RI plan active</div></div>
     </div>
   </div> -->
 
@@ -146,7 +146,7 @@
   <div class="card fade-in-up">
     <div class="card-header">
       <ul class="nav nav-tabs border-0" id="sfTab">
-        <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-security"><i class="fas fa-shield-halved me-2"></i>Oracle Security</button></li>
+        <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-security"><i class="fas fa-shield-halved me-2"></i>Post-Migration Security</button></li>
         <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-compliance"><i class="fas fa-certificate me-2"></i>Compliance</button></li>
         <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-finops"><i class="fas fa-chart-line me-2"></i>FinOps</button></li>
       </ul>
@@ -154,7 +154,7 @@
     <div class="card-body">
       <div class="tab-content">
 
-        <!-- Oracle Security -->
+        <!-- Post-Migration Security -->
         <div class="tab-pane fade show active" id="tab-security">
 
           <!-- KPI Metrics -->
@@ -180,9 +180,9 @@
             <div class="col-6 col-xl-3">
               <div class="card border-0 h-100" style="background:var(--success-light)">
                 <div class="card-body py-3">
-                  <div class="small fw-600 text-muted mb-1">Monthly Platform Cost</div>
-                  <div class="fw-700" style="font-size:26px;letter-spacing:-1px;color:#059669">INR 4.20L</div>
-                  <div class="small fw-600 text-success mt-1"><i class="fas fa-arrow-down me-1"></i>−38% vs legacy Forms stack</div>
+                  <div class="small fw-600 text-muted mb-1">Monthly Infra Cost</div>
+                  <div class="fw-700" style="font-size:26px;letter-spacing:-1px;color:#059669">$4,210</div>
+                  <div class="small fw-600 text-success mt-1"><i class="fas fa-arrow-down me-1"></i>−38% vs legacy</div>
                 </div>
               </div>
             </div>
@@ -227,24 +227,24 @@
                 </div>
                 <div class="card-body p-0">
                   <div class="d-flex align-items-start justify-content-between px-3 py-2 border-bottom">
-                    <div style="flex:1"><div class="small fw-600">Right-size.NET API instances</div><div class="text-muted" style="font-size:11px">3 over-provisioned nodes</div><div class="progress mt-1" style="height:4px"><div class="progress-bar bg-success" style="width:70%"></div></div></div>
-                    <div class="text-end ms-3" style="flex-shrink:0"><div class="small fw-600">INR 58K/mo</div><div class="text-success" style="font-size:11px">Save INR 39K</div></div>
+                    <div style="flex:1"><div class="small fw-600">Right-size API instances</div><div class="text-muted" style="font-size:11px">3 over-provisioned nodes</div><div class="progress mt-1" style="height:4px"><div class="progress-bar bg-success" style="width:70%"></div></div></div>
+                    <div class="text-end ms-3" style="flex-shrink:0"><div class="small fw-600">$580/mo</div><div class="text-success" style="font-size:11px">Save $390</div></div>
                   </div>
                   <div class="d-flex align-items-start justify-content-between px-3 py-2 border-bottom">
                     <div style="flex:1"><div class="small fw-600">Remove unused IAM roles</div><div class="text-muted" style="font-size:11px">14 stale roles detected</div><div class="progress mt-1" style="height:4px"><div class="progress-bar bg-success" style="width:50%"></div></div></div>
-                    <div class="text-end ms-3" style="flex-shrink:0"><div class="small fw-600">Security + cost</div><div class="text-success" style="font-size:11px">Save INR 12K/mo</div></div>
+                    <div class="text-end ms-3" style="flex-shrink:0"><div class="small fw-600">Security + cost</div><div class="text-success" style="font-size:11px">Save $120/mo</div></div>
                   </div>
                   <div class="d-flex align-items-start justify-content-between px-3 py-2 border-bottom">
                     <div style="flex:1"><div class="small fw-600">Enable log compression</div><div class="text-muted" style="font-size:11px">SIEM ingest volume high</div><div class="progress mt-1" style="height:4px"><div class="progress-bar bg-warning" style="width:85%"></div></div></div>
-                    <div class="text-end ms-3" style="flex-shrink:0"><div class="small fw-600">INR 94K/mo</div><div class="text-success" style="font-size:11px">Save INR 43K/mo</div></div>
+                    <div class="text-end ms-3" style="flex-shrink:0"><div class="small fw-600">$940/mo</div><div class="text-success" style="font-size:11px">Save $430/mo</div></div>
                   </div>
                   <div class="d-flex align-items-start justify-content-between px-3 py-2 border-bottom">
                     <div style="flex:1"><div class="small fw-600">WAF rule deduplication</div><div class="text-muted" style="font-size:11px">38 redundant rules</div><div class="progress mt-1" style="height:4px"><div class="progress-bar bg-success" style="width:40%"></div></div></div>
-                    <div class="text-end ms-3" style="flex-shrink:0"><div class="small fw-600">INR 21K/mo</div><div class="text-success" style="font-size:11px">Save INR 9K/mo</div></div>
+                    <div class="text-end ms-3" style="flex-shrink:0"><div class="small fw-600">$210/mo</div><div class="text-success" style="font-size:11px">Save $90/mo</div></div>
                   </div>
                   <div class="d-flex align-items-start justify-content-between px-3 py-2">
-                    <div style="flex:1"><div class="small fw-600">Cache React static assets</div><div class="text-muted" style="font-size:11px">React bundles uncached</div><div class="progress mt-1" style="height:4px"><div class="progress-bar bg-success" style="width:60%"></div></div></div>
-                    <div class="text-end ms-3" style="flex-shrink:0"><div class="small fw-600">INR 32K/mo</div><div class="text-success" style="font-size:11px">Save INR 61K/mo</div></div>
+                    <div style="flex:1"><div class="small fw-600">CDN cache for static assets</div><div class="text-muted" style="font-size:11px">React bundles uncached</div><div class="progress mt-1" style="height:4px"><div class="progress-bar bg-success" style="width:60%"></div></div></div>
+                    <div class="text-end ms-3" style="flex-shrink:0"><div class="small fw-600">$320/mo</div><div class="text-success" style="font-size:11px">Save $610/mo</div></div>
                   </div>
                 </div>
               </div>
@@ -287,12 +287,12 @@
                   <div class="card-title">Cost by Category</div>
                 </div>
                 <div class="card-body">
-                  <div class="d-flex align-items-center gap-2 mb-2"><span class="text-muted" style="font-size:11px;width:80px;text-align:right;flex-shrink:0">Compute</span><div class="progress flex-fill" style="height:6px"><div class="progress-bar bg-primary" style="width:72%"></div></div><span class="text-muted" style="font-size:11px;width:38px;text-align:right">INR 154K</span></div>
-                  <div class="d-flex align-items-center gap-2 mb-2"><span class="text-muted" style="font-size:11px;width:80px;text-align:right;flex-shrink:0">SIEM / logs</span><div class="progress flex-fill" style="height:6px"><div class="progress-bar bg-primary" style="width:44%"></div></div><span class="text-muted" style="font-size:11px;width:38px;text-align:right">INR 94K</span></div>
-                  <div class="d-flex align-items-center gap-2 mb-2"><span class="text-muted" style="font-size:11px;width:80px;text-align:right;flex-shrink:0">WAF / CDN</span><div class="progress flex-fill" style="height:6px"><div class="progress-bar bg-primary" style="width:25%"></div></div><span class="text-muted" style="font-size:11px;width:38px;text-align:right">INR 53K</span></div>
-                  <div class="d-flex align-items-center gap-2 mb-2"><span class="text-muted" style="font-size:11px;width:80px;text-align:right;flex-shrink:0">DB / storage</span><div class="progress flex-fill" style="height:6px"><div class="progress-bar bg-primary" style="width:34%"></div></div><span class="text-muted" style="font-size:11px;width:38px;text-align:right">INR 72K</span></div>
-                  <div class="d-flex align-items-center gap-2 mb-2"><span class="text-muted" style="font-size:11px;width:80px;text-align:right;flex-shrink:0">IdP / auth</span><div class="progress flex-fill" style="height:6px"><div class="progress-bar bg-primary" style="width:14%"></div></div><span class="text-muted" style="font-size:11px;width:38px;text-align:right">INR 29K</span></div>
-                  <div class="d-flex align-items-center gap-2"><span class="text-muted" style="font-size:11px;width:80px;text-align:right;flex-shrink:0">Scanning / CI</span><div class="progress flex-fill" style="height:6px"><div class="progress-bar" style="width:9%;background:#b5d4f4"></div></div><span class="text-muted" style="font-size:11px;width:38px;text-align:right">INR 19K</span></div>
+                  <div class="d-flex align-items-center gap-2 mb-2"><span class="text-muted" style="font-size:11px;width:80px;text-align:right;flex-shrink:0">Compute</span><div class="progress flex-fill" style="height:6px"><div class="progress-bar bg-primary" style="width:72%"></div></div><span class="text-muted" style="font-size:11px;width:38px;text-align:right">$1,540</span></div>
+                  <div class="d-flex align-items-center gap-2 mb-2"><span class="text-muted" style="font-size:11px;width:80px;text-align:right;flex-shrink:0">SIEM / logs</span><div class="progress flex-fill" style="height:6px"><div class="progress-bar bg-primary" style="width:44%"></div></div><span class="text-muted" style="font-size:11px;width:38px;text-align:right">$940</span></div>
+                  <div class="d-flex align-items-center gap-2 mb-2"><span class="text-muted" style="font-size:11px;width:80px;text-align:right;flex-shrink:0">WAF / CDN</span><div class="progress flex-fill" style="height:6px"><div class="progress-bar bg-primary" style="width:25%"></div></div><span class="text-muted" style="font-size:11px;width:38px;text-align:right">$530</span></div>
+                  <div class="d-flex align-items-center gap-2 mb-2"><span class="text-muted" style="font-size:11px;width:80px;text-align:right;flex-shrink:0">DB / storage</span><div class="progress flex-fill" style="height:6px"><div class="progress-bar bg-primary" style="width:34%"></div></div><span class="text-muted" style="font-size:11px;width:38px;text-align:right">$720</span></div>
+                  <div class="d-flex align-items-center gap-2 mb-2"><span class="text-muted" style="font-size:11px;width:80px;text-align:right;flex-shrink:0">IdP / auth</span><div class="progress flex-fill" style="height:6px"><div class="progress-bar bg-primary" style="width:14%"></div></div><span class="text-muted" style="font-size:11px;width:38px;text-align:right">$290</span></div>
+                  <div class="d-flex align-items-center gap-2"><span class="text-muted" style="font-size:11px;width:80px;text-align:right;flex-shrink:0">Scanning / CI</span><div class="progress flex-fill" style="height:6px"><div class="progress-bar" style="width:9%;background:#b5d4f4"></div></div><span class="text-muted" style="font-size:11px;width:38px;text-align:right">$190</span></div>
                 </div>
               </div>
             </div>
@@ -476,7 +476,7 @@
                   </div>
                   <div class="ms-auto text-end">
                     <div class="fw-700 text-primary" style="font-size:20px;letter-spacing:-1px">$72.38</div>
-                    <div class="small text-muted">Apr &nbsp;<span class="text-success fw-600">vs Mar INR 48.4K</span> &nbsp;<span class="text-danger fw-600">↓ INR 41.2K</span></div>
+                    <div class="small text-muted">Apr &nbsp;<span class="text-success fw-600">vs Mar $484.37</span> &nbsp;<span class="text-danger fw-600">↓ $411.99</span></div>
                   </div>
                 </div>
                 <div class="card-body p-0">
@@ -488,7 +488,7 @@
                         <tr class="hover-highlight"><td>App Service</td><td class="text-end font-mono">$1.38</td><td class="text-end font-mono">$0.09</td><td><span class="badge badge-success">▼ Down</span></td></tr>
                         <tr class="hover-highlight"><td>App Service Plan</td><td class="text-end font-mono">$152.56</td><td class="text-end font-mono">$13.78</td><td><span class="badge badge-success">▼ Down</span></td></tr>
                         <tr class="hover-highlight"><td>Application Gateway</td><td class="text-end font-mono">$12.23</td><td class="text-end font-mono">$0.00</td><td><span class="badge badge-muted">Stopped</span></td></tr>
-                        <tr class="hover-highlight"><td>PostgreSQL Flexible Server</td><td class="text-end font-mono">$48.65</td><td class="text-end font-mono">$7.32</td><td><span class="badge badge-success">▼ Down</span></td></tr>
+                        <tr class="hover-highlight"><td>Azure SQL Database</td><td class="text-end font-mono">$48.65</td><td class="text-end font-mono">$7.32</td><td><span class="badge badge-success">▼ Down</span></td></tr>
                       </tbody>
                     </table>
                   </div>
@@ -604,7 +604,7 @@
                       <tbody>
                         <tr class="hover-highlight">
                           <td class="font-mono" style="font-size:10.5px">6d040e94-…145f</td><td style="font-size:12px">rg-aifactory-services</td><td><strong style="font-size:12px">aifactorygpt-5</strong></td>
-                          <td class="text-end font-mono text-danger fw-600">INR 21.2K</td><td class="text-end"><span class="badge badge-danger">873.9%</span></td><td><span class="badge badge-danger">High</span></td>
+                          <td class="text-end font-mono text-danger fw-600">$212.11</td><td class="text-end"><span class="badge badge-danger">873.9%</span></td><td><span class="badge badge-danger">High</span></td>
                         </tr>
                         <tr class="hover-highlight">
                           <td class="font-mono" style="font-size:10.5px">6d040e94-…145f</td><td style="font-size:12px">rg-aifactory-services</td><td><strong style="font-size:12px">aifactory-ai-search</strong></td>
@@ -798,9 +798,9 @@ function initPageCharts() {
     new Chart(svcCtx, {
       type: 'bar',
       data: {
-        labels: ['Virtual Machines','Azure Disks','App Service Plan','PostgreSQL Flexible Server','Healthcare','Bandwidth','Public IP Addr.','Infrastructure','Invoice','Protected Endpoints'],
+        labels: ['Virtual Machines','Azure Disks','App Service Plan','Azure SQL Database','Healthcare','Bandwidth','Public IP Addr.','Infrastructure','Invoice','Protected Endpoints'],
         datasets: [{
-          label: 'Cost (INR)',
+          label: 'Cost ($)',
           data: [28.78, 17.86, 13.78, 7.32, 1.30, 0.69, 0.48, 0.41, 0.41, 0.28],
           backgroundColor: '#2563eb', borderRadius: 4, borderSkipped: false
         }]
@@ -825,7 +825,7 @@ function initPageCharts() {
       data: {
         labels: ['VS Enterprise','VDE','VS-Migration ARO','VS Ent. 2','VS Ent. 3','CloudSubs 4','VS Ent. 5','VS Ent. 6','VS Ent. 7','VS Actual Ent.'],
         datasets: [{
-          label: 'Cost (INR)',
+          label: 'Cost ($)',
           data: [16.44, 2.23, 1.73, 1.35, 1.29, 1.29, 1.26, 1.26, 1.25, 1.25],
           backgroundColor: '#10b981', borderRadius: 4, borderSkipped: false
         }]
@@ -844,6 +844,3 @@ function initPageCharts() {
 </script>
 </body>
 </html>
-
-
-

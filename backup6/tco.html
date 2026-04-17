@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -67,7 +67,7 @@
 <aside id="sidebar">
   <a href="dashboard.html" class="sidebar-brand">
     <div class="brand-icon"><i class="fas fa-database"></i></div>
-    <div class="brand-text"><div class="brand-title">Oracle Estate</div><div class="brand-subtitle">Enterprise Modernization</div></div>
+    <div class="brand-text"><div class="brand-title">Oracle Estate</div><div class="brand-subtitle">Analyzer &amp; Workbench</div></div>
   </a>
   <nav class="sidebar-nav">
     <div class="nav-section-label">Overview</div>
@@ -162,7 +162,7 @@
       <div class="col-md-6 col-xl"><div class="scenario-panel"><span class="badge badge-muted position-absolute top-0 end-0 m-3">Baseline</span><div class="scenario-title">On-Prem Oracle RAC + Forms</div><div class="scenario-platform">Oracle 12.2 EE RAC, WLS on-prem server</div><div class="scenario-tco text-dark">$5.367M</div><div class="scenario-save text-muted">Reference cost</div><div class="mt-3"><div class="mini-row"><span>DB code change</span><strong>None</strong></div><div class="mini-row"><span>Forms change</span><strong>None</strong></div><div class="mini-row"><span>Strategic issue</span><strong>Support and capex</strong></div></div></div></div>
       <div class="col-md-6 col-xl"><div class="scenario-panel recommended exascale"><span class="badge badge-warning position-absolute top-0 end-0 m-3">Best fit</span><div class="scenario-title">ODB@Azure Exascale + Forms VM</div><div class="scenario-platform">Exadata in Azure DC, D8ds_v5 Forms VM</div><div class="scenario-tco text-warning">$3.574M</div><div class="scenario-save text-success">Saves $1.793M / 33%</div><div class="mt-3"><div class="mini-row"><span>Break-even</span><strong>Month 10</strong></div><div class="mini-row"><span>Code change</span><strong class="text-success">Zero</strong></div><div class="mini-row"><span>Weighted score</span><strong>4.47 / 5</strong></div></div></div></div>
       <div class="col-md-6 col-xl"><div class="scenario-panel azvm"><span class="badge badge-cyan position-absolute top-0 end-0 m-3">IaaS</span><div class="scenario-title">Oracle on Azure VM + Forms VM</div><div class="scenario-platform">E32ds_v5 DB VM, D8ds_v5 Forms VM</div><div class="scenario-tco text-cyan">$4.190M</div><div class="scenario-save text-success">Saves $1.177M / 22%</div><div class="mt-3"><div class="mini-row"><span>Break-even</span><strong>Month 14</strong></div><div class="mini-row"><span>Support rewards</span><strong>No</strong></div><div class="mini-row"><span>Weighted score</span><strong>3.34 / 5</strong></div></div></div></div>
-      <div class="col-md-6 col-xl"><div class="scenario-panel pg"><span class="badge badge-success position-absolute top-0 end-0 m-3">Max saving</span><div class="scenario-title">Azure PostgreSQL + Modern App</div><div class="scenario-platform">D32ds_v5 PG, React +.NET API</div><div class="scenario-tco text-success">$2.031M</div><div class="scenario-save text-success">Saves $3.336M / 62%</div><div class="mt-3"><div class="mini-row"><span>Break-even</span><strong>Month 28</strong></div><div class="mini-row"><span>Forms change</span><strong class="text-danger">Full rewrite</strong></div><div class="mini-row"><span>Weighted score</span><strong>3.20 / 5</strong></div></div></div></div>
+      <div class="col-md-6 col-xl"><div class="scenario-panel pg"><span class="badge badge-success position-absolute top-0 end-0 m-3">Max saving</span><div class="scenario-title">Azure PostgreSQL + Modern App</div><div class="scenario-platform">D32ds_v5 PG, React/Angular + Java API</div><div class="scenario-tco text-success">$2.031M</div><div class="scenario-save text-success">Saves $3.336M / 62%</div><div class="mt-3"><div class="mini-row"><span>Break-even</span><strong>Month 28</strong></div><div class="mini-row"><span>Forms change</span><strong class="text-danger">Full rewrite</strong></div><div class="mini-row"><span>Weighted score</span><strong>3.20 / 5</strong></div></div></div></div>
     </div>
   </section>
 
@@ -204,7 +204,7 @@
         <div class="col-md-6 col-xl-3"><div class="metric-tile h-100"><span class="badge badge-warning mb-2">Path 1 - Recommended</span><div class="fw-800 mb-2">Lift & Shift</div><div class="small text-muted mb-3">Forms 12c + WLS 12c on Azure VM with Load Balancer and Entra ID.</div><div class="mini-row"><span>Timeline</span><strong>4-6 weeks</strong></div><div class="mini-row"><span>Cost</span><strong>$40K-$80K</strong></div><div class="mini-row"><span>Code change</span><strong class="text-success">Zero</strong></div><div class="mini-row"><span>Risk</span><strong class="text-success">Low</strong></div></div></div>
         <div class="col-md-6 col-xl-3"><div class="metric-tile h-100"><span class="badge badge-primary mb-2">Path 2</span><div class="fw-800 mb-2">Upgrade & Lift</div><div class="small text-muted mb-3">Upgrade to Forms 14c and WebLogic 14c, then lift to Azure VM.</div><div class="mini-row"><span>Timeline</span><strong>8-14 weeks</strong></div><div class="mini-row"><span>Cost</span><strong>$80K-$150K</strong></div><div class="mini-row"><span>Code change</span><strong class="text-success">Minimal</strong></div><div class="mini-row"><span>Support</span><strong>~2034</strong></div></div></div>
         <div class="col-md-6 col-xl-3"><div class="metric-tile h-100"><span class="badge badge-success mb-2">Path 3</span><div class="fw-800 mb-2">Forms to APEX</div><div class="small text-muted mb-3">Convert Forms to Oracle APEX and eliminate the Forms server tier.</div><div class="mini-row"><span>Timeline</span><strong>6-12 months</strong></div><div class="mini-row"><span>Cost</span><strong>$200K-$400K</strong></div><div class="mini-row"><span>WLS impact</span><strong class="text-success">$176K/yr saved</strong></div><div class="mini-row"><span>Risk</span><strong class="text-warning">Medium</strong></div></div></div>
-        <div class="col-md-6 col-xl-3"><div class="metric-tile h-100"><span class="badge badge-danger mb-2">Path 4</span><div class="fw-800 mb-2">Full Rewrite</div><div class="small text-muted mb-3">Rewrite as React plus REST API and .NET backend.</div><div class="mini-row"><span>Timeline</span><strong>12-18 months</strong></div><div class="mini-row"><span>Cost</span><strong>$400K-$800K</strong></div><div class="mini-row"><span>Code change</span><strong class="text-danger">Full rewrite</strong></div><div class="mini-row"><span>Risk</span><strong class="text-danger">High</strong></div></div></div>
+        <div class="col-md-6 col-xl-3"><div class="metric-tile h-100"><span class="badge badge-danger mb-2">Path 4</span><div class="fw-800 mb-2">Full Rewrite</div><div class="small text-muted mb-3">Rewrite as React/Angular plus REST API and Java/.NET backend.</div><div class="mini-row"><span>Timeline</span><strong>12-18 months</strong></div><div class="mini-row"><span>Cost</span><strong>$400K-$800K</strong></div><div class="mini-row"><span>Code change</span><strong class="text-danger">Full rewrite</strong></div><div class="mini-row"><span>Risk</span><strong class="text-danger">High</strong></div></div></div>
       </div>
     </div>
   </div>
@@ -435,5 +435,3 @@ function initPageCharts() {
 </script>
 </body>
 </html>
-
-
