@@ -26,7 +26,7 @@
 <aside id="sidebar">
   <a href="dashboard.html" class="sidebar-brand">
     <div class="brand-icon"><i class="fas fa-database"></i></div>
-    <div class="brand-text"><div class="brand-title">Oracle Estate</div><div class="brand-subtitle">Enterprise Modernization</div></div>
+    <div class="brand-text"><div class="brand-title">CloudAtlas</div><div class="brand-subtitle">Oracle Modernization</div></div>
   </a>
   <nav class="sidebar-nav">
     <div class="nav-section-label">Overview</div>
@@ -37,9 +37,9 @@
     <a href="assessment-lift-shift.html" class="sidebar-link" data-label="Lift &amp; Shift"><span class="link-icon"><i class="fas fa-arrow-up-right-dots"></i></span><span class="link-text">Lift &amp; Shift</span></a>
     <a href="assessment-modernization.html" class="sidebar-link" data-label="Modernization"><span class="link-icon"><i class="fas fa-wand-magic-sparkles"></i></span><span class="link-text">Modernization</span></a>
     <a href="dependency-mapping.html" class="sidebar-link" data-label="Dependencies"><span class="link-icon"><i class="fas fa-diagram-project"></i></span><span class="link-text">Dependency Mapping</span></a>
+    <a href="tco.html" class="sidebar-link" data-label="TCO Analysis"><span class="link-icon"><i class="fas fa-coins"></i></span><span class="link-text">TCO Analysis</span></a>
     <a href="risk-scoring.html" class="sidebar-link" data-label="Risk Scoring"><span class="link-icon"><i class="fas fa-shield-halved"></i></span><span class="link-text">Risk Scoring</span></a>
     <a href="wave-planning.html" class="sidebar-link" data-label="Wave Planning"><span class="link-icon"><i class="fas fa-wave-square"></i></span><span class="link-text">Wave Planning</span></a>
-    <a href="tco.html" class="sidebar-link" data-label="TCO Analysis"><span class="link-icon"><i class="fas fa-coins"></i></span><span class="link-text">TCO Analysis</span></a>
     <a href="readiness-check.html" class="sidebar-link" data-label="Readiness"><span class="link-icon"><i class="fas fa-clipboard-check"></i></span><span class="link-text">Readiness Check</span></a>
     <div class="forms-path-group">
       <div class="nav-section-label nav-section-forms"><i class="fas fa-wand-magic-sparkles"></i>Forms Modernization</div>
@@ -338,76 +338,6 @@
           </div>
           <div class="col-md-6 col-xl-3">
             <div class="download-card">
-              <div class="download-card-icon" style="background:#f5f3ff;color:#7c3aed"><i class="fas fa-shield-halved"></i></div>
-              <div class="download-card-title">Security Baseline</div>
-              <div class="download-card-desc">Azure Key Vault, Managed Identities, Defender for Cloud policies, and Azure Policy assignments.</div>
-              <div class="download-card-meta">
-                <i class="fas fa-file-code"></i><span>security.bicep</span>
-                <span class="ms-auto">15 KB</span>
-              </div>
-              <div class="d-flex gap-2 align-items-center">
-                <span class="badge badge-muted">v1.5.0</span>
-                <button class="btn btn-primary btn-sm ms-auto"><i class="fas fa-download me-1"></i>Download</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Additional Artifacts -->
-      <div class="fade-in-up">
-        <div class="d-flex align-items-center gap-2 mb-3">
-          <h6 class="fw-800 mb-0" style="font-size:14px">Additional Artefacts</h6>
-          <hr class="flex-1 m-0" style="border-color:var(--border)">
-        </div>
-        <div class="row g-3">
-          <div class="col-md-6 col-xl-3">
-            <div class="download-card">
-              <div class="download-card-icon" style="background:#eff6ff;color:#2563eb"><i class="fas fa-layer-group"></i></div>
-              <div class="download-card-title">Full-Stack Bicep</div>
-              <div class="download-card-desc">Complete orchestration template that deploys all modules in the correct dependency order.</div>
-              <div class="download-card-meta">
-                <i class="fas fa-file-code"></i><span>main.bicep</span>
-                <span class="ms-auto">86 KB</span>
-              </div>
-              <div class="d-flex gap-2 align-items-center">
-                <span class="badge badge-success">All-in-one</span>
-                <button class="btn btn-primary btn-sm ms-auto"><i class="fas fa-download me-1"></i>Download</button>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-xl-3">
-            <div class="download-card">
-              <div class="download-card-icon" style="background:#fef2f2;color:#dc2626"><i class="fas fa-code"></i></div>
-              <div class="download-card-title">ARM JSON Templates</div>
-              <div class="download-card-desc">Azure Resource Manager JSON exports for environments where Bicep tooling is not available.</div>
-              <div class="download-card-meta">
-                <i class="fas fa-file-zipper"></i><span>arm-templates.zip</span>
-                <span class="ms-auto">142 KB</span>
-              </div>
-              <div class="d-flex gap-2 align-items-center">
-                <span class="badge badge-muted">Alternative</span>
-                <button class="btn btn-light btn-sm ms-auto"><i class="fas fa-download me-1"></i>Download</button>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-xl-3">
-            <div class="download-card">
-              <div class="download-card-icon" style="background:#ecfeff;color:#0891b2"><i class="fas fa-terminal"></i></div>
-              <div class="download-card-title">PowerShell Scripts</div>
-              <div class="download-card-desc">Step-by-step deployment scripts for pre-flight checks, resource provisioning, and post-deployment validation.</div>
-              <div class="download-card-meta">
-                <i class="fas fa-file-zipper"></i><span>deploy-scripts.zip</span>
-                <span class="ms-auto">28 KB</span>
-              </div>
-              <div class="d-flex gap-2 align-items-center">
-                <span class="badge badge-muted">PS 7.x</span>
-                <button class="btn btn-light btn-sm ms-auto"><i class="fas fa-download me-1"></i>Download</button>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-xl-3">
-            <div class="download-card">
               <div class="download-card-icon" style="background:#fffbeb;color:#d97706"><i class="fas fa-book-open"></i></div>
               <div class="download-card-title">Deployment Guide</div>
               <div class="download-card-desc">Step-by-step manual deployment guide with pre-requisites, rollback procedures, and troubleshooting tips.</div>
@@ -434,6 +364,5 @@
 <script src="assets/js/main.js"></script>
 </body>
 </html>
-
 
 

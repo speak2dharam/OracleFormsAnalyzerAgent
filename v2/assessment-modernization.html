@@ -115,7 +115,7 @@
 <aside id="sidebar">
   <a href="dashboard.html" class="sidebar-brand">
     <div class="brand-icon"><i class="fas fa-database"></i></div>
-    <div class="brand-text"><div class="brand-title">Oracle Estate</div><div class="brand-subtitle">Enterprise Modernization</div></div>
+    <div class="brand-text"><div class="brand-title">CloudAtlas</div><div class="brand-subtitle">Oracle Modernization</div></div>
   </a>
   <nav class="sidebar-nav">
     <div class="nav-section-label">Overview</div>
@@ -126,9 +126,9 @@
     <a href="assessment-lift-shift.html" class="sidebar-link" data-label="Lift &amp; Shift"><span class="link-icon"><i class="fas fa-arrow-up-right-dots"></i></span><span class="link-text">Lift &amp; Shift</span></a>
     <a href="assessment-modernization.html" class="sidebar-link" data-label="Modernization"><span class="link-icon"><i class="fas fa-wand-magic-sparkles"></i></span><span class="link-text">Modernization</span></a>
     <a href="dependency-mapping.html" class="sidebar-link" data-label="Dependencies"><span class="link-icon"><i class="fas fa-diagram-project"></i></span><span class="link-text">Dependency Mapping</span></a>
+    <a href="tco.html" class="sidebar-link" data-label="TCO Analysis"><span class="link-icon"><i class="fas fa-coins"></i></span><span class="link-text">TCO Analysis</span></a>
     <a href="risk-scoring.html" class="sidebar-link" data-label="Risk Scoring"><span class="link-icon"><i class="fas fa-shield-halved"></i></span><span class="link-text">Risk Scoring</span></a>
     <a href="wave-planning.html" class="sidebar-link" data-label="Wave Planning"><span class="link-icon"><i class="fas fa-wave-square"></i></span><span class="link-text">Wave Planning</span></a>
-    <a href="tco.html" class="sidebar-link" data-label="TCO Analysis"><span class="link-icon"><i class="fas fa-coins"></i></span><span class="link-text">TCO Analysis</span></a>
     <a href="readiness-check.html" class="sidebar-link" data-label="Readiness"><span class="link-icon"><i class="fas fa-clipboard-check"></i></span><span class="link-text">Readiness Check</span></a>
     <div class="forms-path-group">
       <div class="nav-section-label nav-section-forms"><i class="fas fa-wand-magic-sparkles"></i>Forms Modernization</div>
@@ -484,7 +484,7 @@
               <div class="col-6"><div class="db-kpi"><div class="label">Total Oracle Servers</div><div class="value">12</div><div class="note">All discovered source servers</div></div></div>
               <div class="col-6"><div class="db-kpi"><div class="label">Fit For PostgreSQL</div><div class="value">8</div><div class="note">Primary migration stream</div></div></div>
               <div class="col-6"><div class="db-kpi"><div class="label">Exceptions</div><div class="value">4</div><div class="note">Outside PostgreSQL path</div></div></div>
-              <div class="col-6"><div class="db-kpi"><div class="label">Monthly Estimate</div><div class="value">INR 10,52,726</div><div class="note">Combined workbook estimate</div></div></div>
+              <div class="col-6"><div class="db-kpi"><div class="label">Monthly Estimate</div><div class="value">$12.7K</div><div class="note">Combined workbook estimate</div></div></div>
             </div>
           </div>
         </div>
@@ -510,9 +510,9 @@
                   <div class="db-progress"><span style="width:33.3%;background:#f59e0b"></span></div>
                 </div>
                 <div class="col-md-6">
-                  <div class="db-progress-label"><span>PostgreSQL cost share</span><span>INR 32,599 / INR 10,52,726</span></div>
+                  <div class="db-progress-label"><span>PostgreSQL cost share</span><span>$393 / $12.7K</span></div>
                   <div class="db-progress"><span style="width:3.1%;background:#10b981"></span></div>
-                  <div class="db-progress-label"><span>Other recommendation share</span><span>INR 10,20,127 / INR 10,52,726</span></div>
+                  <div class="db-progress-label"><span>Other recommendation share</span><span>$12.3K / $12.7K</span></div>
                   <div class="db-progress"><span style="width:96.9%;background:#f59e0b"></span></div>
                 </div>
               </div>
@@ -537,10 +537,10 @@
               <table class="table db-table">
                 <thead><tr><th>Recommendation Bucket</th><th class="right">Count</th><th class="right">Monthly Cost</th><th>Interpretation</th></tr></thead>
                 <tbody>
-                  <tr><td>PostgreSQL</td><td class="right">8</td><td class="right">INR 32,599</td><td>Primary Oracle-to-PostgreSQL path</td></tr>
-                  <tr><td>Azure Cosmos DB</td><td class="right">4</td><td class="right">INR 4,37,375</td><td>Non-PostgreSQL recommendation bucket in workbook</td></tr>
-                  <tr><td>Azure Virtual Machine</td><td class="right">0</td><td class="right">INR 5,82,752</td><td>Cost summary present, but no workload count mapped here</td></tr>
-                  <tr><td><strong>Total Azure recommendation</strong></td><td class="right"><strong>12</strong></td><td class="right"><strong>INR 10,52,726</strong></td><td><strong>Combined workbook monthly estimate</strong></td></tr>
+                  <tr><td>PostgreSQL</td><td class="right">8</td><td class="right">$393</td><td>Primary Oracle-to-PostgreSQL path</td></tr>
+                  <tr><td>Azure Cosmos DB</td><td class="right">4</td><td class="right">$5.3K</td><td>Non-PostgreSQL recommendation bucket in workbook</td></tr>
+                  <tr><td>Azure Virtual Machine</td><td class="right">0</td><td class="right">$7.0K</td><td>Cost summary present, but no workload count mapped here</td></tr>
+                  <tr><td><strong>Total Azure recommendation</strong></td><td class="right"><strong>12</strong></td><td class="right"><strong>$12.7K</strong></td><td><strong>Combined workbook monthly estimate</strong></td></tr>
                 </tbody>
               </table>
             </div>
@@ -553,13 +553,13 @@
               <table class="table db-table">
                 <thead><tr><th>Deployment Option</th><th>Tier</th><th class="right">Count</th><th class="right">Compute</th><th class="right">Storage</th></tr></thead>
                 <tbody>
-                  <tr><td>Single Server</td><td>Basic</td><td class="right">0</td><td class="right">INR 0</td><td class="right">INR 0</td></tr>
-                  <tr><td>Single Server</td><td>General Purpose</td><td class="right">0</td><td class="right">INR 0</td><td class="right">INR 0</td></tr>
-                  <tr><td>Single Server</td><td>Memory Optimized</td><td class="right">0</td><td class="right">INR 0</td><td class="right">INR 0</td></tr>
-                  <tr><td>Flexible Server</td><td>Burstable</td><td class="right">8</td><td class="right">INR 17,993</td><td class="right">INR 14,606</td></tr>
-                  <tr><td>Flexible Server</td><td>General Purpose</td><td class="right">0</td><td class="right">INR 0</td><td class="right">INR 0</td></tr>
-                  <tr><td>Flexible Server</td><td>Memory Optimized</td><td class="right">0</td><td class="right">INR 0</td><td class="right">INR 0</td></tr>
-                  <tr><td><strong>Total</strong></td><td>-</td><td class="right"><strong>8</strong></td><td class="right"><strong>INR 17,993</strong></td><td class="right"><strong>INR 14,606</strong></td></tr>
+                  <tr><td>Single Server</td><td>Basic</td><td class="right">0</td><td class="right">$0</td><td class="right">$0</td></tr>
+                  <tr><td>Single Server</td><td>General Purpose</td><td class="right">0</td><td class="right">$0</td><td class="right">$0</td></tr>
+                  <tr><td>Single Server</td><td>Memory Optimized</td><td class="right">0</td><td class="right">$0</td><td class="right">$0</td></tr>
+                  <tr><td>Flexible Server</td><td>Burstable</td><td class="right">8</td><td class="right">$217</td><td class="right">$176</td></tr>
+                  <tr><td>Flexible Server</td><td>General Purpose</td><td class="right">0</td><td class="right">$0</td><td class="right">$0</td></tr>
+                  <tr><td>Flexible Server</td><td>Memory Optimized</td><td class="right">0</td><td class="right">$0</td><td class="right">$0</td></tr>
+                  <tr><td><strong>Total</strong></td><td>-</td><td class="right"><strong>8</strong></td><td class="right"><strong>$217</strong></td><td class="right"><strong>$176</strong></td></tr>
                 </tbody>
               </table>
             </div>
@@ -603,22 +603,7 @@
               <div class="db-note"><strong>Exception handling:</strong> 4 workloads are not categorized as PostgreSQL-fit in the workbook and are routed elsewhere. For a client-facing Oracle modernization page, these should be shown as exceptions or separate remediation items.</div>
             </div>
           </div>
-          <div class="db-card">
-            <div class="db-card-header"><i class="fas fa-code-branch text-primary"></i><div><div class="db-card-title">Oracle Version Summary</div><div class="db-card-subtitle">Selected PostgreSQL-fit estate</div></div></div>
-            <div class="table-responsive">
-              <table class="table db-table">
-                <thead><tr><th>Oracle Version</th><th class="right">Count</th><th>Observation</th></tr></thead>
-                <tbody>
-                  <tr><td>10gR2</td><td class="right">2</td><td>Legacy Oracle version present in selected PostgreSQL-fit estate</td></tr>
-                  <tr><td>11gR2</td><td class="right">3</td><td>Common source version in the assessment sample</td></tr>
-                  <tr><td>12gR2</td><td class="right">3</td><td>Modernized target planning should consider feature compatibility</td></tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="db-card-body pt-0">
-              <div class="text-muted" style="font-size:11px;line-height:1.6">Prepared from workbook sheets: <strong>Insights</strong> and <strong>PostgreSQL Sizing</strong>. The <strong>Azure Cosmos DB Sizing</strong> sheet remains evidence, but is kept outside the main PostgreSQL migration narrative because it represents workloads that do not directly fit the Oracle-to-PostgreSQL path.</div>
-            </div>
-          </div>
+          
         </div>
       </div>
     </div>
