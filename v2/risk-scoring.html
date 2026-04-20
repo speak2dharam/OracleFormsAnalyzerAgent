@@ -98,29 +98,29 @@
         <div class="col-md-6 col-xl-3">
           <div class="p-3 rounded border h-100">
             <div class="small text-muted fw-600 mb-1">Dependencies</div>
-            <div class="fw-700">PAYROLL_LIB.pll, HR_LINK</div>
-            <a href="dependency-mapping.html?workload=PAYROLL_ENG" class="small">Open dependency graph</a>
+            <div class="fw-700" id="lifecycleDependencies">PAYROLL_LIB.pll, HR_LINK</div>
+            <a href="dependency-mapping.html?workload=PAYROLL_ENG" class="small" id="lifecycleDependencyLink">Open dependency graph</a>
           </div>
         </div>
         <div class="col-md-6 col-xl-3">
           <div class="p-3 rounded border h-100">
             <div class="small text-muted fw-600 mb-1">Conversion Status</div>
-            <div class="fw-700">Manual review required</div>
-            <a href="schema-conversion.html?workload=PAYROLL_ENG" class="small">Review PL/SQL conversion</a>
+            <div class="fw-700" id="lifecycleConversion">Manual review required</div>
+            <a href="schema-conversion.html?workload=PAYROLL_ENG" class="small" id="lifecycleConversionLink">Review PL/SQL conversion</a>
           </div>
         </div>
         <div class="col-md-6 col-xl-3">
           <div class="p-3 rounded border h-100">
             <div class="small text-muted fw-600 mb-1">Execution Plan</div>
-            <div class="fw-700">Wave 2 - blocked</div>
-            <a href="wave-planning.html?workload=PAYROLL_ENG" class="small">Replan wave assignment</a>
+            <div class="fw-700" id="lifecycleExecution">Wave 2 - blocked</div>
+            <a href="wave-planning.html?workload=PAYROLL_ENG" class="small" id="lifecycleWaveLink">Replan wave assignment</a>
           </div>
         </div>
       </div>
       <div class="d-flex flex-wrap gap-2 mt-3">
-        <button class="btn btn-danger btn-sm"><i class="fas fa-shield-halved me-1"></i>Create Mitigation Task</button>
-        <a href="deployment.html?workload=PAYROLL_ENG" class="btn btn-light btn-sm"><i class="fas fa-rocket me-1"></i>View Deployment Readiness</a>
-        <button class="btn btn-primary btn-sm"><i class="fas fa-file-pdf me-1"></i>Export Workload Brief</button>
+        <button class="btn btn-danger btn-sm" id="lifecyclePrimaryAction"><i class="fas fa-shield-halved me-1"></i>Create Mitigation Task</button>
+        <a href="deployment.html?workload=PAYROLL_ENG" class="btn btn-light btn-sm" id="lifecycleDeploymentLink"><i class="fas fa-rocket me-1"></i>View Deployment Readiness</a>
+        <button class="btn btn-primary btn-sm" id="lifecycleExportAction"><i class="fas fa-file-pdf me-1"></i>Export PAYROLL_ENG Brief</button>
       </div>
     </div>
   </div>
@@ -260,19 +260,69 @@
 <script src="assets/js/main.js"></script>
 <script>
 const workloadContext = {
-  PAYROLL_ENG: ['PAYROLL_ENG Workload Lifecycle', 'Risk 9.1 / 10', 'Custom PLL + DB link', 'Owner: M. Torres - due Apr 18'],
-  HRMS_PAYROLL: ['HRMS_PAYROLL Workload Lifecycle', 'Risk 8.9 / 10', 'Complex PL/SQL packages', 'Owner: J. Park - due Apr 22'],
-  GL_CONSOLIDATE: ['GL_CONSOLIDATE Workload Lifecycle', 'Risk 7.4 / 10', 'Cross-schema dependencies', 'Owner: R. Patel - due Apr 30'],
-  ASSET_MGMT_V2: ['ASSET_MGMT_V2 Workload Lifecycle', 'Risk 6.8 / 10', 'Deprecated DBMS_SCHEDULER jobs', 'Owner: L. Wang - due May 5']
+  PAYROLL_ENG: {
+    title: 'PAYROLL_ENG Workload Lifecycle',
+    badge: 'Risk 9.1 / 10',
+    badgeClass: 'badge badge-danger',
+    driver: 'Custom PLL + DB link',
+    owner: 'Owner: M. Torres - due Apr 18',
+    dependencies: 'PAYROLL_LIB.pll, HR_LINK',
+    conversion: 'Manual PL/SQL review required',
+    execution: 'Wave 2 - blocked by UAT and PLL remediation',
+    primaryAction: 'Create PAYROLL_ENG Mitigation Task'
+  },
+  HRMS_PAYROLL: {
+    title: 'HRMS_PAYROLL Workload Lifecycle',
+    badge: 'Risk 8.9 / 10',
+    badgeClass: 'badge badge-danger',
+    driver: 'Complex PL/SQL packages',
+    owner: 'Owner: J. Park - due Apr 22',
+    dependencies: 'PKG_PAYROLL_CALC, HR_AUDIT_TRG, PAYROLL_BATCH',
+    conversion: 'Package split required before .NET service extraction',
+    execution: 'Wave 2 - at risk, needs payroll calculation test pack',
+    primaryAction: 'Create HRMS_PAYROLL Mitigation Task'
+  },
+  GL_CONSOLIDATE: {
+    title: 'GL_CONSOLIDATE Workload Lifecycle',
+    badge: 'Risk 7.4 / 10',
+    badgeClass: 'badge badge-warning',
+    driver: 'Cross-schema dependencies',
+    owner: 'Owner: R. Patel - due Apr 30',
+    dependencies: 'FIN_GL, AP_INVOICE, AR_RECEIPTS, FX_RATES',
+    conversion: 'Views auto-converted; consolidation package needs review',
+    execution: 'Wave 3 - recommended after finance close freeze',
+    primaryAction: 'Create GL_CONSOLIDATE Review Task'
+  },
+  ASSET_MGMT_V2: {
+    title: 'ASSET_MGMT_V2 Workload Lifecycle',
+    badge: 'Risk 6.8 / 10',
+    badgeClass: 'badge badge-warning',
+    driver: 'Deprecated DBMS_SCHEDULER jobs',
+    owner: 'Owner: L. Wang - due May 5',
+    dependencies: 'ASSET_DEPREC_JOB, FA_BOOKS, GL_INTERFACE',
+    conversion: '.NET worker replacement planned for scheduler jobs',
+    execution: 'Wave 3 - move after depreciation cycle sign-off',
+    primaryAction: 'Create ASSET_MGMT_V2 Review Task'
+  }
 };
-const selectedWorkload = new URLSearchParams(window.location.search).get('workload');
-if (selectedWorkload && workloadContext[selectedWorkload]) {
+const selectedWorkload = (new URLSearchParams(window.location.search).get('workload') || 'PAYROLL_ENG').toUpperCase();
+if (workloadContext[selectedWorkload]) {
   const ctx = workloadContext[selectedWorkload];
-  document.getElementById('lifecycleTitle').textContent = ctx[0];
+  document.getElementById('lifecycleTitle').textContent = ctx.title;
   document.getElementById('lifecycleSubtitle').textContent = 'Opened from Dashboard risk queue - filtered workload lifecycle view';
-  document.getElementById('lifecycleBadge').textContent = ctx[1];
-  document.getElementById('lifecycleDriver').textContent = ctx[2];
-  document.getElementById('lifecycleOwner').textContent = ctx[3];
+  document.getElementById('lifecycleBadge').textContent = ctx.badge;
+  document.getElementById('lifecycleBadge').className = 'ms-auto ' + ctx.badgeClass;
+  document.getElementById('lifecycleDriver').textContent = ctx.driver;
+  document.getElementById('lifecycleOwner').textContent = ctx.owner;
+  document.getElementById('lifecycleDependencies').textContent = ctx.dependencies;
+  document.getElementById('lifecycleConversion').textContent = ctx.conversion;
+  document.getElementById('lifecycleExecution').textContent = ctx.execution;
+  document.getElementById('lifecycleDependencyLink').href = 'dependency-mapping.html?workload=' + selectedWorkload;
+  document.getElementById('lifecycleConversionLink').href = 'schema-conversion.html?workload=' + selectedWorkload;
+  document.getElementById('lifecycleWaveLink').href = 'wave-planning.html?workload=' + selectedWorkload;
+  document.getElementById('lifecycleDeploymentLink').href = 'deployment.html?workload=' + selectedWorkload;
+  document.getElementById('lifecyclePrimaryAction').innerHTML = '<i class="fas fa-shield-halved me-1"></i>' + ctx.primaryAction;
+  document.getElementById('lifecycleExportAction').innerHTML = '<i class="fas fa-file-pdf me-1"></i>Export ' + selectedWorkload + ' Brief';
 }
 
 function initPageCharts() {
