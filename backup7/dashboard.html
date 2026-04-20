@@ -123,18 +123,13 @@
 
 <!-- ===== MAIN CONTENT ===== -->
 <main id="main-content">
-  <noscript>
-    <div class="alert alert-warning mb-3">
-      JavaScript is disabled. Metric animations are skipped, but current CloudAtlas assessment values are rendered directly.
-    </div>
-  </noscript>
 
   <!-- Stat Cards -->
   <div class="row g-3 mb-4 stagger">
     <div class="col-6 col-xl-3 fade-in-up">
       <div class="stat-card">
         <div class="stat-icon blue"><i class="fas fa-server"></i></div>
-        <div class="stat-value counter-animate" data-target="246">246</div>
+        <div class="stat-value counter-animate" data-target="246">0</div>
         <div class="stat-label">Oracle Assets Cataloged</div>
         <div class="stat-delta up"><i class="fas fa-arrow-trend-up"></i>Forms, reports, schemas</div>
       </div>
@@ -142,7 +137,7 @@
     <div class="col-6 col-xl-3 fade-in-up">
       <div class="stat-card">
         <div class="stat-icon green"><i class="fas fa-circle-check"></i></div>
-        <div class="stat-value counter-animate" data-target="91">91</div>
+        <div class="stat-value counter-animate" data-target="91">0</div>
         <div class="stat-label">React/.NET Ready</div>
         <div class="stat-delta up"><i class="fas fa-arrow-trend-up"></i>37% conversion ready</div>
       </div>
@@ -150,7 +145,7 @@
     <div class="col-6 col-xl-3 fade-in-up">
       <div class="stat-card">
         <div class="stat-icon amber"><i class="fas fa-triangle-exclamation"></i></div>
-        <div class="stat-value counter-animate" data-target="14">14</div>
+        <div class="stat-value counter-animate" data-target="14">0</div>
         <div class="stat-label">High-Risk Oracle Objects</div>
         <div class="stat-delta down"><i class="fas fa-arrow-trend-down"></i>DB links + custom libraries</div>
       </div>
@@ -158,7 +153,7 @@
     <div class="col-6 col-xl-3 fade-in-up">
       <div class="stat-card">
         <div class="stat-icon purple"><i class="fas fa-coins"></i></div>
-        <div class="stat-value">$<span class="counter-animate" data-target="4.2" data-decimals="1">4.2</span>M</div>
+                <div class="stat-value">$<span class="counter-animate" data-target="4.2" data-decimals="1">0</span>M</div>
         <div class="stat-label">Run-Rate Reduction</div>
         <div class="stat-delta up"><i class="fas fa-arrow-trend-up"></i>PostgreSQL target model</div>
       </div>
@@ -367,10 +362,9 @@
         <div class="card-body">
           <div class="row g-2">
             <div class="col-6"><a href="discovery.html" class="btn btn-outline-primary w-100 btn-sm"><i class="fas fa-upload"></i>Upload Discovery</a></div>
-            <div class="col-6"><a href="risk-scoring.html?workload=PAYROLL_ENG#workload-lifecycle" class="btn btn-outline-primary w-100 btn-sm"><i class="fas fa-shield-halved"></i>Review PAYROLL_ENG</a></div>
+            <div class="col-6"><a href="risk-scoring.html" class="btn btn-outline-primary w-100 btn-sm"><i class="fas fa-shield-halved"></i>Run Risk Scan</a></div>
             <div class="col-6"><a href="wave-planning.html" class="btn btn-outline-primary w-100 btn-sm"><i class="fas fa-calendar-plus"></i>Plan Wave</a></div>
             <div class="col-6"><a href="deployment.html" class="btn btn-outline-primary w-100 btn-sm"><i class="fas fa-rocket"></i>Deploy</a></div>
-            <div class="col-12"><button class="btn btn-primary w-100 btn-sm"><i class="fas fa-file-pdf"></i>Export Client-Ready PDF Report</button></div>
           </div>
         </div>
       </div>
@@ -398,25 +392,25 @@
               <td><strong>PAYROLL_ENG</strong></td><td><span class="badge badge-muted">HR</span></td>
               <td><span class="badge badge-danger">9.1 / 10</span></td>
               <td class="text-muted small">Custom PLL and DB link dependency</td><td>M. Torres</td><td class="text-danger small fw-600">Apr 18</td>
-              <td><a href="risk-scoring.html?workload=PAYROLL_ENG#workload-lifecycle" class="btn btn-danger btn-sm">Review</a></td>
+              <td><a href="risk-scoring.html" class="btn btn-danger btn-sm">Review</a></td>
             </tr>
             <tr class="hover-highlight">
               <td><strong>HRMS_PAYROLL</strong></td><td><span class="badge badge-muted">HR</span></td>
               <td><span class="badge badge-danger">8.9 / 10</span></td>
               <td class="text-muted small">Complex PL/SQL packages</td><td>J. Park</td><td class="text-danger small fw-600">Apr 22</td>
-              <td><a href="risk-scoring.html?workload=HRMS_PAYROLL#workload-lifecycle" class="btn btn-danger btn-sm">Review</a></td>
+              <td><a href="risk-scoring.html" class="btn btn-danger btn-sm">Review</a></td>
             </tr>
             <tr class="hover-highlight">
               <td><strong>GL_CONSOLIDATE</strong></td><td><span class="badge badge-muted">Finance</span></td>
               <td><span class="badge badge-warning">7.4 / 10</span></td>
               <td class="text-muted small">Cross-schema dependencies</td><td>R. Patel</td><td class="text-warning small fw-600">Apr 30</td>
-              <td><a href="risk-scoring.html?workload=GL_CONSOLIDATE#workload-lifecycle" class="btn btn-warning btn-sm text-dark">Review</a></td>
+              <td><a href="risk-scoring.html" class="btn btn-warning btn-sm text-dark">Review</a></td>
             </tr>
             <tr class="hover-highlight">
               <td><strong>ASSET_MGMT_V2</strong></td><td><span class="badge badge-muted">Finance</span></td>
               <td><span class="badge badge-warning">6.8 / 10</span></td>
               <td class="text-muted small">Deprecated DBMS_SCHEDULER</td><td>L. Wang</td><td class="text-muted small">May 5</td>
-              <td><a href="risk-scoring.html?workload=ASSET_MGMT_V2#workload-lifecycle" class="btn btn-light btn-sm">Review</a></td>
+              <td><a href="risk-scoring.html" class="btn btn-light btn-sm">Review</a></td>
             </tr>
           </tbody>
         </table>

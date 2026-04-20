@@ -76,55 +76,6 @@
 
 <main id="main-content">
 
-  <!-- Workload deep-link lifecycle -->
-  <div class="card mb-4 fade-in-up" id="workload-lifecycle" style="border-left:4px solid var(--danger)">
-    <div class="card-header">
-      <i class="fas fa-route text-danger"></i>
-      <div>
-        <div class="card-title" id="lifecycleTitle">PAYROLL_ENG Workload Lifecycle</div>
-        <div class="card-subtitle" id="lifecycleSubtitle">Opened from Dashboard risk queue - complete path from risk to deployment</div>
-      </div>
-      <span class="ms-auto badge badge-danger" id="lifecycleBadge">Risk 9.1 / 10</span>
-    </div>
-    <div class="card-body">
-      <div class="row g-3">
-        <div class="col-md-6 col-xl-3">
-          <div class="p-3 rounded border h-100">
-            <div class="small text-muted fw-600 mb-1">Risk Driver</div>
-            <div class="fw-700" id="lifecycleDriver">Custom PLL + DB link</div>
-            <div class="small text-muted mt-1" id="lifecycleOwner">Owner: M. Torres - due Apr 18</div>
-          </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-          <div class="p-3 rounded border h-100">
-            <div class="small text-muted fw-600 mb-1">Dependencies</div>
-            <div class="fw-700">PAYROLL_LIB.pll, HR_LINK</div>
-            <a href="dependency-mapping.html?workload=PAYROLL_ENG" class="small">Open dependency graph</a>
-          </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-          <div class="p-3 rounded border h-100">
-            <div class="small text-muted fw-600 mb-1">Conversion Status</div>
-            <div class="fw-700">Manual review required</div>
-            <a href="schema-conversion.html?workload=PAYROLL_ENG" class="small">Review PL/SQL conversion</a>
-          </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-          <div class="p-3 rounded border h-100">
-            <div class="small text-muted fw-600 mb-1">Execution Plan</div>
-            <div class="fw-700">Wave 2 - blocked</div>
-            <a href="wave-planning.html?workload=PAYROLL_ENG" class="small">Replan wave assignment</a>
-          </div>
-        </div>
-      </div>
-      <div class="d-flex flex-wrap gap-2 mt-3">
-        <button class="btn btn-danger btn-sm"><i class="fas fa-shield-halved me-1"></i>Create Mitigation Task</button>
-        <a href="deployment.html?workload=PAYROLL_ENG" class="btn btn-light btn-sm"><i class="fas fa-rocket me-1"></i>View Deployment Readiness</a>
-        <button class="btn btn-primary btn-sm"><i class="fas fa-file-pdf me-1"></i>Export Workload Brief</button>
-      </div>
-    </div>
-  </div>
-
   <!-- Stats -->
   <div class="row g-3 mb-4 stagger">
     <div class="col-6 col-xl-3 fade-in-up">
@@ -206,7 +157,7 @@
             <table class="table" id="riskTable">
               <thead><tr><th>Workload</th><th>Module</th><th>Score</th><th>Technical</th><th>Business</th><th>Data</th><th>Action</th></tr></thead>
               <tbody>
-                <tr class="hover-highlight"><td><strong>PAYROLL_ENG</strong></td><td><span class="badge badge-muted">HR</span></td><td><span class="badge badge-danger fw-700">9.1</span></td><td><div class="progress" style="width:80px"><div class="progress-bar bg-danger" data-width="95" style="width:0%"></div></div></td><td><div class="progress" style="width:80px"><div class="progress-bar bg-danger" data-width="88" style="width:0%"></div></div></td><td><div class="progress" style="width:80px"><div class="progress-bar bg-danger" data-width="91" style="width:0%"></div></div></td><td><a href="risk-scoring.html?workload=PAYROLL_ENG#workload-lifecycle" class="btn btn-danger btn-sm">Mitigate</a></td></tr>
+                <tr class="hover-highlight"><td><strong>PAYROLL_ENG</strong></td><td><span class="badge badge-muted">HR</span></td><td><span class="badge badge-danger fw-700">9.1</span></td><td><div class="progress" style="width:80px"><div class="progress-bar bg-danger" data-width="95" style="width:0%"></div></div></td><td><div class="progress" style="width:80px"><div class="progress-bar bg-danger" data-width="88" style="width:0%"></div></div></td><td><div class="progress" style="width:80px"><div class="progress-bar bg-danger" data-width="91" style="width:0%"></div></div></td><td><button class="btn btn-danger btn-sm">Mitigate</button></td></tr>
                 <tr class="hover-highlight"><td><strong>HRMS_PAYROLL</strong></td><td><span class="badge badge-muted">HR</span></td><td><span class="badge badge-danger fw-700">8.9</span></td><td><div class="progress" style="width:80px"><div class="progress-bar bg-danger" data-width="92" style="width:0%"></div></div></td><td><div class="progress" style="width:80px"><div class="progress-bar bg-danger" data-width="85" style="width:0%"></div></div></td><td><div class="progress" style="width:80px"><div class="progress-bar bg-warning" data-width="78" style="width:0%"></div></div></td><td><button class="btn btn-danger btn-sm">Mitigate</button></td></tr>
                 <tr class="hover-highlight"><td><strong>GL_CONSOLIDATE</strong></td><td><span class="badge badge-indigo">Finance</span></td><td><span class="badge badge-warning fw-700">7.4</span></td><td><div class="progress" style="width:80px"><div class="progress-bar bg-warning" data-width="74" style="width:0%"></div></div></td><td><div class="progress" style="width:80px"><div class="progress-bar bg-danger" data-width="82" style="width:0%"></div></div></td><td><div class="progress" style="width:80px"><div class="progress-bar bg-warning" data-width="68" style="width:0%"></div></div></td><td><button class="btn btn-warning btn-sm text-dark">Review</button></td></tr>
                 <tr class="hover-highlight"><td><strong>ASSET_MGMT_V2</strong></td><td><span class="badge badge-indigo">Finance</span></td><td><span class="badge badge-warning fw-700">6.8</span></td><td><div class="progress" style="width:80px"><div class="progress-bar bg-warning" data-width="68" style="width:0%"></div></div></td><td><div class="progress" style="width:80px"><div class="progress-bar bg-warning" data-width="72" style="width:0%"></div></div></td><td><div class="progress" style="width:80px"><div class="progress-bar bg-primary" data-width="55" style="width:0%"></div></div></td><td><button class="btn btn-light btn-sm">Review</button></td></tr>
@@ -259,22 +210,6 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script src="assets/js/main.js"></script>
 <script>
-const workloadContext = {
-  PAYROLL_ENG: ['PAYROLL_ENG Workload Lifecycle', 'Risk 9.1 / 10', 'Custom PLL + DB link', 'Owner: M. Torres - due Apr 18'],
-  HRMS_PAYROLL: ['HRMS_PAYROLL Workload Lifecycle', 'Risk 8.9 / 10', 'Complex PL/SQL packages', 'Owner: J. Park - due Apr 22'],
-  GL_CONSOLIDATE: ['GL_CONSOLIDATE Workload Lifecycle', 'Risk 7.4 / 10', 'Cross-schema dependencies', 'Owner: R. Patel - due Apr 30'],
-  ASSET_MGMT_V2: ['ASSET_MGMT_V2 Workload Lifecycle', 'Risk 6.8 / 10', 'Deprecated DBMS_SCHEDULER jobs', 'Owner: L. Wang - due May 5']
-};
-const selectedWorkload = new URLSearchParams(window.location.search).get('workload');
-if (selectedWorkload && workloadContext[selectedWorkload]) {
-  const ctx = workloadContext[selectedWorkload];
-  document.getElementById('lifecycleTitle').textContent = ctx[0];
-  document.getElementById('lifecycleSubtitle').textContent = 'Opened from Dashboard risk queue - filtered workload lifecycle view';
-  document.getElementById('lifecycleBadge').textContent = ctx[1];
-  document.getElementById('lifecycleDriver').textContent = ctx[2];
-  document.getElementById('lifecycleOwner').textContent = ctx[3];
-}
-
 function initPageCharts() {
   var ctx = document.getElementById('radarChart');
   if (ctx) {

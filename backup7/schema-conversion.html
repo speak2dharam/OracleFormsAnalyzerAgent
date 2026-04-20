@@ -92,43 +92,6 @@
     </div>
   </div>
 
-  <!-- Conversion Coverage -->
-  <div class="card mb-4 fade-in-up">
-    <div class="card-header">
-      <i class="fas fa-chart-simple text-success"></i>
-      <div>
-        <div class="card-title">Schema Conversion Coverage</div>
-        <div class="card-subtitle">Full Oracle estate conversion summary with expandable DDL review queue</div>
-      </div>
-      <button class="btn btn-primary btn-sm ms-auto"><i class="fas fa-file-pdf me-1"></i>Export Conversion Report</button>
-    </div>
-    <div class="card-body">
-      <div class="row g-3 mb-3">
-        <div class="col-md-3"><div class="p-3 rounded border"><div class="small text-muted">Total Objects</div><div class="fw-800" style="font-size:26px">4,200</div></div></div>
-        <div class="col-md-3"><div class="p-3 rounded border"><div class="small text-muted">Auto-Converted</div><div class="fw-800 text-success" style="font-size:26px">3,800</div></div></div>
-        <div class="col-md-3"><div class="p-3 rounded border"><div class="small text-muted">Manual Review</div><div class="fw-800 text-warning" style="font-size:26px">350</div></div></div>
-        <div class="col-md-3"><div class="p-3 rounded border"><div class="small text-muted">Rewrite Required</div><div class="fw-800 text-danger" style="font-size:26px">50</div></div></div>
-      </div>
-      <div class="progress mb-3" style="height:12px">
-        <div class="progress-bar bg-success" style="width:90.5%"></div>
-        <div class="progress-bar bg-warning" style="width:8.3%"></div>
-        <div class="progress-bar bg-danger" style="width:1.2%"></div>
-      </div>
-      <div class="table-container">
-        <table class="table mb-0">
-          <thead><tr><th>Object</th><th>Type</th><th>Schema</th><th>Status</th><th>DDL Preview</th><th>Owner</th></tr></thead>
-          <tbody>
-            <tr class="hover-highlight"><td><strong>INV_MGMT.INVENTORY_ITEMS</strong></td><td>Table + trigger</td><td>INV_MGMT</td><td><span class="badge badge-success">Auto</span></td><td><button class="btn btn-light btn-sm">Expand</button></td><td>DB Team</td></tr>
-            <tr class="hover-highlight"><td><strong>FIN_GL.GL_ACCOUNTS</strong></td><td>Table</td><td>FIN_GL</td><td><span class="badge badge-success">Auto</span></td><td><button class="btn btn-light btn-sm">Expand</button></td><td>Finance DBA</td></tr>
-            <tr class="hover-highlight"><td><strong>HRMS.PKG_PAYROLL_CALC</strong></td><td>Package</td><td>HRMS</td><td><span class="badge badge-warning">Manual review</span></td><td><button class="btn btn-warning btn-sm text-dark">Review</button></td><td>A. Mehta</td></tr>
-            <tr class="hover-highlight"><td><strong>HRMS.TRG_PAYROLL_AUDIT</strong></td><td>Trigger</td><td>HRMS</td><td><span class="badge badge-warning">Manual review</span></td><td><button class="btn btn-warning btn-sm text-dark">Review</button></td><td>A. Mehta</td></tr>
-            <tr class="hover-highlight"><td><strong>PAYROLL_ENG.HR_LINK_SYNC</strong></td><td>DB link job</td><td>PAYROLL_ENG</td><td><span class="badge badge-danger">Rewrite</span></td><td><button class="btn btn-danger btn-sm">Plan rewrite</button></td><td>M. Torres</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
   <!-- DDL Side-by-Side Preview -->
   <div class="row g-3 mb-4">
     <div class="col-12 fade-in-up">
@@ -141,11 +104,6 @@
               <option>INV_MGMT.INVENTORY_ITEMS</option>
               <option>FIN_GL.GL_ACCOUNTS</option>
               <option>HRMS.EMPLOYEES</option>
-              <option>HRMS.PKG_PAYROLL_CALC</option>
-              <option>HRMS.TRG_PAYROLL_AUDIT</option>
-              <option>PAYROLL_ENG.HR_LINK_SYNC</option>
-              <option>FIN_GL.VW_JOURNAL_BALANCES</option>
-              <option>INV_MGMT.JOB_STOCK_REVALUE</option>
             </select>
             <span class="badge badge-success"><i class="fas fa-check me-1"></i>Auto-Converted</span>
           </div>

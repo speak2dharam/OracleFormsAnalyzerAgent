@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lift &amp; Shift Assessment — Oracle Estate Workbench</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .assessment-hero {
+      background: linear-gradient(135deg, #ffffff 0%, #f6f9ff 100%);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+    .assessment-hero h2 {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 10px 0;
+      color: var(--dark);
+    }
+    .assessment-hero p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+      max-width: 760px;
+      margin: 0;
+    }
+    .report-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid #bfdbfe;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .mini-fact {
+      border: 1px solid var(--border);
+      background: #fff;
+      border-radius: 8px;
+      padding: 14px;
+      height: 100%;
+    }
+    .mini-fact .label,
+    .readiness-item .label,
+    .service-card .label {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .mini-fact .value {
+      color: var(--dark);
+      font-size: 19px;
+      font-weight: 800;
+      margin-top: 4px;
+      line-height: 1.2;
+    }
+    .mini-fact .note {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 6px;
+      line-height: 1.45;
+    }
+    .report-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: var(--shadow-sm);
+      height: 100%;
+    }
+    .report-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--border);
+    }
+    .report-card-title {
+      color: var(--dark);
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    .report-card-subtitle {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 3px;
+    }
+    .report-card-body {
+      padding: 18px;
+    }
+    .readiness-item {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      background: #fbfcff;
+      height: 100%;
+    }
+    .readiness-item .value {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--dark);
+      margin: 5px 0;
+    }
+    .readiness-item .note,
+    .service-card .note,
+    .assessment-note {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+    .service-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      background: #fff;
+      height: 100%;
+    }
+    .service-card .value {
+      color: var(--dark);
+      font-weight: 800;
+      font-size: 17px;
+      margin-top: 4px;
+    }
+    .risk-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .risk-list li {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      background: #fbfcff;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+    .risk-list strong {
+      display: block;
+      color: var(--dark);
+      font-size: 13px;
+      margin-bottom: 2px;
+    }
+    .table.assessment-table th {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: #475569;
+      background: #f8fafc;
+      white-space: nowrap;
+    }
+    .table.assessment-table td {
+      font-size: 12px;
+      vertical-align: middle;
+    }
+    .table.assessment-table .right {
+      text-align: right;
+    }
+    .decision-banner {
+      border: 1px solid #bbf7d0;
+      background: #f0fdf4;
+      color: #166534;
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .gap-banner {
+      border: 1px solid #fed7aa;
+      background: #fff7ed;
+      color: #92400e;
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .admin-hero {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: var(--shadow-sm);
+      padding: 18px;
+    }
+    .admin-hero-title {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--dark);
+      margin: 0;
+    }
+    .admin-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .admin-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #f8fafc;
+      color: #475569;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 7px 10px;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+    }
+    .dashboard-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: var(--shadow-sm);
+      height: 100%;
+      overflow: hidden;
+    }
+    .dashboard-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .dashboard-card-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1.2;
+    }
+    .dashboard-card-subtitle {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 3px;
+    }
+    .dashboard-card-body { padding: 16px; }
+    .metric-tile {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: var(--shadow-sm);
+      padding: 16px;
+      min-height: 132px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .metric-tile .topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .metric-tile .metric-value {
+      color: var(--dark);
+      font-size: 27px;
+      font-weight: 850;
+      letter-spacing: -0.03em;
+      margin-top: 12px;
+      line-height: 1;
+    }
+    .metric-tile .metric-note {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+      margin-top: 8px;
+    }
+    .metric-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #eff6ff;
+      color: #2563eb;
+      flex: 0 0 auto;
+    }
+    .metric-icon.green { background: #ecfdf5; color: #059669; }
+    .metric-icon.amber { background: #fffbeb; color: #d97706; }
+    .metric-icon.red { background: #fef2f2; color: #dc2626; }
+    .metric-icon.purple { background: #f5f3ff; color: #7c3aed; }
+    .status-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 13px;
+      background: #fbfcff;
+      height: 100%;
+    }
+    .status-card .status-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--dark);
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .status-card .status-meta {
+      color: var(--muted);
+      font-size: 11px;
+      margin: 6px 0 10px;
+    }
+    .thin-progress {
+      height: 7px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .thin-progress span {
+      display: block;
+      height: 100%;
+      border-radius: 999px;
+    }
+    .score-box {
+      text-align: center;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 13px;
+      background: #fbfcff;
+    }
+    .score-box .score-value {
+      font-size: 24px;
+      font-weight: 850;
+      color: var(--dark);
+      line-height: 1;
+    }
+    .score-box .score-label {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .table.admin-table th {
+      background: #f8fafc;
+      color: #475569;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      white-space: nowrap;
+    }
+    .table.admin-table td {
+      font-size: 12px;
+      vertical-align: middle;
+    }
+    .table.admin-table .right { text-align: right; }
+    .badge-soft {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border-radius: 999px;
+      padding: 5px 8px;
+      font-size: 10px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .badge-soft.ok { background: #ecfdf5; color: #047857; }
+    .badge-soft.warn { background: #fffbeb; color: #b45309; }
+    .badge-soft.info { background: #eff6ff; color: #1d4ed8; }
+    .badge-soft.danger { background: #fef2f2; color: #b91c1c; }
+    .compact-list {
+      display: grid;
+      gap: 10px;
+    }
+    .compact-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 11px 12px;
+      background: #fbfcff;
+    }
+    .compact-item .name {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--dark);
+    }
+    .compact-item .sub {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .compact-item .amount {
+      font-size: 13px;
+      font-weight: 850;
+      color: var(--dark);
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+<div id="page-loader"><div class="loader-ring"></div></div>
+
+<aside id="sidebar">
+  <a href="dashboard.html" class="sidebar-brand">
+    <div class="brand-icon"><i class="fas fa-database"></i></div>
+    <div class="brand-text"><div class="brand-title">CloudAtlas</div><div class="brand-subtitle">Oracle Modernization</div></div>
+  </a>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Overview</div>
+    <a href="dashboard.html" class="sidebar-link" data-label="Dashboard"><span class="link-icon"><i class="fas fa-gauge-high"></i></span><span class="link-text">Dashboard</span></a>
+    <div class="nav-section-label">Discovery</div>
+    <a href="discovery.html" class="sidebar-link" data-label="Discovery"><span class="link-icon"><i class="fas fa-magnifying-glass-chart"></i></span><span class="link-text">Discovery &amp; Intake</span></a>
+    <div class="nav-section-label">Assessment</div>
+    <a href="assessment-lift-shift.html" class="sidebar-link" data-label="Lift &amp; Shift"><span class="link-icon"><i class="fas fa-arrow-up-right-dots"></i></span><span class="link-text">Lift &amp; Shift</span></a>
+    <a href="assessment-modernization.html" class="sidebar-link" data-label="Modernization"><span class="link-icon"><i class="fas fa-wand-magic-sparkles"></i></span><span class="link-text">Modernization</span></a>
+    <a href="dependency-mapping.html" class="sidebar-link" data-label="Dependencies"><span class="link-icon"><i class="fas fa-diagram-project"></i></span><span class="link-text">Dependency Mapping</span></a>
+    <a href="tco.html" class="sidebar-link" data-label="TCO Analysis"><span class="link-icon"><i class="fas fa-coins"></i></span><span class="link-text">TCO Analysis</span></a>
+    <a href="risk-scoring.html" class="sidebar-link" data-label="Risk Scoring"><span class="link-icon"><i class="fas fa-shield-halved"></i></span><span class="link-text">Risk Scoring</span></a>
+    <a href="wave-planning.html" class="sidebar-link" data-label="Wave Planning"><span class="link-icon"><i class="fas fa-wave-square"></i></span><span class="link-text">Wave Planning</span></a>
+    <a href="readiness-check.html" class="sidebar-link" data-label="Readiness"><span class="link-icon"><i class="fas fa-clipboard-check"></i></span><span class="link-text">Readiness Check</span></a>
+    <div class="forms-path-group">
+      <div class="nav-section-label nav-section-forms"><i class="fas fa-wand-magic-sparkles"></i>Forms Modernization</div>
+      <a href="modernization-execution.html" class="sidebar-link" data-label="Execution"><span class="link-icon"><i class="fas fa-gears"></i></span><span class="link-text">Modernization Exec.</span></a>
+      <a href="schema-conversion.html" class="sidebar-link" data-label="Schema"><span class="link-icon"><i class="fas fa-code-branch"></i></span><span class="link-text">Schema Conversion</span></a>
+      <div class="nav-section-label nav-section-forms">Azure Infrastructure</div>
+      <a href="landing-zone.html" class="sidebar-link" data-label="Landing Zone"><span class="link-icon"><i class="fas fa-cloud"></i></span><span class="link-text">Landing Zone</span></a>
+      <a href="security-finops.html" class="sidebar-link" data-label="Security &amp; FinOps"><span class="link-icon"><i class="fas fa-lock"></i></span><span class="link-text">Security &amp; FinOps</span></a>
+      <div class="nav-section-label nav-section-forms">Delivery</div>
+      <a href="review-validation.html" class="sidebar-link" data-label="Review"><span class="link-icon"><i class="fas fa-circle-check"></i></span><span class="link-text">Review &amp; Validation</span></a>
+      <a href="deployment.html" class="sidebar-link" data-label="Deployment"><span class="link-icon"><i class="fas fa-rocket"></i></span><span class="link-text">Deployment</span><span class="link-badge">Live</span></a>
+    </div>
+  </nav>
+  <div class="sidebar-footer">
+    <button class="sidebar-toggle-btn" id="sidebarToggle2"><i class="fas fa-chevron-left"></i><span>Collapse</span></button>
+  </div>
+</aside>
+
+<header id="topbar">
+  <button class="topbar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+  <div class="topbar-breadcrumb">
+    <h1 class="page-title">Lift &amp; Shift Assessment</h1>
+    <p class="page-subtitle">Oracle Estate Workbench &middot; Infrastructure Rehost Report</p>
+  </div>
+  <div class="topbar-search d-none d-md-flex align-items-center">
+    <i class="fas fa-search search-icon"></i>
+    <input type="text" placeholder="Search workloads…">
+  </div>
+  <div class="d-flex align-items-center gap-2 ms-auto">
+    <button class="btn btn-primary btn-sm"><i class="fas fa-play"></i>Run Assessment</button>
+    <button class="topbar-btn" data-bs-toggle="tooltip" title="Settings"><i class="fas fa-gear"></i></button>
+    <div class="dropdown">
+      <a class="topbar-profile" data-bs-toggle="dropdown">
+        <div class="profile-avatar">SC</div>
+        <div class="d-none d-sm-block"><div class="profile-name">Sarah Chen</div><div class="profile-role">Modernization Lead</div></div>
+        <i class="fas fa-chevron-down ms-1 text-muted" style="font-size:10px"></i>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end" style="min-width:200px">
+        <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i>My Profile</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-right-from-bracket text-danger"></i>Sign Out</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <section class="admin-hero fade-in-up mb-3">
+    <div class="d-flex align-items-start justify-content-between gap-3 flex-wrap">
+      <div>
+        <div class="report-eyebrow"><i class="fas fa-database"></i> Oracle Lift &amp; Shift Control Panel</div>
+        <h2 class="admin-hero-title mt-2">Oracle Estate Rehost Assessment</h2>
+        <div class="admin-chip-row">
+          <span class="admin-chip"><i class="fas fa-layer-group"></i>217 in-scope servers</span>
+          <span class="admin-chip"><i class="fas fa-cloud"></i>Azure VM landing pattern</span>
+          <span class="admin-chip"><i class="fas fa-coins"></i>USD monthly model</span>
+          <span class="admin-chip"><i class="fas fa-triangle-exclamation"></i>Oracle discovery pending</span>
+        </div>
+      </div>
+      <div class="d-flex gap-2 flex-wrap">
+        <button class="btn btn-light btn-sm"><i class="fas fa-download me-1"></i>Export</button>
+        <button class="btn btn-primary btn-sm"><i class="fas fa-rotate me-1"></i>Refresh Assessment</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="row g-3 mb-3 stagger">
+    <div class="col-md-6 col-xl-3 fade-in-up"><div class="metric-tile"><div><div class="topline"><span>Production Estate</span><span class="metric-icon"><i class="fas fa-server"></i></span></div><div class="metric-value">107</div><div class="metric-note">98 Windows + 9 Linux servers</div></div><span class="badge-soft info">251 vCPU / 2,072 GB RAM</span></div></div>
+    <div class="col-md-6 col-xl-3 fade-in-up"><div class="metric-tile"><div><div class="topline"><span>Dev/Test Estate</span><span class="metric-icon green"><i class="fas fa-vial"></i></span></div><div class="metric-value">110</div><div class="metric-note">102 Windows + 8 Linux servers</div></div><span class="badge-soft ok">254 vCPU / 1,667 GB RAM</span></div></div>
+    <div class="col-md-6 col-xl-3 fade-in-up"><div class="metric-tile"><div><div class="topline"><span>Production PAYG</span><span class="metric-icon amber"><i class="fas fa-dollar-sign"></i></span></div><div class="metric-value">$281K</div><div class="metric-note">Monthly production compute estimate</div></div><span class="badge-soft warn">$175K reserved baseline</span></div></div>
+    <div class="col-md-6 col-xl-3 fade-in-up"><div class="metric-tile"><div><div class="topline"><span>Reserved Saving</span><span class="metric-icon green"><i class="fas fa-arrow-trend-down"></i></span></div><div class="metric-value">37.7%</div><div class="metric-note">$106K potential monthly reduction</div></div><span class="badge-soft ok">3-year reserved model</span></div></div>
+  </div>
+
+  <div class="row g-3 mb-3">
+    <div class="col-md-6 col-xl-3"><div class="score-box"><div class="score-value">77.4%</div><div class="score-label">Prod Storage Used</div></div></div>
+    <div class="col-md-6 col-xl-3"><div class="score-box"><div class="score-value">74.2%</div><div class="score-label">Dev/Test Storage Used</div></div></div>
+    <div class="col-md-6 col-xl-3"><div class="score-box"><div class="score-value">1.47M</div><div class="score-label">Disk Monthly Cost</div></div></div>
+    <div class="col-md-6 col-xl-3"><div class="score-box"><div class="score-value">158K</div><div class="score-label">Network + Ops Cost</div></div></div>
+  </div>
+
+  <div class="row g-3 mb-3">
+    <div class="col-xl-4 fade-in-up">
+      <div class="dashboard-card">
+        <div class="dashboard-card-header"><div><div class="dashboard-card-title">Environment Mix</div><div class="dashboard-card-subtitle">Production vs dev/test server footprint</div></div><span class="badge-soft info">217 total</span></div>
+        <div class="dashboard-card-body"><canvas id="envChart" height="230"></canvas></div>
+      </div>
+    </div>
+    <div class="col-xl-4 fade-in-up">
+      <div class="dashboard-card">
+        <div class="dashboard-card-header"><div><div class="dashboard-card-title">Cost Comparison</div><div class="dashboard-card-subtitle">Production PAYG against reserved baseline</div></div><span class="badge-soft ok">37.7% saving</span></div>
+        <div class="dashboard-card-body"><canvas id="costChart" height="230"></canvas></div>
+      </div>
+    </div>
+    <div class="col-xl-4 fade-in-up">
+      <div class="dashboard-card">
+        <div class="dashboard-card-header"><div><div class="dashboard-card-title">Storage Utilization</div><div class="dashboard-card-subtitle">Used vs free capacity by environment</div></div><span class="badge-soft warn">watch list</span></div>
+        <div class="dashboard-card-body"><canvas id="storageChart" height="230"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3 mb-3">
+    <div class="col-xl-8 fade-in-up">
+      <div class="dashboard-card">
+        <div class="dashboard-card-header"><div><div class="dashboard-card-title">Migration Readiness Board</div><div class="dashboard-card-subtitle">Operational gates for Oracle VM-based lift and shift</div></div><span class="badge-soft warn">4 actions open</span></div>
+        <div class="dashboard-card-body">
+          <div class="row g-3">
+            <div class="col-md-6 col-xl-4"><div class="status-card"><div class="status-head"><span>Infra inventory</span><span>92%</span></div><div class="status-meta">Servers, OS, sizing captured</div><div class="thin-progress"><span style="width:92%;background:#10b981"></span></div></div></div>
+            <div class="col-md-6 col-xl-4"><div class="status-card"><div class="status-head"><span>Oracle topology</span><span>42%</span></div><div class="status-meta">DB, RAC, Data Guard pending</div><div class="thin-progress"><span style="width:42%;background:#f59e0b"></span></div></div></div>
+            <div class="col-md-6 col-xl-4"><div class="status-card"><div class="status-head"><span>Storage posture</span><span>77%</span></div><div class="status-meta">Production storage used</div><div class="thin-progress"><span style="width:77%;background:#f59e0b"></span></div></div></div>
+            <div class="col-md-6 col-xl-4"><div class="status-card"><div class="status-head"><span>Network landing</span><span>85%</span></div><div class="status-meta">VNet, ExpressRoute, LB scoped</div><div class="thin-progress"><span style="width:85%;background:#10b981"></span></div></div></div>
+            <div class="col-md-6 col-xl-4"><div class="status-card"><div class="status-head"><span>Security baseline</span><span>78%</span></div><div class="status-meta">Key Vault, Defender, monitoring</div><div class="thin-progress"><span style="width:78%;background:#3b82f6"></span></div></div></div>
+            <div class="col-md-6 col-xl-4"><div class="status-card"><div class="status-head"><span>Cutover runbook</span><span>38%</span></div><div class="status-meta">Wave, rollback, validation open</div><div class="thin-progress"><span style="width:38%;background:#ef4444"></span></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 fade-in-up">
+      <div class="dashboard-card">
+        <div class="dashboard-card-header"><div><div class="dashboard-card-title">Oracle Validation Queue</div><div class="dashboard-card-subtitle">Missing discovery inputs</div></div><span class="badge-soft danger">critical</span></div>
+        <div class="dashboard-card-body">
+          <div class="compact-list">
+            <div class="compact-item"><div><div class="name">DB host mapping</div><div class="sub">Map VM names to Oracle instances</div></div><span class="badge-soft danger">Open</span></div>
+            <div class="compact-item"><div><div class="name">RAC / Data Guard</div><div class="sub">Confirm HA and DR topology</div></div><span class="badge-soft warn">Open</span></div>
+            <div class="compact-item"><div><div class="name">WebLogic domains</div><div class="sub">Forms and Reports runtime map</div></div><span class="badge-soft warn">Open</span></div>
+            <div class="compact-item"><div><div class="name">AWR / ASH peaks</div><div class="sub">Use Oracle peaks for final sizing</div></div><span class="badge-soft info">Next</span></div>
+            <div class="compact-item"><div><div class="name">Backup footprint</div><div class="sub">Retention, restore, RPO/RTO</div></div><span class="badge-soft info">Next</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3 mb-3">
+    <div class="col-xl-7 fade-in-up">
+      <div class="dashboard-card">
+        <div class="dashboard-card-header"><div><div class="dashboard-card-title">Largest Production Hosts By Storage</div><div class="dashboard-card-subtitle">First assets to validate for Oracle DB or shared application dependencies</div></div><span class="badge-soft warn">8 hosts</span></div>
+        <div class="table-responsive">
+          <table class="table admin-table mb-0">
+            <thead><tr><th>Server</th><th>Type</th><th>Azure Size</th><th class="right">Cores</th><th class="right">RAM</th><th class="right">Storage</th><th class="right">Used</th><th class="right">CPU</th></tr></thead>
+            <tbody>
+              <tr><td><strong>NAS1</strong></td><td>Windows</td><td>E32-8s v5</td><td class="right">2</td><td class="right">16 GB</td><td class="right">24,704 GB</td><td class="right">17,396 GB</td><td class="right"><span class="badge-soft warn">69.8%</span></td></tr>
+              <tr><td><strong>mfilestre1</strong></td><td>Windows</td><td>E32-8s v5</td><td class="right">4</td><td class="right">16 GB</td><td class="right">13,184 GB</td><td class="right">9,826 GB</td><td class="right">45.5%</td></tr>
+              <tr><td><strong>Samba 4 FS</strong></td><td>Linux</td><td>E32-8s v5</td><td class="right">4</td><td class="right">8 GB</td><td class="right">9,248 GB</td><td class="right">9,036 GB</td><td class="right">36.1%</td></tr>
+              <tr><td><strong>fileesp6</strong></td><td>Windows</td><td>E32-8s v5</td><td class="right">4</td><td class="right">32 GB</td><td class="right">8,960 GB</td><td class="right">7,306 GB</td><td class="right">27.7%</td></tr>
+              <tr><td><strong>filetreaksu</strong></td><td>Windows</td><td>E32-8s v5</td><td class="right">2</td><td class="right">16 GB</td><td class="right">8,320 GB</td><td class="right">4,493 GB</td><td class="right"><span class="badge-soft danger">80.0%</span></td></tr>
+              <tr><td><strong>FILEAW2</strong></td><td>Windows</td><td>E32-8s v5</td><td class="right">2</td><td class="right">8 GB</td><td class="right">8,256 GB</td><td class="right">7,208 GB</td><td class="right"><span class="badge-soft warn">77.8%</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-5 fade-in-up">
+      <div class="dashboard-card h-100">
+        <div class="dashboard-card-header"><div><div class="dashboard-card-title">Top Production OS</div><div class="dashboard-card-subtitle">Image standardization candidates</div></div><span class="badge-soft info">prod</span></div>
+        <div class="dashboard-card-body"><canvas id="osChart" height="265"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3 mb-3">
+    <div class="col-xl-5 fade-in-up">
+      <div class="dashboard-card">
+        <div class="dashboard-card-header"><div><div class="dashboard-card-title">Managed Disk Profile</div><div class="dashboard-card-subtitle">Disk tiers retained for Oracle VM landing patterns</div></div><span class="badge-soft info">$17.7K</span></div>
+        <div class="table-responsive">
+          <table class="table admin-table mb-0">
+            <thead><tr><th>Tier</th><th class="right">Rows</th><th class="right">Provisioned</th><th class="right">Used</th><th class="right">Monthly</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Standard SSD</strong></td><td class="right">148</td><td class="right">131,925 GB</td><td class="right">102,252 GB</td><td class="right">$10,759</td></tr>
+              <tr><td><strong>Standard HDD</strong></td><td class="right">161</td><td class="right">139,816 GB</td><td class="right">103,755 GB</td><td class="right">$5,370</td></tr>
+              <tr><td><strong>Premium SSD</strong></td><td class="right">19</td><td class="right">11,393 GB</td><td class="right">8,629 GB</td><td class="right">$1,640</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-7 fade-in-up">
+      <div class="dashboard-card">
+        <div class="dashboard-card-header"><div><div class="dashboard-card-title">Network, Security And Operations Services</div><div class="dashboard-card-subtitle">Shared Azure services for Oracle VM-based estate</div></div><span class="badge-soft info">$1.9K</span></div>
+        <div class="table-responsive">
+          <table class="table admin-table mb-0">
+            <thead><tr><th>Service</th><th>Category</th><th>Requirement</th><th>Environment</th><th class="right">Monthly</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Log Analytics</strong></td><td>Management</td><td><span class="badge-soft info">Recommended</span></td><td>Production</td><td class="right">$617</td></tr>
+              <tr><td><strong>Microsoft Defender</strong></td><td>Security</td><td><span class="badge-soft info">Recommended</span></td><td>Production</td><td class="right">$606</td></tr>
+              <tr><td><strong>Application Gateway</strong></td><td>Networking</td><td><span class="badge-soft info">Recommended</span></td><td>Production</td><td class="right">$315</td></tr>
+              <tr><td><strong>Express Route</strong></td><td>Networking</td><td><span class="badge-soft info">Recommended</span></td><td>Production+Dev/Test</td><td class="right">$126</td></tr>
+              <tr><td><strong>Bandwidth</strong></td><td>Networking</td><td><span class="badge-soft warn">Mandatory</span></td><td>Production+Dev/Test</td><td class="right">$58</td></tr>
+              <tr><td><strong>Key Vault</strong></td><td>Security</td><td><span class="badge-soft info">Recommended</span></td><td>Production</td><td class="right">$25</td></tr>
+              <tr><td><strong>Virtual Network</strong></td><td>Networking</td><td><span class="badge-soft warn">Mandatory</span></td><td>Production</td><td class="right">$23</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-xl-8 fade-in-up">
+      <div class="dashboard-card">
+        <div class="dashboard-card-header"><div><div class="dashboard-card-title">Migration Execution Checklist</div><div class="dashboard-card-subtitle">Admin view of what must be completed before wave planning</div></div><span class="badge-soft warn">5 gates</span></div>
+        <div class="table-responsive">
+          <table class="table admin-table mb-0">
+            <thead><tr><th>Gate</th><th>Owner Track</th><th>Signal</th><th>Status</th><th class="right">Score</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Confirm Oracle DB hosts</strong></td><td>Discovery</td><td>VM to DB instance map</td><td><span class="badge-soft danger">Open</span></td><td class="right">42%</td></tr>
+              <tr><td><strong>Validate storage and backup</strong></td><td>Infrastructure</td><td>Used storage, retention, restore model</td><td><span class="badge-soft warn">In Review</span></td><td class="right">68%</td></tr>
+              <tr><td><strong>Approve Azure landing zone</strong></td><td>Platform</td><td>Network, security, monitoring</td><td><span class="badge-soft ok">Ready</span></td><td class="right">85%</td></tr>
+              <tr><td><strong>Finalize reserved sizing</strong></td><td>FinOps</td><td>PAYG vs reserved decision</td><td><span class="badge-soft info">Ready</span></td><td class="right">79%</td></tr>
+              <tr><td><strong>Create cutover runbook</strong></td><td>Migration</td><td>Wave, rollback, validation</td><td><span class="badge-soft danger">Open</span></td><td class="right">38%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 fade-in-up">
+      <div class="dashboard-card">
+        <div class="dashboard-card-header"><div><div class="dashboard-card-title">Ignored Asset Sample</div><div class="dashboard-card-subtitle">Outside server baseline</div></div><span class="badge-soft info">not counted</span></div>
+        <div class="dashboard-card-body">
+          <div class="compact-list">
+            <div class="compact-item"><div><div class="name">aovtre4</div><div class="sub">Virtual</div></div><span class="amount">Not Server</span></div>
+            <div class="compact-item"><div><div class="name">BIMARK1</div><div class="sub">Virtual</div></div><span class="amount">Not Server</span></div>
+            <div class="compact-item"><div><div class="name">DEVEXTAPP</div><div class="sub">Virtual</div></div><span class="amount">Not Server</span></div>
+            <div class="compact-item"><div><div class="name">EBSHISTORICAL</div><div class="sub">Virtual</div></div><span class="amount">Not Server</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+function initPageCharts() {
+  var palette = {
+    blue: '#2563eb',
+    green: '#10b981',
+    amber: '#f59e0b',
+    red: '#ef4444',
+    purple: '#8b5cf6',
+    slate: '#94a3b8',
+    grid: '#f1f5f9',
+    text: '#64748b'
+  };
+
+  var envCtx = document.getElementById('envChart');
+  if (envCtx) {
+    new Chart(envCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Production', 'Dev/Test'],
+        datasets: [
+          { label: 'Windows', data: [98, 102], backgroundColor: palette.blue, borderRadius: 6, borderSkipped: false },
+          { label: 'Linux', data: [9, 8], backgroundColor: palette.green, borderRadius: 6, borderSkipped: false }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, color: palette.text, font: { size: 11 } } } },
+        scales: {
+          y: { stacked: true, grid: { color: palette.grid }, ticks: { color: palette.text, font: { size: 11 } } },
+          x: { stacked: true, grid: { display: false }, ticks: { color: palette.text, font: { size: 11 } } }
+        }
+      }
+    });
+  }
+
+  var costCtx = document.getElementById('costChart');
+  if (costCtx) {
+    new Chart(costCtx, {
+      type: 'bar',
+      data: {
+        labels: ['PAYG', '3Y Reserved', 'Saving'],
+        datasets: [{ data: [23.343, 14.533, 8.81], backgroundColor: [palette.amber, palette.green, palette.blue], borderRadius: 8, borderSkipped: false }]
+      },
+      options: {
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { grid: { color: palette.grid }, ticks: { color: palette.text, font: { size: 11 }, callback: function(value) { return value + 'M'; } } },
+          x: { grid: { display: false }, ticks: { color: palette.text, font: { size: 11 } } }
+        }
+      }
+    });
+  }
+
+  var storageCtx = document.getElementById('storageChart');
+  if (storageCtx) {
+    new Chart(storageCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Prod used', 'Prod free', 'Dev/Test used', 'Dev/Test free'],
+        datasets: [{ data: [77.4, 22.6, 74.2, 25.8], backgroundColor: [palette.red, '#fee2e2', palette.amber, '#fef3c7'], borderWidth: 0, hoverOffset: 8 }]
+      },
+      options: { cutout: '64%', plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, color: palette.text, font: { size: 11 } } } } }
+    });
+  }
+
+  var osCtx = document.getElementById('osChart');
+  if (osCtx) {
+    new Chart(osCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Win 2022 DC', 'Win 2019 DC', 'Win 2016 DC', 'Win 2012 R2', 'Linux 3.x', 'Win 2022'],
+        datasets: [{ data: [39, 21, 12, 11, 4, 3], backgroundColor: [palette.blue, '#3b82f6', palette.purple, palette.slate, palette.green, '#60a5fa'], borderRadius: 6, borderSkipped: false }]
+      },
+      options: {
+        indexAxis: 'y',
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { color: palette.grid }, ticks: { color: palette.text, font: { size: 11 } } },
+          y: { grid: { display: false }, ticks: { color: palette.text, font: { size: 11 } } }
+        }
+      }
+    });
+  }
+}
+</script>
+</body>
+</html>
+
+
+
+
+
+
+

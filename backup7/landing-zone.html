@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Zone — Oracle Estate Workbench</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="page-loader"><div class="loader-ring"></div></div>
+
+<aside id="sidebar">
+  <a href="dashboard.html" class="sidebar-brand">
+    <div class="brand-icon"><i class="fas fa-database"></i></div>
+    <div class="brand-text"><div class="brand-title">CloudAtlas</div><div class="brand-subtitle">Oracle Modernization</div></div>
+  </a>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Overview</div>
+    <a href="dashboard.html" class="sidebar-link" data-label="Dashboard"><span class="link-icon"><i class="fas fa-gauge-high"></i></span><span class="link-text">Dashboard</span></a>
+    <div class="nav-section-label">Discovery</div>
+    <a href="discovery.html" class="sidebar-link" data-label="Discovery"><span class="link-icon"><i class="fas fa-magnifying-glass-chart"></i></span><span class="link-text">Discovery &amp; Intake</span></a>
+    <div class="nav-section-label">Assessment</div>
+    <a href="assessment-lift-shift.html" class="sidebar-link" data-label="Lift &amp; Shift"><span class="link-icon"><i class="fas fa-arrow-up-right-dots"></i></span><span class="link-text">Lift &amp; Shift</span></a>
+    <a href="assessment-modernization.html" class="sidebar-link" data-label="Modernization"><span class="link-icon"><i class="fas fa-wand-magic-sparkles"></i></span><span class="link-text">Modernization</span></a>
+    <a href="dependency-mapping.html" class="sidebar-link" data-label="Dependencies"><span class="link-icon"><i class="fas fa-diagram-project"></i></span><span class="link-text">Dependency Mapping</span></a>
+    <a href="tco.html" class="sidebar-link" data-label="TCO Analysis"><span class="link-icon"><i class="fas fa-coins"></i></span><span class="link-text">TCO Analysis</span></a>
+    <a href="risk-scoring.html" class="sidebar-link" data-label="Risk Scoring"><span class="link-icon"><i class="fas fa-shield-halved"></i></span><span class="link-text">Risk Scoring</span></a>
+    <a href="wave-planning.html" class="sidebar-link" data-label="Wave Planning"><span class="link-icon"><i class="fas fa-wave-square"></i></span><span class="link-text">Wave Planning</span></a>
+    <a href="readiness-check.html" class="sidebar-link" data-label="Readiness"><span class="link-icon"><i class="fas fa-clipboard-check"></i></span><span class="link-text">Readiness Check</span></a>
+    <div class="forms-path-group">
+      <div class="nav-section-label nav-section-forms"><i class="fas fa-wand-magic-sparkles"></i>Forms Modernization</div>
+      <a href="modernization-execution.html" class="sidebar-link" data-label="Execution"><span class="link-icon"><i class="fas fa-gears"></i></span><span class="link-text">Modernization Exec.</span></a>
+      <a href="schema-conversion.html" class="sidebar-link" data-label="Schema"><span class="link-icon"><i class="fas fa-code-branch"></i></span><span class="link-text">Schema Conversion</span></a>
+      <div class="nav-section-label nav-section-forms">Azure Infrastructure</div>
+      <a href="landing-zone.html" class="sidebar-link" data-label="Landing Zone"><span class="link-icon"><i class="fas fa-cloud"></i></span><span class="link-text">Landing Zone</span></a>
+      <a href="security-finops.html" class="sidebar-link" data-label="Security &amp; FinOps"><span class="link-icon"><i class="fas fa-lock"></i></span><span class="link-text">Security &amp; FinOps</span></a>
+      <div class="nav-section-label nav-section-forms">Delivery</div>
+      <a href="review-validation.html" class="sidebar-link" data-label="Review"><span class="link-icon"><i class="fas fa-circle-check"></i></span><span class="link-text">Review &amp; Validation</span></a>
+      <a href="deployment.html" class="sidebar-link" data-label="Deployment"><span class="link-icon"><i class="fas fa-rocket"></i></span><span class="link-text">Deployment</span><span class="link-badge">Live</span></a>
+    </div>
+  </nav>
+  <div class="sidebar-footer">
+    <button class="sidebar-toggle-btn" id="sidebarToggle2"><i class="fas fa-chevron-left"></i><span>Collapse</span></button>
+  </div>
+</aside>
+
+<header id="topbar">
+  <button class="topbar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+  <div class="topbar-breadcrumb">
+    <h1 class="page-title">Landing Zone</h1>
+    <p class="page-subtitle">Oracle Estate Workbench &middot; React + .NET + PostgreSQL Landing Zone</p>
+  </div>
+  <div class="topbar-search d-none d-md-flex align-items-center">
+    <i class="fas fa-search search-icon"></i>
+    <input type="text" placeholder="Search resources…">
+  </div>
+  <div class="d-flex align-items-center gap-2 ms-auto">
+    <button class="btn btn-primary btn-sm"><i class="fas fa-cloud me-1"></i>Azure Portal</button>
+    <button class="topbar-btn"><i class="fas fa-gear"></i></button>
+    <div class="dropdown">
+      <a class="topbar-profile" data-bs-toggle="dropdown">
+        <div class="profile-avatar">SC</div>
+        <div class="d-none d-sm-block"><div class="profile-name">Sarah Chen</div><div class="profile-role">Modernization Lead</div></div>
+        <i class="fas fa-chevron-down ms-1 text-muted" style="font-size:10px"></i>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end" style="min-width:200px">
+        <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i>My Profile</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-right-from-bracket text-danger"></i>Sign Out</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <!-- Infra Stats -->
+  <div class="row g-3 mb-4 stagger">
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card"><div class="stat-icon blue"><i class="fas fa-cloud"></i></div><div class="stat-value counter-animate" data-target="2">0</div><div class="stat-label">Target Regions</div><div class="stat-delta up"><span class="status-dot online">Primary + DR</span></div></div>
+    </div>
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card"><div class="stat-icon green"><i class="fas fa-server"></i></div><div class="stat-value counter-animate" data-target="36">0</div><div class="stat-label">Oracle VM Hosts</div><div class="stat-delta up"><i class="fas fa-arrow-trend-up"></i>Linux-first baseline</div></div>
+    </div>
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card"><div class="stat-icon purple"><i class="fas fa-database"></i></div><div class="stat-value counter-animate" data-target="8">0</div><div class="stat-label">PostgreSQL Targets</div><div class="stat-delta up"><i class="fas fa-check text-success"></i>Private endpoint ready</div></div>
+    </div>
+    <div class="col-6 col-xl-3 fade-in-up">
+      <div class="stat-card"><div class="stat-icon cyan"><i class="fas fa-network-wired"></i></div><div class="stat-value counter-animate" data-target="4">0</div><div class="stat-label">VNets Provisioned</div><div class="stat-delta up"><i class="fas fa-shield-halved text-success"></i>Peered &amp; segmented</div></div>
+    </div>
+  </div>
+
+  <!-- Infrastructure Components Grid -->
+  <div class="card mb-4 fade-in-up">
+    <div class="card-header"><i class="fas fa-sitemap text-primary"></i><div class="card-title">Oracle Landing Zone Components</div><span class="ms-auto badge badge-success">All Provisioned</span></div>
+    <div class="card-body">
+      <div class="row g-3">
+        <div class="col-6 col-md-3 col-xl-2">
+          <div class="infra-component">
+            <div class="infra-icon" style="background:#e0f2fe"><i class="fas fa-globe" style="color:#0284c7;font-size:20px"></i></div>
+            <div class="infra-name">Azure Virtual WAN</div>
+            <div class="infra-desc">Hub routing &amp; SD-WAN</div>
+            <div class="infra-badge"><span class="badge badge-success">Active</span></div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 col-xl-2">
+          <div class="infra-component">
+            <div class="infra-icon" style="background:#fff3cd"><i class="fas fa-shield-halved" style="color:#d97706;font-size:20px"></i></div>
+            <div class="infra-name">App Gateway &amp; WAF</div>
+            <div class="infra-desc">Forms replacement entry point</div>
+            <div class="infra-badge"><span class="badge badge-success">Active</span></div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 col-xl-2">
+          <div class="infra-component">
+            <div class="infra-icon" style="background:#f0fdf4"><i class="fas fa-database" style="color:#16a34a;font-size:20px"></i></div>
+            <div class="infra-name">Azure Database for PostgreSQL</div>
+            <div class="infra-desc">Flexible Server primary</div>
+            <div class="infra-badge"><span class="badge badge-success">Running</span></div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 col-xl-2">
+          <div class="infra-component">
+            <div class="infra-icon" style="background:#fef3c7"><i class="fas fa-circle-nodes" style="color:#d97706;font-size:20px"></i></div>
+            <div class="infra-name">Azure Cache for Redis</div>
+            <div class="infra-desc">Session/cache layer</div>
+            <div class="infra-badge"><span class="badge badge-success">Active</span></div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 col-xl-2">
+          <div class="infra-component">
+            <div class="infra-icon" style="background:#ede9fe"><i class="fas fa-key" style="color:#7c3aed;font-size:20px"></i></div>
+            <div class="infra-name">Azure Key Vault</div>
+            <div class="infra-desc">Secrets &amp; key management</div>
+            <div class="infra-badge"><span class="badge badge-success">Active</span></div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 col-xl-2">
+          <div class="infra-component">
+            <div class="infra-icon" style="background:#ecfeff"><i class="fas fa-chart-line" style="color:#0891b2;font-size:20px"></i></div>
+            <div class="infra-name">Azure Monitor</div>
+            <div class="infra-desc">Metrics &amp; alerting</div>
+            <div class="infra-badge"><span class="badge badge-success">Active</span></div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 col-xl-2">
+          <div class="infra-component">
+            <div class="infra-icon" style="background:#fef2f2"><i class="fas fa-box-archive" style="color:#dc2626;font-size:20px"></i></div>
+            <div class="infra-name">Azure Blob Storage</div>
+            <div class="infra-desc">Object &amp; archive storage</div>
+            <div class="infra-badge"><span class="badge badge-success">Active</span></div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 col-xl-2">
+          <div class="infra-component">
+            <div class="infra-icon" style="background:#f0f9ff"><i class="fas fa-balance-scale" style="color:#2563eb;font-size:20px"></i></div>
+            <div class="infra-name">Azure Load Balancer</div>
+            <div class="infra-desc">L4 / Application Gateway</div>
+            <div class="infra-badge"><span class="badge badge-success">Active</span></div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 col-xl-2">
+          <div class="infra-component">
+            <div class="infra-icon" style="background:#f0fdf4"><i class="fas fa-code" style="color:#15803d;font-size:20px"></i></div>
+            <div class="infra-name">.NET Worker Services</div>
+            <div class="infra-desc">Jobs converted from DBMS_SCHEDULER</div>
+            <div class="infra-badge"><span class="badge badge-primary">Deploying</span></div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 col-xl-2">
+          <div class="infra-component">
+            <div class="infra-icon" style="background:#fff7ed"><i class="fas fa-cube" style="color:#ea580c;font-size:20px"></i></div>
+            <div class="infra-name">.NET Container Runtime</div>
+            <div class="infra-desc">React + API containers</div>
+            <div class="infra-badge"><span class="badge badge-warning">Pending</span></div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 col-xl-2">
+          <div class="infra-component">
+            <div class="infra-icon" style="background:#f5f3ff"><i class="fas fa-envelope" style="color:#7c3aed;font-size:20px"></i></div>
+            <div class="infra-name">Azure Service Bus</div>
+            <div class="infra-desc">Oracle integration queues</div>
+            <div class="infra-badge"><span class="badge badge-success">Active</span></div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 col-xl-2">
+          <div class="infra-component">
+            <div class="infra-icon" style="background:#ecfeff"><i class="fas fa-plug" style="color:#0891b2;font-size:20px"></i></div>
+            <div class="infra-name">Azure API Management</div>
+            <div class="infra-desc">REST API gateway</div>
+            <div class="infra-badge"><span class="badge badge-success">Active</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bicep Modules -->
+  <div class="card fade-in-up">
+    <div class="card-header"><i class="fas fa-code text-purple"></i><div class="card-title">Oracle Landing Zone IaC Modules</div><span class="ms-auto badge badge-success">IaC Applied</span></div>
+    <div class="card-body p-0">
+      <div class="table-container">
+        <table class="table">
+          <thead><tr><th>Module</th><th>Version</th><th>Resources</th><th>State</th><th>Last Applied</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr class="hover-highlight"><td><strong>vnet-core</strong></td><td><span class="badge badge-muted">v1.2.0</span></td><td>28</td><td><span class="status-dot online">Applied</span></td><td class="text-muted small">Apr 14, 09:12</td><td><button class="btn btn-light btn-sm">What-if</button></td></tr>
+            <tr class="hover-highlight"><td><strong>postgres-flex</strong></td><td><span class="badge badge-muted">v2.1.0</span></td><td>15</td><td><span class="status-dot online">Applied</span></td><td class="text-muted small">Apr 14, 09:48</td><td><button class="btn btn-light btn-sm">What-if</button></td></tr>
+            <tr class="hover-highlight"><td><strong>dotnet-app-runtime</strong></td><td><span class="badge badge-muted">v1.8.3</span></td><td>38</td><td><span class="status-dot warning">Pending</span></td><td class="text-muted small">Pending approval</td><td><button class="btn btn-primary btn-sm">Deploy</button></td></tr>
+            <tr class="hover-highlight"><td><strong>security-baseline</strong></td><td><span class="badge badge-muted">v1.5.0</span></td><td>20</td><td><span class="status-dot online">Applied</span></td><td class="text-muted small">Apr 13, 14:30</td><td><button class="btn btn-light btn-sm">What-if</button></td></tr>
+            <tr class="hover-highlight"><td><strong>monitor-stack</strong></td><td><span class="badge badge-muted">v1.3.1</span></td><td>12</td><td><span class="status-dot online">Applied</span></td><td class="text-muted small">Apr 14, 10:05</td><td><button class="btn btn-light btn-sm">What-if</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Additional Artifacts -->
+  <div class="mt-4 fade-in-up">
+    <div class="d-flex align-items-center gap-2 mb-3">
+      <h6 class="fw-800 mb-0" style="font-size:14px">Additional Artefacts</h6>
+      <hr class="flex-1 m-0" style="border-color:var(--border)">
+    </div>
+    <div class="row g-3">
+      <div class="col-md-6 col-xl-3">
+        <div class="download-card">
+          <div class="download-card-icon" style="background:#eff6ff;color:#2563eb"><i class="fas fa-layer-group"></i></div>
+          <div class="download-card-title">Full-Stack Bicep</div>
+          <div class="download-card-desc">Complete orchestration template that deploys all modules in the correct dependency order.</div>
+          <div class="download-card-meta">
+            <i class="fas fa-file-code"></i><span>main.bicep</span>
+            <span class="ms-auto">86 KB</span>
+          </div>
+          <div class="d-flex gap-2 align-items-center">
+            <span class="badge badge-success">All-in-one</span>
+            <button class="btn btn-primary btn-sm ms-auto"><i class="fas fa-download me-1"></i>Download</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-xl-3">
+        <div class="download-card">
+          <div class="download-card-icon" style="background:#fef2f2;color:#dc2626"><i class="fas fa-code"></i></div>
+          <div class="download-card-title">ARM JSON Templates</div>
+          <div class="download-card-desc">Azure Resource Manager JSON exports for environments where Bicep tooling is not available.</div>
+          <div class="download-card-meta">
+            <i class="fas fa-file-zipper"></i><span>arm-templates.zip</span>
+            <span class="ms-auto">142 KB</span>
+          </div>
+          <div class="d-flex gap-2 align-items-center">
+            <span class="badge badge-muted">Alternative</span>
+            <button class="btn btn-light btn-sm ms-auto"><i class="fas fa-download me-1"></i>Download</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-xl-3">
+        <div class="download-card">
+          <div class="download-card-icon" style="background:#ecfeff;color:#0891b2"><i class="fas fa-terminal"></i></div>
+          <div class="download-card-title">PowerShell Scripts</div>
+          <div class="download-card-desc">Step-by-step deployment scripts for pre-flight checks, resource provisioning, and post-deployment validation.</div>
+          <div class="download-card-meta">
+            <i class="fas fa-file-zipper"></i><span>deploy-scripts.zip</span>
+            <span class="ms-auto">28 KB</span>
+          </div>
+          <div class="d-flex gap-2 align-items-center">
+            <span class="badge badge-muted">PS 7.x</span>
+            <button class="btn btn-light btn-sm ms-auto"><i class="fas fa-download me-1"></i>Download</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
+
+
