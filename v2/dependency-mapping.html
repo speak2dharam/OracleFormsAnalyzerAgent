@@ -30,24 +30,27 @@
     <div class="nav-section-label">Discovery</div>
     <a href="discovery.html" class="sidebar-link" data-label="Discovery"><span class="link-icon"><i class="fas fa-magnifying-glass-chart"></i></span><span class="link-text">Discovery &amp; Intake</span></a>
     <div class="nav-section-label">Assessment</div>
-    <a href="assessment-lift-shift.html" class="sidebar-link" data-label="Lift &amp; Shift"><span class="link-icon"><i class="fas fa-arrow-up-right-dots"></i></span><span class="link-text">Lift &amp; Shift</span></a>
+    <a href="#" class="sidebar-link has-submenu" data-submenu="liftShiftSub" data-label="Lift &amp; Shift"><span class="link-icon"><i class="fas fa-arrow-up-right-dots"></i></span><span class="link-text">Lift &amp; Shift</span><i class="fas fa-chevron-right submenu-arrow ms-auto"></i></a>
+    <div class="sidebar-submenu" id="liftShiftSub">
+      <a href="lift-shift-insights.html" class="sidebar-link sidebar-sublink" data-label="Insights"><span class="link-icon"><i class="fas fa-chart-bar"></i></span><span class="link-text">Insights</span></a>
+      <a href="lift-shift-server.html" class="sidebar-link sidebar-sublink" data-label="Server Assessment"><span class="link-icon"><i class="fas fa-server"></i></span><span class="link-text">Server Assessment</span></a>
+      <a href="lift-shift-storage.html" class="sidebar-link sidebar-sublink" data-label="Storage Assessment"><span class="link-icon"><i class="fas fa-hard-drive"></i></span><span class="link-text">Storage Assessment</span></a>
+    </div>
     <a href="assessment-modernization.html" class="sidebar-link" data-label="Modernization"><span class="link-icon"><i class="fas fa-wand-magic-sparkles"></i></span><span class="link-text">Modernization</span></a>
     <a href="dependency-mapping.html" class="sidebar-link" data-label="Dependencies"><span class="link-icon"><i class="fas fa-diagram-project"></i></span><span class="link-text">Dependency Mapping</span></a>
     <a href="tco.html" class="sidebar-link" data-label="TCO Analysis"><span class="link-icon"><i class="fas fa-coins"></i></span><span class="link-text">TCO Analysis</span></a>
     <a href="risk-scoring.html" class="sidebar-link" data-label="Risk Scoring"><span class="link-icon"><i class="fas fa-shield-halved"></i></span><span class="link-text">Risk Scoring</span></a>
     <a href="wave-planning.html" class="sidebar-link" data-label="Wave Planning"><span class="link-icon"><i class="fas fa-wave-square"></i></span><span class="link-text">Wave Planning</span></a>
     <a href="readiness-check.html" class="sidebar-link" data-label="Readiness"><span class="link-icon"><i class="fas fa-clipboard-check"></i></span><span class="link-text">Readiness Check</span></a>
-    <div class="forms-path-group">
-      <div class="nav-section-label nav-section-forms"><i class="fas fa-wand-magic-sparkles"></i>Forms Modernization</div>
-      <a href="modernization-execution.html" class="sidebar-link" data-label="Execution"><span class="link-icon"><i class="fas fa-gears"></i></span><span class="link-text">Modernization Exec.</span></a>
-      <a href="schema-conversion.html" class="sidebar-link" data-label="Schema"><span class="link-icon"><i class="fas fa-code-branch"></i></span><span class="link-text">Schema Conversion</span></a>
-      <div class="nav-section-label nav-section-forms">Azure Infrastructure</div>
-      <a href="landing-zone.html" class="sidebar-link" data-label="Landing Zone"><span class="link-icon"><i class="fas fa-cloud"></i></span><span class="link-text">Landing Zone</span></a>
-      <a href="security-finops.html" class="sidebar-link" data-label="Security &amp; FinOps"><span class="link-icon"><i class="fas fa-lock"></i></span><span class="link-text">Security &amp; FinOps</span></a>
-      <div class="nav-section-label nav-section-forms">Delivery</div>
-      <a href="review-validation.html" class="sidebar-link" data-label="Review"><span class="link-icon"><i class="fas fa-circle-check"></i></span><span class="link-text">Review &amp; Validation</span></a>
-      <a href="deployment.html" class="sidebar-link" data-label="Deployment"><span class="link-icon"><i class="fas fa-rocket"></i></span><span class="link-text">Deployment</span><span class="link-badge">Live</span></a>
-    </div>
+    <div class="nav-section-label">Forms Modernization</div>
+    <a href="modernization-execution.html" class="sidebar-link" data-label="Execution"><span class="link-icon"><i class="fas fa-gears"></i></span><span class="link-text">Modernization Exec.</span></a>
+    <a href="schema-conversion.html" class="sidebar-link" data-label="Schema"><span class="link-icon"><i class="fas fa-code-branch"></i></span><span class="link-text">Schema Conversion</span></a>
+    <div class="nav-section-label">Azure Infrastructure</div>
+    <a href="landing-zone.html" class="sidebar-link" data-label="Landing Zone"><span class="link-icon"><i class="fas fa-cloud"></i></span><span class="link-text">Landing Zone</span></a>
+    <a href="security-finops.html" class="sidebar-link" data-label="Security &amp; FinOps"><span class="link-icon"><i class="fas fa-lock"></i></span><span class="link-text">Security &amp; FinOps</span></a>
+    <div class="nav-section-label">Delivery</div>
+    <a href="review-validation.html" class="sidebar-link" data-label="Review"><span class="link-icon"><i class="fas fa-circle-check"></i></span><span class="link-text">Review &amp; Validation</span></a>
+    <a href="deployment.html" class="sidebar-link" data-label="Deployment"><span class="link-icon"><i class="fas fa-rocket"></i></span><span class="link-text">Deployment</span><span class="link-badge">Live</span></a>
   </nav>
   <div class="sidebar-footer">
     <button class="sidebar-toggle-btn" id="sidebarToggle2"><i class="fas fa-chevron-left"></i><span>Collapse</span></button>
@@ -60,11 +63,12 @@
     <h1 class="page-title">Dependency Mapping</h1>
     <p class="page-subtitle">Oracle Estate Workbench &middot; Oracle Object &amp; Runtime Dependencies</p>
   </div>
-  <div class="topbar-search d-none d-md-flex align-items-center">
+  <div class="topbar-search d-none d-lg-block">
     <i class="fas fa-search search-icon"></i>
     <input type="text" placeholder="Search dependencies…">
   </div>
-  <div class="d-flex align-items-center gap-2 ms-auto">
+  <div class="d-flex align-items-center gap-1 ms-auto">
+    <div class="topbar-divider d-none d-md-block"></div>
     <button class="btn btn-primary btn-sm"><i class="fas fa-arrows-spin"></i>Re-scan</button>
     <button class="topbar-btn"><i class="fas fa-gear"></i></button>
     <div class="dropdown">

@@ -64,6 +64,84 @@ $(function () {
   });
 
   /* ================================================================
+     SIDEBAR SUBMENU TOGGLE
+     ================================================================ */
+  // Auto-open submenu if a child is the active page
+  $('.sidebar-submenu').each(function () {
+    var $sub = $(this);
+    if ($sub.find('.sidebar-link.active').length) {
+      $sub.addClass('open');
+      $('[data-submenu="' + $sub.attr('id') + '"]').addClass('submenu-open');
+    }
+  });
+
+  // Toggle on click of parent item (expanded sidebar)
+  $(document).on('click', '.has-submenu', function (e) {
+    e.preventDefault();
+    if ($('#sidebar').hasClass('collapsed')) return; // handled by flyout
+    var subId = $(this).data('submenu');
+    var $sub  = $('#' + subId);
+    var isOpen = $sub.hasClass('open');
+    // Close all other submenus
+    $('.sidebar-submenu.open').not($sub).removeClass('open');
+    $('.has-submenu.submenu-open').not(this).removeClass('submenu-open');
+    // Toggle this one
+    $sub.toggleClass('open', !isOpen);
+    $(this).toggleClass('submenu-open', !isOpen);
+  });
+
+  /* ================================================================
+     COLLAPSED SIDEBAR FLYOUT (submenu hover panel)
+     ================================================================ */
+  var currentFile2 = window.location.pathname.split('/').pop() || 'dashboard.html';
+  var $flyout = $('<div class="sidebar-flyout" id="sidebarFlyout"></div>').appendTo('body');
+  var flyoutTimer = null;
+
+  function showFlyout($link) {
+    if (!$('#sidebar').hasClass('collapsed')) return;
+    var subId  = $link.data('submenu');
+    if (!subId) return; // regular links use CSS ::after tooltip
+    var label  = $link.find('.link-text').text().trim();
+    var offset = $link.offset();
+    var sidebarW = $('#sidebar').outerWidth() + 8;
+
+    var html = '<div class="flyout-label">' + label + '</div>';
+    $('#' + subId).find('.sidebar-sublink').each(function () {
+      var href    = $(this).attr('href');
+      var text    = $(this).find('.link-text').text().trim();
+      var iconCls = $(this).find('.link-icon i').attr('class') || 'fas fa-circle';
+      var active  = href.split('/').pop() === currentFile2 ? ' active' : '';
+      html += '<a href="' + href + '" class="flyout-item' + active + '"><i class="' + iconCls + '"></i>' + text + '</a>';
+    });
+
+    $flyout.html(html).css({ top: offset.top, left: sidebarW }).addClass('visible');
+  }
+
+  function hideFlyout() {
+    $flyout.removeClass('visible');
+  }
+
+  $('#sidebar').on('mouseenter', '.has-submenu', function () {
+    clearTimeout(flyoutTimer);
+    showFlyout($(this));
+  }).on('mouseleave', '.has-submenu', function () {
+    flyoutTimer = setTimeout(function () {
+      if (!$flyout.is(':hover')) hideFlyout();
+    }, 120);
+  });
+
+  $flyout.on('mouseenter', function () {
+    clearTimeout(flyoutTimer);
+  }).on('mouseleave', function () {
+    hideFlyout();
+  });
+
+  // Hide flyout when sidebar expands
+  $('#sidebarToggle, #sidebarToggle2').on('click', function () {
+    hideFlyout();
+  });
+
+  /* ================================================================
      COUNTER ANIMATION
      ================================================================ */
   function animateCounters() {
