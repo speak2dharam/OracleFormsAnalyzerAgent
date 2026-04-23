@@ -113,7 +113,7 @@ body {
   align-items: center;
   gap: 9px;
   padding: 7px 12px;
-  color: var(--text-muted);
+  color: #1e293b;
   text-decoration: none;
   border-radius: var(--radius-sm);
   margin: 1px 8px;
@@ -152,11 +152,11 @@ body {
   font-size: 13px;
   flex-shrink: 0;
   border-radius: var(--radius-sm);
-  color: #64748b;
+  color: #334155;
   transition: var(--transition);
 }
 
-.sidebar-link:hover .link-icon { color: #1e293b; background: rgba(0,0,0,.04); }
+.sidebar-link:hover .link-icon { color: #0f172a; background: rgba(0,0,0,.04); }
 
 .sidebar-link.active .link-icon {
   background: rgba(37,99,235,.12);
