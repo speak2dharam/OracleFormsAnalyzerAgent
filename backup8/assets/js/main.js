@@ -99,44 +99,32 @@ $(function () {
 
   function showFlyout($link) {
     if (!$('#sidebar').hasClass('collapsed')) return;
-    // Skip sublinks (they're hidden in collapsed mode anyway)
-    if ($link.hasClass('sidebar-sublink')) return;
-
-    var subId    = $link.data('submenu');
-    var label    = $link.find('.link-text').text().trim() || $link.data('label') || '';
-    var href     = $link.attr('href') || '#';
-    var offset   = $link.offset();
+    var subId  = $link.data('submenu');
+    if (!subId) return; // regular links use CSS ::after tooltip
+    var label  = $link.find('.link-text').text().trim();
+    var offset = $link.offset();
     var sidebarW = $('#sidebar').outerWidth() + 8;
-    var html     = '';
 
-    if (subId) {
-      // Has submenu — show label header + sub-items
-      html = '<div class="flyout-label">' + label + '</div>';
-      $('#' + subId).find('.sidebar-sublink').each(function () {
-        var itemHref  = $(this).attr('href');
-        var text      = $(this).find('.link-text').text().trim();
-        var iconName  = $(this).find('.link-icon i[data-lucide]').attr('data-lucide') || 'circle';
-        var active    = itemHref.split('/').pop() === currentFile2 ? ' active' : '';
-        html += '<a href="' + itemHref + '" class="flyout-item' + active + '"><i data-lucide="' + iconName + '"></i>' + text + '</a>';
-      });
-    } else {
-      // Regular link — show as a simple tooltip pill
-      html = '<a href="' + href + '" class="flyout-tooltip-label">' + label + '</a>';
-    }
+    var html = '<div class="flyout-label">' + label + '</div>';
+    $('#' + subId).find('.sidebar-sublink').each(function () {
+      var href    = $(this).attr('href');
+      var text    = $(this).find('.link-text').text().trim();
+      var iconCls = $(this).find('.link-icon i').attr('class') || 'fas fa-circle';
+      var active  = href.split('/').pop() === currentFile2 ? ' active' : '';
+      html += '<a href="' + href + '" class="flyout-item' + active + '"><i class="' + iconCls + '"></i>' + text + '</a>';
+    });
 
     $flyout.html(html).css({ top: offset.top, left: sidebarW }).addClass('visible');
-    if (typeof lucide !== 'undefined') lucide.createIcons({ strokeWidth: 1.75 });
   }
 
   function hideFlyout() {
     $flyout.removeClass('visible');
   }
 
-  // Trigger flyout for ALL sidebar links (submenu + regular) in collapsed mode
-  $('#sidebar').on('mouseenter', '.sidebar-link:not(.sidebar-sublink)', function () {
+  $('#sidebar').on('mouseenter', '.has-submenu', function () {
     clearTimeout(flyoutTimer);
     showFlyout($(this));
-  }).on('mouseleave', '.sidebar-link:not(.sidebar-sublink)', function () {
+  }).on('mouseleave', '.has-submenu', function () {
     flyoutTimer = setTimeout(function () {
       if (!$flyout.is(':hover')) hideFlyout();
     }, 120);

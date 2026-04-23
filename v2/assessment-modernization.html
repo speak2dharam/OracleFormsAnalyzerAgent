@@ -1,179 +1,288 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Modernization Assessment — Oracle Estate Workbench</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <style>
+    /* ── Tab strip ── */
     .modernization-tabs {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 6px;
-      box-shadow: var(--shadow-sm);
-      gap: 6px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      padding: 4px;
+      gap: 4px;
+      box-shadow: var(--shadow-xs);
+      display: inline-flex;
     }
     .modernization-tabs .nav-link {
-      border-radius: 8px;
-      color: var(--text-muted);
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
       font-size: 13px;
-      font-weight: 600;
-      padding: 10px 14px;
+      font-weight: 500;
+      padding: 7px 14px;
       display: flex;
       align-items: center;
-      gap: 8px;
-    }
-    .modernization-tabs .nav-link.active {
-      background: var(--primary);
-      color: #fff;
-      box-shadow: 0 6px 14px rgba(37,99,235,.2);
-    }
-    .db-hero {
-      background: linear-gradient(135deg, #12376f 0%, #2563eb 58%, #0f766e 100%);
-      border-radius: 8px;
-      color: #fff;
-      padding: 22px;
-      box-shadow: var(--shadow);
-    }
-    .db-hero h2 { font-size: 26px; font-weight: 700; letter-spacing: -.8px; margin: 8px 0; }
-    .db-hero p { color: rgba(255,255,255,.78); margin: 0; max-width: 900px; line-height: 1.65; }
-    .db-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 5px 10px;
-      border: 1px solid rgba(255,255,255,.22);
-      border-radius: 8px;
-      background: rgba(255,255,255,.12);
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: .7px;
-    }
-    .db-kpi {
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.18);
-      border-radius: 8px;
-      padding: 13px;
-      height: 100%;
-    }
-    .db-kpi .label { font-size: 10px; color: rgba(255,255,255,.66); text-transform: uppercase; letter-spacing: .7px; font-weight: 600; margin-bottom: 5px; }
-    .db-kpi .value { font-size: 24px; line-height: 1; font-weight: 700; letter-spacing: -.8px; }
-    .db-kpi .note { font-size: 11px; color: rgba(255,255,255,.66); margin-top: 6px; }
-    .db-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      box-shadow: var(--shadow-sm);
-      height: 100%;
-    }
-    .db-card-header {
-      padding: 16px 18px;
-      border-bottom: 1px solid var(--border-light);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .db-card-title { font-size: 14px; font-weight: 700; margin: 0; }
-    .db-card-subtitle { color: var(--text-muted); font-size: 12px; margin: 1px 0 0; }
-    .db-card-body { padding: 18px; }
-    .db-metric {
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 15px;
-      background: #fff;
-      min-height: 112px;
-    }
-    .db-metric .label { color: var(--text-muted); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .6px; margin-bottom: 8px; }
-    .db-metric .value { font-size: 25px; font-weight: 700; line-height: 1; letter-spacing: -.8px; }
-    .db-metric .note { color: var(--text-muted); font-size: 11px; line-height: 1.45; margin-top: 8px; }
-    .db-progress-label { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; font-weight: 600; margin-bottom: 7px; }
-    .db-progress { height: 10px; border-radius: 999px; background: #e5eaf2; overflow: hidden; margin-bottom: 14px; }
-    .db-progress span { display: block; height: 100%; border-radius: 999px; }
-    .table.db-table { margin: 0; vertical-align: middle; }
-    .table.db-table th {
-      background: #f8fafc;
-      color: var(--text-muted);
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: .7px;
-      border-bottom: 1px solid var(--border);
+      gap: 7px;
+      border: none;
+      background: transparent;
+      transition: all var(--transition-fast);
       white-space: nowrap;
     }
-    .table.db-table td { font-size: 12.5px; line-height: 1.5; }
-    .table.db-table .right { text-align: right; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-    .db-note { border-radius: 8px; border: 1px solid #bfdbfe; background: #eff6ff; padding: 14px; font-size: 12px; color: var(--text); line-height: 1.6; }
-    .db-good-note { border-radius: 8px; border: 1px solid #a7f3d0; background: #ecfdf5; padding: 14px; font-size: 12px; color: var(--text); line-height: 1.6; }
+    .modernization-tabs .nav-link svg { width: 14px; height: 14px; }
+    .modernization-tabs .nav-link:hover { background: var(--bg-surface-alt); color: var(--text-primary); }
+    .modernization-tabs .nav-link.active {
+      background: var(--brand-primary);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(21,161,220,.3);
+      font-weight: 600;
+    }
+
+    /* ── Compact path cards ── */
+    .mod-path-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-lg);
+      height: 100%;
+      transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
+      position: relative;
+      overflow: hidden;
+    }
+    .mod-path-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      border-radius: 0 2px 2px 0;
+    }
+    .mod-path-card--blue::before  { background: var(--brand-primary); }
+    .mod-path-card--purple::before { background: var(--purple); }
+    .mod-path-card--green::before  { background: var(--success); }
+    .mod-path-card:hover { box-shadow: var(--shadow-md); border-color: var(--border-default); }
+    .mod-path-icon {
+      width: 42px; height: 42px;
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .mod-path-icon svg { width: 18px; height: 18px; }
+    .mod-path-count {
+      font-size: 24px; font-weight: 700; line-height: 1;
+      letter-spacing: -0.5px;
+      color: var(--text-primary);
+      font-feature-settings: "tnum" 1;
+    }
+    .mod-path-name  { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-top: 2px; }
+    .mod-path-desc  { font-size: 11.5px; color: var(--text-secondary); margin-top: 1px; line-height: 1.4; }
+    .mod-path-badge { margin-left: auto; flex-shrink: 0; }
+
+    /* ── Compact complexity scorer cards ── */
+    .cmplx-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      height: 100%;
+    }
+    .cmplx-head {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .cmplx-score {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 800;
+      flex-shrink: 0;
+      border: 2px solid;
+      line-height: 1;
+    }
+    .cmplx-name  { font-size: 12.5px; font-weight: 700; color: var(--text-primary); line-height: 1.3; }
+    .cmplx-meta  { display: flex; gap: 4px; margin-top: 3px; flex-wrap: wrap; }
+    .cmplx-bars  { display: flex; flex-direction: column; gap: 7px; }
+    .cmplx-row   { display: flex; align-items: center; gap: 8px; }
+    .cmplx-label { font-size: 10.5px; color: var(--text-secondary); width: 130px; flex-shrink: 0; }
+    .cmplx-bar   { flex: 1; height: 4px; background: var(--bg-surface-alt); border-radius: 999px; overflow: hidden; }
+    .cmplx-bar-fill { height: 100%; border-radius: 999px; }
+    .cmplx-val   { font-size: 10.5px; font-weight: 600; color: var(--text-primary); width: 38px; text-align: right; white-space: nowrap; flex-shrink: 0; }
+    .cmplx-rec   { font-size: 11px; color: var(--text-secondary); padding-top: 8px; border-top: 1px solid var(--border-subtle); margin-top: 8px; line-height: 1.45; }
+    .cmplx-rec svg { width: 12px; height: 12px; vertical-align: -2px; margin-right: 4px; }
+
+    /* ── DB section styles (unchanged) ── */
+    .db-hero {
+      background: linear-gradient(135deg, #12376f 0%, #1a56db 58%, #0f766e 100%);
+      border-radius: var(--radius-lg);
+      color: #fff;
+      padding: 22px;
+      box-shadow: var(--shadow-md);
+    }
+    .db-hero h2 { font-size: 22px; font-weight: 700; letter-spacing: -.5px; margin: 8px 0; color: #fff; }
+    .db-hero p  { color: rgba(255,255,255,.78); margin: 0; max-width: 900px; line-height: 1.65; font-size: 13px; }
+    .db-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 4px 10px;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,.12);
+      font-size: 10.5px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .7px;
+    }
+    .db-kpi { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.18); border-radius: var(--radius-md); padding: 12px; height: 100%; }
+    .db-kpi .label { font-size: 10px; color: rgba(255,255,255,.66); text-transform: uppercase; letter-spacing: .7px; font-weight: 600; margin-bottom: 4px; }
+    .db-kpi .value { font-size: 22px; line-height: 1; font-weight: 700; letter-spacing: -.5px; }
+    .db-kpi .note  { font-size: 10.5px; color: rgba(255,255,255,.6); margin-top: 5px; }
+    .db-card { background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg); box-shadow: var(--shadow-xs); height: 100%; }
+    .db-card-header { padding: 14px 16px; border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; gap: 10px; }
+    .db-card-title    { font-size: 13px; font-weight: 700; margin: 0; color: var(--text-primary); }
+    .db-card-subtitle { color: var(--text-secondary); font-size: 11.5px; margin: 1px 0 0; }
+    .db-card-body { padding: 16px; }
+    .db-metric { border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: 14px; background: var(--bg-surface); }
+    .db-metric .label { color: var(--text-secondary); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .6px; margin-bottom: 6px; }
+    .db-metric .value { font-size: 22px; font-weight: 700; line-height: 1; letter-spacing: -.5px; color: var(--text-primary); }
+    .db-metric .note  { color: var(--text-secondary); font-size: 11px; line-height: 1.4; margin-top: 6px; }
+    .db-progress-label { display: flex; justify-content: space-between; gap: 12px; font-size: 11.5px; font-weight: 600; margin-bottom: 6px; color: var(--text-primary); }
+    .db-progress { height: 8px; border-radius: 999px; background: var(--bg-surface-alt); overflow: hidden; margin-bottom: 12px; }
+    .db-progress span { display: block; height: 100%; border-radius: 999px; }
+    .table.db-table { margin: 0; vertical-align: middle; }
+    .table.db-table th { background: var(--bg-surface-alt); color: var(--text-secondary); font-size: 10px; text-transform: uppercase; letter-spacing: .7px; border-bottom: 1px solid var(--border-default); white-space: nowrap; padding: 8px 12px; }
+    .table.db-table td { font-size: 12px; line-height: 1.5; padding: 8px 12px; }
+    .table.db-table .right { text-align: right; font-family: var(--font-mono); }
+    .db-note      { border-radius: var(--radius-md); border: 1px solid #bfdbfe; background: #eff6ff; padding: 12px; font-size: 12px; line-height: 1.6; }
+    .db-good-note { border-radius: var(--radius-md); border: 1px solid #a7f3d0; background: #ecfdf5; padding: 12px; font-size: 12px; line-height: 1.6; }
   </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 <div id="page-loader"><div class="loader-ring"></div></div>
 
+<!-- ===== SIDEBAR ===== -->
 <aside id="sidebar">
   <a href="dashboard.html" class="sidebar-brand">
-    <div class="brand-icon"><i class="fas fa-database"></i></div>
-    <div class="brand-text"><div class="brand-title">CloudAtlas</div><div class="brand-subtitle">Oracle Modernization</div></div>
+    <img src="assets/brand/logo.svg" alt="UnifyCloud" class="sidebar-logo-full">
+    <span class="sidebar-logo-mark" aria-hidden="true">UC</span>
   </a>
-  <nav class="sidebar-nav">
+  <nav class="sidebar-nav" aria-label="Main navigation">
     <div class="nav-section-label">Overview</div>
-    <a href="dashboard.html" class="sidebar-link" data-label="Dashboard"><span class="link-icon"><i class="fas fa-gauge-high"></i></span><span class="link-text">Dashboard</span></a>
+    <a href="dashboard.html" class="sidebar-link" data-label="Dashboard"><span class="link-icon"><i data-lucide="layout-dashboard"></i></span><span class="link-text">Dashboard</span></a>
     <div class="nav-section-label">Discovery</div>
-    <a href="discovery.html" class="sidebar-link" data-label="Discovery"><span class="link-icon"><i class="fas fa-magnifying-glass-chart"></i></span><span class="link-text">Discovery &amp; Intake</span></a>
+    <a href="discovery.html" class="sidebar-link" data-label="Discovery"><span class="link-icon"><i data-lucide="scan-search"></i></span><span class="link-text">Discovery &amp; Intake</span></a>
     <div class="nav-section-label">Assessment</div>
-    <a href="#" class="sidebar-link has-submenu" data-submenu="liftShiftSub" data-label="Lift &amp; Shift"><span class="link-icon"><i class="fas fa-arrow-up-right-dots"></i></span><span class="link-text">Lift &amp; Shift</span><i class="fas fa-chevron-right submenu-arrow ms-auto"></i></a>
+    <a href="#" class="sidebar-link has-submenu" data-submenu="liftShiftSub" data-label="Lift &amp; Shift"><span class="link-icon"><i data-lucide="trending-up"></i></span><span class="link-text">Lift &amp; Shift</span><i data-lucide="chevron-right" class="submenu-arrow"></i></a>
     <div class="sidebar-submenu" id="liftShiftSub">
-      <a href="lift-shift-insights.html" class="sidebar-link sidebar-sublink" data-label="Insights"><span class="link-icon"><i class="fas fa-chart-bar"></i></span><span class="link-text">Insights</span></a>
-      <a href="lift-shift-server.html" class="sidebar-link sidebar-sublink" data-label="Server Assessment"><span class="link-icon"><i class="fas fa-server"></i></span><span class="link-text">Server Assessment</span></a>
-      <a href="lift-shift-storage.html" class="sidebar-link sidebar-sublink" data-label="Storage Assessment"><span class="link-icon"><i class="fas fa-hard-drive"></i></span><span class="link-text">Storage Assessment</span></a>
+      <a href="lift-shift-insights.html" class="sidebar-link sidebar-sublink" data-label="Insights"><span class="link-icon"><i data-lucide="bar-chart-2"></i></span><span class="link-text">Insights</span></a>
+      <a href="lift-shift-server.html" class="sidebar-link sidebar-sublink" data-label="Server Assessment"><span class="link-icon"><i data-lucide="server"></i></span><span class="link-text">Server Assessment</span></a>
+      <a href="lift-shift-storage.html" class="sidebar-link sidebar-sublink" data-label="Storage Assessment"><span class="link-icon"><i data-lucide="hard-drive"></i></span><span class="link-text">Storage Assessment</span></a>
     </div>
-    <a href="assessment-modernization.html" class="sidebar-link" data-label="Modernization"><span class="link-icon"><i class="fas fa-wand-magic-sparkles"></i></span><span class="link-text">Modernization</span></a>
-    <a href="dependency-mapping.html" class="sidebar-link" data-label="Dependencies"><span class="link-icon"><i class="fas fa-diagram-project"></i></span><span class="link-text">Dependency Mapping</span></a>
-    <a href="tco.html" class="sidebar-link" data-label="TCO Analysis"><span class="link-icon"><i class="fas fa-coins"></i></span><span class="link-text">TCO Analysis</span></a>
-    <a href="risk-scoring.html" class="sidebar-link" data-label="Risk Scoring"><span class="link-icon"><i class="fas fa-shield-halved"></i></span><span class="link-text">Risk Scoring</span></a>
-    <a href="wave-planning.html" class="sidebar-link" data-label="Wave Planning"><span class="link-icon"><i class="fas fa-wave-square"></i></span><span class="link-text">Wave Planning</span></a>
-    <a href="readiness-check.html" class="sidebar-link" data-label="Readiness"><span class="link-icon"><i class="fas fa-clipboard-check"></i></span><span class="link-text">Readiness Check</span></a>
+    <a href="assessment-modernization.html" class="sidebar-link" data-label="Modernization"><span class="link-icon"><i data-lucide="sparkles"></i></span><span class="link-text">Modernization</span></a>
+    <a href="dependency-mapping.html" class="sidebar-link" data-label="Dependencies"><span class="link-icon"><i data-lucide="git-fork"></i></span><span class="link-text">Dependency Mapping</span></a>
+    <a href="tco.html" class="sidebar-link" data-label="TCO Analysis"><span class="link-icon"><i data-lucide="circle-dollar-sign"></i></span><span class="link-text">TCO Analysis</span></a>
+    <a href="risk-scoring.html" class="sidebar-link" data-label="Risk Scoring"><span class="link-icon"><i data-lucide="shield-alert"></i></span><span class="link-text">Risk Scoring</span></a>
+    <a href="wave-planning.html" class="sidebar-link" data-label="Wave Planning"><span class="link-icon"><i data-lucide="waves"></i></span><span class="link-text">Wave Planning</span></a>
+    <a href="readiness-check.html" class="sidebar-link" data-label="Readiness"><span class="link-icon"><i data-lucide="clipboard-check"></i></span><span class="link-text">Readiness Check</span></a>
     <div class="nav-section-label">Forms Modernization</div>
-    <a href="modernization-execution.html" class="sidebar-link" data-label="Execution"><span class="link-icon"><i class="fas fa-gears"></i></span><span class="link-text">Modernization Exec.</span></a>
-    <a href="schema-conversion.html" class="sidebar-link" data-label="Schema"><span class="link-icon"><i class="fas fa-code-branch"></i></span><span class="link-text">Schema Conversion</span></a>
+    <a href="modernization-execution.html" class="sidebar-link" data-label="Execution"><span class="link-icon"><i data-lucide="settings-2"></i></span><span class="link-text">Modernization Exec.</span></a>
+    <a href="schema-conversion.html" class="sidebar-link" data-label="Schema"><span class="link-icon"><i data-lucide="git-branch"></i></span><span class="link-text">Schema Conversion</span></a>
     <div class="nav-section-label">Azure Infrastructure</div>
-    <a href="landing-zone.html" class="sidebar-link" data-label="Landing Zone"><span class="link-icon"><i class="fas fa-cloud"></i></span><span class="link-text">Landing Zone</span></a>
-    <a href="security-finops.html" class="sidebar-link" data-label="Security &amp; FinOps"><span class="link-icon"><i class="fas fa-lock"></i></span><span class="link-text">Security &amp; FinOps</span></a>
+    <a href="landing-zone.html" class="sidebar-link" data-label="Landing Zone"><span class="link-icon"><i data-lucide="cloud"></i></span><span class="link-text">Landing Zone</span></a>
+    <a href="security-finops.html" class="sidebar-link" data-label="Security &amp; FinOps"><span class="link-icon"><i data-lucide="lock"></i></span><span class="link-text">Security &amp; FinOps</span></a>
     <div class="nav-section-label">Delivery</div>
-    <a href="review-validation.html" class="sidebar-link" data-label="Review"><span class="link-icon"><i class="fas fa-circle-check"></i></span><span class="link-text">Review &amp; Validation</span></a>
-    <a href="deployment.html" class="sidebar-link" data-label="Deployment"><span class="link-icon"><i class="fas fa-rocket"></i></span><span class="link-text">Deployment</span><span class="link-badge">Live</span></a>
+    <a href="review-validation.html" class="sidebar-link" data-label="Review"><span class="link-icon"><i data-lucide="circle-check"></i></span><span class="link-text">Review &amp; Validation</span></a>
+    <a href="deployment.html" class="sidebar-link" data-label="Deployment"><span class="link-icon"><i data-lucide="rocket"></i></span><span class="link-text">Deployment</span><span class="link-badge">Live</span></a>
   </nav>
   <div class="sidebar-footer">
-    <button class="sidebar-toggle-btn" id="sidebarToggle2"><i class="fas fa-chevron-left"></i><span>Collapse</span></button>
+    <button class="sidebar-toggle-btn" id="sidebarToggle2" aria-label="Collapse sidebar">
+      <i data-lucide="chevrons-left" class="toggle-icon"></i>
+      <span>Collapse</span>
+    </button>
   </div>
 </aside>
 
+<!-- ===== TOPBAR ===== -->
 <header id="topbar">
-  <button class="topbar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+  <button class="topbar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+    <i data-lucide="menu"></i>
+  </button>
+  <div class="topbar-brand-mobile">
+    <img src="assets/brand/logo.svg" alt="UnifyCloud" height="20">
+  </div>
   <div class="topbar-breadcrumb">
     <h1 class="page-title">Modernization Assessment</h1>
     <p class="page-subtitle">Oracle Estate Workbench &middot; Forms &amp; PL/SQL Analysis</p>
   </div>
-  <div class="topbar-search d-none d-lg-block">
-    <i class="fas fa-search search-icon"></i>
-    <input type="text" placeholder="Search modules…">
-  </div>
+  <button class="topbar-search-trigger d-none d-lg-flex" data-uc-palette aria-label="Open command palette (Ctrl+K)">
+    <i data-lucide="search"></i>
+    <span class="search-trigger-text">Search pages &amp; actions…</span>
+    <kbd class="search-trigger-kbd">Ctrl K</kbd>
+  </button>
   <div class="d-flex align-items-center gap-1 ms-auto">
+    <span class="uc-pill--env d-none d-md-inline-flex">Production</span>
     <div class="topbar-divider d-none d-md-block"></div>
-    <button class="btn btn-primary btn-sm"><i class="fas fa-wand-magic-sparkles"></i>AI Analyze</button>
-    <button class="topbar-btn"><i class="fas fa-gear"></i></button>
     <div class="dropdown">
-      <a class="topbar-profile" data-bs-toggle="dropdown">
+      <button class="topbar-btn" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications">
+        <i data-lucide="bell"></i>
+        <span class="badge-dot"></span>
+      </button>
+      <div class="dropdown-menu dropdown-menu-end notif-dropdown">
+        <div class="notif-header"><h6>Notifications</h6><button id="uc-notif-mark-all" class="btn-link-text">Mark all read</button></div>
+        <div class="notif-body">
+          <a href="#" class="notif-item unread">
+            <div class="notif-icon bg-danger-light text-danger"><i data-lucide="triangle-alert"></i></div>
+            <div><div class="notif-title">High Risk Workload Detected</div><div class="notif-desc">HRMS_PAYROLL flagged with complexity score 8.9</div><div class="notif-time">5 min ago</div></div>
+          </a>
+          <a href="#" class="notif-item unread">
+            <div class="notif-icon bg-success-light text-success"><i data-lucide="circle-check"></i></div>
+            <div><div class="notif-title">Wave 1 Assessment Complete</div><div class="notif-desc">28 workloads ready for lift &amp; shift execution</div><div class="notif-time">2 hrs ago</div></div>
+          </a>
+          <a href="#" class="notif-item">
+            <div class="notif-icon bg-primary-light text-primary"><i data-lucide="cloud-upload"></i></div>
+            <div><div class="notif-title">Schema Conversion Started</div><div class="notif-desc">Oracle 19c → PostgreSQL 15 job initiated</div><div class="notif-time">4 hrs ago</div></div>
+          </a>
+          <a href="#" class="notif-item">
+            <div class="notif-icon" style="background:var(--warning-bg);color:var(--warning)"><i data-lucide="clock"></i></div>
+            <div><div class="notif-title">TCO Review Pending</div><div class="notif-desc">Awaiting CFO sign-off on 5-year projection</div><div class="notif-time">Yesterday</div></div>
+          </a>
+        </div>
+        <a href="#" class="notif-footer">View all notifications</a>
+      </div>
+    </div>
+    <button class="topbar-btn" data-uc-theme-toggle aria-label="Toggle dark mode">
+      <i data-lucide="moon"></i>
+    </button>
+    <div class="dropdown">
+      <a class="topbar-profile" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
         <div class="profile-avatar">SC</div>
-        <div class="d-none d-sm-block"><div class="profile-name">Sarah Chen</div><div class="profile-role">Modernization Lead</div></div>
-        <i class="fas fa-chevron-down ms-1 text-muted" style="font-size:10px"></i>
+        <div class="d-none d-sm-block">
+          <div class="profile-name">Sarah Chen</div>
+          <div class="profile-role">Modernization Lead</div>
+        </div>
+        <i data-lucide="chevron-down" class="profile-chevron ms-1"></i>
       </a>
-      <ul class="dropdown-menu dropdown-menu-end" style="min-width:200px">
-        <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i>My Profile</a></li>
+      <ul class="dropdown-menu dropdown-menu-end" style="min-width:210px">
+        <li><div class="px-3 py-2 border-bottom mb-1">
+          <div class="fw-600 text-sm">Sarah Chen</div>
+          <div class="text-muted" style="font-size:11px">sarah.chen@enterprise.com</div>
+        </div></li>
+        <li><a class="dropdown-item" href="#"><i data-lucide="user"></i>My Profile</a></li>
+        <li><a class="dropdown-item" href="#"><i data-lucide="settings"></i>Settings</a></li>
+        <li><a class="dropdown-item" href="#"><i data-lucide="circle-help"></i>Help &amp; Support</a></li>
+        <li><a class="dropdown-item" href="#"><i data-lucide="file-text"></i>Documentation</a></li>
         <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-right-from-bracket text-danger"></i>Sign Out</a></li>
+        <li><a class="dropdown-item text-danger" href="#"><i data-lucide="log-out"></i>Sign Out</a></li>
       </ul>
     </div>
   </div>
@@ -181,55 +290,70 @@
 
 <main id="main-content">
 
-  <ul class="nav nav-pills modernization-tabs mb-4" id="modernizationTabs" role="tablist">
-    <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="app-modernization-tab" data-bs-toggle="pill" data-bs-target="#app-modernization-pane" type="button" role="tab" aria-controls="app-modernization-pane" aria-selected="true">
-        <i class="fas fa-window-restore"></i> Application Modernization
-      </button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="db-modernization-tab" data-bs-toggle="pill" data-bs-target="#db-modernization-pane" type="button" role="tab" aria-controls="db-modernization-pane" aria-selected="false">
-        <i class="fas fa-database"></i> Database Modernization
-      </button>
-    </li>
-  </ul>
+  <div class="d-flex align-items-center gap-3 mb-4 flex-wrap">
+    <ul class="nav nav-pills modernization-tabs mb-0" id="modernizationTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="app-modernization-tab" data-bs-toggle="pill" data-bs-target="#app-modernization-pane" type="button" role="tab" aria-controls="app-modernization-pane" aria-selected="true">
+          <i data-lucide="layout-panel-left"></i> Application Modernization
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="db-modernization-tab" data-bs-toggle="pill" data-bs-target="#db-modernization-pane" type="button" role="tab" aria-controls="db-modernization-pane" aria-selected="false">
+          <i data-lucide="database"></i> Database Modernization
+        </button>
+      </li>
+    </ul>
+    <span class="text-muted ms-auto" style="font-size:12px">37 total Oracle assets assessed</span>
+  </div>
 
   <div class="tab-content" id="modernizationTabContent">
     <div class="tab-pane fade show active" id="app-modernization-pane" role="tabpanel" aria-labelledby="app-modernization-tab" tabindex="0">
 
-  <!-- Paths -->
-  <div class="row g-3 mb-4 stagger">
-    <div class="col-md-4 fade-in-up">
-      <div class="card" style="border-top: 3px solid var(--primary)">
-        <div class="card-body text-center py-4">
-          <div class="stat-icon blue mx-auto mb-3"><i class="fas fa-code"></i></div>
-          <div class="fw-800" style="font-size:28px;letter-spacing:-1px" class="counter-animate" data-target="18">18</div>
-          <div class="fw-600 mb-1">React SPA</div>
-          <div class="text-muted small">Oracle Forms → Modern Web App</div>
-          <div class="mt-3"><span class="badge badge-primary">Recommended</span></div>
+  <!-- Compact Path Cards -->
+  <div class="row g-2 mb-4">
+    <div class="col-md-4">
+      <div class="mod-path-card mod-path-card--blue">
+        <div class="mod-path-icon" style="background:var(--brand-primary-100);color:var(--brand-primary)">
+          <i data-lucide="code-2"></i>
         </div>
+        <div class="flex-1 min-w-0">
+          <div class="d-flex align-items-baseline gap-2">
+            <span class="mod-path-count">18</span>
+            <span class="mod-path-name">React SPA</span>
+          </div>
+          <div class="mod-path-desc">Oracle Forms → Modern Web App</div>
+        </div>
+        <span class="uc-badge uc-badge--primary mod-path-badge">Recommended</span>
       </div>
     </div>
-    <div class="col-md-4 fade-in-up">
-      <div class="card" style="border-top: 3px solid var(--purple)">
-        <div class="card-body text-center py-4">
-          <div class="stat-icon purple mx-auto mb-3"><i class="fas fa-cloud"></i></div>
-          <div class="fw-800" style="font-size:28px;letter-spacing:-1px">12</div>
-          <div class="fw-600 mb-1">Cloud-Native APIs</div>
-          <div class="text-muted small">PL/SQL → REST Microservices</div>
-          <div class="mt-3"><span class="badge badge-purple">Strategic</span></div>
+    <div class="col-md-4">
+      <div class="mod-path-card mod-path-card--purple">
+        <div class="mod-path-icon" style="background:var(--purple-light);color:var(--purple)">
+          <i data-lucide="cpu"></i>
         </div>
+        <div class="flex-1 min-w-0">
+          <div class="d-flex align-items-baseline gap-2">
+            <span class="mod-path-count">12</span>
+            <span class="mod-path-name">Cloud-Native APIs</span>
+          </div>
+          <div class="mod-path-desc">PL/SQL → REST Microservices</div>
+        </div>
+        <span class="uc-badge mod-path-badge" style="background:var(--purple-light);color:var(--purple)">Strategic</span>
       </div>
     </div>
-    <div class="col-md-4 fade-in-up">
-      <div class="card" style="border-top: 3px solid var(--success)">
-        <div class="card-body text-center py-4">
-          <div class="stat-icon green mx-auto mb-3"><i class="fas fa-layer-group"></i></div>
-          <div class="fw-800" style="font-size:28px;letter-spacing:-1px">7</div>
-          <div class="fw-600 mb-1">APEX Modernization</div>
-          <div class="text-muted small">Oracle Forms → Oracle APEX</div>
-          <div class="mt-3"><span class="badge badge-success">Fast Track</span></div>
+    <div class="col-md-4">
+      <div class="mod-path-card mod-path-card--green">
+        <div class="mod-path-icon" style="background:var(--success-bg);color:var(--success)">
+          <i data-lucide="layers"></i>
         </div>
+        <div class="flex-1 min-w-0">
+          <div class="d-flex align-items-baseline gap-2">
+            <span class="mod-path-count">7</span>
+            <span class="mod-path-name">APEX Modernization</span>
+          </div>
+          <div class="mod-path-desc">Oracle Forms → Oracle APEX</div>
+        </div>
+        <span class="uc-badge uc-badge--success mod-path-badge">Fast Track</span>
       </div>
     </div>
   </div>
@@ -310,164 +434,163 @@
         <div class="card-title">AI Complexity Scorer</div>
         <div class="card-subtitle">Automated 1–10 complexity score per Forms module · Powered by Azure OpenAI</div>
       </div>
-      <span class="ms-auto badge badge-purple" style="font-size:11px;padding:5px 12px"><i class="fas fa-wand-magic-sparkles me-1"></i>AI Scored</span>
+      <span class="ms-auto badge badge-purple" style="font-size:11px;padding:5px 12px"><i data-lucide="sparkles" style="width:11px;height:11px;vertical-align:-1px;margin-right:4px"></i>AI Scored</span>
     </div>
-    <div class="card-body">
-      <div class="row g-3">
+    <div class="card-body p-0">
+      <div class="row g-2 p-3">
 
         <!-- FRM_HRMS_MASTER -->
         <div class="col-lg-6 col-xl-4">
-          <div class="card" style="border:1px solid var(--border)">
-            <div class="card-body">
-              <div class="d-flex align-items-center gap-3 mb-3">
-                <div class="complexity-score-ring" style="color:#ef4444;border-color:#ef4444;background:#fef2f2">9.2</div>
-                <div>
-                  <div class="fw-700" style="font-size:13px">FRM_HRMS_MASTER</div>
+          <div class="cmplx-card">
+            <div class="cmplx-head">
+              <div class="cmplx-score" style="color:#ef4444;border-color:#ef4444;background:#fef2f2">9.2</div>
+              <div class="min-w-0">
+                <div class="cmplx-name">FRM_HRMS_MASTER</div>
+                <div class="cmplx-meta">
                   <span class="badge badge-danger">Critical</span>
-                  <span class="badge badge-muted ms-1">HR</span>
+                  <span class="badge badge-muted">HR</span>
                 </div>
               </div>
-              <div class="d-flex flex-column gap-2">
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Lines of Code</span><span class="fw-700 small">4,812</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:96%;background:#ef4444"></div></div></div>
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Oracle-Specific Constructs</span><span class="fw-700 small">38</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:90%;background:#f97316"></div></div></div>
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Dynamic SQL Usage</span><span class="fw-700 small">High</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:85%;background:#f59e0b"></div></div></div>
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Cross-Schema Dependencies</span><span class="fw-700 small">12 schemas</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:92%;background:#ef4444"></div></div></div>
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Transaction Patterns</span><span class="fw-700 small">Nested / Autonomous</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:88%;background:#f97316"></div></div></div>
-              </div>
-              <div class="mt-3 pt-2 border-top"><span class="text-muted" style="font-size:11px"><i class="fas fa-lightbulb text-warning me-1"></i>Recommended: React SPA + microservices decomposition</span></div>
             </div>
+            <div class="cmplx-bars">
+              <div class="cmplx-row"><span class="cmplx-label">Lines of Code</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:96%;background:#ef4444"></div></div><span class="cmplx-val">4,812</span></div>
+              <div class="cmplx-row"><span class="cmplx-label">Oracle Constructs</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:90%;background:#f97316"></div></div><span class="cmplx-val">38</span></div>
+              <div class="cmplx-row"><span class="cmplx-label">Dynamic SQL</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:85%;background:#f59e0b"></div></div><span class="cmplx-val">High</span></div>
+              <div class="cmplx-row"><span class="cmplx-label">Schema Deps</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:92%;background:#ef4444"></div></div><span class="cmplx-val">12</span></div>
+              <div class="cmplx-row"><span class="cmplx-label">Txn Patterns</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:88%;background:#f97316"></div></div><span class="cmplx-val">Nested</span></div>
+            </div>
+            <div class="cmplx-rec"><i data-lucide="lightbulb"></i>React SPA + microservices decomposition</div>
           </div>
         </div>
 
         <!-- FRM_PAYROLL_MAIN -->
         <div class="col-lg-6 col-xl-4">
-          <div class="card" style="border:1px solid var(--border)">
-            <div class="card-body">
-              <div class="d-flex align-items-center gap-3 mb-3">
-                <div class="complexity-score-ring" style="color:#ef4444;border-color:#ef4444;background:#fef2f2">8.7</div>
-                <div>
-                  <div class="fw-700" style="font-size:13px">FRM_PAYROLL_MAIN</div>
+          <div class="cmplx-card">
+            <div class="cmplx-head">
+              <div class="cmplx-score" style="color:#ef4444;border-color:#ef4444;background:#fef2f2">8.7</div>
+              <div class="min-w-0">
+                <div class="cmplx-name">FRM_PAYROLL_MAIN</div>
+                <div class="cmplx-meta">
                   <span class="badge badge-danger">High</span>
-                  <span class="badge badge-muted ms-1">HR</span>
+                  <span class="badge badge-muted">HR</span>
                 </div>
               </div>
-              <div class="d-flex flex-column gap-2">
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Lines of Code</span><span class="fw-700 small">3,241</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:80%;background:#ef4444"></div></div></div>
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Oracle-Specific Constructs</span><span class="fw-700 small">29</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:72%;background:#f97316"></div></div></div>
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Dynamic SQL Usage</span><span class="fw-700 small">Medium</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:60%;background:#f59e0b"></div></div></div>
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Cross-Schema Dependencies</span><span class="fw-700 small">8 schemas</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:78%;background:#f97316"></div></div></div>
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Transaction Patterns</span><span class="fw-700 small">Complex batching</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:82%;background:#ef4444"></div></div></div>
-              </div>
-              <div class="mt-3 pt-2 border-top"><span class="text-muted" style="font-size:11px"><i class="fas fa-lightbulb text-warning me-1"></i>Recommended: React SPA with dedicated payroll API</span></div>
             </div>
+            <div class="cmplx-bars">
+              <div class="cmplx-row"><span class="cmplx-label">Lines of Code</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:80%;background:#ef4444"></div></div><span class="cmplx-val">3,241</span></div>
+              <div class="cmplx-row"><span class="cmplx-label">Oracle Constructs</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:72%;background:#f97316"></div></div><span class="cmplx-val">29</span></div>
+              <div class="cmplx-row"><span class="cmplx-label">Dynamic SQL</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:60%;background:#f59e0b"></div></div><span class="cmplx-val">Medium</span></div>
+              <div class="cmplx-row"><span class="cmplx-label">Schema Deps</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:78%;background:#f97316"></div></div><span class="cmplx-val">8</span></div>
+              <div class="cmplx-row"><span class="cmplx-label">Txn Patterns</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:82%;background:#ef4444"></div></div><span class="cmplx-val">Batch</span></div>
+            </div>
+            <div class="cmplx-rec"><i data-lucide="lightbulb"></i>React SPA with dedicated payroll API</div>
           </div>
         </div>
 
         <!-- FRM_AR_INVOICE -->
         <div class="col-lg-6 col-xl-4">
-          <div class="card" style="border:1px solid var(--border)">
-            <div class="card-body">
-              <div class="d-flex align-items-center gap-3 mb-3">
-                <div class="complexity-score-ring" style="color:#f59e0b;border-color:#f59e0b;background:#fffbeb">6.3</div>
-                <div>
-                  <div class="fw-700" style="font-size:13px">FRM_AR_INVOICE</div>
+          <div class="cmplx-card">
+            <div class="cmplx-head">
+              <div class="cmplx-score" style="color:#f59e0b;border-color:#f59e0b;background:#fffbeb">6.3</div>
+              <div class="min-w-0">
+                <div class="cmplx-name">FRM_AR_INVOICE</div>
+                <div class="cmplx-meta">
                   <span class="badge badge-warning">Medium</span>
-                  <span class="badge badge-indigo ms-1">Finance</span>
+                  <span class="badge badge-indigo">Finance</span>
                 </div>
               </div>
-              <div class="d-flex flex-column gap-2">
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Lines of Code</span><span class="fw-700 small">2,108</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:62%;background:#f59e0b"></div></div></div>
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Oracle-Specific Constructs</span><span class="fw-700 small">17</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:55%;background:#f59e0b"></div></div></div>
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Dynamic SQL Usage</span><span class="fw-700 small">Low</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:30%;background:#10b981"></div></div></div>
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Cross-Schema Dependencies</span><span class="fw-700 small">5 schemas</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:58%;background:#f59e0b"></div></div></div>
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Transaction Patterns</span><span class="fw-700 small">Standard CRUD</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:45%;background:#f59e0b"></div></div></div>
-              </div>
-              <div class="mt-3 pt-2 border-top"><span class="text-muted" style="font-size:11px"><i class="fas fa-lightbulb text-primary me-1"></i>Recommended: React SPA · feasible in single sprint</span></div>
             </div>
+            <div class="cmplx-bars">
+              <div class="cmplx-row"><span class="cmplx-label">Lines of Code</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:62%;background:#f59e0b"></div></div><span class="cmplx-val">2,108</span></div>
+              <div class="cmplx-row"><span class="cmplx-label">Oracle Constructs</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:55%;background:#f59e0b"></div></div><span class="cmplx-val">17</span></div>
+              <div class="cmplx-row"><span class="cmplx-label">Dynamic SQL</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:30%;background:#10b981"></div></div><span class="cmplx-val">Low</span></div>
+              <div class="cmplx-row"><span class="cmplx-label">Schema Deps</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:58%;background:#f59e0b"></div></div><span class="cmplx-val">5</span></div>
+              <div class="cmplx-row"><span class="cmplx-label">Txn Patterns</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:45%;background:#f59e0b"></div></div><span class="cmplx-val">CRUD</span></div>
+            </div>
+            <div class="cmplx-rec"><i data-lucide="lightbulb"></i>React SPA · feasible in single sprint</div>
           </div>
         </div>
 
         <!-- FRM_GL_ENTRY -->
         <div class="col-lg-6 col-xl-4">
-          <div class="card" style="border:1px solid var(--border)">
-            <div class="card-body">
-              <div class="d-flex align-items-center gap-3 mb-3">
-                <div class="complexity-score-ring" style="color:#f59e0b;border-color:#f59e0b;background:#fffbeb">5.9</div>
-                <div>
-                  <div class="fw-700" style="font-size:13px">FRM_GL_ENTRY</div>
+          <div class="cmplx-card">
+            <div class="cmplx-head">
+              <div class="cmplx-score" style="color:#f59e0b;border-color:#f59e0b;background:#fffbeb">5.9</div>
+              <div class="min-w-0">
+                <div class="cmplx-name">FRM_GL_ENTRY</div>
+                <div class="cmplx-meta">
                   <span class="badge badge-warning">Medium</span>
-                  <span class="badge badge-indigo ms-1">Finance</span>
+                  <span class="badge badge-indigo">Finance</span>
                 </div>
               </div>
-              <div class="d-flex flex-column gap-2">
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Lines of Code</span><span class="fw-700 small">1,876</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:58%;background:#f59e0b"></div></div></div>
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Oracle-Specific Constructs</span><span class="fw-700 small">14</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:48%;background:#f59e0b"></div></div></div>
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Dynamic SQL Usage</span><span class="fw-700 small">Medium</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:55%;background:#f59e0b"></div></div></div>
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Cross-Schema Dependencies</span><span class="fw-700 small">4 schemas</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:50%;background:#f59e0b"></div></div></div>
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Transaction Patterns</span><span class="fw-700 small">Multi-entry journal</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:62%;background:#f59e0b"></div></div></div>
-              </div>
-              <div class="mt-3 pt-2 border-top"><span class="text-muted" style="font-size:11px"><i class="fas fa-lightbulb text-purple me-1"></i>Recommended: REST API with journal validation service</span></div>
             </div>
+            <div class="cmplx-bars">
+              <div class="cmplx-row"><span class="cmplx-label">Lines of Code</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:58%;background:#f59e0b"></div></div><span class="cmplx-val">1,876</span></div>
+              <div class="cmplx-row"><span class="cmplx-label">Oracle Constructs</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:48%;background:#f59e0b"></div></div><span class="cmplx-val">14</span></div>
+              <div class="cmplx-row"><span class="cmplx-label">Dynamic SQL</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:55%;background:#f59e0b"></div></div><span class="cmplx-val">Medium</span></div>
+              <div class="cmplx-row"><span class="cmplx-label">Schema Deps</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:50%;background:#f59e0b"></div></div><span class="cmplx-val">4</span></div>
+              <div class="cmplx-row"><span class="cmplx-label">Txn Patterns</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:62%;background:#f59e0b"></div></div><span class="cmplx-val">Journal</span></div>
+            </div>
+            <div class="cmplx-rec"><i data-lucide="lightbulb"></i>REST API with journal validation service</div>
           </div>
         </div>
 
         <!-- FRM_ASSET_REGISTER -->
         <div class="col-lg-6 col-xl-4">
-          <div class="card" style="border:1px solid var(--border)">
-            <div class="card-body">
-              <div class="d-flex align-items-center gap-3 mb-3">
-                <div class="complexity-score-ring" style="color:#10b981;border-color:#10b981;background:#f0fdf4">3.1</div>
-                <div>
-                  <div class="fw-700" style="font-size:13px">FRM_ASSET_REGISTER</div>
+          <div class="cmplx-card">
+            <div class="cmplx-head">
+              <div class="cmplx-score" style="color:#10b981;border-color:#10b981;background:#f0fdf4">3.1</div>
+              <div class="min-w-0">
+                <div class="cmplx-name">FRM_ASSET_REGISTER</div>
+                <div class="cmplx-meta">
                   <span class="badge badge-success">Low</span>
-                  <span class="badge badge-indigo ms-1">Finance</span>
+                  <span class="badge badge-indigo">Finance</span>
                 </div>
               </div>
-              <div class="d-flex flex-column gap-2">
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Lines of Code</span><span class="fw-700 small">892</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:28%;background:#10b981"></div></div></div>
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Oracle-Specific Constructs</span><span class="fw-700 small">6</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:22%;background:#10b981"></div></div></div>
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Dynamic SQL Usage</span><span class="fw-700 small">None</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:5%;background:#10b981"></div></div></div>
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Cross-Schema Dependencies</span><span class="fw-700 small">2 schemas</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:25%;background:#10b981"></div></div></div>
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Transaction Patterns</span><span class="fw-700 small">Simple CRUD</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:18%;background:#10b981"></div></div></div>
-              </div>
-              <div class="mt-3 pt-2 border-top"><span class="text-muted" style="font-size:11px"><i class="fas fa-lightbulb text-success me-1"></i>Recommended: Oracle APEX · fast-track candidate</span></div>
             </div>
+            <div class="cmplx-bars">
+              <div class="cmplx-row"><span class="cmplx-label">Lines of Code</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:28%;background:#10b981"></div></div><span class="cmplx-val">892</span></div>
+              <div class="cmplx-row"><span class="cmplx-label">Oracle Constructs</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:22%;background:#10b981"></div></div><span class="cmplx-val">6</span></div>
+              <div class="cmplx-row"><span class="cmplx-label">Dynamic SQL</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:5%;background:#10b981"></div></div><span class="cmplx-val">None</span></div>
+              <div class="cmplx-row"><span class="cmplx-label">Schema Deps</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:25%;background:#10b981"></div></div><span class="cmplx-val">2</span></div>
+              <div class="cmplx-row"><span class="cmplx-label">Txn Patterns</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:18%;background:#10b981"></div></div><span class="cmplx-val">CRUD</span></div>
+            </div>
+            <div class="cmplx-rec"><i data-lucide="lightbulb"></i>Oracle APEX · fast-track candidate</div>
           </div>
         </div>
 
         <!-- FRM_INV_RECEIPT -->
         <div class="col-lg-6 col-xl-4">
-          <div class="card" style="border:1px solid var(--border)">
-            <div class="card-body">
-              <div class="d-flex align-items-center gap-3 mb-3">
-                <div class="complexity-score-ring" style="color:#10b981;border-color:#10b981;background:#f0fdf4">2.4</div>
-                <div>
-                  <div class="fw-700" style="font-size:13px">FRM_INV_RECEIPT</div>
+          <div class="cmplx-card">
+            <div class="cmplx-head">
+              <div class="cmplx-score" style="color:#10b981;border-color:#10b981;background:#f0fdf4">2.4</div>
+              <div class="min-w-0">
+                <div class="cmplx-name">FRM_INV_RECEIPT</div>
+                <div class="cmplx-meta">
                   <span class="badge badge-success">Low</span>
-                  <span class="badge badge-cyan ms-1">Inventory</span>
+                  <span class="badge badge-cyan">Inventory</span>
                 </div>
               </div>
-              <div class="d-flex flex-column gap-2">
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Lines of Code</span><span class="fw-700 small">641</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:20%;background:#10b981"></div></div></div>
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Oracle-Specific Constructs</span><span class="fw-700 small">4</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:15%;background:#10b981"></div></div></div>
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Dynamic SQL Usage</span><span class="fw-700 small">None</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:5%;background:#10b981"></div></div></div>
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Cross-Schema Dependencies</span><span class="fw-700 small">1 schema</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:12%;background:#10b981"></div></div></div>
-                <div><div class="d-flex justify-content-between mb-1"><span class="text-muted" style="font-size:11px">Transaction Patterns</span><span class="fw-700 small">Insert/Update only</span></div><div class="complexity-factor-bar"><div class="bar-fill" style="width:15%;background:#10b981"></div></div></div>
-              </div>
-              <div class="mt-3 pt-2 border-top"><span class="text-muted" style="font-size:11px"><i class="fas fa-lightbulb text-success me-1"></i>Recommended: Oracle APEX · 1-week conversion</span></div>
             </div>
+            <div class="cmplx-bars">
+              <div class="cmplx-row"><span class="cmplx-label">Lines of Code</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:20%;background:#10b981"></div></div><span class="cmplx-val">641</span></div>
+              <div class="cmplx-row"><span class="cmplx-label">Oracle Constructs</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:15%;background:#10b981"></div></div><span class="cmplx-val">4</span></div>
+              <div class="cmplx-row"><span class="cmplx-label">Dynamic SQL</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:5%;background:#10b981"></div></div><span class="cmplx-val">None</span></div>
+              <div class="cmplx-row"><span class="cmplx-label">Schema Deps</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:12%;background:#10b981"></div></div><span class="cmplx-val">1</span></div>
+              <div class="cmplx-row"><span class="cmplx-label">Txn Patterns</span><div class="cmplx-bar"><div class="cmplx-bar-fill" style="width:15%;background:#10b981"></div></div><span class="cmplx-val">Insert</span></div>
+            </div>
+            <div class="cmplx-rec"><i data-lucide="lightbulb"></i>Oracle APEX · 1-week conversion</div>
           </div>
         </div>
 
       </div>
-
       <!-- Score legend -->
-      <div class="d-flex align-items-center gap-4 mt-3 pt-3 border-top flex-wrap">
-        <div class="fw-600 small text-muted">Complexity Scale:</div>
-        <div class="d-flex align-items-center gap-2"><div style="width:12px;height:12px;border-radius:50%;background:#10b981"></div><span class="small">1–4 · Low → APEX</span></div>
-        <div class="d-flex align-items-center gap-2"><div style="width:12px;height:12px;border-radius:50%;background:#f59e0b"></div><span class="small">5–7 · Medium → React SPA</span></div>
-        <div class="d-flex align-items-center gap-2"><div style="width:12px;height:12px;border-radius:50%;background:#ef4444"></div><span class="small">8–10 · High/Critical → Microservices</span></div>
-        <div class="ms-auto text-muted" style="font-size:11px"><i class="fas fa-info-circle me-1"></i>Scores computed from AST analysis + Azure OpenAI GPT-4o</div>
+      <div class="d-flex align-items-center gap-4 px-3 pb-3 flex-wrap border-top pt-3">
+        <span class="fw-600 text-muted" style="font-size:11.5px">Scale:</span>
+        <div class="d-flex align-items-center gap-2"><div style="width:10px;height:10px;border-radius:50%;background:#10b981;flex-shrink:0"></div><span style="font-size:11.5px">1–4 Low → APEX</span></div>
+        <div class="d-flex align-items-center gap-2"><div style="width:10px;height:10px;border-radius:50%;background:#f59e0b;flex-shrink:0"></div><span style="font-size:11.5px">5–7 Medium → React SPA</span></div>
+        <div class="d-flex align-items-center gap-2"><div style="width:10px;height:10px;border-radius:50%;background:#ef4444;flex-shrink:0"></div><span style="font-size:11.5px">8–10 Critical → Microservices</span></div>
+        <span class="ms-auto text-muted" style="font-size:11px">Scored via AST analysis + Azure OpenAI GPT-4o</span>
       </div>
     </div>
   </div>
@@ -704,6 +827,9 @@ function initPageCharts() {
   }
 }
 </script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="assets/js/lucide-init.js"></script>
+  <script src="assets/js/ui.js"></script>
 </body>
 </html>
 

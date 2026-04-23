@@ -1,78 +1,136 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Storage Assessment — Lift &amp; Shift</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 <div id="page-loader"><div class="loader-ring"></div></div>
 
+<!-- ===== SIDEBAR ===== -->
 <aside id="sidebar">
   <a href="dashboard.html" class="sidebar-brand">
-    <div class="brand-icon"><i class="fas fa-database"></i></div>
-    <div class="brand-text"><div class="brand-title">CloudAtlas</div><div class="brand-subtitle">Oracle Modernization</div></div>
+    <img src="assets/brand/logo.svg" alt="UnifyCloud" class="sidebar-logo-full">
+    <span class="sidebar-logo-mark" aria-hidden="true">UC</span>
   </a>
-  <nav class="sidebar-nav">
+  <nav class="sidebar-nav" aria-label="Main navigation">
     <div class="nav-section-label">Overview</div>
-    <a href="dashboard.html" class="sidebar-link" data-label="Dashboard"><span class="link-icon"><i class="fas fa-gauge-high"></i></span><span class="link-text">Dashboard</span></a>
+    <a href="dashboard.html" class="sidebar-link" data-label="Dashboard"><span class="link-icon"><i data-lucide="layout-dashboard"></i></span><span class="link-text">Dashboard</span></a>
     <div class="nav-section-label">Discovery</div>
-    <a href="discovery.html" class="sidebar-link" data-label="Discovery"><span class="link-icon"><i class="fas fa-magnifying-glass-chart"></i></span><span class="link-text">Discovery &amp; Intake</span></a>
+    <a href="discovery.html" class="sidebar-link" data-label="Discovery"><span class="link-icon"><i data-lucide="scan-search"></i></span><span class="link-text">Discovery &amp; Intake</span></a>
     <div class="nav-section-label">Assessment</div>
-    <a href="#" class="sidebar-link has-submenu" data-submenu="liftShiftSub" data-label="Lift &amp; Shift"><span class="link-icon"><i class="fas fa-arrow-up-right-dots"></i></span><span class="link-text">Lift &amp; Shift</span><i class="fas fa-chevron-right submenu-arrow ms-auto"></i></a>
+    <a href="#" class="sidebar-link has-submenu" data-submenu="liftShiftSub" data-label="Lift &amp; Shift"><span class="link-icon"><i data-lucide="trending-up"></i></span><span class="link-text">Lift &amp; Shift</span><i data-lucide="chevron-right" class="submenu-arrow"></i></a>
     <div class="sidebar-submenu" id="liftShiftSub">
-      <a href="lift-shift-insights.html" class="sidebar-link sidebar-sublink" data-label="Insights"><span class="link-icon"><i class="fas fa-chart-bar"></i></span><span class="link-text">Insights</span></a>
-      <a href="lift-shift-server.html" class="sidebar-link sidebar-sublink" data-label="Server Assessment"><span class="link-icon"><i class="fas fa-server"></i></span><span class="link-text">Server Assessment</span></a>
-      <a href="lift-shift-storage.html" class="sidebar-link sidebar-sublink" data-label="Storage Assessment"><span class="link-icon"><i class="fas fa-hard-drive"></i></span><span class="link-text">Storage Assessment</span></a>
+      <a href="lift-shift-insights.html" class="sidebar-link sidebar-sublink" data-label="Insights"><span class="link-icon"><i data-lucide="bar-chart-2"></i></span><span class="link-text">Insights</span></a>
+      <a href="lift-shift-server.html" class="sidebar-link sidebar-sublink" data-label="Server Assessment"><span class="link-icon"><i data-lucide="server"></i></span><span class="link-text">Server Assessment</span></a>
+      <a href="lift-shift-storage.html" class="sidebar-link sidebar-sublink" data-label="Storage Assessment"><span class="link-icon"><i data-lucide="hard-drive"></i></span><span class="link-text">Storage Assessment</span></a>
     </div>
-    <a href="assessment-modernization.html" class="sidebar-link" data-label="Modernization"><span class="link-icon"><i class="fas fa-wand-magic-sparkles"></i></span><span class="link-text">Modernization</span></a>
-    <a href="dependency-mapping.html" class="sidebar-link" data-label="Dependencies"><span class="link-icon"><i class="fas fa-diagram-project"></i></span><span class="link-text">Dependency Mapping</span></a>
-    <a href="tco.html" class="sidebar-link" data-label="TCO Analysis"><span class="link-icon"><i class="fas fa-coins"></i></span><span class="link-text">TCO Analysis</span></a>
-    <a href="risk-scoring.html" class="sidebar-link" data-label="Risk Scoring"><span class="link-icon"><i class="fas fa-shield-halved"></i></span><span class="link-text">Risk Scoring</span></a>
-    <a href="wave-planning.html" class="sidebar-link" data-label="Wave Planning"><span class="link-icon"><i class="fas fa-wave-square"></i></span><span class="link-text">Wave Planning</span></a>
-    <a href="readiness-check.html" class="sidebar-link" data-label="Readiness"><span class="link-icon"><i class="fas fa-clipboard-check"></i></span><span class="link-text">Readiness Check</span></a>
+    <a href="assessment-modernization.html" class="sidebar-link" data-label="Modernization"><span class="link-icon"><i data-lucide="sparkles"></i></span><span class="link-text">Modernization</span></a>
+    <a href="dependency-mapping.html" class="sidebar-link" data-label="Dependencies"><span class="link-icon"><i data-lucide="git-fork"></i></span><span class="link-text">Dependency Mapping</span></a>
+    <a href="tco.html" class="sidebar-link" data-label="TCO Analysis"><span class="link-icon"><i data-lucide="circle-dollar-sign"></i></span><span class="link-text">TCO Analysis</span></a>
+    <a href="risk-scoring.html" class="sidebar-link" data-label="Risk Scoring"><span class="link-icon"><i data-lucide="shield-alert"></i></span><span class="link-text">Risk Scoring</span></a>
+    <a href="wave-planning.html" class="sidebar-link" data-label="Wave Planning"><span class="link-icon"><i data-lucide="waves"></i></span><span class="link-text">Wave Planning</span></a>
+    <a href="readiness-check.html" class="sidebar-link" data-label="Readiness"><span class="link-icon"><i data-lucide="clipboard-check"></i></span><span class="link-text">Readiness Check</span></a>
     <div class="nav-section-label">Forms Modernization</div>
-    <a href="modernization-execution.html" class="sidebar-link" data-label="Execution"><span class="link-icon"><i class="fas fa-gears"></i></span><span class="link-text">Modernization Exec.</span></a>
-    <a href="schema-conversion.html" class="sidebar-link" data-label="Schema"><span class="link-icon"><i class="fas fa-code-branch"></i></span><span class="link-text">Schema Conversion</span></a>
+    <a href="modernization-execution.html" class="sidebar-link" data-label="Execution"><span class="link-icon"><i data-lucide="settings-2"></i></span><span class="link-text">Modernization Exec.</span></a>
+    <a href="schema-conversion.html" class="sidebar-link" data-label="Schema"><span class="link-icon"><i data-lucide="git-branch"></i></span><span class="link-text">Schema Conversion</span></a>
     <div class="nav-section-label">Azure Infrastructure</div>
-    <a href="landing-zone.html" class="sidebar-link" data-label="Landing Zone"><span class="link-icon"><i class="fas fa-cloud"></i></span><span class="link-text">Landing Zone</span></a>
-    <a href="security-finops.html" class="sidebar-link" data-label="Security &amp; FinOps"><span class="link-icon"><i class="fas fa-lock"></i></span><span class="link-text">Security &amp; FinOps</span></a>
+    <a href="landing-zone.html" class="sidebar-link" data-label="Landing Zone"><span class="link-icon"><i data-lucide="cloud"></i></span><span class="link-text">Landing Zone</span></a>
+    <a href="security-finops.html" class="sidebar-link" data-label="Security &amp; FinOps"><span class="link-icon"><i data-lucide="lock"></i></span><span class="link-text">Security &amp; FinOps</span></a>
     <div class="nav-section-label">Delivery</div>
-    <a href="review-validation.html" class="sidebar-link" data-label="Review"><span class="link-icon"><i class="fas fa-circle-check"></i></span><span class="link-text">Review &amp; Validation</span></a>
-    <a href="deployment.html" class="sidebar-link" data-label="Deployment"><span class="link-icon"><i class="fas fa-rocket"></i></span><span class="link-text">Deployment</span><span class="link-badge">Live</span></a>
+    <a href="review-validation.html" class="sidebar-link" data-label="Review"><span class="link-icon"><i data-lucide="circle-check"></i></span><span class="link-text">Review &amp; Validation</span></a>
+    <a href="deployment.html" class="sidebar-link" data-label="Deployment"><span class="link-icon"><i data-lucide="rocket"></i></span><span class="link-text">Deployment</span><span class="link-badge">Live</span></a>
   </nav>
   <div class="sidebar-footer">
-    <button class="sidebar-toggle-btn" id="sidebarToggle2"><i class="fas fa-chevron-left"></i><span>Collapse</span></button>
+    <button class="sidebar-toggle-btn" id="sidebarToggle2" aria-label="Collapse sidebar">
+      <i data-lucide="chevrons-left" class="toggle-icon"></i>
+      <span>Collapse</span>
+    </button>
   </div>
 </aside>
 
+<!-- ===== TOPBAR ===== -->
 <header id="topbar">
-  <button class="topbar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+  <button class="topbar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+    <i data-lucide="menu"></i>
+  </button>
+  <div class="topbar-brand-mobile">
+    <img src="assets/brand/logo.svg" alt="UnifyCloud" height="20">
+  </div>
   <div class="topbar-breadcrumb">
     <h1 class="page-title">Storage Assessment</h1>
     <p class="page-subtitle">Lift &amp; Shift &middot; Disk Tiers &amp; Capacity Planning</p>
   </div>
-  <div class="topbar-search d-none d-lg-block">
-    <i class="fas fa-search search-icon"></i>
-    <input type="text" placeholder="Search storage…">
-    <span class="ai-badge">AI</span>
-  </div>
+  <button class="topbar-search-trigger d-none d-lg-flex" data-uc-palette aria-label="Open command palette (Ctrl+K)">
+    <i data-lucide="search"></i>
+    <span class="search-trigger-text">Search pages &amp; actions…</span>
+    <kbd class="search-trigger-kbd">Ctrl K</kbd>
+  </button>
   <div class="d-flex align-items-center gap-1 ms-auto">
+    <span class="uc-pill--env d-none d-md-inline-flex">Production</span>
     <div class="topbar-divider d-none d-md-block"></div>
-    <button class="topbar-btn" data-bs-toggle="tooltip" title="Settings"><i class="fas fa-gear"></i></button>
     <div class="dropdown">
-      <a class="topbar-profile" data-bs-toggle="dropdown">
+      <button class="topbar-btn" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications">
+        <i data-lucide="bell"></i>
+        <span class="badge-dot"></span>
+      </button>
+      <div class="dropdown-menu dropdown-menu-end notif-dropdown">
+        <div class="notif-header"><h6>Notifications</h6><button id="uc-notif-mark-all" class="btn-link-text">Mark all read</button></div>
+        <div class="notif-body">
+          <a href="#" class="notif-item unread">
+            <div class="notif-icon bg-danger-light text-danger"><i data-lucide="triangle-alert"></i></div>
+            <div><div class="notif-title">High Risk Workload Detected</div><div class="notif-desc">HRMS_PAYROLL flagged with complexity score 8.9</div><div class="notif-time">5 min ago</div></div>
+          </a>
+          <a href="#" class="notif-item unread">
+            <div class="notif-icon bg-success-light text-success"><i data-lucide="circle-check"></i></div>
+            <div><div class="notif-title">Wave 1 Assessment Complete</div><div class="notif-desc">28 workloads ready for lift &amp; shift execution</div><div class="notif-time">2 hrs ago</div></div>
+          </a>
+          <a href="#" class="notif-item">
+            <div class="notif-icon bg-primary-light text-primary"><i data-lucide="cloud-upload"></i></div>
+            <div><div class="notif-title">Schema Conversion Started</div><div class="notif-desc">Oracle 19c → PostgreSQL 15 job initiated</div><div class="notif-time">4 hrs ago</div></div>
+          </a>
+          <a href="#" class="notif-item">
+            <div class="notif-icon" style="background:var(--warning-bg);color:var(--warning)"><i data-lucide="clock"></i></div>
+            <div><div class="notif-title">TCO Review Pending</div><div class="notif-desc">Awaiting CFO sign-off on 5-year projection</div><div class="notif-time">Yesterday</div></div>
+          </a>
+        </div>
+        <a href="#" class="notif-footer">View all notifications</a>
+      </div>
+    </div>
+    <button class="topbar-btn" data-uc-theme-toggle aria-label="Toggle dark mode">
+      <i data-lucide="moon"></i>
+    </button>
+    <div class="dropdown">
+      <a class="topbar-profile" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
         <div class="profile-avatar">SC</div>
-        <div class="d-none d-sm-block"><div class="profile-name">Sarah Chen</div><div class="profile-role">Modernization Lead</div></div>
-        <i class="fas fa-chevron-down ms-1 text-muted" style="font-size:10px"></i>
+        <div class="d-none d-sm-block">
+          <div class="profile-name">Sarah Chen</div>
+          <div class="profile-role">Modernization Lead</div>
+        </div>
+        <i data-lucide="chevron-down" class="profile-chevron ms-1"></i>
       </a>
-      <ul class="dropdown-menu dropdown-menu-end" style="min-width:200px">
-        <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i>My Profile</a></li>
+      <ul class="dropdown-menu dropdown-menu-end" style="min-width:210px">
+        <li><div class="px-3 py-2 border-bottom mb-1">
+          <div class="fw-600 text-sm">Sarah Chen</div>
+          <div class="text-muted" style="font-size:11px">sarah.chen@enterprise.com</div>
+        </div></li>
+        <li><a class="dropdown-item" href="#"><i data-lucide="user"></i>My Profile</a></li>
+        <li><a class="dropdown-item" href="#"><i data-lucide="settings"></i>Settings</a></li>
+        <li><a class="dropdown-item" href="#"><i data-lucide="circle-help"></i>Help &amp; Support</a></li>
+        <li><a class="dropdown-item" href="#"><i data-lucide="file-text"></i>Documentation</a></li>
         <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-right-from-bracket text-danger"></i>Sign Out</a></li>
+        <li><a class="dropdown-item text-danger" href="#"><i data-lucide="log-out"></i>Sign Out</a></li>
       </ul>
     </div>
   </div>
@@ -96,5 +154,8 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/main.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="assets/js/lucide-init.js"></script>
+  <script src="assets/js/ui.js"></script>
 </body>
 </html>

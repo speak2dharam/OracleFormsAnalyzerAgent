@@ -1,10 +1,55 @@
 /* ================================================================
    Oracle Migration Workbench — Custom Design System
    Bootstrap 5 + jQuery UI Layer
-   Tokens, reset, and typography are now in tokens.css / base.css
    ================================================================ */
 
-/* ---------- Base Reset (kept for Bootstrap layer compat) ---------- */
+/* ---------- Google Fonts ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* ---------- Design Tokens ---------- */
+:root {
+  --primary:        #2563eb;
+  --primary-rgb:    37, 99, 235;
+  --primary-light:  #eff6ff;
+  --primary-dark:   #1d4ed8;
+  --success:        #10b981;
+  --success-rgb:    16, 185, 129;
+  --success-light:  #ecfdf5;
+  --warning:        #f59e0b;
+  --warning-rgb:    245, 158, 11;
+  --warning-light:  #fffbeb;
+  --danger:         #ef4444;
+  --danger-rgb:     239, 68, 68;
+  --danger-light:   #fef2f2;
+  --purple:         #8b5cf6;
+  --purple-light:   #f5f3ff;
+  --indigo:         #6366f1;
+  --indigo-light:   #eef2ff;
+  --cyan:           #06b6d4;
+  --cyan-light:     #ecfeff;
+  --sidebar-width:            248px;
+  --sidebar-collapsed-width:  64px;
+  --topbar-height:            58px;
+  --bg:             #f1f5f9;
+  --card-bg:        #ffffff;
+  --border:         #e2e8f0;
+  --border-light:   #f1f5f9;
+  --text:           #1e293b;
+  --text-muted:     #64748b;
+  --text-light:     #94a3b8;
+  --shadow-sm:      0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow:         0 4px 6px -1px rgba(0,0,0,.07), 0 2px 4px -2px rgba(0,0,0,.05);
+  --shadow-md:      0 10px 15px -3px rgba(0,0,0,.08), 0 4px 6px -4px rgba(0,0,0,.05);
+  --shadow-lg:      0 20px 25px -5px rgba(0,0,0,.08), 0 8px 10px -6px rgba(0,0,0,.05);
+  --radius-sm:      6px;
+  --radius:         10px;
+  --radius-md:      12px;
+  --radius-lg:      16px;
+  --radius-xl:      20px;
+  --transition:     all .2s cubic-bezier(.4,0,.2,1);
+}
+
+/* ---------- Base Reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
@@ -50,7 +95,6 @@ body {
 .sidebar-brand {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
   gap: 11px;
   padding: 0 16px;
   text-decoration: none;
@@ -59,12 +103,6 @@ body {
   flex-shrink: 0;
   overflow: hidden;
   white-space: nowrap;
-  transition: padding .25s, justify-content 0s;
-}
-#sidebar.collapsed .sidebar-brand {
-  justify-content: center;
-  padding: 0;
-  gap: 0;
 }
 
 .brand-icon {
@@ -166,27 +204,24 @@ body {
 /* Collapsed: center icon and make it more prominent */
 #sidebar.collapsed .sidebar-link {
   justify-content: center;
-  padding: 7px 0;
-  margin: 1px 6px;
-  overflow: visible;    /* allow JS flyout to render outside link bounds */
+  padding: 7px 8px;
 }
 #sidebar.collapsed .sidebar-link .link-icon {
-  color: #1e293b;       /* darker so icons are clearly visible */
+  color: #475569;
   width: 34px; height: 34px;
   font-size: 14px;
-  flex-shrink: 0;
 }
 #sidebar.collapsed .sidebar-link:hover .link-icon {
   background: var(--primary-light);
   color: var(--primary);
 }
 #sidebar.collapsed .sidebar-link.active .link-icon {
-  background: rgba(21,161,220,.15);
+  background: rgba(37,99,235,.15);
   color: var(--primary);
 }
 
-.link-text { transition: opacity .15s, width .15s; flex-shrink: 0; }
-#sidebar.collapsed .link-text { opacity: 0; width: 0; overflow: hidden; pointer-events: none; }
+.link-text { transition: opacity .2s; }
+#sidebar.collapsed .link-text { opacity: 0; width: 0; }
 
 .link-badge {
   margin-left: auto;
@@ -229,20 +264,22 @@ body {
 #sidebar.collapsed .sidebar-toggle-btn i { transform: rotate(180deg); }
 #sidebar.collapsed .sidebar-toggle-btn span { opacity: 0; width: 0; }
 
-/* Tooltip for collapsed sidebar — handled entirely by JS flyout (see main.js showFlyout) */
-/* CSS ::after approach removed: sidebar overflow:hidden clips pseudo-elements */
-
-/* Simple label tooltip shown by JS for non-submenu links */
-.flyout-tooltip-label {
-  display: block;
-  padding: 7px 12px;
-  font-size: 13px; font-weight: 600;
-  color: var(--text);
-  text-decoration: none;
+/* Tooltip for collapsed sidebar regular links (non-submenu) */
+#sidebar.collapsed .sidebar-link:not(.has-submenu):hover::after {
+  content: attr(data-label);
+  position: absolute;
+  left: calc(var(--sidebar-collapsed-width) + 8px);
+  top: 50%; transform: translateY(-50%);
+  background: #1e293b;
+  color: #fff;
+  font-size: 12px; font-weight: 500;
+  padding: 5px 12px;
   border-radius: var(--radius-sm);
-  transition: var(--transition);
+  white-space: nowrap;
+  z-index: 1055;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  pointer-events: none;
 }
-.flyout-tooltip-label:hover { background: var(--bg); color: var(--primary); }
 
 /* Flyout panel for submenu in collapsed mode */
 .sidebar-flyout {
@@ -1612,246 +1649,4 @@ hr { border-color: var(--border); opacity: 1; margin: 14px 0; }
 .topbar-divider {
   width: 1px; height: 22px; background: var(--border);
   flex-shrink: 0; margin: 0 2px;
-}
-
-/* ================================================================
-   TASK 2 — GLOBAL SHELL UPGRADES
-   ================================================================ */
-
-/* ── Sidebar logo ── */
-.sidebar-logo-full {
-  height: 22px;
-  width: auto;
-  max-width: 118px;
-  object-fit: contain;
-  display: block;
-  transition: opacity .2s, width .2s;
-  flex-shrink: 0;
-}
-#sidebar.collapsed .sidebar-logo-full {
-  opacity: 0;
-  width: 0;
-  overflow: hidden;
-}
-
-.sidebar-logo-mark {
-  display: none;
-  width: 32px; height: 32px;
-  background: var(--brand-primary);
-  color: #fff;
-  font-size: 11px; font-weight: 800;
-  border-radius: var(--radius-sm);
-  align-items: center; justify-content: center;
-  flex-shrink: 0;
-  letter-spacing: -0.5px;
-  box-shadow: 0 2px 8px rgba(21,161,220,.35);
-}
-#sidebar.collapsed .sidebar-logo-mark { display: flex; }
-
-/* ── Lucide icon sizing inside sidebar links ── */
-.sidebar-link .link-icon i[data-lucide],
-.sidebar-link .link-icon svg {
-  width: 16px; height: 16px;
-  display: block;
-}
-
-/* Submenu chevron (Lucide) */
-.submenu-arrow {
-  width: 14px; height: 14px;
-  flex-shrink: 0;
-  transition: transform .2s;
-  margin-left: auto;
-  color: var(--text-tertiary);
-}
-.has-submenu.submenu-open .submenu-arrow { transform: rotate(90deg); }
-#sidebar.collapsed .submenu-arrow { display: none; }
-
-/* ── Sidebar toggle button icon (Lucide chevrons-left) ── */
-.sidebar-toggle-btn .toggle-icon { width: 16px; height: 16px; }
-#sidebar.collapsed .sidebar-toggle-btn .toggle-icon { transform: rotate(180deg); }
-
-/* ── Topbar search trigger (Cmd+K) ── */
-.topbar-search-trigger {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 10px;
-  background: var(--bg-canvas);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-md);
-  color: var(--text-tertiary);
-  font-family: var(--font-sans);
-  font-size: 12.5px;
-  cursor: pointer;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), color var(--transition-fast);
-  min-width: 210px;
-  max-width: 280px;
-  flex-shrink: 1;
-}
-.topbar-search-trigger:hover {
-  border-color: var(--brand-primary);
-  box-shadow: 0 0 0 3px rgba(21,161,220,.1);
-  color: var(--text-secondary);
-}
-.topbar-search-trigger i[data-lucide],
-.topbar-search-trigger svg {
-  width: 14px; height: 14px;
-  flex-shrink: 0;
-}
-.search-trigger-text { flex: 1; text-align: left; }
-.search-trigger-kbd {
-  font-size: 10px;
-  padding: 1px 5px;
-  border: 1px solid var(--border-default);
-  border-radius: 4px;
-  background: var(--bg-surface);
-  color: var(--text-tertiary);
-  font-family: var(--font-sans);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-/* ── Profile name/role ── */
-.profile-name  { font-size: 12.5px; font-weight: 600; color: var(--text-primary); line-height: 1.3; }
-.profile-role  { font-size: 10.5px; color: var(--text-tertiary); line-height: 1.3; }
-.profile-chevron { width: 12px; height: 12px; color: var(--text-tertiary); }
-
-/* ── Dropdown item icon sizing (Lucide) ── */
-.dropdown-item i[data-lucide],
-.dropdown-item svg {
-  width: 14px; height: 14px;
-  vertical-align: -2px;
-  margin-right: 8px;
-  flex-shrink: 0;
-}
-
-/* ── Notification icon sizing (Lucide) ── */
-.notif-icon i[data-lucide],
-.notif-icon svg {
-  width: 14px; height: 14px;
-}
-
-/* ── Topbar icon buttons (Lucide) ── */
-.topbar-btn i[data-lucide],
-.topbar-btn svg,
-.topbar-toggle i[data-lucide],
-.topbar-toggle svg {
-  width: 16px; height: 16px;
-  display: block;
-}
-
-/* ── btn-link-text (notifications "Mark all read") ── */
-.btn-link-text {
-  background: none; border: none; padding: 0;
-  color: var(--brand-primary);
-  font-size: 12px; font-weight: 500;
-  cursor: pointer;
-  font-family: inherit;
-}
-.btn-link-text:hover { text-decoration: underline; }
-
-/* ── Breadcrumb row ── */
-.uc-breadcrumb-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 0 16px;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.uc-breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 12px;
-  color: var(--text-tertiary);
-  flex-wrap: wrap;
-}
-.uc-breadcrumb a {
-  color: var(--text-tertiary);
-  text-decoration: none;
-  transition: color var(--transition-fast);
-}
-.uc-breadcrumb a:hover { color: var(--brand-primary); }
-.uc-breadcrumb .bc-sep {
-  color: var(--border-default);
-  font-size: 11px;
-}
-.uc-breadcrumb .bc-current {
-  color: var(--text-secondary);
-  font-weight: 500;
-}
-
-/* ── Last-refresh pill ── */
-.uc-refresh-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 11px;
-  color: var(--text-tertiary);
-  background: var(--bg-surface-alt);
-  border: 1px solid var(--border-subtle);
-  border-radius: 20px;
-  padding: 3px 10px;
-  white-space: nowrap;
-  flex-shrink: 0;
-  cursor: default;
-}
-.uc-refresh-pill i[data-lucide],
-.uc-refresh-pill svg { width: 11px; height: 11px; }
-
-/* ── Environment pill ── */
-.uc-pill--env {
-  font-size: 11px;
-  font-weight: 600;
-  padding: 3px 10px;
-  border-radius: 20px;
-  background: var(--success-bg);
-  color: var(--success);
-  border: 1px solid rgba(16,185,129,.2);
-  letter-spacing: .2px;
-  white-space: nowrap;
-}
-
-/* ── Topbar brand (mobile logo) ── */
-.topbar-brand-mobile {
-  display: none;
-}
-@media (max-width: 991px) {
-  .topbar-brand-mobile {
-    display: flex;
-    align-items: center;
-    flex: 1;
-    justify-content: center;
-  }
-  .topbar-brand-mobile img { height: 20px; }
-  .topbar-breadcrumb { display: none; }
-  .topbar-search-trigger { display: none !important; }
-}
-
-/* ── Dark mode overrides for new shell elements ── */
-[data-theme="dark"] .sidebar-logo-full {
-  filter: brightness(0) invert(1) opacity(.85);
-}
-[data-theme="dark"] .topbar-search-trigger {
-  background: var(--bg-surface-alt);
-  border-color: var(--border-default);
-  color: var(--text-tertiary);
-}
-[data-theme="dark"] .search-trigger-kbd {
-  background: var(--bg-canvas);
-  border-color: var(--border-default);
-}
-[data-theme="dark"] .uc-pill--env {
-  background: rgba(16,185,129,.1);
-  border-color: rgba(16,185,129,.2);
-}
-[data-theme="dark"] .sidebar-flyout {
-  background: var(--bg-surface);
-  border-color: var(--border-default);
-}
-[data-theme="dark"] .uc-refresh-pill {
-  background: var(--bg-surface-alt);
-  border-color: var(--border-default);
 }
