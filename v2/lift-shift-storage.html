@@ -13,6 +13,78 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* ── Page-local styles ── */
+    .page-hero {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid #8b5cf6;
+      border-radius: var(--radius-lg);
+      padding: 18px 22px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .page-hero-title { font-size: 15px; font-weight: 600; color: var(--text-primary); margin: 0; }
+    .page-hero-desc  { font-size: 12px; color: var(--text-muted); margin: 2px 0 0; }
+    .hero-chip {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px; border-radius: 20px; font-size: 11.5px; font-weight: 500;
+      background: var(--brand-primary-bg); color: var(--brand-primary);
+    }
+    .hero-chip.purple { background: #f5f3ff; color: #7c3aed; }
+    .hero-chip.green  { background: var(--success-bg, #f0fdf4); color: var(--success, #16a34a); }
+    .hero-chip.orange { background: var(--warning-bg, #fffbeb); color: var(--warning, #d97706); }
+
+    .metric-tile {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      display: flex; flex-direction: column;
+    }
+    .metric-tile .mt-label { font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+    .metric-tile .mt-value { font-size: 28px; font-weight: 700; color: var(--text-primary); line-height: 1; }
+    .metric-tile .mt-sub   { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+    .metric-tile .mt-badge { margin-top: 8px; }
+
+    .dc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); }
+    .dc-header { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+    .dc-title  { font-size: 13px; font-weight: 600; color: var(--text-primary); margin: 0; }
+    .dc-body   { padding: 16px 18px; }
+
+    .tbl { width: 100%; font-size: 12.5px; border-collapse: collapse; }
+    .tbl th { font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted); padding: 8px 12px; background: var(--surface-alt, var(--surface)); border-bottom: 1px solid var(--border); white-space: nowrap; }
+    .tbl td { padding: 9px 12px; border-bottom: 1px solid var(--border); color: var(--text-primary); vertical-align: middle; }
+    .tbl tr:last-child td { border-bottom: none; }
+    .tbl tr:hover td { background: var(--surface-hover, rgba(21,161,220,.04)); }
+
+    .util-bar-wrap { display: flex; align-items: center; gap: 8px; }
+    .util-bar-track { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+    .util-bar-fill  { height: 100%; border-radius: 3px; }
+
+    .tier-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 6px; flex-shrink: 0; }
+
+    .badge-status { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+    .bs-ready   { background: #f0fdf4; color: #16a34a; }
+    .bs-review  { background: #fffbeb; color: #d97706; }
+    .bs-block   { background: #fef2f2; color: #dc2626; }
+    .bs-planned { background: #f0f9ff; color: #0284c7; }
+
+    .cost-compare-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .cc-label { width: 110px; font-size: 12px; color: var(--text-secondary); flex-shrink: 0; }
+    .cc-bar-wrap { flex: 1; position: relative; }
+    .cc-bar { height: 22px; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; font-size: 12px; font-weight: 600; color: #fff; }
+    .cc-note { width: 60px; text-align: right; font-size: 12px; font-weight: 600; color: var(--text-primary); }
+
+    .net-service-row { display: flex; align-items: center; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 12.5px; }
+    .net-service-row:last-child { border-bottom: none; }
+    .nsr-name { color: var(--text-primary); }
+    .nsr-detail { color: var(--text-muted); font-size: 11.5px; margin-top: 2px; }
+    .nsr-cost { font-weight: 600; color: var(--text-primary); }
+  </style>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -34,7 +106,7 @@
     <div class="sidebar-submenu" id="liftShiftSub">
       <a href="lift-shift-insights.html" class="sidebar-link sidebar-sublink" data-label="Insights"><span class="link-icon"><i data-lucide="bar-chart-2"></i></span><span class="link-text">Insights</span></a>
       <a href="lift-shift-server.html" class="sidebar-link sidebar-sublink" data-label="Server Assessment"><span class="link-icon"><i data-lucide="server"></i></span><span class="link-text">Server Assessment</span></a>
-      <a href="lift-shift-storage.html" class="sidebar-link sidebar-sublink" data-label="Storage Assessment"><span class="link-icon"><i data-lucide="hard-drive"></i></span><span class="link-text">Storage Assessment</span></a>
+      <a href="lift-shift-storage.html" class="sidebar-link sidebar-sublink active" data-label="Storage Assessment"><span class="link-icon"><i data-lucide="hard-drive"></i></span><span class="link-text">Storage Assessment</span></a>
     </div>
     <a href="assessment-modernization.html" class="sidebar-link" data-label="Modernization"><span class="link-icon"><i data-lucide="sparkles"></i></span><span class="link-text">Modernization</span></a>
     <a href="dependency-mapping.html" class="sidebar-link" data-label="Dependencies"><span class="link-icon"><i data-lucide="git-fork"></i></span><span class="link-text">Dependency Mapping</span></a>
@@ -70,7 +142,7 @@
   </div>
   <div class="topbar-breadcrumb">
     <h1 class="page-title">Storage Assessment</h1>
-    <p class="page-subtitle">Lift &amp; Shift &middot; Disk Tiers &amp; Capacity Planning</p>
+    <p class="page-subtitle">Lift &amp; Shift &middot; Disk Tiers, Capacity &amp; Cost Planning</p>
   </div>
   <button class="topbar-search-trigger d-none d-lg-flex" data-uc-palette aria-label="Open command palette (Ctrl+K)">
     <i data-lucide="search"></i>
@@ -137,25 +209,483 @@
 </header>
 
 <main id="main-content">
-  <div class="empty-state" style="padding: 80px 20px;">
-    <div class="empty-state-icon" style="width:72px;height:72px;font-size:30px;">
-      <i class="fas fa-hard-drive text-primary"></i>
+
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <div>
+      <p class="page-hero-title">Storage Assessment — 328 Managed Disks Discovered</p>
+      <p class="page-hero-desc">Azure Managed Disk tier mapping · Capacity &amp; cost analysis · Data as of April 2026</p>
     </div>
-    <div class="empty-state-title mt-3">Storage Assessment</div>
-    <div class="empty-state-desc mt-2" style="max-width:400px;margin:0 auto;">
-      This module is under construction. Disk tier analysis, managed disk profiles, and capacity planning recommendations will appear here.
-    </div>
-    <div class="mt-4">
-      <span class="badge badge-muted" style="font-size:12px;padding:6px 14px;">Coming Soon</span>
+    <div class="d-flex flex-wrap gap-2 ms-auto">
+      <span class="hero-chip purple"><i data-lucide="hard-drive" style="width:13px;height:13px;"></i>77.4% Prod Used</span>
+      <span class="hero-chip"><i data-lucide="layers" style="width:13px;height:13px;"></i>74.2% Dev/Test Used</span>
+      <span class="hero-chip orange"><i data-lucide="circle-dollar-sign" style="width:13px;height:13px;"></i>$1.47M Disk/mo</span>
+      <span class="hero-chip green"><i data-lucide="network" style="width:13px;height:13px;"></i>$158K Net + Ops</span>
     </div>
   </div>
+
+  <!-- KPI Tiles -->
+  <div class="row g-3 mb-4">
+    <div class="col-6 col-xl-3">
+      <div class="metric-tile">
+        <div class="mt-label">Prod Disk Utilisation</div>
+        <div class="mt-value" style="color:#7c3aed;">77.4%</div>
+        <div class="mt-sub">Avg across prod volumes</div>
+        <div class="mt-badge"><span class="badge-status bs-review">High</span></div>
+      </div>
+    </div>
+    <div class="col-6 col-xl-3">
+      <div class="metric-tile">
+        <div class="mt-label">Dev/Test Disk Utilisation</div>
+        <div class="mt-value">74.2%</div>
+        <div class="mt-sub">Candidate for right-sizing</div>
+        <div class="mt-badge"><span class="badge-status bs-review">Review</span></div>
+      </div>
+    </div>
+    <div class="col-6 col-xl-3">
+      <div class="metric-tile">
+        <div class="mt-label">Monthly Disk Cost (Azure)</div>
+        <div class="mt-value">$1.47M</div>
+        <div class="mt-sub">Standard + Premium tiers</div>
+        <div class="mt-badge"><span class="badge-status bs-block">PAYG</span></div>
+      </div>
+    </div>
+    <div class="col-6 col-xl-3">
+      <div class="metric-tile">
+        <div class="mt-label">Network + Ops Services</div>
+        <div class="mt-value">$158K</div>
+        <div class="mt-sub">Egress, DNS, Backup, NSG</div>
+        <div class="mt-badge"><span class="badge-status bs-planned">Included</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Row -->
+  <div class="row g-3 mb-4">
+    <div class="col-lg-5">
+      <div class="dc h-100">
+        <div class="dc-header">
+          <h2 class="dc-title">Storage Utilisation by Environment</h2>
+          <span style="font-size:11px;color:var(--text-muted);">Capacity vs Used</span>
+        </div>
+        <div class="dc-body d-flex align-items-center justify-content-center">
+          <canvas id="storageUtilChart" style="max-height:230px;"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-7">
+      <div class="dc h-100">
+        <div class="dc-header">
+          <h2 class="dc-title">Azure Managed Disk Cost Comparison</h2>
+          <span style="font-size:11px;color:var(--text-muted);">PAYG vs 3-yr Reserved</span>
+        </div>
+        <div class="dc-body">
+          <div class="mb-3" style="font-size:12px;color:var(--text-muted);">Monthly cost estimates for all 328 disks across tiers</div>
+
+          <div class="cost-compare-row">
+            <span class="cc-label">Standard SSD</span>
+            <div class="cc-bar-wrap">
+              <div class="cc-bar" style="width:100%;background:#6366f1;">$10,759 PAYG</div>
+            </div>
+          </div>
+          <div class="cost-compare-row" style="margin-top:-6px;margin-bottom:18px;">
+            <span class="cc-label"></span>
+            <div class="cc-bar-wrap">
+              <div class="cc-bar" style="width:65%;background:#a5b4fc;color:#3730a3;">$6,993 Reserved</div>
+            </div>
+          </div>
+
+          <div class="cost-compare-row">
+            <span class="cc-label">Standard HDD</span>
+            <div class="cc-bar-wrap">
+              <div class="cc-bar" style="width:50%;background:#94a3b8;">$5,370 PAYG</div>
+            </div>
+          </div>
+          <div class="cost-compare-row" style="margin-top:-6px;margin-bottom:18px;">
+            <span class="cc-label"></span>
+            <div class="cc-bar-wrap">
+              <div class="cc-bar" style="width:32%;background:#cbd5e1;color:#334155;">$3,491 Reserved</div>
+            </div>
+          </div>
+
+          <div class="cost-compare-row">
+            <span class="cc-label">Premium SSD</span>
+            <div class="cc-bar-wrap">
+              <div class="cc-bar" style="width:15%;background:#15A1DC;">$1,640 PAYG</div>
+            </div>
+          </div>
+          <div class="cost-compare-row" style="margin-top:-6px;">
+            <span class="cc-label"></span>
+            <div class="cc-bar-wrap">
+              <div class="cc-bar" style="width:10%;background:#7dd3fc;color:#0369a1;">$1,066 Rsv</div>
+            </div>
+          </div>
+
+          <div class="mt-3 pt-2 border-top" style="font-size:12px;">
+            <span style="color:var(--text-muted);">Total PAYG: </span><strong>$17,769/mo</strong>
+            <span class="ms-3" style="color:var(--text-muted);">Reserved: </span><strong style="color:#16a34a;">$11,550/mo</strong>
+            <span class="ms-3 badge-status bs-ready" style="font-size:11px;">35% saving</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Managed Disk Profile Table -->
+  <div class="dc mb-4">
+    <div class="dc-header">
+      <h2 class="dc-title">Managed Disk Profile — All Tiers</h2>
+      <div class="d-flex gap-2">
+        <input type="text" class="form-control form-control-sm table-search" data-target="#diskTable" placeholder="Filter disks…" style="width:200px;">
+        <button class="btn btn-sm btn-outline-secondary" data-export-table="diskTable"><i data-lucide="download" style="width:14px;height:14px;"></i></button>
+      </div>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="tbl data-table" id="diskTable">
+        <thead>
+          <tr>
+            <th data-sort>Disk Tier</th>
+            <th data-sort>Count</th>
+            <th data-sort>Total Size (TB)</th>
+            <th data-sort>Avg Size (GB)</th>
+            <th data-sort>Avg Utilisation</th>
+            <th data-sort>PAYG/mo</th>
+            <th data-sort>Reserved/mo</th>
+            <th>Recommended Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tier-dot" style="background:#6366f1;"></span>Standard SSD (E-series)</td>
+            <td>148</td>
+            <td>29.6 TB</td>
+            <td>204 GB</td>
+            <td>
+              <div class="util-bar-wrap">
+                <div class="util-bar-track"><div class="util-bar-fill" style="width:72%;background:#6366f1;"></div></div>
+                <span style="font-size:11.5px;font-weight:600;width:36px;">72%</span>
+              </div>
+            </td>
+            <td>$10,759</td>
+            <td style="color:#16a34a;font-weight:600;">$6,993</td>
+            <td><span class="badge-status bs-ready">Retain — right tier</span></td>
+          </tr>
+          <tr>
+            <td><span class="tier-dot" style="background:#94a3b8;"></span>Standard HDD (S-series)</td>
+            <td>161</td>
+            <td>40.3 TB</td>
+            <td>255 GB</td>
+            <td>
+              <div class="util-bar-wrap">
+                <div class="util-bar-track"><div class="util-bar-fill" style="width:61%;background:#94a3b8;"></div></div>
+                <span style="font-size:11.5px;font-weight:600;width:36px;">61%</span>
+              </div>
+            </td>
+            <td>$5,370</td>
+            <td style="color:#16a34a;font-weight:600;">$3,491</td>
+            <td><span class="badge-status bs-review">Review — upgrade dev/test?</span></td>
+          </tr>
+          <tr>
+            <td><span class="tier-dot" style="background:#15A1DC;"></span>Premium SSD (P-series)</td>
+            <td>19</td>
+            <td>4.8 TB</td>
+            <td>257 GB</td>
+            <td>
+              <div class="util-bar-wrap">
+                <div class="util-bar-track"><div class="util-bar-fill" style="width:88%;background:#15A1DC;"></div></div>
+                <span style="font-size:11.5px;font-weight:600;width:36px;">88%</span>
+              </div>
+            </td>
+            <td>$1,640</td>
+            <td style="color:#16a34a;font-weight:600;">$1,066</td>
+            <td><span class="badge-status bs-block">DB workloads — keep Premium</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Largest Prod Hosts by Storage + Network Services -->
+  <div class="row g-3 mb-4">
+    <div class="col-lg-6">
+      <div class="dc">
+        <div class="dc-header">
+          <h2 class="dc-title">Largest Production Hosts by Storage</h2>
+          <span class="badge-status bs-block" style="font-size:11px;">Top 8</span>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="tbl data-table">
+            <thead>
+              <tr>
+                <th data-sort>Host</th>
+                <th data-sort>Role</th>
+                <th data-sort>Disk Size</th>
+                <th data-sort>Used</th>
+                <th data-sort>Tier</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code style="font-size:11px;">PROD-DB-01</code></td>
+                <td>Oracle DB Primary</td>
+                <td>4,096 GB</td>
+                <td>
+                  <div class="util-bar-wrap">
+                    <div class="util-bar-track"><div class="util-bar-fill" style="width:89%;background:#dc2626;"></div></div>
+                    <span style="font-size:11px;width:32px;">89%</span>
+                  </div>
+                </td>
+                <td><span class="tier-dot" style="background:#15A1DC;"></span>Premium</td>
+              </tr>
+              <tr>
+                <td><code style="font-size:11px;">PROD-DB-02</code></td>
+                <td>Oracle DB Standby</td>
+                <td>4,096 GB</td>
+                <td>
+                  <div class="util-bar-wrap">
+                    <div class="util-bar-track"><div class="util-bar-fill" style="width:85%;background:#dc2626;"></div></div>
+                    <span style="font-size:11px;width:32px;">85%</span>
+                  </div>
+                </td>
+                <td><span class="tier-dot" style="background:#15A1DC;"></span>Premium</td>
+              </tr>
+              <tr>
+                <td><code style="font-size:11px;">PROD-DWH-01</code></td>
+                <td>Data Warehouse</td>
+                <td>8,192 GB</td>
+                <td>
+                  <div class="util-bar-wrap">
+                    <div class="util-bar-track"><div class="util-bar-fill" style="width:76%;background:#d97706;"></div></div>
+                    <span style="font-size:11px;width:32px;">76%</span>
+                  </div>
+                </td>
+                <td><span class="tier-dot" style="background:#6366f1;"></span>Std SSD</td>
+              </tr>
+              <tr>
+                <td><code style="font-size:11px;">PROD-APP-01</code></td>
+                <td>App Server</td>
+                <td>1,024 GB</td>
+                <td>
+                  <div class="util-bar-wrap">
+                    <div class="util-bar-track"><div class="util-bar-fill" style="width:61%;background:#16a34a;"></div></div>
+                    <span style="font-size:11px;width:32px;">61%</span>
+                  </div>
+                </td>
+                <td><span class="tier-dot" style="background:#6366f1;"></span>Std SSD</td>
+              </tr>
+              <tr>
+                <td><code style="font-size:11px;">PROD-LOG-01</code></td>
+                <td>Log Aggregation</td>
+                <td>2,048 GB</td>
+                <td>
+                  <div class="util-bar-wrap">
+                    <div class="util-bar-track"><div class="util-bar-fill" style="width:82%;background:#dc2626;"></div></div>
+                    <span style="font-size:11px;width:32px;">82%</span>
+                  </div>
+                </td>
+                <td><span class="tier-dot" style="background:#94a3b8;"></span>Std HDD</td>
+              </tr>
+              <tr>
+                <td><code style="font-size:11px;">PROD-BCK-01</code></td>
+                <td>Backup Target</td>
+                <td>16,384 GB</td>
+                <td>
+                  <div class="util-bar-wrap">
+                    <div class="util-bar-track"><div class="util-bar-fill" style="width:68%;background:#d97706;"></div></div>
+                    <span style="font-size:11px;width:32px;">68%</span>
+                  </div>
+                </td>
+                <td><span class="tier-dot" style="background:#94a3b8;"></span>Std HDD</td>
+              </tr>
+              <tr>
+                <td><code style="font-size:11px;">PROD-NFS-01</code></td>
+                <td>NFS File Share</td>
+                <td>5,120 GB</td>
+                <td>
+                  <div class="util-bar-wrap">
+                    <div class="util-bar-track"><div class="util-bar-fill" style="width:54%;background:#16a34a;"></div></div>
+                    <span style="font-size:11px;width:32px;">54%</span>
+                  </div>
+                </td>
+                <td><span class="tier-dot" style="background:#94a3b8;"></span>Std HDD</td>
+              </tr>
+              <tr>
+                <td><code style="font-size:11px;">PROD-ARCH-01</code></td>
+                <td>Archive Store</td>
+                <td>20,480 GB</td>
+                <td>
+                  <div class="util-bar-wrap">
+                    <div class="util-bar-track"><div class="util-bar-fill" style="width:44%;background:#16a34a;"></div></div>
+                    <span style="font-size:11px;width:32px;">44%</span>
+                  </div>
+                </td>
+                <td><span class="tier-dot" style="background:#94a3b8;"></span>Std HDD</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="dc h-100">
+        <div class="dc-header">
+          <h2 class="dc-title">Network, Security &amp; Operations Services</h2>
+          <span style="font-size:11px;color:var(--text-muted);">Monthly cost estimate</span>
+        </div>
+        <div class="dc-body">
+
+          <div style="font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;">Networking</div>
+          <div class="net-service-row">
+            <div><div class="nsr-name">Azure ExpressRoute (1 Gbps)</div><div class="nsr-detail">Primary circuit — 2 data centres</div></div>
+            <span class="nsr-cost">$4,200/mo</span>
+          </div>
+          <div class="net-service-row">
+            <div><div class="nsr-name">Azure Firewall Premium</div><div class="nsr-detail">Hub VNet — 2 instances</div></div>
+            <span class="nsr-cost">$3,104/mo</span>
+          </div>
+          <div class="net-service-row">
+            <div><div class="nsr-name">Egress Data Transfer</div><div class="nsr-detail">Est. 40 TB/mo outbound</div></div>
+            <span class="nsr-cost">$1,536/mo</span>
+          </div>
+          <div class="net-service-row">
+            <div><div class="nsr-name">Azure DNS + Private Zones</div><div class="nsr-detail">32 private zones</div></div>
+            <span class="nsr-cost">$128/mo</span>
+          </div>
+
+          <div style="font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--text-muted);margin-top:16px;margin-bottom:8px;">Security</div>
+          <div class="net-service-row">
+            <div><div class="nsr-name">Microsoft Defender for Cloud</div><div class="nsr-detail">All 217 servers — enhanced</div></div>
+            <span class="nsr-cost">$2,170/mo</span>
+          </div>
+          <div class="net-service-row">
+            <div><div class="nsr-name">Key Vault + Managed HSM</div><div class="nsr-detail">Secret operations, cert lifecycle</div></div>
+            <span class="nsr-cost">$420/mo</span>
+          </div>
+
+          <div style="font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--text-muted);margin-top:16px;margin-bottom:8px;">Operations</div>
+          <div class="net-service-row">
+            <div><div class="nsr-name">Azure Monitor + Log Analytics</div><div class="nsr-detail">100 GB ingestion/day retained 30d</div></div>
+            <span class="nsr-cost">$3,200/mo</span>
+          </div>
+          <div class="net-service-row">
+            <div><div class="nsr-name">Azure Backup (Vault)</div><div class="nsr-detail">LRS policy, 90-day retention</div></div>
+            <span class="nsr-cost">$6,840/mo</span>
+          </div>
+          <div class="net-service-row" style="border-bottom:none;">
+            <div><div class="nsr-name">Azure Site Recovery</div><div class="nsr-detail">Replication for 107 prod VMs</div></div>
+            <span class="nsr-cost">$2,782/mo</span>
+          </div>
+
+          <div class="mt-3 pt-2 border-top" style="font-size:12px;">
+            <span style="color:var(--text-muted);">Total Network + Ops: </span>
+            <strong>$24,380/mo</strong>
+            <span class="ms-3" style="color:var(--text-muted);">Annual: </span>
+            <strong>$292,560</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Storage Utilisation per Tier Bars -->
+  <div class="dc mb-4">
+    <div class="dc-header">
+      <h2 class="dc-title">Disk Utilisation Distribution</h2>
+      <span style="font-size:11px;color:var(--text-muted);">By utilisation bucket across all 328 disks</span>
+    </div>
+    <div class="dc-body">
+      <canvas id="utilDistChart" height="100"></canvas>
+    </div>
+  </div>
+
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
 <script src="assets/js/main.js"></script>
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-  <script src="assets/js/lucide-init.js"></script>
-  <script src="assets/js/ui.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="assets/js/lucide-init.js"></script>
+<script src="assets/js/ui.js"></script>
+<script>
+function initPageCharts() {
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  var gridColor  = isDark ? 'rgba(255,255,255,.08)' : 'rgba(0,0,0,.06)';
+  var labelColor = isDark ? '#94a3b8' : '#64748b';
+
+  // Storage utilisation doughnut
+  var storCtx = document.getElementById('storageUtilChart');
+  if (storCtx) {
+    new Chart(storCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Prod Used (77.4%)', 'Prod Free', 'Dev/Test Used (74.2%)', 'Dev/Test Free'],
+        datasets: [{
+          data: [77.4, 22.6, 74.2, 25.8],
+          backgroundColor: ['#7c3aed', '#ede9fe', '#15A1DC', '#e0f2fe'],
+          borderWidth: 0,
+          hoverOffset: 6
+        }]
+      },
+      options: {
+        cutout: '70%',
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: { color: labelColor, boxWidth: 12, padding: 14, font: { size: 11 } }
+          }
+        }
+      }
+    });
+  }
+
+  // Utilisation distribution bar
+  var utilCtx = document.getElementById('utilDistChart');
+  if (utilCtx) {
+    new Chart(utilCtx, {
+      type: 'bar',
+      data: {
+        labels: ['0–20%', '21–40%', '41–60%', '61–80%', '81–100%'],
+        datasets: [
+          {
+            label: 'Standard SSD',
+            data: [8, 22, 44, 51, 23],
+            backgroundColor: '#6366f1',
+            borderRadius: 4
+          },
+          {
+            label: 'Standard HDD',
+            data: [14, 31, 48, 42, 26],
+            backgroundColor: '#94a3b8',
+            borderRadius: 4
+          },
+          {
+            label: 'Premium SSD',
+            data: [0, 1, 3, 9, 6],
+            backgroundColor: '#15A1DC',
+            borderRadius: 4
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'bottom', labels: { color: labelColor, boxWidth: 12, padding: 16 } }
+        },
+        scales: {
+          x: { grid: { color: gridColor }, ticks: { color: labelColor } },
+          y: {
+            grid: { color: gridColor },
+            ticks: { color: labelColor },
+            title: { display: true, text: 'Disk count', color: labelColor, font: { size: 11 } }
+          }
+        }
+      }
+    });
+  }
+}
+</script>
 </body>
 </html>

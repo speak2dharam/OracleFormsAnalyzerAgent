@@ -13,6 +13,84 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* ── Page-local styles ── */
+    .page-hero {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--brand-primary);
+      border-radius: var(--radius-lg);
+      padding: 18px 22px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .page-hero-title { font-size: 15px; font-weight: 600; color: var(--text-primary); margin: 0; }
+    .page-hero-desc  { font-size: 12px; color: var(--text-muted); margin: 2px 0 0; }
+    .hero-chip {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px; border-radius: 20px; font-size: 11.5px; font-weight: 500;
+      background: var(--brand-primary-bg); color: var(--brand-primary);
+    }
+    .hero-chip.green { background: var(--success-bg, #f0fdf4); color: var(--success, #16a34a); }
+    .hero-chip.orange{ background: var(--warning-bg, #fffbeb); color: var(--warning, #d97706); }
+
+    .metric-tile {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      display: flex; flex-direction: column;
+    }
+    .metric-tile .mt-label { font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+    .metric-tile .mt-value { font-size: 28px; font-weight: 700; color: var(--text-primary); line-height: 1; }
+    .metric-tile .mt-sub   { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+    .metric-tile .mt-badge { margin-top: 8px; }
+
+    .dc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); }
+    .dc-header { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+    .dc-title  { font-size: 13px; font-weight: 600; color: var(--text-primary); margin: 0; }
+    .dc-body   { padding: 16px 18px; }
+
+    .tbl { width: 100%; font-size: 12.5px; border-collapse: collapse; }
+    .tbl th { font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted); padding: 8px 12px; background: var(--surface-alt, var(--surface)); border-bottom: 1px solid var(--border); white-space: nowrap; }
+    .tbl td { padding: 9px 12px; border-bottom: 1px solid var(--border); color: var(--text-primary); vertical-align: middle; }
+    .tbl tr:last-child td { border-bottom: none; }
+    .tbl tr:hover td { background: var(--surface-hover, rgba(21,161,220,.04)); }
+
+    .split-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .split-bar-label { width: 130px; font-size: 12px; color: var(--text-secondary); flex-shrink: 0; }
+    .split-bar-track { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+    .split-bar-fill  { height: 100%; border-radius: 4px; }
+    .split-bar-val   { width: 46px; text-align: right; font-size: 12px; font-weight: 600; color: var(--text-primary); }
+
+    .gate-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+    .gate-row:last-child { border-bottom: none; }
+    .gate-icon { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+    .gate-name { flex: 1; font-size: 13px; color: var(--text-primary); }
+    .gate-pct  { font-size: 12px; font-weight: 600; color: var(--text-secondary); width: 36px; text-align: right; }
+    .gate-bar  { width: 80px; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+    .gate-bar-fill { height: 100%; border-radius: 3px; }
+
+    .sc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 14px; display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
+    .sc:last-child { margin-bottom: 0; }
+    .sc-icon { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+    .sc-body { flex: 1; }
+    .sc-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+    .sc-desc { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+    .compact-list { list-style: none; padding: 0; margin: 0; }
+    .compact-list li { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 12.5px; color: var(--text-primary); }
+    .compact-list li:last-child { border-bottom: none; }
+
+    .badge-status { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+    .bs-ready   { background: #f0fdf4; color: #16a34a; }
+    .bs-review  { background: #fffbeb; color: #d97706; }
+    .bs-block   { background: #fef2f2; color: #dc2626; }
+    .bs-planned { background: #f0f9ff; color: #0284c7; }
+  </style>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -33,7 +111,7 @@
     <a href="#" class="sidebar-link has-submenu" data-submenu="liftShiftSub" data-label="Lift &amp; Shift"><span class="link-icon"><i data-lucide="trending-up"></i></span><span class="link-text">Lift &amp; Shift</span><i data-lucide="chevron-right" class="submenu-arrow"></i></a>
     <div class="sidebar-submenu" id="liftShiftSub">
       <a href="lift-shift-insights.html" class="sidebar-link sidebar-sublink" data-label="Insights"><span class="link-icon"><i data-lucide="bar-chart-2"></i></span><span class="link-text">Insights</span></a>
-      <a href="lift-shift-server.html" class="sidebar-link sidebar-sublink" data-label="Server Assessment"><span class="link-icon"><i data-lucide="server"></i></span><span class="link-text">Server Assessment</span></a>
+      <a href="lift-shift-server.html" class="sidebar-link sidebar-sublink active" data-label="Server Assessment"><span class="link-icon"><i data-lucide="server"></i></span><span class="link-text">Server Assessment</span></a>
       <a href="lift-shift-storage.html" class="sidebar-link sidebar-sublink" data-label="Storage Assessment"><span class="link-icon"><i data-lucide="hard-drive"></i></span><span class="link-text">Storage Assessment</span></a>
     </div>
     <a href="assessment-modernization.html" class="sidebar-link" data-label="Modernization"><span class="link-icon"><i data-lucide="sparkles"></i></span><span class="link-text">Modernization</span></a>
@@ -70,7 +148,7 @@
   </div>
   <div class="topbar-breadcrumb">
     <h1 class="page-title">Server Assessment</h1>
-    <p class="page-subtitle">Lift &amp; Shift &middot; Server Inventory &amp; Sizing</p>
+    <p class="page-subtitle">Lift &amp; Shift &middot; Server Inventory &amp; Azure VM Sizing</p>
   </div>
   <button class="topbar-search-trigger d-none d-lg-flex" data-uc-palette aria-label="Open command palette (Ctrl+K)">
     <i data-lucide="search"></i>
@@ -137,25 +215,551 @@
 </header>
 
 <main id="main-content">
-  <div class="empty-state" style="padding: 80px 20px;">
-    <div class="empty-state-icon" style="width:72px;height:72px;font-size:30px;">
-      <i class="fas fa-server text-primary"></i>
+
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <div>
+      <p class="page-hero-title">Server Assessment — 217 Total Servers Discovered</p>
+      <p class="page-hero-desc">Azure VM sizing derived from right-sizing engine · Data as of April 2026</p>
     </div>
-    <div class="empty-state-title mt-3">Server Assessment</div>
-    <div class="empty-state-desc mt-2" style="max-width:400px;margin:0 auto;">
-      This module is under construction. Server inventory, sizing recommendations, and Azure VM mapping will appear here.
-    </div>
-    <div class="mt-4">
-      <span class="badge badge-muted" style="font-size:12px;padding:6px 14px;">Coming Soon</span>
+    <div class="d-flex flex-wrap gap-2 ms-auto">
+      <span class="hero-chip"><i data-lucide="server" style="width:13px;height:13px;"></i>107 Production</span>
+      <span class="hero-chip"><i data-lucide="layers" style="width:13px;height:13px;"></i>110 Dev / Test</span>
+      <span class="hero-chip green"><i data-lucide="cpu" style="width:13px;height:13px;"></i>505 vCPU</span>
+      <span class="hero-chip orange"><i data-lucide="memory-stick" style="width:13px;height:13px;"></i>3,739 GB RAM</span>
     </div>
   </div>
+
+  <!-- KPI Tiles -->
+  <div class="row g-3 mb-4">
+    <div class="col-6 col-xl-3">
+      <div class="metric-tile">
+        <div class="mt-label">Production Servers</div>
+        <div class="mt-value counter-animate" data-target="107">107</div>
+        <div class="mt-sub">Across 3 data centres</div>
+        <div class="mt-badge"><span class="badge-status bs-ready">Active</span></div>
+      </div>
+    </div>
+    <div class="col-6 col-xl-3">
+      <div class="metric-tile">
+        <div class="mt-label">Dev / Test Servers</div>
+        <div class="mt-value counter-animate" data-target="110">110</div>
+        <div class="mt-sub">Candidate for consolidation</div>
+        <div class="mt-badge"><span class="badge-status bs-planned">Planned</span></div>
+      </div>
+    </div>
+    <div class="col-6 col-xl-3">
+      <div class="metric-tile">
+        <div class="mt-label">PAYG Monthly Cost</div>
+        <div class="mt-value">$281K</div>
+        <div class="mt-sub">Azure VM equivalents</div>
+        <div class="mt-badge"><span class="badge-status bs-review">Estimate</span></div>
+      </div>
+    </div>
+    <div class="col-6 col-xl-3">
+      <div class="metric-tile">
+        <div class="mt-label">Reserved Savings</div>
+        <div class="mt-value" style="color:var(--success,#16a34a);">37.7%</div>
+        <div class="mt-sub">3-yr reserved vs PAYG</div>
+        <div class="mt-badge"><span class="badge-status bs-ready">$106K/mo saved</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Row -->
+  <div class="row g-3 mb-4">
+    <div class="col-lg-6">
+      <div class="dc">
+        <div class="dc-header">
+          <h2 class="dc-title">Environment Mix by OS</h2>
+          <span class="badge-status bs-planned" style="font-size:11px;">217 Servers</span>
+        </div>
+        <div class="dc-body">
+          <canvas id="envMixChart" height="200"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="dc">
+        <div class="dc-header">
+          <h2 class="dc-title">Top Production OS Distribution</h2>
+          <span class="badge-status bs-ready" style="font-size:11px;">107 Prod Servers</span>
+        </div>
+        <div class="dc-body">
+          <canvas id="osDist" height="200"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- vCPU / RAM Split Bars -->
+  <div class="row g-3 mb-4">
+    <div class="col-lg-6">
+      <div class="dc">
+        <div class="dc-header"><h2 class="dc-title">vCPU Allocation by Tier</h2></div>
+        <div class="dc-body">
+          <div class="split-bar-row">
+            <span class="split-bar-label">Production</span>
+            <div class="split-bar-track"><div class="split-bar-fill" style="width:58%;background:var(--brand-primary);"></div></div>
+            <span class="split-bar-val">293</span>
+          </div>
+          <div class="split-bar-row">
+            <span class="split-bar-label">Dev / Test</span>
+            <div class="split-bar-track"><div class="split-bar-fill" style="width:42%;background:#94a3b8;"></div></div>
+            <span class="split-bar-val">212</span>
+          </div>
+          <div class="split-bar-row">
+            <span class="split-bar-label">Windows</span>
+            <div class="split-bar-track"><div class="split-bar-fill" style="width:65%;background:#6366f1;"></div></div>
+            <span class="split-bar-val">328</span>
+          </div>
+          <div class="split-bar-row">
+            <span class="split-bar-label">Linux</span>
+            <div class="split-bar-track"><div class="split-bar-fill" style="width:35%;background:#06b6d4;"></div></div>
+            <span class="split-bar-val">177</span>
+          </div>
+          <div class="split-bar-row">
+            <span class="split-bar-label">Avg Utilisation</span>
+            <div class="split-bar-track"><div class="split-bar-fill" style="width:42%;background:#f59e0b;"></div></div>
+            <span class="split-bar-val">42%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="dc">
+        <div class="dc-header"><h2 class="dc-title">RAM Allocation by Tier (GB)</h2></div>
+        <div class="dc-body">
+          <div class="split-bar-row">
+            <span class="split-bar-label">Production</span>
+            <div class="split-bar-track"><div class="split-bar-fill" style="width:62%;background:var(--brand-primary);"></div></div>
+            <span class="split-bar-val">2,318</span>
+          </div>
+          <div class="split-bar-row">
+            <span class="split-bar-label">Dev / Test</span>
+            <div class="split-bar-track"><div class="split-bar-fill" style="width:38%;background:#94a3b8;"></div></div>
+            <span class="split-bar-val">1,421</span>
+          </div>
+          <div class="split-bar-row">
+            <span class="split-bar-label">Windows</span>
+            <div class="split-bar-track"><div class="split-bar-fill" style="width:70%;background:#6366f1;"></div></div>
+            <span class="split-bar-val">2,617</span>
+          </div>
+          <div class="split-bar-row">
+            <span class="split-bar-label">Linux</span>
+            <div class="split-bar-track"><div class="split-bar-fill" style="width:30%;background:#06b6d4;"></div></div>
+            <span class="split-bar-val">1,122</span>
+          </div>
+          <div class="split-bar-row">
+            <span class="split-bar-label">Avg Utilisation</span>
+            <div class="split-bar-track"><div class="split-bar-fill" style="width:54%;background:#f59e0b;"></div></div>
+            <span class="split-bar-val">54%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Server Inventory Table -->
+  <div class="dc mb-4">
+    <div class="dc-header">
+      <h2 class="dc-title">Server Inventory &amp; Azure VM Mapping</h2>
+      <div class="d-flex gap-2">
+        <input type="text" class="form-control form-control-sm table-search" data-target="#serverTable" placeholder="Filter servers…" style="width:200px;">
+        <button class="btn btn-sm btn-outline-secondary" data-export-table="serverTable"><i data-lucide="download" style="width:14px;height:14px;"></i></button>
+      </div>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="tbl data-table" id="serverTable">
+        <thead>
+          <tr>
+            <th data-sort>Host Name</th>
+            <th data-sort>Role</th>
+            <th data-sort>OS</th>
+            <th data-sort>vCPU</th>
+            <th data-sort>RAM (GB)</th>
+            <th data-sort>CPU Util %</th>
+            <th data-sort>Azure VM SKU</th>
+            <th data-sort>PAYG/mo</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code style="font-size:11px;">PROD-DB-01</code></td>
+            <td>Oracle DB Primary</td>
+            <td>RHEL 8.6</td>
+            <td>16</td>
+            <td>256</td>
+            <td>71%</td>
+            <td>Standard_E16s_v5</td>
+            <td>$1,248</td>
+            <td><span class="badge-status bs-ready">Ready</span></td>
+          </tr>
+          <tr>
+            <td><code style="font-size:11px;">PROD-DB-02</code></td>
+            <td>Oracle DB Standby</td>
+            <td>RHEL 8.6</td>
+            <td>16</td>
+            <td>256</td>
+            <td>35%</td>
+            <td>Standard_E16s_v5</td>
+            <td>$1,248</td>
+            <td><span class="badge-status bs-ready">Ready</span></td>
+          </tr>
+          <tr>
+            <td><code style="font-size:11px;">PROD-APP-01</code></td>
+            <td>WebLogic App Server</td>
+            <td>Windows Server 2019</td>
+            <td>8</td>
+            <td>64</td>
+            <td>58%</td>
+            <td>Standard_D8s_v5</td>
+            <td>$547</td>
+            <td><span class="badge-status bs-ready">Ready</span></td>
+          </tr>
+          <tr>
+            <td><code style="font-size:11px;">PROD-APP-02</code></td>
+            <td>WebLogic App Server</td>
+            <td>Windows Server 2019</td>
+            <td>8</td>
+            <td>64</td>
+            <td>62%</td>
+            <td>Standard_D8s_v5</td>
+            <td>$547</td>
+            <td><span class="badge-status bs-ready">Ready</span></td>
+          </tr>
+          <tr>
+            <td><code style="font-size:11px;">PROD-FORMS-01</code></td>
+            <td>Oracle Forms Server</td>
+            <td>Windows Server 2016</td>
+            <td>4</td>
+            <td>32</td>
+            <td>44%</td>
+            <td>Standard_D4s_v5</td>
+            <td>$274</td>
+            <td><span class="badge-status bs-review">Review</span></td>
+          </tr>
+          <tr>
+            <td><code style="font-size:11px;">PROD-MID-01</code></td>
+            <td>Middleware (MQ)</td>
+            <td>RHEL 7.9</td>
+            <td>4</td>
+            <td>32</td>
+            <td>31%</td>
+            <td>Standard_D4s_v5</td>
+            <td>$274</td>
+            <td><span class="badge-status bs-review">Review</span></td>
+          </tr>
+          <tr>
+            <td><code style="font-size:11px;">PROD-REP-01</code></td>
+            <td>Reporting Server</td>
+            <td>Windows Server 2019</td>
+            <td>4</td>
+            <td>48</td>
+            <td>27%</td>
+            <td>Standard_E4s_v5</td>
+            <td>$312</td>
+            <td><span class="badge-status bs-block">Blocked</span></td>
+          </tr>
+          <tr>
+            <td><code style="font-size:11px;">PROD-UTIL-01</code></td>
+            <td>Utility / Batch</td>
+            <td>Windows Server 2019</td>
+            <td>2</td>
+            <td>16</td>
+            <td>18%</td>
+            <td>Standard_D2s_v5</td>
+            <td>$137</td>
+            <td><span class="badge-status bs-ready">Ready</span></td>
+          </tr>
+          <tr>
+            <td><code style="font-size:11px;">PROD-GW-01</code></td>
+            <td>API Gateway</td>
+            <td>RHEL 8.6</td>
+            <td>4</td>
+            <td>16</td>
+            <td>55%</td>
+            <td>Standard_F4s_v2</td>
+            <td>$198</td>
+            <td><span class="badge-status bs-ready">Ready</span></td>
+          </tr>
+          <tr>
+            <td><code style="font-size:11px;">PROD-MON-01</code></td>
+            <td>Monitoring (OEM)</td>
+            <td>RHEL 8.4</td>
+            <td>4</td>
+            <td>32</td>
+            <td>22%</td>
+            <td>Standard_D4s_v5</td>
+            <td>$274</td>
+            <td><span class="badge-status bs-planned">Planned</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="px-3 pb-2 pt-1" style="font-size:11.5px;color:var(--text-muted);">Showing 10 of 217 servers. Export CSV to view full inventory.</div>
+  </div>
+
+  <!-- Migration Readiness Board + Oracle Validation Queue -->
+  <div class="row g-3 mb-4">
+    <div class="col-lg-6">
+      <div class="dc h-100">
+        <div class="dc-header">
+          <h2 class="dc-title">Migration Readiness Gates</h2>
+          <span style="font-size:11px;color:var(--text-muted);">Production environment</span>
+        </div>
+        <div class="dc-body">
+          <div class="gate-row">
+            <div class="gate-icon" style="background:#f0fdf4;color:#16a34a;"><i data-lucide="check" style="width:14px;height:14px;"></i></div>
+            <span class="gate-name">Network Connectivity Test</span>
+            <div class="gate-bar"><div class="gate-bar-fill" style="width:100%;background:#16a34a;"></div></div>
+            <span class="gate-pct">100%</span>
+          </div>
+          <div class="gate-row">
+            <div class="gate-icon" style="background:#f0fdf4;color:#16a34a;"><i data-lucide="check" style="width:14px;height:14px;"></i></div>
+            <span class="gate-name">Agent Installation</span>
+            <div class="gate-bar"><div class="gate-bar-fill" style="width:96%;background:#16a34a;"></div></div>
+            <span class="gate-pct">96%</span>
+          </div>
+          <div class="gate-row">
+            <div class="gate-icon" style="background:#fffbeb;color:#d97706;"><i data-lucide="clock" style="width:14px;height:14px;"></i></div>
+            <span class="gate-name">Dependency Mapping</span>
+            <div class="gate-bar"><div class="gate-bar-fill" style="width:82%;background:#d97706;"></div></div>
+            <span class="gate-pct">82%</span>
+          </div>
+          <div class="gate-row">
+            <div class="gate-icon" style="background:#fffbeb;color:#d97706;"><i data-lucide="clock" style="width:14px;height:14px;"></i></div>
+            <span class="gate-name">Azure Landing Zone Ready</span>
+            <div class="gate-bar"><div class="gate-bar-fill" style="width:68%;background:#d97706;"></div></div>
+            <span class="gate-pct">68%</span>
+          </div>
+          <div class="gate-row">
+            <div class="gate-icon" style="background:#fef2f2;color:#dc2626;"><i data-lucide="x" style="width:14px;height:14px;"></i></div>
+            <span class="gate-name">DR Runbook Sign-off</span>
+            <div class="gate-bar"><div class="gate-bar-fill" style="width:41%;background:#dc2626;"></div></div>
+            <span class="gate-pct">41%</span>
+          </div>
+          <div class="gate-row">
+            <div class="gate-icon" style="background:#f0f9ff;color:#0284c7;"><i data-lucide="circle-dot" style="width:14px;height:14px;"></i></div>
+            <span class="gate-name">Performance Baseline</span>
+            <div class="gate-bar"><div class="gate-bar-fill" style="width:55%;background:#0284c7;"></div></div>
+            <span class="gate-pct">55%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="dc h-100">
+        <div class="dc-header">
+          <h2 class="dc-title">Oracle Validation Queue</h2>
+          <span class="badge-status bs-review" style="font-size:11px;">5 Pending</span>
+        </div>
+        <div class="dc-body">
+          <div class="sc">
+            <div class="sc-icon" style="background:#fef2f2;color:#dc2626;"><i data-lucide="database" style="width:15px;height:15px;"></i></div>
+            <div class="sc-body">
+              <div class="sc-name">PROD-DB-01 — RAC Node Separation</div>
+              <div class="sc-desc">Oracle RAC config must be dissolved prior to single-VM migration. Requires DBA sign-off.</div>
+            </div>
+            <span class="badge-status bs-block ms-auto">Blocked</span>
+          </div>
+          <div class="sc">
+            <div class="sc-icon" style="background:#fffbeb;color:#d97706;"><i data-lucide="shield" style="width:15px;height:15px;"></i></div>
+            <div class="sc-body">
+              <div class="sc-name">PROD-FORMS-01 — License Entitlement</div>
+              <div class="sc-desc">Oracle Forms 12c license portability to Azure must be confirmed with Oracle LMS.</div>
+            </div>
+            <span class="badge-status bs-review ms-auto">Review</span>
+          </div>
+          <div class="sc">
+            <div class="sc-icon" style="background:#fffbeb;color:#d97706;"><i data-lucide="link" style="width:15px;height:15px;"></i></div>
+            <div class="sc-body">
+              <div class="sc-name">PROD-MID-01 — MQ Binding Audit</div>
+              <div class="sc-desc">IBM MQ bindings to 14 downstream services need remapping for Azure Service Bus migration.</div>
+            </div>
+            <span class="badge-status bs-review ms-auto">Review</span>
+          </div>
+          <div class="sc">
+            <div class="sc-icon" style="background:#f0fdf4;color:#16a34a;"><i data-lucide="circle-check" style="width:15px;height:15px;"></i></div>
+            <div class="sc-body">
+              <div class="sc-name">PROD-APP-01/02 — WebLogic Version Check</div>
+              <div class="sc-desc">WebLogic 14c compatible with Azure VM deployment. Cluster config validated.</div>
+            </div>
+            <span class="badge-status bs-ready ms-auto">Ready</span>
+          </div>
+          <div class="sc">
+            <div class="sc-icon" style="background:#f0f9ff;color:#0284c7;"><i data-lucide="clock" style="width:15px;height:15px;"></i></div>
+            <div class="sc-body">
+              <div class="sc-name">PROD-REP-01 — OBIEE Dependency</div>
+              <div class="sc-desc">Reporting server has OBIEE 12c dependency; separate assessment stream required.</div>
+            </div>
+            <span class="badge-status bs-planned ms-auto">Planned</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Execution Checklist + Ignored Assets -->
+  <div class="row g-3 mb-4">
+    <div class="col-lg-8">
+      <div class="dc">
+        <div class="dc-header">
+          <h2 class="dc-title">Execution Checklist</h2>
+          <span style="font-size:11.5px;color:var(--text-muted);">Wave 1 · Production servers</span>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>Gate</th>
+                <th>Owner</th>
+                <th>Due</th>
+                <th>Status</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Pre-migration snapshot</td>
+                <td>Cloud Ops</td>
+                <td>May 3</td>
+                <td><span class="badge-status bs-ready">Done</span></td>
+                <td style="color:var(--text-muted);font-size:12px;">All 107 prod VMs snapshotted</td>
+              </tr>
+              <tr>
+                <td>Azure VM provisioning</td>
+                <td>Infra Team</td>
+                <td>May 6</td>
+                <td><span class="badge-status bs-ready">Done</span></td>
+                <td style="color:var(--text-muted);font-size:12px;">Sizing reviewed, reservations purchased</td>
+              </tr>
+              <tr>
+                <td>Network / DNS cutover plan</td>
+                <td>NetOps</td>
+                <td>May 10</td>
+                <td><span class="badge-status bs-review">In Progress</span></td>
+                <td style="color:var(--text-muted);font-size:12px;">BGP routes pending approval</td>
+              </tr>
+              <tr>
+                <td>DR runbook validation</td>
+                <td>DBA + Infra</td>
+                <td>May 14</td>
+                <td><span class="badge-status bs-block">Blocked</span></td>
+                <td style="color:var(--text-muted);font-size:12px;">Awaiting Oracle RAC resolution</td>
+              </tr>
+              <tr>
+                <td>UAT sign-off</td>
+                <td>Business Owners</td>
+                <td>May 20</td>
+                <td><span class="badge-status bs-planned">Not Started</span></td>
+                <td style="color:var(--text-muted);font-size:12px;">Scheduled post DR runbook</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="dc h-100">
+        <div class="dc-header">
+          <h2 class="dc-title">Ignored / Excluded Assets</h2>
+          <span class="badge-status bs-review" style="font-size:11px;">11 Servers</span>
+        </div>
+        <div class="dc-body">
+          <ul class="compact-list">
+            <li><i data-lucide="circle-minus" style="width:13px;height:13px;color:var(--text-muted);"></i><span>DEV-LEGACY-03 — EOL OS (Win 2008)</span></li>
+            <li><i data-lucide="circle-minus" style="width:13px;height:13px;color:var(--text-muted);"></i><span>DEV-LEGACY-04 — EOL OS (Win 2008)</span></li>
+            <li><i data-lucide="circle-minus" style="width:13px;height:13px;color:var(--text-muted);"></i><span>PROD-TEST-07 — Duplicate snapshot</span></li>
+            <li><i data-lucide="circle-minus" style="width:13px;height:13px;color:var(--text-muted);"></i><span>QA-MOCK-01 through 05 — Decommissioned</span></li>
+            <li><i data-lucide="circle-minus" style="width:13px;height:13px;color:var(--text-muted);"></i><span>INFRA-PRINT-01 — Out of scope</span></li>
+            <li><i data-lucide="circle-minus" style="width:13px;height:13px;color:var(--text-muted);"></i><span>INFRA-FAX-01 — Out of scope</span></li>
+            <li><i data-lucide="circle-minus" style="width:13px;height:13px;color:var(--text-muted);"></i><span>BACKUP-TAPE-01 — Physical only</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
 <script src="assets/js/main.js"></script>
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-  <script src="assets/js/lucide-init.js"></script>
-  <script src="assets/js/ui.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="assets/js/lucide-init.js"></script>
+<script src="assets/js/ui.js"></script>
+<script>
+function initPageCharts() {
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  var gridColor  = isDark ? 'rgba(255,255,255,.08)' : 'rgba(0,0,0,.06)';
+  var labelColor = isDark ? '#94a3b8' : '#64748b';
+
+  // Environment Mix Chart
+  var envCtx = document.getElementById('envMixChart');
+  if (envCtx) {
+    new Chart(envCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Production', 'Dev / Test'],
+        datasets: [
+          {
+            label: 'Windows',
+            data: [72, 69],
+            backgroundColor: '#6366f1',
+            borderRadius: 4
+          },
+          {
+            label: 'Linux (RHEL)',
+            data: [35, 41],
+            backgroundColor: '#15A1DC',
+            borderRadius: 4
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'bottom', labels: { color: labelColor, boxWidth: 12, padding: 16 } }
+        },
+        scales: {
+          x: { stacked: true, grid: { color: gridColor }, ticks: { color: labelColor } },
+          y: { stacked: true, grid: { color: gridColor }, ticks: { color: labelColor } }
+        }
+      }
+    });
+  }
+
+  // OS Distribution horizontal bar
+  var osCtx = document.getElementById('osDist');
+  if (osCtx) {
+    new Chart(osCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Win Server 2019', 'RHEL 8.x', 'Win Server 2016', 'RHEL 7.x', 'Win Server 2022', 'Other Linux'],
+        datasets: [{
+          label: 'Servers',
+          data: [48, 31, 12, 8, 5, 3],
+          backgroundColor: ['#6366f1','#15A1DC','#8b5cf6','#06b6d4','#a78bfa','#94a3b8'],
+          borderRadius: 4
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { color: gridColor }, ticks: { color: labelColor } },
+          y: { grid: { color: gridColor }, ticks: { color: labelColor, font: { size: 11 } } }
+        }
+      }
+    });
+  }
+}
+</script>
 </body>
 </html>
