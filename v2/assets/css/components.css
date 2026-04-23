@@ -633,12 +633,21 @@
   text-decoration: none;
   color: var(--text-primary);
   transition: background var(--transition-fast);
+  /* button reset */
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  box-shadow: none;
+  outline: none;
 }
 
 .uc-palette__item:hover,
-.uc-palette__item.active {
+.uc-palette__item.active,
+.uc-palette__item:focus {
   background: var(--brand-primary-50);
   color: var(--brand-primary-700);
+  outline: none;
 }
 
 .uc-palette__item-icon {

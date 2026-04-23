@@ -134,20 +134,20 @@
       : COMMANDS.slice(0, 8);
 
     if (!matches.length) {
-      list.innerHTML = '<div class="palette-empty">No results for "' + query + '"</div>';
+      list.innerHTML = '<div class="uc-palette__empty">No results for "' + query + '"</div>';
       return;
     }
 
     list.innerHTML = matches.map(function (c, i) {
-      return '<button class="palette-item" data-idx="' + i + '" tabindex="-1">' +
-        '<i data-lucide="' + c.icon + '" class="palette-item__icon"></i>' +
-        '<span>' + c.label + '</span>' +
+      return '<button class="uc-palette__item" data-idx="' + i + '" tabindex="-1">' +
+        '<div class="uc-palette__item-icon"><i data-lucide="' + c.icon + '"></i></div>' +
+        '<span class="uc-palette__item-label">' + c.label + '</span>' +
         '</button>';
     }).join('');
 
     if (typeof lucide !== 'undefined') lucide.createIcons({ strokeWidth: 1.75 });
 
-    list.querySelectorAll('.palette-item').forEach(function (btn, i) {
+    list.querySelectorAll('.uc-palette__item').forEach(function (btn, i) {
       btn.addEventListener('click', function () {
         var cmd = matches[i];
         closePalette();
@@ -164,12 +164,12 @@
       tpl.innerHTML =
         '<div id="uc-palette-overlay" class="uc-palette-overlay" role="dialog" aria-modal="true" aria-label="Command palette">' +
           '<div class="uc-palette">' +
-            '<div class="palette-search-row">' +
-              '<i data-lucide="search" class="palette-search-icon"></i>' +
-              '<input id="uc-palette-input" class="palette-input" placeholder="Search pages & actions…" autocomplete="off" spellcheck="false">' +
-              '<kbd class="palette-esc-hint">ESC</kbd>' +
+            '<div class="uc-palette__header">' +
+              '<i data-lucide="search"></i>' +
+              '<input id="uc-palette-input" class="uc-palette__input" placeholder="Search pages & actions…" autocomplete="off" spellcheck="false">' +
+              '<kbd class="uc-palette__kbd">ESC</kbd>' +
             '</div>' +
-            '<div id="uc-palette-list" class="palette-list" role="listbox"></div>' +
+            '<div id="uc-palette-list" class="uc-palette__results" role="listbox"></div>' +
           '</div>' +
         '</div>';
       document.body.appendChild(tpl.firstChild);
@@ -192,7 +192,7 @@
       input.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') { closePalette(); return; }
         if (e.key === 'ArrowDown') {
-          var first = document.querySelector('#uc-palette-list .palette-item');
+          var first = document.querySelector('#uc-palette-list .uc-palette__item');
           if (first) first.focus();
         }
       });
@@ -203,7 +203,7 @@
       var listEl = document.getElementById('uc-palette-list');
       if (!listEl) return;
       if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-        var items = Array.from(listEl.querySelectorAll('.palette-item'));
+        var items = Array.from(listEl.querySelectorAll('.uc-palette__item'));
         if (!items.length) return;
         var cur = document.activeElement;
         var idx = items.indexOf(cur);
