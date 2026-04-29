@@ -10,7 +10,7 @@ $(function () {
      ================================================================ */
   var SIDEBAR_KEY = 'omw_sidebar_collapsed';
 
-  function applySidebarState(collapsed) {
+  function applySidebarState(collapsed, animate) {
     if (collapsed) {
       $('#sidebar').addClass('collapsed');
       $('body').addClass('sidebar-collapsed');
@@ -20,14 +20,15 @@ $(function () {
     }
   }
 
-  // Always start expanded so labels are visible — sidebar collapse is a
-  // session-only preference (not persisted) so every page load opens fully.
-  applySidebarState(false);
+  // Restore saved state
+  var saved = localStorage.getItem(SIDEBAR_KEY);
+  applySidebarState(saved === 'true');
 
   // Toggle buttons (topbar hamburger + sidebar bottom button)
   $('#sidebarToggle, #sidebarToggle2').on('click', function () {
     var isCollapsed = $('#sidebar').hasClass('collapsed');
     applySidebarState(!isCollapsed);
+    localStorage.setItem(SIDEBAR_KEY, String(!isCollapsed));
   });
 
   /* ----------------------------------------------------------------

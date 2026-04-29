@@ -45,7 +45,7 @@
     <a href="wave-planning.html" class="sidebar-link" data-label="Wave Planning"><span class="link-icon"><i data-lucide="waves"></i></span><span class="link-text">Wave Planning</span></a>
     <a href="readiness-check.html" class="sidebar-link" data-label="Readiness"><span class="link-icon"><i data-lucide="clipboard-check"></i></span><span class="link-text">Readiness Check</span></a>
     <div class="nav-section-label">Forms Modernization</div>
-    <a href="modernization-execution.html" class="sidebar-link" data-label="Execution"><span class="link-icon"><i data-lucide="settings-2"></i></span><span class="link-text">Modernization Execution</span></a>
+    <a href="modernization-execution.html" class="sidebar-link" data-label="Execution"><span class="link-icon"><i data-lucide="settings-2"></i></span><span class="link-text">Modernization Exec.</span></a>
     <a href="schema-conversion.html" class="sidebar-link" data-label="Schema"><span class="link-icon"><i data-lucide="git-branch"></i></span><span class="link-text">Schema Conversion</span></a>
     <div class="nav-section-label">Azure Infrastructure</div>
     <a href="landing-zone.html" class="sidebar-link" data-label="Landing Zone"><span class="link-icon"><i data-lucide="cloud"></i></span><span class="link-text">Landing Zone</span></a>
@@ -81,10 +81,6 @@
   </button>
   <div class="d-flex align-items-center gap-1 ms-auto">
     <span class="uc-pill--env d-none d-md-inline-flex">Production</span>
-    <button class="topbar-btn d-none d-md-inline-flex align-items-center gap-1" id="refreshDataBtn" style="font-size:11px;color:var(--text-muted);padding:4px 8px;border-radius:6px;border:1px solid var(--border);background:var(--card-bg)" aria-label="Refresh data" title="Refresh data">
-      <i data-lucide="refresh-cw" style="width:11px;height:11px"></i>
-      <span id="dataFreshness">Updated just now</span>
-    </button>
     <div class="topbar-divider d-none d-md-block"></div>
     <!-- Notifications -->
     <div class="dropdown">
@@ -121,7 +117,7 @@
     </button>
     <!-- Profile -->
     <div class="dropdown">
-      <a class="topbar-profile" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Account menu">
+      <a class="topbar-profile" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
         <div class="profile-avatar">SC</div>
         <div class="d-none d-sm-block">
           <div class="profile-name">Sarah Chen</div>
@@ -245,7 +241,7 @@
             </div>
             <div>
               <div class="d-flex justify-content-between mb-1">
-                <span class="fw-600 small">React + .NET Conversion <span class="badge badge-primary ms-1" style="font-size:9px;padding:2px 6px;vertical-align:middle">Current Phase</span></span>
+                <span class="fw-600 small">Active React + .NET Conversion</span>
                 <span class="text-muted small">91 / 246</span>
               </div>
               <div class="progress"><div class="progress-bar bg-warning" data-width="37" style="width:0%"></div></div>
@@ -279,7 +275,7 @@
           </div>
         </div>
         <div class="card-body d-flex flex-column align-items-center justify-content-center">
-          <canvas id="workloadChart" width="240" height="240"></canvas>
+          <canvas id="workloadChart" width="200" height="200"></canvas>
           <div class="chart-legend mt-3 justify-content-center">
             <div class="legend-item"><div class="legend-dot" style="background:#2563eb"></div>Lift &amp; Shift <strong class="ms-1">48%</strong></div>
             <div class="legend-item"><div class="legend-dot" style="background:#8b5cf6"></div>Modernize <strong class="ms-1">28%</strong></div>
@@ -391,13 +387,10 @@
         <div class="card-body">
           <div class="row g-2">
             <div class="col-6"><a href="discovery.html" class="btn btn-outline-primary w-100 btn-sm"><i class="fas fa-upload"></i>Upload Discovery</a></div>
-            <div class="col-6"><a href="risk-scoring.html?workload=PAYROLL_ENG#workload-lifecycle" class="btn btn-outline-primary w-100 btn-sm"><i class="fas fa-shield-halved"></i>Review top risk</a></div>
+            <div class="col-6"><a href="risk-scoring.html?workload=PAYROLL_ENG#workload-lifecycle" class="btn btn-outline-primary w-100 btn-sm"><i class="fas fa-shield-halved"></i>Review PAYROLL_ENG</a></div>
             <div class="col-6"><a href="wave-planning.html" class="btn btn-outline-primary w-100 btn-sm"><i class="fas fa-calendar-plus"></i>Plan Wave</a></div>
-            <div class="col-12 mt-1 pt-1" style="border-top:1px solid var(--border)">
-              <div class="text-muted small mb-1" style="font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.4px"><i class="fas fa-triangle-exclamation text-warning me-1"></i>High-impact actions</div>
-              <a href="deployment.html" class="btn btn-outline-danger w-100 btn-sm" data-bs-toggle="tooltip" title="Deployment affects production — confirm in deployment page"><i class="fas fa-rocket me-1"></i>Deploy to Production</a>
-            </div>
-            <div class="col-12"><button class="btn btn-primary w-100 btn-sm"><i class="fas fa-file-pdf me-1"></i>Export Client-Ready PDF Report</button></div>
+            <div class="col-6"><a href="deployment.html" class="btn btn-outline-primary w-100 btn-sm"><i class="fas fa-rocket"></i>Deploy</a></div>
+            <div class="col-12"><button class="btn btn-primary w-100 btn-sm"><i class="fas fa-file-pdf"></i>Export Client-Ready PDF Report</button></div>
           </div>
         </div>
       </div>
@@ -424,26 +417,26 @@
             <tr class="hover-highlight">
               <td><strong>PAYROLL_ENG</strong></td><td><span class="badge badge-muted">HR</span></td>
               <td><span class="badge badge-danger">9.1 / 10</span></td>
-              <td class="text-muted small">Custom PLL and DB link dependency</td><td>M. Torres</td><td class="text-danger small fw-600"><i class="fas fa-triangle-exclamation me-1"></i>Apr 18</td>
-              <td><a href="risk-scoring.html?workload=PAYROLL_ENG#workload-lifecycle" class="btn btn-outline-danger btn-sm">Review</a></td>
+              <td class="text-muted small">Custom PLL and DB link dependency</td><td>M. Torres</td><td class="text-danger small fw-600">Apr 18</td>
+              <td><a href="risk-scoring.html?workload=PAYROLL_ENG#workload-lifecycle" class="btn btn-danger btn-sm">Review</a></td>
             </tr>
             <tr class="hover-highlight">
               <td><strong>HRMS_PAYROLL</strong></td><td><span class="badge badge-muted">HR</span></td>
               <td><span class="badge badge-danger">8.9 / 10</span></td>
-              <td class="text-muted small">Complex PL/SQL packages</td><td>J. Park</td><td class="text-danger small fw-600"><i class="fas fa-triangle-exclamation me-1"></i>Apr 22</td>
-              <td><a href="risk-scoring.html?workload=HRMS_PAYROLL#workload-lifecycle" class="btn btn-outline-danger btn-sm">Review</a></td>
+              <td class="text-muted small">Complex PL/SQL packages</td><td>J. Park</td><td class="text-danger small fw-600">Apr 22</td>
+              <td><a href="risk-scoring.html?workload=HRMS_PAYROLL#workload-lifecycle" class="btn btn-danger btn-sm">Review</a></td>
             </tr>
             <tr class="hover-highlight">
               <td><strong>GL_CONSOLIDATE</strong></td><td><span class="badge badge-muted">Finance</span></td>
               <td><span class="badge badge-warning">7.4 / 10</span></td>
-              <td class="text-muted small">Cross-schema dependencies</td><td>R. Patel</td><td class="text-warning small fw-600"><i class="fas fa-triangle-exclamation me-1"></i>Apr 30</td>
-              <td><a href="risk-scoring.html?workload=GL_CONSOLIDATE#workload-lifecycle" class="btn btn-outline-warning btn-sm">Review</a></td>
+              <td class="text-muted small">Cross-schema dependencies</td><td>R. Patel</td><td class="text-warning small fw-600">Apr 30</td>
+              <td><a href="risk-scoring.html?workload=GL_CONSOLIDATE#workload-lifecycle" class="btn btn-warning btn-sm text-dark">Review</a></td>
             </tr>
             <tr class="hover-highlight">
               <td><strong>ASSET_MGMT_V2</strong></td><td><span class="badge badge-muted">Finance</span></td>
               <td><span class="badge badge-warning">6.8 / 10</span></td>
               <td class="text-muted small">Deprecated DBMS_SCHEDULER</td><td>L. Wang</td><td class="text-muted small">May 5</td>
-              <td><a href="risk-scoring.html?workload=ASSET_MGMT_V2#workload-lifecycle" class="btn btn-outline-secondary btn-sm">Review</a></td>
+              <td><a href="risk-scoring.html?workload=ASSET_MGMT_V2#workload-lifecycle" class="btn btn-light btn-sm">Review</a></td>
             </tr>
           </tbody>
         </table>
@@ -472,13 +465,12 @@ function initPageCharts() {
         datasets: [{
           data: [118, 69, 44, 15],
           backgroundColor: ['#2563eb', '#8b5cf6', '#10b981', '#f59e0b'],
-          borderWidth: 3,
-          borderColor: '#ffffff',
-          hoverOffset: 10
+          borderWidth: 0,
+          hoverOffset: 8
         }]
       },
       options: {
-        cutout: '60%',
+        cutout: '70%',
         plugins: { legend: { display: false } },
         animation: { animateScale: true, duration: 900 }
       }
@@ -489,36 +481,6 @@ function initPageCharts() {
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script src="assets/js/lucide-init.js"></script>
   <script src="assets/js/ui.js"></script>
-  <script>
-  /* Data freshness badge — shows real timestamp + elapsed update */
-  (function () {
-    var loadTime = new Date();
-    var $badge = document.getElementById('dataFreshness');
-    if (!$badge) return;
-    function pad(n) { return n < 10 ? '0' + n : n; }
-    function fmtTime(d) {
-      var h = d.getHours(), m = pad(d.getMinutes()), s = d.getSeconds();
-      return (h % 12 || 12) + ':' + m + ' ' + (h < 12 ? 'AM' : 'PM');
-    }
-    function updateBadge() {
-      var now = new Date();
-      var secs = Math.floor((now - loadTime) / 1000);
-      if (secs < 60)      $badge.textContent = 'Updated just now';
-      else if (secs < 120) $badge.textContent = 'Updated 1 min ago';
-      else if (secs < 3600) $badge.textContent = 'Updated ' + Math.floor(secs / 60) + ' min ago';
-      else                 $badge.textContent = 'Updated at ' + fmtTime(loadTime);
-    }
-    updateBadge();
-    setInterval(updateBadge, 30000);
-    document.getElementById('refreshDataBtn').addEventListener('click', function () {
-      loadTime = new Date();
-      $badge.textContent = 'Updated just now';
-      // Spin the refresh icon briefly
-      var icon = this.querySelector('[data-lucide]');
-      if (icon) { icon.style.transition = 'transform 0.6s'; icon.style.transform = 'rotate(360deg)'; setTimeout(function(){ icon.style.transform = ''; }, 700); }
-    });
-  }());
-  </script>
 </body>
 </html>
 
