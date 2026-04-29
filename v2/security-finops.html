@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Security &amp; FinOps — Oracle Estate Workbench</title>
+  <title>Security Workspace — Oracle Estate Workbench</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -14,50 +14,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <style>
-    /* FinOps Tab Components */
-    .fo-kpi { background:#fff; border:1px solid var(--border); border-radius:8px; padding:16px; box-shadow:var(--shadow-sm); height:100%; }
-    .fo-kpi-label { font-size:10px; color:var(--text-muted); text-transform:uppercase; letter-spacing:.6px; font-weight:600; margin-bottom:6px; }
-    .fo-kpi-value { font-size:24px; font-weight:700; letter-spacing:-1px; line-height:1; margin-bottom:5px; }
-    .fo-kpi-delta { font-size:11px; font-weight:600; }
-    .fo-kpi-delta.down { color:#ef4444; }
-    .fo-kpi-delta.up { color:#10b981; }
-    .fo-kpi-note { font-size:11px; color:var(--text-muted); }
-
-    .fo-opt-card { background:#fff; border:1px solid var(--border); border-radius:8px; padding:18px; box-shadow:var(--shadow-sm); height:100%; }
-    .fo-opt-badge { display:inline-block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.6px; padding:3px 8px; border-radius:4px; margin-bottom:12px; }
-    .fo-opt-yellow .fo-opt-badge { background:#fef3c7; color:#92400e; }
-    .fo-opt-blue .fo-opt-badge   { background:#dbeafe; color:#1e40af; }
-    .fo-opt-cyan .fo-opt-badge   { background:#cffafe; color:#0e7490; }
-    .fo-opt-saving .fo-opt-badge { background:#dcfce7; color:#14532d; }
-    .fo-opt-icon { font-size:20px; margin-bottom:10px; }
-    .fo-opt-yellow .fo-opt-icon { color:#f59e0b; }
-    .fo-opt-blue .fo-opt-icon   { color:#2563eb; }
-    .fo-opt-cyan .fo-opt-icon   { color:#06b6d4; }
-    .fo-opt-title { font-size:13px; font-weight:700; margin-bottom:6px; }
-    .fo-opt-desc  { font-size:11px; color:var(--text-muted); line-height:1.5; margin-bottom:12px; flex-grow:1; }
-    .fo-opt-amount { font-size:22px; font-weight:700; letter-spacing:-.8px; }
-    .fo-opt-yellow .fo-opt-amount { color:#f59e0b; }
-    .fo-opt-blue .fo-opt-amount   { color:#2563eb; }
-    .fo-opt-cyan .fo-opt-amount   { color:#06b6d4; }
-    .fo-opt-saving { background:linear-gradient(135deg,#f0fdf4 0%,#ecfdf5 100%); border-color:#a7f3d0; }
-    .fo-opt-total-amount { font-size:30px; font-weight:700; letter-spacing:-1.5px; color:#10b981; margin:6px 0 2px; }
-    .fo-opt-total-label  { font-size:12px; color:var(--text-muted); margin-bottom:10px; }
-
-    .fo-ri-summary { flex:1 1 90px; border-radius:8px; padding:10px 12px; text-align:center; min-width:88px; }
-    .fo-ri-summary.green  { background:#f0fdf4; border:1px solid #a7f3d0; }
-    .fo-ri-summary.blue   { background:#eff6ff; border:1px solid #bfdbfe; }
-    .fo-ri-summary.purple { background:#f5f3ff; border:1px solid #ddd6fe; }
-    .fo-ri-summary.cyan   { background:#ecfeff; border:1px solid #a5f3fc; }
-    .fo-ri-summary-val  { font-size:15px; font-weight:700; letter-spacing:-.4px; }
-    .fo-ri-summary.green .fo-ri-summary-val  { color:#10b981; }
-    .fo-ri-summary.blue .fo-ri-summary-val   { color:#2563eb; }
-    .fo-ri-summary.purple .fo-ri-summary-val { color:#8b5cf6; }
-    .fo-ri-summary.cyan .fo-ri-summary-val   { color:#06b6d4; }
-    .fo-ri-summary-label { font-size:10px; color:var(--text-muted); margin-top:3px; }
-
-    .font-mono { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
-
-    /* Oracle Security Tab */
+    /* Security Event Badges */
     .sec-event-badge { font-size:10px; padding:2px 7px; border-radius:999px; display:inline-block; margin-top:3px; font-weight:500; }
     .sec-evt-security { background:#dbeafe; color:#1e40af; }
     .sec-evt-cost { background:#dcfce7; color:#14532d; }
@@ -79,7 +36,7 @@
     <a href="dashboard.html" class="sidebar-link" data-label="Dashboard"><span class="link-icon"><i data-lucide="layout-dashboard"></i></span><span class="link-text">Dashboard</span></a>
     <div class="nav-section-label">Discovery</div>
     <a href="discovery.html" class="sidebar-link" data-label="Discovery"><span class="link-icon"><i data-lucide="scan-search"></i></span><span class="link-text">Discovery &amp; Intake</span></a>
-    <div class="nav-section-label">Assessment</div>
+    <div class="nav-section-label">Assessment (Rehost)</div>
     <a href="#" class="sidebar-link has-submenu" data-submenu="liftShiftSub" data-label="Lift &amp; Shift"><span class="link-icon"><i data-lucide="trending-up"></i></span><span class="link-text">Lift &amp; Shift</span><i data-lucide="chevron-right" class="submenu-arrow"></i></a>
     <div class="sidebar-submenu" id="liftShiftSub">
       <a href="lift-shift-insights.html" class="sidebar-link sidebar-sublink" data-label="Insights"><span class="link-icon"><i data-lucide="bar-chart-2"></i></span><span class="link-text">Insights</span></a>
@@ -92,12 +49,13 @@
     <a href="risk-scoring.html" class="sidebar-link" data-label="Risk Scoring"><span class="link-icon"><i data-lucide="shield-alert"></i></span><span class="link-text">Risk Scoring</span></a>
     <a href="wave-planning.html" class="sidebar-link" data-label="Wave Planning"><span class="link-icon"><i data-lucide="waves"></i></span><span class="link-text">Wave Planning</span></a>
     <a href="readiness-check.html" class="sidebar-link" data-label="Readiness"><span class="link-icon"><i data-lucide="clipboard-check"></i></span><span class="link-text">Readiness Check</span></a>
-    <div class="nav-section-label">Forms Modernization</div>
+    <div class="nav-section-label">Modernization</div>
     <a href="modernization-execution.html" class="sidebar-link" data-label="Execution"><span class="link-icon"><i data-lucide="settings-2"></i></span><span class="link-text">Modernization Execution</span></a>
     <a href="schema-conversion.html" class="sidebar-link" data-label="Schema"><span class="link-icon"><i data-lucide="git-branch"></i></span><span class="link-text">Schema Conversion</span></a>
     <div class="nav-section-label">Azure Infrastructure</div>
     <a href="landing-zone.html" class="sidebar-link" data-label="Landing Zone"><span class="link-icon"><i data-lucide="cloud"></i></span><span class="link-text">Landing Zone</span></a>
-    <a href="security-finops.html" class="sidebar-link" data-label="Security &amp; FinOps"><span class="link-icon"><i data-lucide="lock"></i></span><span class="link-text">Security &amp; FinOps</span></a>
+    <a href="security-finops.html" class="sidebar-link active" data-label="Security"><span class="link-icon"><i data-lucide="lock"></i></span><span class="link-text">Security</span></a>
+    <a href="finops.html" class="sidebar-link" data-label="FinOps"><span class="link-icon"><i data-lucide="trending-down"></i></span><span class="link-text">FinOps</span></a>
     <div class="nav-section-label">Delivery</div>
     <a href="review-validation.html" class="sidebar-link" data-label="Review"><span class="link-icon"><i data-lucide="circle-check"></i></span><span class="link-text">Review &amp; Validation</span></a>
     <a href="deployment.html" class="sidebar-link" data-label="Deployment"><span class="link-icon"><i data-lucide="rocket"></i></span><span class="link-text">Deployment</span><span class="link-badge">Live</span></a>
@@ -119,8 +77,8 @@
     <img src="assets/brand/logo.svg" alt="UnifyCloud" height="20">
   </div>
   <div class="topbar-breadcrumb">
-    <h1 class="page-title">Security &amp; FinOps</h1>
-    <p class="page-subtitle">Oracle Estate Workbench &middot; Oracle Security &amp; FinOps Controls</p>
+    <h1 class="page-title">Security Workspace</h1>
+    <p class="page-subtitle">Oracle Estate Workbench &middot; Oracle Security Controls &amp; Compliance</p>
   </div>
   <button class="topbar-search-trigger d-none d-lg-flex" data-uc-palette aria-label="Open command palette (Ctrl+K)">
     <i data-lucide="search"></i>
@@ -162,7 +120,7 @@
       <i data-lucide="moon"></i>
     </button>
     <div class="dropdown">
-      <a class="topbar-profile" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+      <a class="topbar-profile" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Account menu">
         <div class="profile-avatar">SC</div>
         <div class="d-none d-sm-block">
           <div class="profile-name">Sarah Chen</div>
@@ -188,33 +146,15 @@
 
 <main id="main-content">
 
-  <!-- Stats -->
-  <!-- <div class="row g-3 mb-4 stagger">
-    <div class="col-6 col-xl-3 fade-in-up">
-      <div class="stat-card"><div class="stat-icon green"><i class="fas fa-shield-check"></i></div><div class="stat-value counter-animate" data-target="87">0</div><div class="stat-label">Security Score</div><div class="stat-delta up"><i class="fas fa-arrow-trend-up"></i>+12 vs Oracle Forms</div></div>
-    </div>
-    <div class="col-6 col-xl-3 fade-in-up">
-      <div class="stat-card"><div class="stat-icon amber"><i class="fas fa-triangle-exclamation"></i></div><div class="stat-value counter-animate" data-target="2">0</div><div class="stat-label">Open Findings</div><div class="stat-delta down"><i class="fas fa-exclamation"></i>CSRF + dependency patching</div></div>
-    </div>
-    <div class="col-6 col-xl-3 fade-in-up">
-      <div class="stat-card"><div class="stat-icon purple"><i class="fas fa-coins"></i></div><div class="stat-value"><span class="counter-animate" data-target="4.2" data-decimals="1" data-suffix="K" data-prefix="$">$0</span></div><div class="stat-label">Monthly Platform Cost</div><div class="stat-delta up"><i class="fas fa-arrow-trend-down text-success"></i>−38% vs legacy Forms stack</div></div>
-    </div>
-    <div class="col-6 col-xl-3 fade-in-up">
-      <div class="stat-card"><div class="stat-icon cyan"><i class="fas fa-piggy-bank"></i></div><div class="stat-value"><span class="counter-animate" data-target="11" data-suffix="K" data-prefix="$">$0</span></div><div class="stat-label">Reserved Savings (Annual)</div><div class="stat-delta up"><i class="fas fa-arrow-trend-up"></i>1-yr RI plan active</div></div>
-    </div>
-  </div> -->
-
   <!-- Tabs -->
   <div class="card fade-in-up">
     <div class="card-header">
       <ul class="nav nav-tabs border-0" id="sfTab">
         <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-security"><i class="fas fa-shield-halved me-2"></i>Security Workspace</button></li>
         <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-compliance"><i class="fas fa-certificate me-2"></i>Compliance Controls</button></li>
-        <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-finops"><i class="fas fa-chart-line me-2"></i>FinOps Workspace</button></li>
       </ul>
       <div class="ms-auto d-none d-lg-flex align-items-center gap-2">
-        <span class="badge badge-muted">Separated views</span>
-        <button class="btn btn-light btn-sm"><i class="fas fa-file-pdf me-1"></i>Export Security/FinOps Pack</button>
+        <button class="btn btn-light btn-sm"><i class="fas fa-file-pdf me-1"></i>Export Security Pack</button>
       </div>
     </div>
     <div class="card-body">
@@ -293,7 +233,7 @@
                 </div>
                 <div class="card-body p-0">
                   <div class="d-flex align-items-start justify-content-between px-3 py-2 border-bottom">
-                    <div style="flex:1"><div class="small fw-600">Right-size.NET API instances</div><div class="text-muted" style="font-size:11px">3 over-provisioned nodes</div><div class="progress mt-1" style="height:4px"><div class="progress-bar bg-success" style="width:70%"></div></div></div>
+                    <div style="flex:1"><div class="small fw-600">Right-size .NET API instances</div><div class="text-muted" style="font-size:11px">3 over-provisioned nodes</div><div class="progress mt-1" style="height:4px"><div class="progress-bar bg-success" style="width:70%"></div></div></div>
                     <div class="text-end ms-3" style="flex-shrink:0"><div class="small fw-600">$699/mo</div><div class="text-success" style="font-size:11px">Save $470</div></div>
                   </div>
                   <div class="d-flex align-items-start justify-content-between px-3 py-2 border-bottom">
@@ -406,7 +346,7 @@
 
         </div>
 
-        <!-- Compliance -->
+        <!-- Compliance Controls -->
         <div class="tab-pane fade" id="tab-compliance">
           <div class="row g-3">
             <div class="col-md-4">
@@ -434,323 +374,6 @@
               </div>
             </div>
           </div>
-        </div>
-
-        <!-- FinOps -->
-        <div class="tab-pane fade" id="tab-finops">
-
-          <!-- Overview KPIs -->
-          <div class="row g-3 mb-4">
-            <div class="col-6 col-xl-3">
-              <div class="fo-kpi">
-                <div class="fo-kpi-label">Total Subscriptions</div>
-                <div class="fo-kpi-value">159</div>
-                <div class="fo-kpi-delta down"><i class="fas fa-arrow-down me-1"></i>17.53% vs last period</div>
-              </div>
-            </div>
-            <div class="col-6 col-xl-3">
-              <div class="fo-kpi">
-                <div class="fo-kpi-label">Total Services</div>
-                <div class="fo-kpi-value">778</div>
-                <div class="fo-kpi-delta down"><i class="fas fa-arrow-down me-1"></i>103.34% vs last period</div>
-              </div>
-            </div>
-            <div class="col-6 col-xl-3">
-              <div class="fo-kpi">
-                <div class="fo-kpi-label">Apr Expenditure</div>
-                <div class="fo-kpi-value">$72.38</div>
-                <div class="fo-kpi-note">Daily spend so far · 01-Apr-2026</div>
-              </div>
-            </div>
-            <div class="col-6 col-xl-3">
-              <div class="fo-kpi">
-                <div class="fo-kpi-label">Last Month Avg (Daily)</div>
-                <div class="fo-kpi-value">$592.09</div>
-                <div class="fo-kpi-note">Mar 2026 baseline</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Optimization Opportunities -->
-          <div class="fw-600 small text-muted text-uppercase mb-2" style="letter-spacing:.5px">Optimization Opportunities</div>
-          <div class="row g-3 mb-4">
-            <div class="col-md-6 col-xl-3">
-              <div class="fo-opt-card fo-opt-yellow">
-                <div class="fo-opt-badge">LOW EFFORT</div>
-                <div class="fo-opt-icon"><i class="fas fa-trash-can"></i></div>
-                <div class="fo-opt-title">Orphaned Resources</div>
-                <div class="fo-opt-desc">7 Resources in which services like disks, networkInterfaces… detected.</div>
-                <div class="fo-opt-amount">$96.24</div>
-                <div class="d-flex gap-2 mt-3">
-                  <button class="btn btn-sm btn-outline-secondary flex-fill" style="font-size:11px">Details</button>
-                  <button class="btn btn-sm btn-warning flex-fill" style="font-size:11px">Clean Up</button>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-xl-3">
-              <div class="fo-opt-card fo-opt-blue">
-                <div class="fo-opt-badge">MEDIUM EFFORT</div>
-                <div class="fo-opt-icon"><i class="fas fa-scale-balanced"></i></div>
-                <div class="fo-opt-title">Rightsize Instances</div>
-                <div class="fo-opt-desc">Optimize 90 resources to reduce cost.</div>
-                <div class="fo-opt-amount">$1,247.25</div>
-                <div class="d-flex gap-2 mt-3">
-                  <button class="btn btn-sm btn-outline-secondary flex-fill" style="font-size:11px">Details</button>
-                  <button class="btn btn-sm btn-primary flex-fill" style="font-size:11px">Resize</button>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-xl-3">
-              <div class="fo-opt-card fo-opt-cyan">
-                <div class="fo-opt-badge">AUTO-FIX</div>
-                <div class="fo-opt-icon"><i class="fas fa-power-off"></i></div>
-                <div class="fo-opt-title">Idle Shutdowns</div>
-                <div class="fo-opt-desc">Schedule off-hours for DevTest environments.</div>
-                <div class="fo-opt-amount">$0</div>
-                <div class="d-flex gap-2 mt-3">
-                  <button class="btn btn-sm btn-info text-white flex-fill" style="font-size:11px">Schedule</button>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-xl-3">
-              <div class="fo-opt-card fo-opt-saving">
-                <div class="fo-opt-badge">TOTAL OPPORTUNITY</div>
-                <div class="fo-opt-total-amount">$1,343.49</div>
-                <div class="fo-opt-total-label">Total Cost Saving Opportunity</div>
-                <div class="d-flex justify-content-between pt-2 border-top">
-                  <span class="small text-muted">Efficiency Boost</span>
-                  <span class="fw-700 text-success" style="font-size:12px">1856.16%</span>
-                </div>
-                <div class="d-flex justify-content-between mt-1 mb-3">
-                  <span class="small text-muted">Affected Resources</span>
-                  <span class="fw-700" style="font-size:12px">97</span>
-                </div>
-                <button class="btn btn-success btn-sm w-100">Apply All Fixes</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Services Cost Breakdown + Daily Spend -->
-          <div class="row g-3 mb-4">
-            <div class="col-xl-7">
-              <div class="card h-100">
-                <div class="card-header">
-                  <i class="fas fa-table-list text-primary"></i>
-                  <div>
-                    <div class="card-title">Services Cost Breakdown</div>
-                    <div class="card-subtitle">Current vs. Previous Cycle Comparison</div>
-                  </div>
-                  <div class="ms-auto text-end">
-                    <div class="fw-700 text-primary" style="font-size:20px;letter-spacing:-1px">$72.38</div>
-                    <div class="small text-muted">Apr &nbsp;<span class="text-success fw-600">vs Mar $583</span> &nbsp;<span class="text-danger fw-600">↓ $496</span></div>
-                  </div>
-                </div>
-                <div class="card-body p-0">
-                  <div class="table-container">
-                    <table class="table">
-                      <thead><tr><th>Service Name</th><th class="text-end">Mar Cost</th><th class="text-end">Apr Cost</th><th>Change</th></tr></thead>
-                      <tbody>
-                        <tr class="hover-highlight"><td>Accounts Purviews</td><td class="text-end font-mono">$0.23</td><td class="text-end font-mono">$0.22</td><td><span class="badge badge-success">▼ Stable</span></td></tr>
-                        <tr class="hover-highlight"><td>App Service</td><td class="text-end font-mono">$1.38</td><td class="text-end font-mono">$0.09</td><td><span class="badge badge-success">▼ Down</span></td></tr>
-                        <tr class="hover-highlight"><td>App Service Plan</td><td class="text-end font-mono">$152.56</td><td class="text-end font-mono">$13.78</td><td><span class="badge badge-success">▼ Down</span></td></tr>
-                        <tr class="hover-highlight"><td>Application Gateway</td><td class="text-end font-mono">$12.23</td><td class="text-end font-mono">$0.00</td><td><span class="badge badge-muted">Stopped</span></td></tr>
-                        <tr class="hover-highlight"><td>PostgreSQL Flexible Server</td><td class="text-end font-mono">$48.65</td><td class="text-end font-mono">$7.32</td><td><span class="badge badge-success">▼ Down</span></td></tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div class="px-3 pb-2 text-muted" style="font-size:11px">Showing 1–5 of 32 entries</div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-5">
-              <div class="card h-100">
-                <div class="card-header">
-                  <i class="fas fa-chart-column text-success"></i>
-                  <div>
-                    <div class="card-title">Daily Spend Analysis</div>
-                    <div class="card-subtitle">Consumption Trends ($)</div>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <canvas id="dailySpendChart" height="200"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Cost Distribution by Tag + RI Plan -->
-          <div class="row g-3 mb-4">
-            <div class="col-xl-5">
-              <div class="card h-100">
-                <div class="card-header">
-                  <i class="fas fa-chart-pie text-purple"></i>
-                  <div>
-                    <div class="card-title">Cost Distribution by Tag</div>
-                    <div class="card-subtitle">Owner · Not Tagged: 59.7%</div>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <canvas id="costTagChart" height="185"></canvas>
-                  <div class="d-flex flex-wrap gap-2 mt-3 justify-content-center" style="font-size:11px">
-                    <div class="d-flex align-items-center gap-1"><div style="width:10px;height:10px;border-radius:50%;background:#2563eb;flex-shrink:0"></div>Not Tagged 59.7%</div>
-                    <div class="d-flex align-items-center gap-1"><div style="width:10px;height:10px;border-radius:50%;background:#10b981;flex-shrink:0"></div>deepakkumarpathak 13.3%</div>
-                    <div class="d-flex align-items-center gap-1"><div style="width:10px;height:10px;border-radius:50%;background:#f59e0b;flex-shrink:0"></div>ghanshhyamagrawal 9.2%</div>
-                    <div class="d-flex align-items-center gap-1"><div style="width:10px;height:10px;border-radius:50%;background:#ef4444;flex-shrink:0"></div>ghardlyan 7.0%</div>
-                    <div class="d-flex align-items-center gap-1"><div style="width:10px;height:10px;border-radius:50%;background:#8b5cf6;flex-shrink:0"></div>sulypriye 2.3%</div>
-                    <div class="d-flex align-items-center gap-1"><div style="width:10px;height:10px;border-radius:50%;background:#06b6d4;flex-shrink:0"></div>deepakpathak 1.4%</div>
-                    <div class="d-flex align-items-center gap-1"><div style="width:10px;height:10px;border-radius:50%;background:#64748b;flex-shrink:0"></div>Others 7.1%</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-7">
-              <div class="card h-100">
-                <div class="card-header">
-                  <i class="fas fa-tag text-primary"></i>
-                  <div>
-                    <div class="card-title">RI Plan &amp; Benefits</div>
-                    <div class="card-subtitle">Smart cost optimization — Reserved Instance savings</div>
-                  </div>
-                </div>
-                <div class="card-body p-0">
-                  <div class="table-container">
-                    <table class="table mb-0">
-                      <thead><tr><th>Service</th><th class="text-end">Pay-As-You-Go</th><th class="text-end">1-Year RI</th><th class="text-end">3-Year RI</th></tr></thead>
-                      <tbody>
-                        <tr>
-                          <td><i class="fas fa-server text-primary me-2" style="font-size:12px"></i><strong>VM Instances</strong></td>
-                          <td class="text-end font-mono">$1,809.24</td>
-                          <td class="text-end font-mono">$1,317.07<br><span class="badge badge-success" style="font-size:9px">↓ 27.2%</span></td>
-                          <td class="text-end font-mono">$1,074.14<br><span class="badge badge-success" style="font-size:9px">↓ 40.6%</span></td>
-                        </tr>
-                        <tr>
-                          <td><i class="fas fa-database text-warning me-2" style="font-size:12px"></i><strong>SQL Databases</strong></td>
-                          <td class="text-end font-mono">$0.00</td>
-                          <td class="text-end font-mono">$0.00</td>
-                          <td class="text-end font-mono">$0.00</td>
-                        </tr>
-                        <tr>
-                          <td><i class="fas fa-cloud text-success me-2" style="font-size:12px"></i><strong>App Services</strong></td>
-                          <td class="text-end font-mono">$739.49</td>
-                          <td class="text-end font-mono">$281.43<br><span class="badge badge-success" style="font-size:9px">↓ 61.9%</span></td>
-                          <td class="text-end font-mono">$220.70<br><span class="badge badge-success" style="font-size:9px">↓ 70.1%</span></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div class="px-3 py-3">
-                    <div class="d-flex gap-2 flex-wrap">
-                      <div class="fo-ri-summary green"><div class="fo-ri-summary-val">$491.83</div><div class="fo-ri-summary-label">VM 1-Yr Savings/mo</div></div>
-                      <div class="fo-ri-summary blue"><div class="fo-ri-summary-val">$735.10</div><div class="fo-ri-summary-label">VM 3-Yr Savings/mo</div></div>
-                      <div class="fo-ri-summary purple"><div class="fo-ri-summary-val">$458.06</div><div class="fo-ri-summary-label">App Svc 1-Yr/mo</div></div>
-                      <div class="fo-ri-summary cyan"><div class="fo-ri-summary-val">$518.79</div><div class="fo-ri-summary-label">App Svc 3-Yr/mo</div></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Top Cost Anomalies + Cost Prediction -->
-          <div class="row g-3 mb-4">
-            <div class="col-xl-8">
-              <div class="card">
-                <div class="card-header">
-                  <i class="fas fa-triangle-exclamation text-danger"></i>
-                  <div>
-                    <div class="card-title">Top Cost Anomalies</div>
-                    <div class="card-subtitle">Last 30 Days</div>
-                  </div>
-                  <button class="btn btn-sm btn-light ms-auto">View Details</button>
-                </div>
-                <div class="card-body p-0">
-                  <div class="table-container">
-                    <table class="table">
-                      <thead><tr><th>Subscription ID</th><th>Resource Group</th><th>Service</th><th class="text-end">Cost Diff</th><th class="text-end">Variance</th><th>AI Insight</th></tr></thead>
-                      <tbody>
-                        <tr class="hover-highlight">
-                          <td class="font-mono" style="font-size:10.5px">6d040e94-…145f</td><td style="font-size:12px">rg-aifactory-services</td><td><strong style="font-size:12px">aifactorygpt-5</strong></td>
-                          <td class="text-end font-mono text-danger fw-600">$255</td><td class="text-end"><span class="badge badge-danger">873.9%</span></td><td><span class="badge badge-danger">High</span></td>
-                        </tr>
-                        <tr class="hover-highlight">
-                          <td class="font-mono" style="font-size:10.5px">6d040e94-…145f</td><td style="font-size:12px">rg-aifactory-services</td><td><strong style="font-size:12px">aifactory-ai-search</strong></td>
-                          <td class="text-end font-mono text-danger fw-600">$206.15</td><td class="text-end"><span class="badge badge-danger">837.95%</span></td><td><span class="badge badge-danger">High</span></td>
-                        </tr>
-                        <tr class="hover-highlight">
-                          <td class="font-mono" style="font-size:10.5px">ba8a917b-…43de</td><td style="font-size:12px">rg-aifactory-services</td><td><strong style="font-size:12px">aifactorygpt-5</strong></td>
-                          <td class="text-end font-mono text-warning fw-600">$189.72</td><td class="text-end"><span class="badge badge-muted">-100%</span></td><td><span class="badge badge-warning">Medium</span></td>
-                        </tr>
-                        <tr class="hover-highlight">
-                          <td class="font-mono" style="font-size:10.5px">6d040e94-…145f</td><td style="font-size:12px">rg-aifactory-services</td><td><strong style="font-size:12px">aifactory-openai</strong></td>
-                          <td class="text-end font-mono text-danger fw-600">$189.16</td><td class="text-end"><span class="badge badge-danger">1032.57%</span></td><td><span class="badge badge-warning">Medium</span></td>
-                        </tr>
-                        <tr class="hover-highlight">
-                          <td class="font-mono" style="font-size:10.5px">ba8a917b-…43de</td><td style="font-size:12px">rg-aifactory-services</td><td><strong style="font-size:12px">aifactorygpt-5</strong></td>
-                          <td class="text-end font-mono text-warning fw-600">$188.97</td><td class="text-end"><span class="badge badge-muted">-100%</span></td><td><span class="badge badge-warning">Medium</span></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-4">
-              <div class="card h-100">
-                <div class="card-header">
-                  <i class="fas fa-chart-line text-purple"></i>
-                  <div>
-                    <div class="card-title">Cost Prediction</div>
-                    <div class="card-subtitle">Projected spend for next 30 days</div>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="small text-muted fw-600 mb-1">Estimated End of Month</div>
-                  <div class="fw-700 text-primary" style="font-size:32px;letter-spacing:-1.5px;line-height:1">$2,099.02</div>
-                  <div class="mt-3">
-                    <canvas id="predictionChart" height="110"></canvas>
-                  </div>
-                  <div class="mt-3 p-3 rounded" style="background:#eff6ff;border:1px solid #bfdbfe;font-size:11.5px;line-height:1.6">
-                    <i class="fas fa-circle-info text-primary me-1"></i>
-                    Projected spend is <strong>88.56% below</strong> previous month. You have <strong>$16,253.66</strong> in cost savings vs. last month.
-                  </div>
-                  <button class="btn btn-sm btn-outline-secondary w-100 mt-3" style="font-size:12px">Adjust Budget Alerts</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Top 10 Charts -->
-          <div class="row g-3">
-            <div class="col-xl-6">
-              <div class="card">
-                <div class="card-header">
-                  <i class="fas fa-chart-bar text-primary"></i>
-                  <div>
-                    <div class="card-title">Top 10 Services with Higher Cost</div>
-                    <div class="card-subtitle">Current period · USD</div>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <canvas id="topServicesChart" height="230"></canvas>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-6">
-              <div class="card">
-                <div class="card-header">
-                  <i class="fas fa-id-card text-success"></i>
-                  <div>
-                    <div class="card-title">Top 10 Subscriptions with Higher Cost</div>
-                    <div class="card-subtitle">Current period · USD</div>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <canvas id="topSubsChart" height="230"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
 
       </div>
@@ -787,125 +410,6 @@ function initPageCharts() {
       }
     });
   }
-
-  // Daily Spend Analysis — Mar trend + Apr Day 1
-  var dailyCtx = document.getElementById('dailySpendChart');
-  if (dailyCtx) {
-    new Chart(dailyCtx, {
-      type: 'bar',
-      data: {
-        labels: ['Mar 25','Mar 26','Mar 27','Mar 28','Mar 29','Mar 30','Mar 31','Apr 01'],
-        datasets: [{
-          label: 'Daily Spend ($)',
-          data: [621, 548, 593, 612, 578, 605, 590, 72.38],
-          backgroundColor: ['#bfdbfe','#bfdbfe','#bfdbfe','#bfdbfe','#bfdbfe','#bfdbfe','#bfdbfe','#2563eb'],
-          borderRadius: 4, borderSkipped: false
-        }]
-      },
-      options: {
-        plugins: { legend: { display: false },
-          tooltip: { callbacks: { label: ctx => '$' + ctx.parsed.y.toFixed(2) } } },
-        scales: {
-          x: { grid: { display: false }, ticks: { color: '#64748b', font: { size: 10 } } },
-          y: { ticks: { callback: v => '$'+v, color: '#64748b', font: { size: 10 } }, grid: { color: '#f1f5f9' } }
-        },
-        animation: { duration: 900 }
-      }
-    });
-  }
-
-  // Cost Distribution by Tag — doughnut
-  var tagCtx = document.getElementById('costTagChart');
-  if (tagCtx) {
-    new Chart(tagCtx, {
-      type: 'doughnut',
-      data: {
-        labels: ['Not Tagged','deepakkumarpathak','ghanshhyamagrawal','ghardlyan','sulypriye','deepakpathak','Others'],
-        datasets: [{
-          data: [59.7, 13.3, 9.2, 7.0, 2.3, 1.4, 7.1],
-          backgroundColor: ['#2563eb','#10b981','#f59e0b','#ef4444','#8b5cf6','#06b6d4','#64748b'],
-          borderWidth: 0, hoverOffset: 6
-        }]
-      },
-      options: {
-        cutout: '62%',
-        plugins: { legend: { display: false } },
-        animation: { animateScale: true, duration: 900 }
-      }
-    });
-  }
-
-  // Cost Prediction — Actual vs Forecast
-  var predCtx = document.getElementById('predictionChart');
-  if (predCtx) {
-    new Chart(predCtx, {
-      type: 'bar',
-      data: {
-        labels: ['Mar 2026 (Actual)', 'Apr 2026 (Forecast)'],
-        datasets: [
-          { label: 'Actual', data: [6174.68, 71.08], backgroundColor: '#bfdbfe', borderRadius: 4, borderSkipped: false },
-          { label: 'Forecast', data: [null, 2099.02], backgroundColor: '#2563eb', borderRadius: 4, borderSkipped: false }
-        ]
-      },
-      options: {
-        plugins: { legend: { labels: { font: { size: 10 }, color: '#475569' } } },
-        scales: {
-          x: { grid: { display: false }, ticks: { color: '#64748b', font: { size: 10 } } },
-          y: { ticks: { callback: v => '$'+v, color: '#64748b', font: { size: 10 } }, grid: { color: '#f1f5f9' } }
-        },
-        animation: { duration: 900 }
-      }
-    });
-  }
-
-  // Top 10 Services — horizontal bar
-  var svcCtx = document.getElementById('topServicesChart');
-  if (svcCtx) {
-    new Chart(svcCtx, {
-      type: 'bar',
-      data: {
-        labels: ['Virtual Machines','Azure Disks','App Service Plan','PostgreSQL Flexible Server','Healthcare','Bandwidth','Public IP Addr.','Infrastructure','Invoice','Protected Endpoints'],
-        datasets: [{
-          label: 'Cost (USD)',
-          data: [28.78, 17.86, 13.78, 7.32, 1.30, 0.69, 0.48, 0.41, 0.41, 0.28],
-          backgroundColor: '#2563eb', borderRadius: 4, borderSkipped: false
-        }]
-      },
-      options: {
-        indexAxis: 'y',
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { ticks: { callback: v => '$'+v, color: '#64748b', font: { size: 10 } }, grid: { color: '#f1f5f9' } },
-          y: { grid: { display: false }, ticks: { color: '#64748b', font: { size: 10 } } }
-        },
-        animation: { duration: 900 }
-      }
-    });
-  }
-
-  // Top 10 Subscriptions — vertical bar
-  var subCtx = document.getElementById('topSubsChart');
-  if (subCtx) {
-    new Chart(subCtx, {
-      type: 'bar',
-      data: {
-        labels: ['VS Enterprise','VDE','VS-Migration ARO','VS Ent. 2','VS Ent. 3','CloudSubs 4','VS Ent. 5','VS Ent. 6','VS Ent. 7','VS Actual Ent.'],
-        datasets: [{
-          label: 'Cost (USD)',
-          data: [16.44, 2.23, 1.73, 1.35, 1.29, 1.29, 1.26, 1.26, 1.25, 1.25],
-          backgroundColor: '#10b981', borderRadius: 4, borderSkipped: false
-        }]
-      },
-      options: {
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { grid: { display: false }, ticks: { color: '#64748b', font: { size: 10 } } },
-          y: { ticks: { callback: v => '$'+v, color: '#64748b', font: { size: 10 } }, grid: { color: '#f1f5f9' } }
-        },
-        animation: { duration: 900 }
-      }
-    });
-  }
 }
 </script>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
@@ -913,6 +417,3 @@ function initPageCharts() {
   <script src="assets/js/ui.js"></script>
 </body>
 </html>
-
-
-
